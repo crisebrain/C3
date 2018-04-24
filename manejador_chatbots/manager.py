@@ -1,5 +1,5 @@
 from IntentTree import IntentTree, IntentNode
-from .modulo_cognitivo impor cognitive_req
+from .modulo_cognitivo import cognitive_req
 from time import time
 
 class InfoManager:
@@ -16,24 +16,16 @@ class InfoManager:
         Outputs:
         Json with the info for the conversation nodes,
                  each node with the info about the id chatBot."""
-        if self.conference == {}:
-            node = cognitive_req(chatbotjson)
-            conversation = self.new_conversation(node)
-            self.conference.update(dict(zip([idchatBot],[conversation])))
-        else:
-            idchatBot =
-            self.conference[]
-
+        json_root = cognitive_req(chatbotjson)
+        idchatBot = chatbotjson['idChatBot']
+        conversation = IntentTree(json_root,
+                                  time(), idchatBot)
+        self.conference.update(dict(zip([idchatBot],[conversation])))
 
     def new_intent(self, intent_info):
-        """Creates the intentnode from the intent_info json or
+        """Creates the intent node from the intent_info json or
         string path to json."""
-        if intent_info isinstance(list):
-            self.intent_info = self.load_json(intent_info)
-        else:
-            self.intent_info = intent_info
-        self
-
-
-    def search_node(self):
-        print("Busca nodos")
+        if isinstance(intent_info, str):
+            intent_info = self.load_json(intent_info)
+        self.conference[ChatBotWrapper.current_idChatBot].add_node(intent_info,
+                                                                   parent)
