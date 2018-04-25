@@ -1,5 +1,4 @@
 from anytree import Node, RenderTree, ContStyle, find
-from time import time
 
 """Defines Intent Node class and include intent fields."""
 class IntentNode(Node):
@@ -78,7 +77,7 @@ class IntentTree(RenderTree):
 
 
 if __name__ == "__main__":
-
+    from time import time
     # root = IntentNode(name="Saludo", parent=None, idField="nombre",
     #                   value="Francis", accuracyPrediction=None, mandatory=True,
     #                   msgReq="Hola, mi nombre es Francis",

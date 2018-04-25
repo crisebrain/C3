@@ -14,3 +14,4 @@ Cambios martes 24
 
 Cambios miercoles 25
 - Modificación de nombres de componentes a Inglés y asignación de módulos para cada uno con imports relativos.
+- Reubicación de módulos por servicios
