@@ -1,4 +1,3 @@
-from conversationManager import IntentTree, IntentNode
 """Class to manage the conversation and publish the IntentTree"""
 class ChatBotWrapper:
 

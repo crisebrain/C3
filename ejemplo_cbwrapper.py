@@ -1,3 +1,3 @@
-from CBWrapper import ChatBotWrapper
+from ConversationEngine import ChatBotWrapper
 
 cbw = ChatBotWrapper('1123')

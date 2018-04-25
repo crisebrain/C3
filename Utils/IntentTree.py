@@ -37,7 +37,7 @@ class IntentTree(RenderTree):
         Attributes:
         node - Root node.
         nodels - node list for the tree
-        loadedDate - Date into float time
+        loadedDate - str Date-Time
         idChatBot - Id for the current ChatBot
         """
         self.style=ContStyle()
@@ -56,6 +56,7 @@ class IntentTree(RenderTree):
                  method using the name attribute. If it's an integer the parent
                  will be assigned by the position on the nodels list.
         """
+        parent = json_data["parent"]
         if parent == None:
             parent = self.node
             node = IntentNode(parent, **json_data)

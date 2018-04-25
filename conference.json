@@ -1,0 +1,85 @@
+{ "Conversations": [
+   {
+    "IdChatBot": "1",
+    "CreationDate": "19-04-2018",
+    "Intents": [
+          {
+              "name": "Saludo",
+              "parent": "None",
+              "idField": "nombre",
+              "value": "Ramón",
+              "accuracyPrediction": "100",
+              "mandatory": "True",
+              "msgReq": "Hola, mi nombre es Ramón",
+              "msgAns": "Bienvenido Ramon, ¿qué puedo hacer por tí hoy?"
+          },
+          {
+              "name": "NumCuenta",
+              "parent": "Saludo",
+              "idField": "num_cuenta",
+              "value": "34322",
+              "mandatory": "True",
+              "msgReq": "Dame mi número de cuenta",
+              "msgAns": "Claro que sí, tu cuenta es 34322"
+          },
+          {
+              "name": "ConsultaSaldo",
+              "parent":"NumCuenta",
+              "value": "saldo",
+              "msgReq": "Quiero consultar mi saldo",
+              "msgAns": "Tu saldo es 100"
+          },
+          {
+              "name": "TarjetaCredito",
+              "parent": "NumCuenta",
+              "idField": "credito",
+              "value": "09134322",
+              "accuracyPrediction": "80",
+              "msgReq": "Quiero saber el saldo de mi tarjeta de crédito",
+              "msgAns": "Su saldo es 20 y vence el viernes"
+          }
+     ]
+},
+{
+    "IdChatBot": "2",
+    "CreationDate": "21-04-2018",
+    "Intents": [
+          {
+              "name": "Saludo",
+              "parent": "None",
+              "idField": "nombre",
+              "value": "Francis",
+              "accuracyPrediction": "100",
+              "mandatory": "True",
+              "msgReq": "Hola, mi nombre es Francis",
+              "msgAns": "Bienvenida Francis, ¿qué puedo hacer por tí hoy?"
+          },
+          {
+              "name": "NumCuenta",
+              "parent": "Saludo",
+              "idField": "num_cuenta",
+              "value": "34399",
+              "mandatory": "True",
+              "msgReq": "Necesito mi número de cuenta",
+              "msgAns": "Claro que sí, tu cuenta es 34322"
+          },
+          {
+              "name": "ConsultaSaldo",
+              "parent":"NumCuenta",
+              "value": "saldo",
+              "msgReq": "Quiero consultar mi saldo",
+              "msgAns": "Claro que sí, tu saldo es 100"
+          },
+          {
+              "name": "TarjetaCredito",
+              "parent": "NumCuenta",
+              "idField": "credito",
+              "value": "09134399",
+              "accuracyPrediction": "80",
+              "msgReq": "Quiero saber el saldo de mi tarjeta de crédito",
+              "msgAns": "Su saldo es 20"
+          }
+     ]
+}
+]
+}

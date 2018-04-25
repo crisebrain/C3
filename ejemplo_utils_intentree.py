@@ -1,5 +1,5 @@
 from time import time
-from ConversationManager import IntentNode, IntentTree
+from Utils import IntentNode, IntentTree
 # Para poder adjuntar los nodos de manera automatizada revisar
 # IntentTree.add_node()
 
