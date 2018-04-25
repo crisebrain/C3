@@ -12,7 +12,7 @@ def cognitive_req(data):
     """
     msg = data['msgOriginal']
     print("El mensaje original recibido es:", msg)
-    
+
     nodo1 = {"id": "direccion",
              "value": "Reforma 27",
              "acc": 98.7,

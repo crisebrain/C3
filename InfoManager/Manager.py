@@ -1,5 +1,3 @@
-from IntentTree import IntentTree, IntentNode
-from .modulo_cognitivo import cognitive_req
 from time import time
 
 class InfoManager:

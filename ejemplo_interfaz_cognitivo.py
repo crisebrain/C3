@@ -4,7 +4,7 @@ Created on Sun Apr 22 15:33:33 2018
 
 @author: crisebrain
 """
-from modulo_cognitivo.cognitivo import cognitive_req
+from Cognitive import cognitive_req
 
 """
 el modulo  cognitive_req
