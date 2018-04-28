@@ -37,7 +37,7 @@ class SessionContainer:
     def feedNextEntry(self, json_data):
         """Fill the field next to the current."""
         tree = self.extractTree()
-        tree.add_node(json_data, True)
+        tree.fill_node(json_data, True)
         #setattr(self, "C_" + self.Conversation_dict["IdConference"], tree)
 
     def addSessionTree(self, conversation_dict):

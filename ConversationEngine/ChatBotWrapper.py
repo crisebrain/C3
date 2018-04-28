@@ -1,8 +1,8 @@
 """Class to manage the conversation and publish the IntentTree"""
 class ChatBotWrapper:
 
-    def publishIntentTree(self, idChatBot):
-        self.idChatBot = idChatBot
+    def publishIntentTree(self, IdChatBot):
+        self.IdChatBot = IdChatBot
         """Consult and publish the current Intent by the Chatbot Id.
 
         Here a chatbot id is supplied to retrieve all intents from core
@@ -25,7 +25,7 @@ class ChatBotWrapper:
         """
         respuesta = input()
         return {"name":"Ampliacion", "value": respuesta,
-                "idChatBot":self.idChatBot, "msgAns":"Tu respuesta es {0}".format(respuesta)}
+                "IdChatBot":self.IdChatBot, "msgAns":"Tu respuesta es {0}".format(respuesta)}
 
     def listAllAvailableChatbots(self):
         """Check all available chatbots on the core and assign them an id."""
@@ -34,5 +34,5 @@ class ChatBotWrapper:
         """intercept the intent that it is actioned and change it by the
         one received from GI."""
 
-    def __init__(self, idChatBot):
-        self.publishIntentTree(idChatBot)
+    def __init__(self, IdChatBot):
+        self.publishIntentTree(IdChatBot)

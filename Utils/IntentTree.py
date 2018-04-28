@@ -30,6 +30,10 @@ class IntentNode(Node):
         for nodeparent in self.path:
             self.spathlist.append(nodeparent.name)
 
+    def updateNode(self, **kwargs):
+        for key, value in kwargs.items():
+            setattr(self, key, value)
+
 
 """General Tree to manipulate all intents"""
 class IntentTree(RenderTree):
@@ -64,7 +68,8 @@ class IntentTree(RenderTree):
         current : The field "current" is useful at the new node adding by
                   the intent Analysis.
         """
-        parent = json_data.pop("parent")
+        if "parent" in json_data:
+            parent = json_data.pop("parent")
         if current:
             json_data.update({"current": "True"})
             _ = self.getOrderFromCurrent(mandatory=False)
@@ -83,6 +88,22 @@ class IntentTree(RenderTree):
             node = IntentNode(parent, **json_data)
         self.nodels.append(node)
         self.__LevelOrderlist()
+
+    def fill_node(self, json_data, current=False):
+        name = json_data["name"]
+        idChatBot = json_data["IdChatBot"]
+        node = find(self.node,
+                    lambda node: node.name == name and node.IdChatBot == idChatBot)
+        if node is not None:
+            befnode = self.find_node(self.orderlist[self.index], False)
+            delattr(befnode, "current")
+            print("deleting current attribute for {0}".format(befnode.name))
+            self.index += 1
+            nextnode = self.find_node(self.orderlist[self.index], False)
+            setattr(nextnode, "current", "True")
+            node.updateNode(**json_data)
+        else:
+            self.add_node(json_data, current)
 
     def find_node(self, value, to_dict=True, by_field="name"):
         """Find a node by the str name attribute."""
