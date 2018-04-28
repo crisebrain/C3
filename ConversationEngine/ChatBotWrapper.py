@@ -1,7 +1,8 @@
 """Class to manage the conversation and publish the IntentTree"""
 class ChatBotWrapper:
 
-    def publishIntentTree(idChatBot):
+    def publishIntentTree(self, idChatBot):
+        self.idChatBot = idChatBot
         """Consult and publish the current Intent by the Chatbot Id.
 
         Here a chatbot id is supplied to retrieve all intents from core
@@ -9,7 +10,7 @@ class ChatBotWrapper:
         be updated and the tree saved it into session
         """
 
-    def generateAnswer(jsonGenerateAnswer):
+    def generateAnswer(self, jsonGenerateAnswer):
         """Read msgAnswer from the idIntentTree-idNode for current intent.
 
         If the idIntentTree equals to idChatBot for the current_intentTree,
@@ -18,15 +19,18 @@ class ChatBotWrapper:
         The output is sending to the IVR as a text string.
         """
 
-    def interceptIntent(strText, idNode):
+    def interceptIntent(self):  # strText, idNode
         """Text from IVR is sending to core chatbot and an intent is actioned.
         Output a jsonInput object with msgOriginal, idChatBot, idNode
         """
+        respuesta = input()
+        return {"name":"Ampliacion", "value": respuesta,
+                "idChatBot":self.idChatBot, "msgAns":"Tu respuesta es {0}".format(respuesta)}
 
-    def listAllAvailableChatbots():
+    def listAllAvailableChatbots(self):
         """Check all available chatbots on the core and assign them an id."""
 
-    def manageConversation():
+    def manageConversation(self):
         """intercept the intent that it is actioned and change it by the
         one received from GI."""
 

@@ -1,1 +1,1 @@
-from .IntentTree import IntentTree, IntentNode
+from .SessionContainer import SessionContainer
