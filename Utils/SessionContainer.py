@@ -29,7 +29,7 @@ class SessionContainer:
         ddata_node = node.__dict__
         ddata = {}
         for key, value in ddata_node.items():
-            if key in ["IdChatBot", "msgAns", "name", "msgReq"]:
+            if key in ["IdField", "msgAns", "name", "msgReq"]:
                 ddata.update(dict(zip([key], [value])))
         ddata.update({"parent":node.spathlist[node.depth - 1]})
         return ddata
@@ -53,9 +53,9 @@ class SessionContainer:
         IdConference = self.IdConference
         print("Id : %s\n" %(IdConference))
         it = self.__getSessionTree(IdConference)
-        IdChatBot = it.node.IdChatBot
+        IdField = it.node.IdField
         for i,(pre, fill, node) in enumerate(it):
-            stchain = "%s #_%d CB_%s  %s : %s" % (pre, i, node.IdChatBot,
+            stchain = "%s #_%d CB_%s  %s : %s" % (pre, i, node.IdField,
                                                   node.name, node.value)
             if getattr(node, "current", None) is not None:
                 stchain = stchain + " --- "
