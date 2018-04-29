@@ -52,7 +52,8 @@ class IntentTree(RenderTree):
         idChatBot - Id for the current ChatBot
         """
         self.style=ContStyle()
-        _ = json_data.pop("parent")
+        if "parent" in json_data:
+            _ = json_data.pop("parent")
         self.node = IntentNode(None, **json_data)
         self.childiter = list
         self.orderlist = list()
