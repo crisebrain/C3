@@ -8,7 +8,7 @@ import pickle
 """Class to manage the conversation and publish the IntentTree"""
 class ChatBotWrapper:
 
-    def publishIntentTree(self, chatbots_folder): 
+    def publishIntentTree(self, chatbots_folder):
         """Consult and publish the current IntentTree using the chatbots folder.
         Here a project id is supplied to retrieve all intents from core
         and build the IntentTree. At the end self.current_intentTree must
@@ -33,11 +33,7 @@ class ChatBotWrapper:
             intents_ids = {}
             for intent in range(len(intents)):
                 intent_data = json.load(open(os.path.join(chatbots_folder,chat,'intents',intents[intent])))
-                for elem in intent_data:
-                    print(elem, "\n")
                 intent_usersay = json.load(open(os.path.join(chatbots_folder,chat,'intents',intents_usersays[intent])))
-                for elem in intent_usersay:
-                    print(elem, "\n")
                 # normal intent
                 if not intent_data['fallbackIntent']:
                     intents_ids[intent_data['id']]=intent_data['name']

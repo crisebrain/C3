@@ -16,15 +16,17 @@ class InfoManager:
         Json with the info for the conversation nodes,
                  each node with the info about the id chatBot."""
         jdata = self.sc.WhosNextEntry()
-        print(jdata["msgAns"])
         return jdata
 
     def intentFlow(self, jdata, cbwrapper, se):
-        cbwrapper.(jdata)
-        chbw = self.cbw(jdata["IdField"])
-        if True:
-            jdata_new = chbw.interceptIntent()
-        else:
-            jdata_new = self.se(jdata)
-        self.sc.feedNextEntry(jdata_new)
-        self.sc.ShowSessionTree()
+        if jdata["state"] == "valid":
+            cbwrapper.showResponse(jdata)
+            # self.sc.fill_node(jdata)
+        elif jdata["state"] == "no_valid":
+            print("ChatBotWrapper no solucionó")
+            print("Buscando en bases de datos\n")
+            print("Buscando con mecanismo cognitivo\n")
+            jdata_ans = se(jdata)
+            for intent in jdata_ans:
+                cbwrapper.showResponse(intent)
+                self.sc.feedNextEntry(intent)

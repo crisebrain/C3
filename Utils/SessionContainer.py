@@ -24,7 +24,7 @@ class SessionContainer:
     def WhosNextEntry(self):
         """Extracts the next field to fill."""
         tree = self.extractTree()
-        name = tree.getOrderFromCurrent()
+        name = tree.getOrderFromCurrent(pr=False)
         node = tree.find_node(name, False)
         ddata_node = node.__dict__
         ddata = {}

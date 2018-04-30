@@ -92,9 +92,9 @@ class IntentTree(RenderTree):
 
     def fill_node(self, json_data, current=False):
         name = json_data["name"]
-        idChatBot = json_data["IdChatBot"]
+        IdField = json_data["IdField"]
         node = find(self.node,
-                    lambda node: node.name == name and node.IdChatBot == idChatBot)
+                    lambda node: node.name == name and node.IdField == IdField)
         if node is not None:
             befnode = self.find_node(self.orderlist[self.index], False)
             delattr(befnode, "current")
@@ -117,15 +117,16 @@ class IntentTree(RenderTree):
         else:
             return node
 
-    def getOrderFromCurrent(self, mandatory=False):
+    def getOrderFromCurrent(self, mandatory=False, pr=True):
         node = find(self.node, lambda node: getattr(node, "current", None) is not None)
         index = self.orderlist.index(node.name)
         self.index = index
-        for i, nodename in enumerate(self.orderlist):
-            if i == index + 1:
-                print("-->%s"%nodename)
-            else:
-                print("%s"%nodename)
+        if pr:
+            for i, nodename in enumerate(self.orderlist):
+                if i == index + 1:
+                    print("-->%s"%nodename)
+                else:
+                    print("%s"%nodename)
         return self.orderlist[index+1]
 
     def __LevelOrderlist(self):
