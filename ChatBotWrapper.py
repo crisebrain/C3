@@ -8,7 +8,7 @@ import pickle
 """Class to manage the conversation and publish the IntentTree"""
 class ChatBotWrapper:
 
-    def publishIntentTree(self, chatbots_folder='chatbots'): 
+    def publishIntentTree(self, chatbots_folder): 
         """Consult and publish the current IntentTree using the chatbots folder.
         Here a project id is supplied to retrieve all intents from core
         and build the IntentTree. At the end self.current_intentTree must
@@ -88,5 +88,10 @@ class ChatBotWrapper:
         """intercept the intent that it is actioned and change it by the
         one received from GI."""
 
-    def __init__(self, IdProject):
-        self.publishIntentTree(IdProject)
+    def __init__(self, chatbots_folder):
+        self.publishIntentTree(chatbots_folder)
+
+if __name__ == "__main__":
+    print('Iniciando el upload a sessions...')
+    ChatBotWrapper(chatbots_folder='chatbots')
+    print('Objeto lista de IntentTrees lista para consumirse...')
