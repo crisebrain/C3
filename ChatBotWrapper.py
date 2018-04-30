@@ -8,7 +8,7 @@ import pickle
 """Class to manage the conversation and publish the IntentTree"""
 class ChatBotWrapper:
 
-    def publishIntentTree(self, chatbots_folder='chatbots'): 
+    def publishIntentTree(self, chatbots_folder='chatbots'):
         """Consult and publish the current IntentTree using the chatbots folder.
         Here a project id is supplied to retrieve all intents from core
         and build the IntentTree. At the end self.current_intentTree must
@@ -16,7 +16,7 @@ class ChatBotWrapper:
         """
         chatbots = os.listdir(chatbots_folder)
         intentTree_list = []
-        for chat in chatbots:            
+        for chat in chatbots:
             intents = os.listdir(os.path.join(chatbots_folder,chat,'intents'))
             agent_data = json.load(open(os.path.join(chatbots_folder,chat,'agent.json')))
             id_chatbot = agent_data['googleAssistant']['project']
@@ -28,18 +28,22 @@ class ChatBotWrapper:
                     intents.remove(f)
                 if 'Fallback' in f:
                     intents.remove(f)
-            # parsing Intents and Usersays to IntentTree  
+            # parsing Intents and Usersays to IntentTree
             intents_jsons = []
             intents_ids = {}
-            for intent in range(len(intents)):            
-                intent_data = json.load(open(os.path.join(chatbots_folder,chat,'intents',intents[intent]))) 
-                intent_usersay = json.load(open(os.path.join(chatbots_folder,chat,'intents',intents_usersays[intent]))) 
-                # normal intent              
+            for intent in range(len(intents)):
+                intent_data = json.load(open(os.path.join(chatbots_folder,chat,'intents',intents[intent])))
+                for elem in intent_data:
+                    print(elem, "\n")
+                intent_usersay = json.load(open(os.path.join(chatbots_folder,chat,'intents',intents_usersays[intent])))
+                for elem in intent_usersay:
+                    print(elem, "\n")
+                # normal intent
                 if not intent_data['fallbackIntent']:
                     intents_ids[intent_data['id']]=intent_data['name']
                     msgReq = intent_usersay[0]['data'][0]['text']
                     msgAns = intent_data['responses'][0]['messages'][0]['speech']
-                    id_field = None                
+                    id_field = None
                     if len(intent_data['responses'][0]['parameters'])>0:
                         id_field = intent_data['responses'][0]['parameters'][0]['name']
                     build_json = {"name":intent_data['name'], "parent": None, "idField":id_field, "value":None,"accuracyPrediction":0, "mandatory":False,"msgReq":msgReq,"msgAns":msgAns}
@@ -51,7 +55,7 @@ class ChatBotWrapper:
                         intents_jsons.append(build_json)
             i = 0
             while len(intents_jsons)>0:
-                jsonObj=intents_jsons[i]                
+                jsonObj=intents_jsons[i]
                 if it.find_node(value=intents_ids[jsonObj['parent']],to_dict=False):
                     jsonObj['parent']=intents_ids[jsonObj['parent']]
                     it.add_node(jsonObj)
@@ -63,7 +67,7 @@ class ChatBotWrapper:
         # keep as current tree the first one and save all IntentTrees in the list to Sessions
         self.current_intentTree = intentTree_list[0]
         pickle.dump(intentTree_list,open('./Sessions/Conference.pck','wb'))
-                
+
     def generateAnswer(self, jsonGenerateAnswer):
         """Read msgAnswer from the idIntentTree-idNode for current intent.
 

@@ -1,15 +1,13 @@
 from time import time
 
 class InfoManager:
-    def __init__(self, SessionContainer, ChatBotWrapper, cognitive_req):
+    def __init__(self, SessionContainer):
         """Creates the Info Manager for the current conference session."""
         self.conference_date = time()
         self.conference = {}
         self.sc = SessionContainer()
-        self.cbw = ChatBotWrapper
-        self.se = cognitive_req
 
-    def newconsult(self):
+    def newConsult(self):
         """Creates new conversation Flow with the IntentTree class.
         Parameteres:
         chatbotjson: Json array with the ChatBot Id
@@ -21,8 +19,9 @@ class InfoManager:
         print(jdata["msgAns"])
         return jdata
 
-    def newAnswer(self, jdata):
-        chbw = self.cbw(jdata["IdChatBot"])
+    def intentFlow(self, jdata, cbwrapper, se):
+        cbwrapper.(jdata)
+        chbw = self.cbw(jdata["IdField"])
         if True:
             jdata_new = chbw.interceptIntent()
         else:

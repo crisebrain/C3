@@ -6,7 +6,7 @@
          {
               "name": "Inicio",
               "parent": "None",
-              "idField": "None",
+              "IdField": "None",
               "value": "None",
               "mandatory": "True",
               "IdChatBot": "101a343bc"
@@ -14,7 +14,7 @@
           {
               "name": "Saludo",
               "parent": "Inicio",
-              "idField": "nombre",
+              "IdField": "nombre",
               "value": "Ramón",
               "accuracyPrediction": "100",
               "msgReq": "Hola, mi nombre es Ramón",
@@ -24,7 +24,7 @@
           {
               "name": "NumCuenta",
               "parent": "Inicio",
-              "idField": "num_cuenta",
+              "IdField": "num_cuenta",
               "value": "34322",
               "mandatory": "True",
               "msgReq": "Dame mi número de cuenta",
@@ -37,12 +37,13 @@
               "value": "saldo",
               "msgReq": "Quiero consultar mi saldo",
               "msgAns": "Tu saldo es 100",
-              "IdChatBot": "101a343bc"
+              "IdChatBot": "101a343bc",
+              "IdField": "consultasaldo"
           },
           {
               "name": "TarjetaCredito",
               "parent": "Inicio",
-              "idField": "credito",
+              "IdField": "credito",
               "value": "09134322",
               "accuracyPrediction": "80",
               "msgReq": "Quiero saber el saldo de mi tarjeta de crédito",
@@ -53,7 +54,7 @@
               "name": "Descuento",
               "parent": "TarjetaCredito",
               "mandatory": "True",
-              "idField": "saldo",
+              "IdField": "saldo",
               "value": "09134322",
               "accuracyPrediction": "80",
               "msgReq": "¿Dar descuento a cuenta 09134322?",
@@ -65,7 +66,7 @@
               "name": "Pago",
               "parent": "Inicio",
               "mandatory": "True",
-              "idField": "credito",
+              "IdField": "credito",
               "value": "09134322",
               "accuracyPrediction": "80",
               "msgReq": "¿Cuál es el pago mínimo para evitar intereses?",
@@ -75,7 +76,7 @@
           {
               "name": "Ampliacion",
               "parent": "TarjetaCredito",
-              "idField": "credito",
+              "IdField": "credito",
               "value": "09134322",
               "accuracyPrediction": "80",
               "msgReq": "El cliente desea ampliación de crédito",

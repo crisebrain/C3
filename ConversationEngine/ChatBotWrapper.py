@@ -24,8 +24,10 @@ class ChatBotWrapper:
         Output a jsonInput object with msgOriginal, idChatBot, idNode
         """
         respuesta = input()
-        return {"name":"Ampliacion", "value": respuesta,
-                "IdChatBot":self.IdChatBot, "msgAns":"Tu respuesta es {0}".format(respuesta)}
+        return {"name": "Ampliacion", "value": respuesta,
+                "IdField": self.IdField,
+                "msgAns": "Tu respuesta es {0}".format(respuesta),
+                "msgReq": "Necesito una ampliación de mi crédito"}
 
     def listAllAvailableChatbots(self):
         """Check all available chatbots on the core and assign them an id."""
