@@ -82,7 +82,7 @@ class IntentTree(RenderTree):
                 delattr(befnode, "current")
                 print("deleting current attribute for {0}".format(befnode.name))
                 # ------------------------------------------------------------
-                # Si ya existe el nombre y el IdField solo reasignar campos.
+                # Si ya existe el nombre y el IdChatBot solo reasignar campos.
                 # ------------------------------------------------------------
         elif isinstance(parent, int):
             parent = self.find_node(self.nodels[parent].name, False)
@@ -92,9 +92,9 @@ class IntentTree(RenderTree):
 
     def fill_node(self, json_data, current=False):
         name = json_data["name"]
-        idField = json_data["IdField"]
+        idChatBot = json_data["IdChatBot"]
         node = find(self.node,
-                    lambda node: node.name == name and node.IdField == idField)
+                    lambda node: node.name == name and node.IdChatBot == idChatBot)
         if node is not None:
             befnode = self.find_node(self.orderlist[self.index], False)
             delattr(befnode, "current")
@@ -112,7 +112,7 @@ class IntentTree(RenderTree):
             node = find(self.node, lambda node: node.name == value)
         elif by_field == "idField":
             node = find(self.node, lambda node: getattr(node, "idField", None) == value)
-        if to_dict:
+        if to_dict and node:
             return node.__dict__
         else:
             return node
