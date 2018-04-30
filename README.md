@@ -15,3 +15,9 @@ Cambios martes 24
 Cambios miercoles 25
 - Modificación de nombres de componentes a Inglés y asignación de módulos para cada uno con imports relativos.
 - Reubicación de módulos por servicios
+
+Cambios (28/04/2018 y 29/04/2018):
+- Moví el ChatBotWrapper.py fuera de su folder para poder leer de Utils y escribir en Sessions (estoy escribiendo un objeto lista de IntentTrees que fue lo que vimos en la reunión).
+- Corregí el método find_node, agregando una validación por si el node es None y to_dict es True, probé los métodos init y add_node del IntentTree. No pude probar el SessionContainer pues no encontré un ejemplo, en la raíz del branch habían ejemplos para interactuar con el árbol y esos fue los que utilicé.
+- En DialogFlow ya está el chatbot y en el folder chatbots están todos los json asociados, para automatizar este proceso se necesita vincular a projecto google y hay que insertar una tarjeta de crédito, de lo contrario este proceso de export se tiene que hacer manual. Si se automatiza hay que cambiar la implementación actual.
+- Se completó el método publishIntentTree a partir del folder donde deben aparecer todos los chatbots disponibles.
