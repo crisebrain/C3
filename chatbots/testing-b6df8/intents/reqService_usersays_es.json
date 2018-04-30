@@ -1,0 +1,65 @@
+[
+  {
+    "id": "2024e040-b5a4-4a02-8abf-863cf2058500",
+    "data": [
+      {
+        "text": "Quiero que activen ",
+        "userDefined": false
+      },
+      {
+        "text": "un",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " servicio",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1524969904
+  },
+  {
+    "id": "1e4b43dd-b820-4c2b-9e00-6c98a5a864cc",
+    "data": [
+      {
+        "text": "Requiero la activación ",
+        "userDefined": false
+      },
+      {
+        "text": "de un",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " servicio",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1524969904
+  },
+  {
+    "id": "c736ff47-7c04-435e-8ce0-7128ebfc034d",
+    "data": [
+      {
+        "text": "Necesito la activación ",
+        "userDefined": false
+      },
+      {
+        "text": "de un",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " servicio",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1524969904
+  }
+]

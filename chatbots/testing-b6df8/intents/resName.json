@@ -1,0 +1,48 @@
+{
+  "id": "e152e645-a8cc-4b6b-b26f-c9b948a6277a",
+  "parentId": "4fbc659c-cadd-41a1-b273-a068e0500351",
+  "rootParentId": "4fbc659c-cadd-41a1-b273-a068e0500351",
+  "name": "resName",
+  "auto": true,
+  "contexts": [
+    "DefaultWelcomeIntent-followup"
+  ],
+  "responses": [
+    {
+      "resetContexts": false,
+      "action": "resName",
+      "affectedContexts": [
+        {
+          "name": "resName-followup",
+          "parameters": {},
+          "lifespan": 2
+        }
+      ],
+      "parameters": [
+        {
+          "id": "f7fc6208-1065-49ac-9ee2-226efe2a2f7c",
+          "required": false,
+          "dataType": "@sys.given-name",
+          "name": "name",
+          "value": "$name",
+          "isList": false
+        }
+      ],
+      "messages": [
+        {
+          "type": 0,
+          "lang": "es",
+          "speech": "Gracias por comunicarte con nosotros $name, ¿en qué te puedo ayudar hoy?"
+        }
+      ],
+      "defaultResponsePlatforms": {},
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": false,
+  "webhookForSlotFilling": false,
+  "lastUpdate": 1525012164,
+  "fallbackIntent": false,
+  "events": []
+}

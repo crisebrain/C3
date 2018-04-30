@@ -1,0 +1,46 @@
+{
+  "id": "44c696b1-ba82-46b8-a62e-b738829c85fe",
+  "parentId": "e152e645-a8cc-4b6b-b26f-c9b948a6277a",
+  "rootParentId": "4fbc659c-cadd-41a1-b273-a068e0500351",
+  "name": "reqService",
+  "auto": true,
+  "contexts": [
+    "resName-followup"
+  ],
+  "responses": [
+    {
+      "resetContexts": false,
+      "action": "reqService",
+      "affectedContexts": [
+        {
+          "name": "reqService-followup",
+          "parameters": {},
+          "lifespan": 2
+        }
+      ],
+      "parameters": [
+        {
+          "id": "56121c99-82ec-47dd-9cd5-a88954793af8",
+          "dataType": "@sys.given-name",
+          "name": "name",
+          "value": "#resName-followup.name"
+        }
+      ],
+      "messages": [
+        {
+          "type": 0,
+          "lang": "es",
+          "speech": "Por supuesto $name, de qué proveedor te comunicas?"
+        }
+      ],
+      "defaultResponsePlatforms": {},
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": false,
+  "webhookForSlotFilling": false,
+  "lastUpdate": 1524970531,
+  "fallbackIntent": false,
+  "events": []
+}

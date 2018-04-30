@@ -1,0 +1,38 @@
+[
+  {
+    "id": "5064e425-fdb5-49ee-b6fb-b58576a4e0d0",
+    "data": [
+      {
+        "text": "Qué onda",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1524968799
+  },
+  {
+    "id": "82e90669-2083-4573-9418-14dfbfcf249c",
+    "data": [
+      {
+        "text": "Hello",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1524968799
+  },
+  {
+    "id": "b96329f0-dc56-44fa-b286-1b5463ae0ef8",
+    "data": [
+      {
+        "text": "Hola",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1524968799
+  }
+]

@@ -1,0 +1,88 @@
+[
+  {
+    "id": "fdc2b080-7037-4d3f-a5b5-34cea9dc74b3",
+    "data": [
+      {
+        "text": "Por supuesto, el proveedor del servicio es ",
+        "userDefined": false
+      },
+      {
+        "text": "Santander",
+        "alias": "provider_name",
+        "meta": "@sys.given-name",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1525012909
+  },
+  {
+    "id": "15543fcf-14c8-4fcf-b663-8b233371e078",
+    "data": [
+      {
+        "text": "Kia Pacific",
+        "alias": "provider_name",
+        "meta": "@sys.given-name",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1524970717
+  },
+  {
+    "id": "9c017c78-059c-40af-a8e1-d2b11f1c0ee2",
+    "data": [
+      {
+        "text": "Claro, el proveedor es ",
+        "userDefined": false
+      },
+      {
+        "text": "Kia Pacific",
+        "alias": "provider_name",
+        "meta": "@sys.given-name",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1524970717
+  },
+  {
+    "id": "6ad70f36-8712-448a-bb2b-d0d58346ef85",
+    "data": [
+      {
+        "text": "Por supuesto, el proveedor del servicio es ",
+        "userDefined": false
+      },
+      {
+        "text": "Kia Pacific",
+        "alias": "provider_name",
+        "meta": "@sys.given-name",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1524970717
+  },
+  {
+    "id": "a1efdd1f-198b-47f9-bbe8-7f40f396f2ed",
+    "data": [
+      {
+        "text": "Hablo de ",
+        "userDefined": false
+      },
+      {
+        "text": "Kia Pacific",
+        "alias": "provider_name",
+        "meta": "@sys.given-name",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1524970717
+  }
+]
