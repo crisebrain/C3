@@ -34,6 +34,9 @@ class IntentNode(Node):
         for key, value in kwargs.items():
             setattr(self, key, value)
 
+    # AssignCurrent solo para el ejemplo
+    def assignCurrent(self):
+        self.current = "True"
 
 """General Tree to manipulate all intents"""
 class IntentTree(RenderTree):
@@ -71,18 +74,19 @@ class IntentTree(RenderTree):
         """
         if "parent" in json_data:
             parent = json_data.pop("parent")
-        if current:
-            json_data.update({"current": "True"})
-            _ = self.getOrderFromCurrent(mandatory=False)
+        # if current:
+            # json_data.update({"current": "True"})
+            # _ = self.getOrderFromCurrent(mandatory=False)
         if isinstance(parent, str):
             parent = self.find_node(parent, False)
             node = IntentNode(parent, **json_data)
             if current:
-                befnode = self.find_node(self.orderlist[self.index], False)
+                node.assignCurrent()
+                befnode = self.find_node(self.orderlist[self.index - 1], False)
                 delattr(befnode, "current")
                 print("deleting current attribute for {0}".format(befnode.name))
                 # ------------------------------------------------------------
-                # Si ya existe el nombre y el IdChatBot solo reasignar campos.
+                # Si ya existe el nombre y el idField solo reasignar campos.
                 # ------------------------------------------------------------
         elif isinstance(parent, int):
             parent = self.find_node(self.nodels[parent].name, False)
@@ -92,16 +96,15 @@ class IntentTree(RenderTree):
 
     def fill_node(self, json_data, current=False):
         name = json_data["name"]
-        IdField = json_data["IdField"]
+        idField = json_data["idField"]
         node = find(self.node,
-                    lambda node: node.name == name and node.IdField == IdField)
+                    lambda nod: nod.name == name)# and nod.idField == idField)
         if node is not None:
-            befnode = self.find_node(self.orderlist[self.index], False)
-            delattr(befnode, "current")
-            print("deleting current attribute for {0}".format(befnode.name))
-            self.index += 1
-            nextnode = self.find_node(self.orderlist[self.index], False)
+            delattr(node, "current")
+            # print("deleting current attribute for {0}".format(node.name))
+            nextnode = self.find_node(self.orderlist[self.index + 1], False)
             setattr(nextnode, "current", "True")
+            _ = json_data.pop("parent")
             node.updateNode(**json_data)
         else:
             self.add_node(json_data, current)
@@ -110,8 +113,10 @@ class IntentTree(RenderTree):
         """Find a node by the str name attribute."""
         if by_field == "name":
             node = find(self.node, lambda node: node.name == value)
-        elif by_field == "idField":
-            node = find(self.node, lambda node: getattr(node, "idField", None) == value)
+        # elif by_field == "idField":
+        #     node = find(self.node, lambda node: getattr(node, "idField", None) == value)
+        else:
+            node = find(self.node, lambda node: getattr(node, by_field, None) == value)
         if to_dict and node:
             return node.__dict__
         else:
@@ -127,7 +132,7 @@ class IntentTree(RenderTree):
                     print("-->%s"%nodename)
                 else:
                     print("%s"%nodename)
-        return self.orderlist[index+1]
+        return self.orderlist[index]
 
     def __LevelOrderlist(self):
         self.orderlist = [node.name for node in PreOrderIter(self.node)]

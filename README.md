@@ -21,3 +21,8 @@ Cambios (28/04/2018 y 29/04/2018):
 - Corregí el método find_node, agregando una validación por si el node es None y to_dict es True, probé los métodos init y add_node del IntentTree. No pude probar el SessionContainer pues no encontré un ejemplo, en la raíz del branch habían ejemplos para interactuar con el árbol y esos fue los que utilicé.
 - En DialogFlow ya está el chatbot y en el folder chatbots están todos los json asociados, para automatizar este proceso se necesita vincular a projecto google y hay que insertar una tarjeta de crédito, de lo contrario este proceso de export se tiene que hacer manual. Si se automatiza hay que cambiar la implementación actual.
 - Se completó el método publishIntentTree a partir del folder donde deben aparecer todos los chatbots disponibles.
+
+Cambios (30/04/2018 y 1/05/2018):
+- Ajuste de conversación de dialogFlow a flujo de conversaciones con infomanager.
+- Navegacion de intents con sessioncontainer, el arbol lo construye chatbotwrapper y sessioncontainer lo resguarda para poder navegar sobre él.
+- por ahora se puede probar corriendo ejemplo_infomanager con "python ejemplo_infomanager".

@@ -22,7 +22,8 @@ class ChatBotWrapper:
             id_chatbot = agent_data['googleAssistant']['project']
             # divide the json objects between intents and usersays
             intents_usersays = []
-            for f in intents:
+            intents_copy = intents.copy()
+            for f in intents_copy:
                 if '_usersays_' in f:
                     intents_usersays.append(f)
                     intents.remove(f)
@@ -73,13 +74,22 @@ class ChatBotWrapper:
         The output is sending to the IVR as a text string.
         """
 
-    def interceptIntent(self):  # strText, idNode
+    def interceptIntent(self, im):  # strText, idNode
         """Text from IVR is sending to core chatbot and an intent is actioned.
         Output a jsonInput object with msgOriginal, idChatBot, idNode
         """
-        respuesta = input()
-        return {"name":"Ampliacion", "value": respuesta,
-                "IdChatBot":self.IdChatBot, "msgAns":"Tu respuesta es {0}".format(respuesta)}
+        jdata = im.newConsult()
+        print(jdata["msgAns"])
+        value = input()
+        # simulacion de construccion de mensaje
+        if len(value.split(" ")) == 1:
+            jdata.update({"value": value})
+            jdata.update({"msgAns": jdata["msgAns"]})
+            jdata.update({"state": "valid"})
+        else:
+            jdata.update({"msgAns": ""})
+            jdata.update({"state": "no_valid"})
+        return jdata
 
     def listAllAvailableChatbots(self):
         """Check all available chatbots on the core and assign them an id."""
@@ -90,8 +100,3 @@ class ChatBotWrapper:
 
     def __init__(self, chatbots_folder):
         self.publishIntentTree(chatbots_folder)
-
-if __name__ == "__main__":
-    print('Iniciando el upload a sessions...')
-    ChatBotWrapper(chatbots_folder='chatbots')
-    print('Objeto lista de IntentTrees lista para consumirse...')
