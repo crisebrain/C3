@@ -43,7 +43,10 @@ class ChatBotWrapper:
                     id_field = None
                     if len(intent_data['responses'][0]['parameters'])>0:
                         id_field = intent_data['responses'][0]['parameters'][0]['name']
-                    build_json = {"name":intent_data['name'], "parent": None, "idField":id_field, "value":None,"accuracyPrediction":0, "mandatory":False,"msgReq":msgReq,"msgAns":msgAns}
+                    build_json = {"name":intent_data['name'], "parent": None,
+                                  "idField":id_field, "value":None,
+                                  "accuracyPrediction":0, "mandatory":False,
+                                  "msgReq":msgReq,"msgAns":msgAns}
                     # check if it is the root node
                     if 'parentId' not in intent_data.keys():
                         it = IntentTree(build_json, time(), id_chatbot)
@@ -53,7 +56,7 @@ class ChatBotWrapper:
             i = 0
             while len(intents_jsons)>0:
                 jsonObj=intents_jsons[i]
-                if it.find_node(value=intents_ids[jsonObj['parent']],to_dict=False):
+                if it.find_node(value=intents_ids[jsonObj['parent']], to_dict=False):
                     jsonObj['parent']=intents_ids[jsonObj['parent']]
                     it.add_node(jsonObj)
                     intents_jsons.remove(jsonObj)
@@ -73,23 +76,28 @@ class ChatBotWrapper:
         with the new idChatBot and find idNode to load msgAnswer.
         The output is sending to the IVR as a text string.
         """
+        print("Chatbot:  ", jsonGenerateAnswer["msgAnsd"])
 
     def interceptIntent(self, im):  # strText, idNode
         """Text from IVR is sending to core chatbot and an intent is actioned.
         Output a jsonInput object with msgOriginal, idChatBot, idNode
         """
         jdata = im.newConsult()
-        print(jdata["msgAns"])
-        value = input()
+        # IVR
+        print("Usuario:  ")
+        msgOriginal = input()
+        # IVR
+        # print(jdata["msgAns"])
+        jdata.update({"msgOriginal": msgOriginal})
         # simulacion de construccion de mensaje
-        if len(value.split(" ")) == 1:
-            jdata.update({"value": value})
-            jdata.update({"msgAns": jdata["msgAns"]})
+        # ******* Operaciones de chatbotWrapper para deteccion de *******
+        # ************* mensajes, simulada con el if ********************
+        if msgOriginal is not None:
             jdata.update({"state": "valid"})
         else:
-            jdata.update({"msgAns": ""})
             jdata.update({"state": "no_valid"})
         return jdata
+        # ***************************************************************
 
     def listAllAvailableChatbots(self):
         """Check all available chatbots on the core and assign them an id."""

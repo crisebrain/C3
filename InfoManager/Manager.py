@@ -6,25 +6,28 @@ class InfoManager:
         """Creates the Info Manager for the current conference session."""
         self.conference_date = time()
         self.conference = {}
-        self.sc = SessionContainer(ChatBotWrapper.current_intentTree,
-                                   ChatBotWrapper.current_intentTree.idChatBot)
+        self.sc = SessionContainer(ChatBotWrapper)
 
     def newConsult(self):
         """Creates new conversation Flow with the IntentTree class.
-        Parameteres:
-        chatbotjson: Json array with the ChatBot Id
-                       and other fields.
         Outputs:
         Json with the info for the conversation nodes,
                  each node with the info about the id chatBot."""
-        jdata = self.sc.WhosNextEntry()
-        jdata["msgAns"] = self.outputMsg(jdata["msgAns"])
-        return jdata
+        # jdata["msgAns"] = self.outputMsg(jdata["msgAns"])
+        return self.sc.WhosNextEntry()
 
     def intentFlow(self, jdata, cbwrapper, se):
         if jdata["state"] == "valid":
-            cbwrapper.generateAnswer(jdata)
+            # Extraer valor ***********************************
+            jdata = self.extractValue(jdata)
+            # Extraer valor ***********************************
             self.sc.feedNextEntry(jdata)
+            msgAns = self.outputMsg(jdata)
+            if isinstance(msgAns, str):
+                jdata["msgAnsd"] = msgAns
+                cbwrapper.generateAnswer(jdata)
+            else:
+                print("Funcion para saltar hacia el nodo no lleno y reordenar")
 
             # self.sc.fill_node(jdata)
         elif jdata["state"] == "no_valid":
@@ -33,17 +36,34 @@ class InfoManager:
             print("Buscando con mecanismo cognitivo\n")
             jdata_ans = se(jdata)
             for intent in jdata_ans:
-                cbwrapper.generateAnswer(intent)
                 self.sc.feedNextEntry(intent)
+                cbwrapper.generateAnswer(intent)
 
-    def outputMsg(self, msgString):
+    def extractValue(self, jdata):
+        msgOriginal = jdata["msgOriginal"]
+        # ****************************************************
+        # extraer valor, condiciones *************************
+        value = msgOriginal.split(" ")[-1]
+        # ****************************************************
+        jdata.update({"value":value})
+        return jdata
+
+    def outputMsg(self, jdata):
+        msgString = jdata["msgAns"]
+        namestr = jdata["name"]
         pattern = r"\$\w+"
         fields = re.findall(pattern=pattern, string=msgString)
         if isinstance(fields, list):
             for field in fields:
                 fieldw = field[1:]
                 tree = self.sc.extractTree()
-                node = tree.find_node(fieldw, False, "idvalue")
-                msgString = msgString.replace(field, node.value)
+                node = tree.findFieldContext(fieldw, namestr)
+                if node is None:
+                    raise ValueError("Key not stored at context %s"%fieldw)
+                else:
+                    if node.value is None:
+                        print("No previosly filled node, jumping")
+                        return node
+                    else:
+                        msgString = msgString.replace(field, node.value)
         return msgString
-            # tree.find_node()

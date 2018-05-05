@@ -32,7 +32,7 @@ if __name__ == "__main__":
     while(i < qs):
         json_data = chbw.interceptIntent(im)
         if i < qs - 1:
-            json_data.update({"idvalue":ids[i]})
+            # json_data.update({"idvalue":ids[i]})
             im.intentFlow(json_data, chbw, cognitive_req)
         else:
             break

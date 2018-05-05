@@ -1,5 +1,6 @@
 from anytree import (Node, RenderTree, ContStyle,
-                     find, PreOrderIter)
+                     find, PreOrderIter, findall)
+import numpy as np
 
 """Defines Intent Node class and include intent fields."""
 class IntentNode(Node):
@@ -19,7 +20,6 @@ class IntentNode(Node):
                  -msgAns.
         binding fields are marked with *
         """
-        #super().__init__()
         self.parent = parent
         self.spathlist = list()
         for key, value in kwargs.items():
@@ -34,7 +34,6 @@ class IntentNode(Node):
         for key, value in kwargs.items():
             setattr(self, key, value)
 
-    # AssignCurrent solo para el ejemplo
     def assignCurrent(self):
         self.current = "True"
 
@@ -74,9 +73,6 @@ class IntentTree(RenderTree):
         """
         if "parent" in json_data:
             parent = json_data.pop("parent")
-        # if current:
-            # json_data.update({"current": "True"})
-            # _ = self.getOrderFromCurrent(mandatory=False)
         if isinstance(parent, str):
             parent = self.find_node(parent, False)
             node = IntentNode(parent, **json_data)
@@ -95,6 +91,11 @@ class IntentTree(RenderTree):
         self.__LevelOrderlist()
 
     def fill_node(self, json_data, current=False):
+        """Fill the current Node with the new contained fields in json_data.
+        If exists, Updates the value attribute and adds the msgOriginal
+        to current Node, and set "current" for the next node in the order
+        list.
+        """
         name = json_data["name"]
         idField = json_data["idField"]
         node = find(self.node,
@@ -110,29 +111,73 @@ class IntentTree(RenderTree):
             self.add_node(json_data, current)
 
     def find_node(self, value, to_dict=True, by_field="name"):
-        """Find a node by the str name attribute."""
+        """Find a node by an arbitrary "field" attribute.
+
+        Parameters:
+        value - string value to compare.
+        to_dict - Bolean condition to ask for the node or
+                  the text dictionary.
+        by_field - string attribute.
+
+        Returns:
+        node - IntentNode object or dictionary with attributes
+               as elements.
+        """
         if by_field == "name":
-            node = find(self.node, lambda node: node.name == value)
-        # elif by_field == "idField":
-        #     node = find(self.node, lambda node: getattr(node, "idField", None) == value)
+            node = find(self.node,
+                        lambda node: node.name == value)
         else:
-            node = find(self.node, lambda node: getattr(node, by_field, None) == value)
+            node = find(self.node,
+                        lambda node: getattr(node, by_field, None) == value)
         if to_dict and node:
             return node.__dict__
         else:
             return node
 
-    def getOrderFromCurrent(self, mandatory=False, pr=True):
-        node = find(self.node, lambda node: getattr(node, "current", None) is not None)
+    def getOrderFromCurrent(self):
+        """Get the name for the current node according to orderlist.
+        """
+        node = find(self.node,
+                    lambda node: getattr(node, "current", None) is not None)
         index = self.orderlist.index(node.name)
         self.index = index
-        if pr:
-            for i, nodename in enumerate(self.orderlist):
-                if i == index + 1:
-                    print("-->%s"%nodename)
-                else:
-                    print("%s"%nodename)
         return self.orderlist[index]
 
+    def findFieldContext(self, key, nodename):
+        nodetup = findall(self.node,
+                          lambda node: getattr(node, "idField") == key)
+        nodec = self.find_node(nodename, False)
+        path = nodec.spathlist
+        if len(nodetup) > 1:
+            incontext = list()
+            for n in nodetup:
+                if all([True for pn in n.spathlist if pn in path]):
+                    incontext.append(n)
+                if len(incontext) > 1:
+                    depths = [incon.depth for incon in incontext]
+                    mindepinc = np.argmin(depths)
+                    foundnode = incontext[mindepinc]
+                elif len(incontext) == 1:
+                    foundnode = incontext[0]
+                else:
+                    foundnode = None
+        elif len(nodetup) == 1:
+            foundnode = nodetup[0].value
+        else:
+            foundnode = None
+        if foundnode is not None:
+            return foundnode
+        else:
+            return None
+
+    def mandatoryChecker():
+        """Check if all the nodes with the mandatory attribute are filled.
+        Search for all the nodes with the mandatory attribute, checks the
+        existance of value and msgOriginal attributes, and reasign the index
+        accord to the next node to fill.
+        """
+
     def __LevelOrderlist(self):
+        """Creates the node name list from intenttree with depth and sequence.
+        """
         self.orderlist = [node.name for node in PreOrderIter(self.node)]

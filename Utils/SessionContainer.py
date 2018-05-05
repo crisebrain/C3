@@ -3,16 +3,22 @@ import os
 import json
 
 class SessionContainer:
-    def __init__(self, tree, idChatBot):
-        self.addSessionTree(tree, idChatBot)
+
+    def __init__(self, CBW):
+        """Class to contain the intentTree, from ChatBotWrapper CBW instance."""
+        self.addSessionTree(CBW.current_intentTree,
+                            CBW.current_intentTree.idChatBot)
 
     def addSessionTree(self, tree, idChatBot):
         tree.node.assignCurrent()
         setattr(self, idChatBot, tree)
         self.current_intentTree = idChatBot
 
-    def extractTree(self):
-        return getattr(self, self.current_intentTree)
+    def extractTree(self, idChatBot=None):
+        if idChatBot is None:
+            return getattr(self, self.current_intentTree)
+        else:
+            return getattr(self, idChatBot)
 
     def ShowSessionTree(self):
         print("Id : %s\n" %(self.current_intentTree))
@@ -25,12 +31,13 @@ class SessionContainer:
             if getattr(node, "mandatory", None) is not None:
                 stchain = stchain + " *** "
             print(stchain)
+            print("\n\n", node, "\n\n")
         print("\nmandatory: ****\ncurrent: ---")
 
     def WhosNextEntry(self):
         """Extracts the next field to fill."""
         tree = self.extractTree()
-        name = tree.getOrderFromCurrent(pr=False)
+        name = tree.getOrderFromCurrent()
         node = tree.find_node(name, False)
         ddata_node = node.__dict__
         ddata = {}
@@ -41,12 +48,15 @@ class SessionContainer:
         return ddata
 
     def feedNextEntry(self, json_data):
-        """Fill the field next to the current."""
+        """Fill the fields next to the current."""
         tree = self.extractTree()
         tree.fill_node(json_data, True)
         #setattr(self, "C_" + self.Conversation_dict["IdConference"], tree)
 
     def __NewSessionTree(self, conversation_dict):
+        """Creates the tree from an conversation_dict.
+        This function doesn't works with the dialog flow structure.
+        """
         for index, intent in enumerate(conversation_dict['Session']):
             if index == 0:
                 it = IntentTree(intent, conversation_dict["CreationDate"],
@@ -55,14 +65,3 @@ class SessionContainer:
                 it.add_node(intent)
         it.getOrderFromCurrent()
         return it
-
-    # def updateConferences(self):
-    #     with open(self.__jspath, "w") as jsf:
-    #         json.dump(self.Conversation_dict, jsf, sort_keys = True,
-    #                   indent = 4, ensure_ascii = True)
-
-    # def __ConstructSessionTrees(self):
-    #     conversation_dict = self.Conversation_dict["Conversation"]
-    #     tree = self.__NewSessionTree(conversation_dict)
-    #     setattr(self, "C_" + conversation_dict["IdConference"], tree)
-    #     self.IdConference = conversation_dict["IdConference"]
