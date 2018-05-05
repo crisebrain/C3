@@ -31,11 +31,7 @@ if __name__ == "__main__":
     ids = ["name", "action", "provider_name", "affiliation"]
     while(i < qs):
         json_data = chbw.interceptIntent(im)
-        if i < qs - 1:
-            # json_data.update({"idvalue":ids[i]})
-            im.intentFlow(json_data, chbw, cognitive_req)
-        else:
-            break
+        im.intentFlow(json_data, chbw, cognitive_req)
         i += 1
     im.sc.ShowSessionTree()
 

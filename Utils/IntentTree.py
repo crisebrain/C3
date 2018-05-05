@@ -103,8 +103,9 @@ class IntentTree(RenderTree):
         if node is not None:
             delattr(node, "current")
             # print("deleting current attribute for {0}".format(node.name))
-            nextnode = self.find_node(self.orderlist[self.index + 1], False)
-            setattr(nextnode, "current", "True")
+            if self.index + 1 < len(self.orderlist):
+                nextnode = self.find_node(self.orderlist[self.index + 1], False)
+                setattr(nextnode, "current", "True")
             _ = json_data.pop("parent")
             node.updateNode(**json_data)
         else:
@@ -162,7 +163,7 @@ class IntentTree(RenderTree):
                 else:
                     foundnode = None
         elif len(nodetup) == 1:
-            foundnode = nodetup[0].value
+            foundnode = nodetup[0]
         else:
             foundnode = None
         if foundnode is not None:

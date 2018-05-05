@@ -17,6 +17,16 @@ class InfoManager:
         return self.sc.WhosNextEntry()
 
     def intentFlow(self, jdata, cbwrapper, se):
+        """Extracts the value from the msgOriginal with the extractValue
+        function, then is stored into node from msgReq and msgAns taken.
+        If state is valid the msg is formated, saved to msgAnsd element into
+        jdata dictionary and passed to cbwrapper.
+        In other cases this searchs into the database or CSE for the intent.
+        Parameters:
+        jdata - Node information dictionary.
+        cbwrapper - ChatBotWrapper instance object.
+        se - Search Engine function.
+        """
         if jdata["state"] == "valid":
             # Extraer valor ***********************************
             jdata = self.extractValue(jdata)
@@ -40,6 +50,7 @@ class InfoManager:
                 cbwrapper.generateAnswer(intent)
 
     def extractValue(self, jdata):
+        """Extracts the value from msgOriginal string from jdata dict."""
         msgOriginal = jdata["msgOriginal"]
         # ****************************************************
         # extraer valor, condiciones *************************
@@ -49,6 +60,7 @@ class InfoManager:
         return jdata
 
     def outputMsg(self, jdata):
+        """formats the msgAns with the values from upper nodes."""
         msgString = jdata["msgAns"]
         namestr = jdata["name"]
         pattern = r"\$\w+"

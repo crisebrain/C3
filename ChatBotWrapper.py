@@ -76,7 +76,7 @@ class ChatBotWrapper:
         with the new idChatBot and find idNode to load msgAnswer.
         The output is sending to the IVR as a text string.
         """
-        print("Chatbot:  ", jsonGenerateAnswer["msgAnsd"])
+        print("Chatbot:  \n", jsonGenerateAnswer["msgAnsd"])
 
     def interceptIntent(self, im):  # strText, idNode
         """Text from IVR is sending to core chatbot and an intent is actioned.

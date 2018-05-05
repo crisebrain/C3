@@ -31,7 +31,7 @@ class SessionContainer:
             if getattr(node, "mandatory", None) is not None:
                 stchain = stchain + " *** "
             print(stchain)
-            print("\n\n", node, "\n\n")
+            # print("\n\n", node, "\n\n")
         print("\nmandatory: ****\ncurrent: ---")
 
     def WhosNextEntry(self):
