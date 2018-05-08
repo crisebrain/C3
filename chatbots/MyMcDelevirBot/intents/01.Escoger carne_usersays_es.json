@@ -1,0 +1,26 @@
+[
+  {
+    "id": "0d419311-dca9-4a6f-9121-cd4e9988e2fe",
+    "data": [
+      {
+        "text": "Carne",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1516787328
+  },
+  {
+    "id": "aafd96c0-69f1-4ebc-9750-17503fc22b7a",
+    "data": [
+      {
+        "text": "Carne, por favor",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1516787328
+  }
+]

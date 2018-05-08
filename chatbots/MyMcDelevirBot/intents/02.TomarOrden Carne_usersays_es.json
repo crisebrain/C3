@@ -1,0 +1,109 @@
+[
+  {
+    "id": "24508585-449f-4457-9fb1-ec333d9e569d",
+    "data": [
+      {
+        "text": "Por favor, deme ",
+        "userDefined": false
+      },
+      {
+        "text": "una",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "mc spicy",
+        "alias": "menu",
+        "meta": "@menu",
+        "userDefined": true
+      },
+      {
+        "text": " de carne",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1516788368
+  },
+  {
+    "id": "a7d14566-cc29-49d6-a495-b8d00ad85d6d",
+    "data": [
+      {
+        "text": "Por favor, deme una ",
+        "userDefined": false
+      },
+      {
+        "text": "big mac",
+        "alias": "menu",
+        "meta": "@menu",
+        "userDefined": true
+      },
+      {
+        "text": " de carne",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1516788368
+  },
+  {
+    "id": "c1c75325-1d96-4749-8425-f563d6ee7c14",
+    "data": [
+      {
+        "text": "Por favor, ",
+        "userDefined": false
+      },
+      {
+        "text": "una",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "big mac",
+        "alias": "menu",
+        "meta": "@menu",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1516788368
+  },
+  {
+    "id": "c5d5ca51-a5f9-4063-ad75-1f26f77e0fd0",
+    "data": [
+      {
+        "text": "Por favor, ",
+        "userDefined": false
+      },
+      {
+        "text": "una",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "mc spicy",
+        "alias": "menu",
+        "meta": "@menu",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1516788368
+  }
+]

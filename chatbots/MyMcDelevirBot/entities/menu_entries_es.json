@@ -1,0 +1,53 @@
+[
+  {
+    "value": "postre",
+    "synonyms": [
+      "Postre",
+      "helado, flan, galletas"
+    ]
+  },
+  {
+    "value": "drink",
+    "synonyms": [
+      "drink",
+      "coca, coca-cola, coca cola, 7up, 7 up, te verde, té verde"
+    ]
+  },
+  {
+    "value": "mc spicy",
+    "synonyms": [
+      "mc spicy"
+    ]
+  },
+  {
+    "value": "hamburguesa",
+    "synonyms": [
+      "Hamburguesa",
+      "big mac, queso, mc spicy, mcspicy, bigmac"
+    ]
+  },
+  {
+    "value": "helado",
+    "synonyms": [
+      "helado"
+    ]
+  },
+  {
+    "value": "cocas",
+    "synonyms": [
+      "cocas"
+    ]
+  },
+  {
+    "value": "coca",
+    "synonyms": [
+      "coca"
+    ]
+  },
+  {
+    "value": "big mac",
+    "synonyms": [
+      "big mac"
+    ]
+  }
+]

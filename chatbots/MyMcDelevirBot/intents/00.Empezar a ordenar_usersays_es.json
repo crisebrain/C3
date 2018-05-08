@@ -1,0 +1,71 @@
+[
+  {
+    "id": "4beeff60-99c1-4a51-9fc3-c7b7fdeede08",
+    "data": [
+      {
+        "text": "Sí, por favor",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0
+  },
+  {
+    "id": "eec54068-7dd1-4731-aa68-dc7ce696cea7",
+    "data": [
+      {
+        "text": "Me gustaría ordenar una hamburguesa",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0
+  },
+  {
+    "id": "abaa5756-102e-4c38-97b4-7eae673c36a9",
+    "data": [
+      {
+        "text": "Sí",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0
+  },
+  {
+    "id": "96d6d72c-5a53-4e52-9e4e-3273f8d54b3d",
+    "data": [
+      {
+        "text": "Deseo ordenar",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1516786380
+  },
+  {
+    "id": "5d3aa806-f12a-47e9-bcf8-b409a761d2d2",
+    "data": [
+      {
+        "text": "Me gustaría ordenar una comida",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1516786380
+  },
+  {
+    "id": "135ee62c-a05f-469b-aa3d-3376c0473c7e",
+    "data": [
+      {
+        "text": "¿Puede tomar mi orden?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1516786380
+  }
+]

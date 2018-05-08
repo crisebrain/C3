@@ -177,6 +177,11 @@ class IntentTree(RenderTree):
         existance of value and msgOriginal attributes, and reasign the index
         accord to the next node to fill.
         """
+        nodetup = findall(self.node, lambda node: getattr(node,
+                                                          "mandatory",
+                                                          None) is not None)
+        return nodetup
+
 
     def __LevelOrderlist(self):
         """Creates the node name list from intenttree with depth and sequence.

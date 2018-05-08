@@ -67,6 +67,7 @@ class ChatBotWrapper:
         # keep as current tree the first one and save all IntentTrees in the list to Sessions
         self.current_intentTree = intentTree_list[0]
         pickle.dump(intentTree_list,open('./Sessions/Conference.pck','wb'))
+        
 
     def generateAnswer(self, jsonGenerateAnswer):
         """Read msgAnswer from the idIntentTree-idNode for current intent.

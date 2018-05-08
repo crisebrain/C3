@@ -1,0 +1,44 @@
+{
+  "id": "88fae9d2-8317-40e8-aa05-65150fd7e657",
+  "name": "03.No",
+  "auto": true,
+  "contexts": [],
+  "responses": [
+    {
+      "resetContexts": false,
+      "affectedContexts": [
+        {
+          "name": "ctx_alacarta",
+          "parameters": {},
+          "lifespan": 0
+        },
+        {
+          "name": "ctx_carne",
+          "parameters": {},
+          "lifespan": 0
+        },
+        {
+          "name": "ctx_direccion",
+          "parameters": {},
+          "lifespan": 5
+        }
+      ],
+      "parameters": [],
+      "messages": [
+        {
+          "type": 0,
+          "lang": "es",
+          "speech": "Genial. Ha sido una elección maravillosa del menú. Por favor ingrese su dirección."
+        }
+      ],
+      "defaultResponsePlatforms": {},
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": false,
+  "webhookForSlotFilling": false,
+  "lastUpdate": 1516866624,
+  "fallbackIntent": false,
+  "events": []
+}

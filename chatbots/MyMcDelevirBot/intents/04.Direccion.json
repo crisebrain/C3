@@ -1,0 +1,45 @@
+{
+  "id": "8b088187-696a-438f-9a51-e9f176723bc0",
+  "name": "04.Direccion",
+  "auto": true,
+  "contexts": [
+    "ctx_direccion"
+  ],
+  "responses": [
+    {
+      "resetContexts": false,
+      "affectedContexts": [
+        {
+          "name": "ctx_direccion",
+          "parameters": {},
+          "lifespan": 0
+        }
+      ],
+      "parameters": [
+        {
+          "id": "73b92f8b-b7a6-4b6a-8a2b-a00160869fbf",
+          "required": false,
+          "dataType": "@sys.any",
+          "name": "myaddress",
+          "value": "$myaddress",
+          "isList": false
+        }
+      ],
+      "messages": [
+        {
+          "type": 0,
+          "lang": "es",
+          "speech": "Gracias. Fue un placer atenderlo. Su orden será despachada pronto, y debería recibirla en 30 minutos. Tenga un bonito día."
+        }
+      ],
+      "defaultResponsePlatforms": {},
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": false,
+  "webhookForSlotFilling": false,
+  "lastUpdate": 1516866955,
+  "fallbackIntent": false,
+  "events": []
+}

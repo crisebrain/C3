@@ -1,0 +1,34 @@
+{
+  "id": "e49197e2-ae28-4c8e-9237-b91a22e9763e",
+  "name": "01.Escoger a la carta",
+  "auto": true,
+  "contexts": [],
+  "responses": [
+    {
+      "resetContexts": false,
+      "affectedContexts": [
+        {
+          "name": "ctx_alacarta",
+          "parameters": {},
+          "lifespan": 5
+        }
+      ],
+      "parameters": [],
+      "messages": [
+        {
+          "type": 0,
+          "lang": "es",
+          "speech": "Genial. ¿Qué te gustaría?"
+        }
+      ],
+      "defaultResponsePlatforms": {},
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": false,
+  "webhookForSlotFilling": false,
+  "lastUpdate": 1516787101,
+  "fallbackIntent": false,
+  "events": []
+}
