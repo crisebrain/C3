@@ -1,0 +1,27 @@
+- returnCode : "0" (valor por default, error de webservice)
+- returnCode : "#X" (succesfull)
+
+Dialog Flow y web service
+
+- web service vdn:
+     req = {"nombre": "xxxxx"}
+     respuesta = {"result":[
+                          {"nombre": "xxxxx",
+                           "VDN": "YYYY"},
+                           ...
+                           ]
+                  "retunrCode":"#X"
+                  }
+
+- web service saldo:
+      req = {"nombre": "xxxxx"}
+      respuesta = {"result":[
+                           {"nombre": "xxxxx",
+                            "saldo": "YYYY"},
+                            ...
+                            ]
+                   "retunrCode":"#X"
+                   }
+
+
+% longitud de parametros formatear bien los valores

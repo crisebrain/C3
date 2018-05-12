@@ -171,7 +171,7 @@ class IntentTree(RenderTree):
         else:
             return None
 
-    def mandatoryChecker():
+    def mandatoryChecker(self):
         """Check if all the nodes with the mandatory attribute are filled.
         Search for all the nodes with the mandatory attribute, checks the
         existance of value and msgOriginal attributes, and reasign the index
@@ -180,8 +180,19 @@ class IntentTree(RenderTree):
         nodetup = findall(self.node, lambda node: getattr(node,
                                                           "mandatory",
                                                           None) is not None)
-        return nodetup
-
+        # modificar parametros de profundidad para busqueda
+        emptynodedepths = [node.depth for node in
+                           nodetup if getattr(node, "value", None) is None]
+        comparedepths = all([True for depth in emptynodedepths if depth == emptynodedepths[0]])
+        if comparedepths:
+            nodenames = [node.name for node in nodetup]
+            inds = [self.orderlist.index(name) for name in nodenames]
+            self.index = min(inds)
+            return current
+        else:
+            mindepthindex = np.argmin(emptynodedepths)
+            current = nodetup[mindepthindex]
+            return current
 
     def __LevelOrderlist(self):
         """Creates the node name list from intenttree with depth and sequence.
