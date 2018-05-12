@@ -25,4 +25,8 @@ Cambios (28/04/2018 y 29/04/2018):
 Cambios (30/04/2018 y 1/05/2018):
 - Ajuste de conversación de dialogFlow a flujo de conversaciones con infomanager.
 - Navegacion de intents con sessioncontainer, el arbol lo construye chatbotwrapper y sessioncontainer lo resguarda para poder navegar sobre él.
-- por ahora se puede probar corriendo ejemplo_infomanager con "python ejemplo_infomanager".
+por ahora se puede probar corriendo ejemplo_infomanager con "python ejemplo_infomanager".
+
+Cambios 12/05/2018:
+- Se especificó la clase CognitiveSearchEngine.py, se implementó un NER para nombres, locaciones y se extraen todos los números de la sentencia.
+- Cada método fue especificado para su posterior implementación. Incluyendo en la especificación: entrada, algoritmia, salida.
