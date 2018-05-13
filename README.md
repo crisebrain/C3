@@ -26,3 +26,9 @@ Cambios (30/04/2018 y 1/05/2018):
 - Ajuste de conversación de dialogFlow a flujo de conversaciones con infomanager.
 - Navegacion de intents con sessioncontainer, el arbol lo construye chatbotwrapper y sessioncontainer lo resguarda para poder navegar sobre él.
 - por ahora se puede probar corriendo ejemplo_infomanager con "python ejemplo_infomanager".
+
+Adición de servicio de webhook vdn (13/05/2018):
+- Servicio de Webhook con busqueda de vdn por request de dialogFlow. Nota: Falta probar con dialog Flow, pero ya debería de funcionar puesto que se utiliza la estructura de intent que se supone envía en el request.
+- Uso de un json almacenado en query_VDN.json como el query enviado por DialogFlow.
+- Creación de mensaje y código de error según el numero de coincidencias de la petición a dialogFlow.
+- Uso de Base de datos ficticia con un txt.
