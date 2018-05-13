@@ -32,3 +32,7 @@ Adición de servicio de webhook vdn (13/05/2018):
 - Uso de un json almacenado en query_VDN.json como el query enviado por DialogFlow.
 - Creación de mensaje y código de error según el numero de coincidencias de la petición a dialogFlow.
 - Uso de Base de datos ficticia con un txt.
+
+Cambios 12/05/2018:
+- Se especificó la clase CognitiveSearchEngine.py, se implementó un NER para nombres, locaciones y se extraen todos los números de la sentencia.
+- Cada método fue especificado para su posterior implementación. Incluyendo en la especificación: entrada, algoritmia, salida.
