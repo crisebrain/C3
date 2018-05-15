@@ -36,3 +36,6 @@ Adición de servicio de webhook vdn (13/05/2018):
 Cambios 12/05/2018:
 - Se especificó la clase CognitiveSearchEngine.py, se implementó un NER para nombres, locaciones y se extraen todos los números de la sentencia.
 - Cada método fue especificado para su posterior implementación. Incluyendo en la especificación: entrada, algoritmia, salida.
+
+Cambios 15/05/2018:
+- Se terminó la validación de los webservices de prueba para la fase uno, mismos que trabajan con DialogFlow y ngrok para exponer el servicio.

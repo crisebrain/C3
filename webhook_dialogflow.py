@@ -18,6 +18,7 @@ def webhook():
                "fulfillmentText": "Null"}
         res = json.dumps(res, indent=4)
         r = make_response(res)
+        print(err)
     r.headers["Content-Type"] = "application/json"
     return r
 
@@ -30,7 +31,7 @@ def makeWebhookResult(req):
                "fulfillmentText": "Null"}
 
 def makeresponseAction(req, action):
-    from bd_busqueda import BDbusquedas
+    from DFWrapper import BDbusquedas
     bd = BDbusquedas()
     # Carga de base de datos
     result = req.get("queryResult").get("parameters")
