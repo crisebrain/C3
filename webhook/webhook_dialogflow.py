@@ -67,9 +67,10 @@ def mensajson(array, code, action):
             Text = "No hay referencia de esa persona"
         elif code == 1:
             elem = array[0]
-            Text = "El telefono de {0} {1} es {2}".format(elem["Nombre"],
+            Text = "El telefono de {0} {1} es {2}.".format(elem["Nombre"],
                                                           elem["Apellido"],
                                                           elem["VDN"])
+            Text += "\n¿Deseas algo más?"
         elif code == 2:
             textnames = [elem["Nombre"] + " " + elem["Apellido"] for elem in array]
             textnames = ' o '.join(textnames)
@@ -84,6 +85,7 @@ def mensajson(array, code, action):
             Text = "El saldo de {0} {1} es {2} pesos".format(elem["Nombre"],
                                                              elem["Apellido"],
                                                              elem["saldo"])
+            Text += "\n¿Deseas algo más?"
         elif code == 2:
             textnames = [elem["Nombre"] + " " + elem["Apellido"] for elem in array]
             textnames = ' o '.join(textnames)
