@@ -3,7 +3,7 @@
 
 Dialog Flow y web service
 
-- web service vdn:
+- web service VDN:
      req = {"nombre": "xxxxx"}
      respuesta = {"result":[
                           {"nombre": "xxxxx",
@@ -25,3 +25,5 @@ Dialog Flow y web service
 
 
 % longitud de parametros formatear bien los valores
+% para la primer fase, el campo "result" está contenido en payload del mensaje
+%       principal

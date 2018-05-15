@@ -1,10 +1,10 @@
 {
   "responseId": "36dabea4-e98c-4d14-8c04-1bc7c64d48d2",
   "queryResult": {
-    "queryText": "Dame el vdn de Juan",
-    "action": "VDN",
+    "queryText": "Dame el saldo de Juan",
+    "action": "saldo",
     "parameters": {
-      "personname": "Juan"
+      "nombre": "Ramon Apa"
     },
     "allRequiredParamsPresent": true,
     "fulfillmentMessages": [
