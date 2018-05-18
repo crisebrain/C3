@@ -7,6 +7,10 @@ def joinnames(array):
     stname = " ".join(array)
     return stname
 
+def normaliza(data):
+    import unicodedata
+    normal = unicodedata.normalize('NFKD', data).encode('ASCII', 'ignore')
+    return normal.decode()
 
 class BDbusquedas:
     def __init__(self):
@@ -16,6 +20,7 @@ class BDbusquedas:
 
     def busqueda(self, valor):
         valor = valor.strip()
+        valor = normaliza(valor)
         if valor != "":
             Nombres = self.BD[["Nombre", "Apellido"]].apply(func=joinnames, axis=1)
             posibles = self.BD.iloc[[True if valor.lower() in n else False for n in Nombres.str.lower().values]]
@@ -25,19 +30,3 @@ class BDbusquedas:
         else:
             resultado = []
         return resultado
-
-# print(valor)
-# if len(valor.split(" ")) == 1:
-#     if valor.lower() in self.BD.Nombre.str.lower().values:
-#         posibles = self.BD.loc[self.BD.Nombre.str.lower() == valor.lower()]
-#         resultado = json.loads(posibles.drop(["Id"], axis=1).to_json(orient="table"))["data"]
-#     elif valor.lower() in self.BD.Apellido.str.lower().values:
-#         posibles = self.BD.loc[self.BD.Apellido.str.lower() == valor.lower()]
-#         resultado = json.loads(posibles.drop(["Id"], axis=1).to_json(orient="table"))["data"]
-#     else:
-#         resultado = []
-# elif len(valor.split(" ")) == 2:
-#     cad = valor.split(" ")
-#     posibles = self.BD.loc[self.BD.Nombre.str.lower() == cad[0].lower()]
-#     posibles2 = posibles.loc[posibles.Apellido.str.lower() == cad[1].lower()]
-#     resultado = json.loads(posibles2.drop(["Id"], axis=1).to_json(orient="table"))["data"]
