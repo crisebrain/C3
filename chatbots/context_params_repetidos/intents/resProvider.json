@@ -1,0 +1,56 @@
+{
+  "id": "e639a925-2db1-4f36-801b-1dd050527b16",
+  "parentId": "44c696b1-ba82-46b8-a62e-b738829c85fe",
+  "rootParentId": "4fbc659c-cadd-41a1-b273-a068e0500351",
+  "name": "resProvider",
+  "auto": true,
+  "contexts": [
+    "reqService-followup"
+  ],
+  "responses": [
+    {
+      "resetContexts": false,
+      "action": "resProvider",
+      "affectedContexts": [
+        {
+          "name": "resProvider-followup",
+          "parameters": {},
+          "lifespan": 2
+        }
+      ],
+      "parameters": [
+        {
+          "id": "49b8f7b7-85a7-4009-9b15-774656b90f1c",
+          "required": false,
+          "dataType": "@sys.given-name",
+          "name": "provider_name",
+          "value": "$provider_name",
+          "isList": false
+        },
+        {
+          "id": "6e225a95-d48e-474f-b06c-ec734150fce7",
+          "required": false,
+          "dataType": "@sys.given-name",
+          "name": "name",
+          "value": "#reqService-followup.name",
+          "isList": false
+        }
+      ],
+      "messages": [
+        {
+          "type": 0,
+          "lang": "es",
+          "speech": "Muchas gracias, $name,  ¿Me puedes brindar el número de afiliación?"
+        }
+      ],
+      "defaultResponsePlatforms": {},
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": false,
+  "webhookForSlotFilling": false,
+  "lastUpdate": 1525012909,
+  "fallbackIntent": false,
+  "events": []
+}

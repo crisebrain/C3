@@ -1,0 +1,41 @@
+{
+  "id": "66e0ee03-f74e-4806-876f-9a0fd6c27ed5",
+  "name": "prueba 2",
+  "auto": true,
+  "contexts": [],
+  "responses": [
+    {
+      "resetContexts": false,
+      "affectedContexts": [
+        {
+          "name": "megustas",
+          "parameters": {},
+          "lifespan": 5
+        }
+      ],
+      "parameters": [
+        {
+          "id": "d49d5be8-05fc-4679-9d0e-b1758249aa33",
+          "dataType": "@sys.number",
+          "name": "numero",
+          "value": "$numero"
+        }
+      ],
+      "messages": [
+        {
+          "type": 0,
+          "lang": "es",
+          "speech": []
+        }
+      ],
+      "defaultResponsePlatforms": {},
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": false,
+  "webhookForSlotFilling": false,
+  "lastUpdate": 1526592152,
+  "fallbackIntent": false,
+  "events": []
+}

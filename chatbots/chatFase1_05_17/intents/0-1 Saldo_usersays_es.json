@@ -1,0 +1,152 @@
+[
+  {
+    "id": "d8387c0e-f6a8-43fd-bba7-1888693cba5e",
+    "data": [
+      {
+        "text": "podrias dame el saldo de ",
+        "userDefined": false
+      },
+      {
+        "text": "gaby",
+        "alias": "nombre",
+        "meta": "@sys.any",
+        "userDefined": true
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1526426632
+  },
+  {
+    "id": "298324b9-aa41-4e99-b25a-33dcc557f2bc",
+    "data": [
+      {
+        "text": "me ayudas con el saldo de ",
+        "userDefined": false
+      },
+      {
+        "text": "felipe",
+        "alias": "nombre",
+        "meta": "@sys.any",
+        "userDefined": true
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1526426632
+  },
+  {
+    "id": "32302e50-423a-48ec-b6df-08db282c7f2a",
+    "data": [
+      {
+        "text": "dame el saldo de ",
+        "userDefined": false
+      },
+      {
+        "text": "manuel",
+        "alias": "nombre",
+        "meta": "@sys.any",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1526426632
+  },
+  {
+    "id": "7d4dcae1-7b93-46e4-a273-9c70c4a3eae0",
+    "data": [
+      {
+        "text": "quiero conocer el saldo de ",
+        "userDefined": false
+      },
+      {
+        "text": "ramon",
+        "alias": "nombre",
+        "meta": "@sys.any",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1526426632
+  },
+  {
+    "id": "dd7ca8b2-d7ba-43f1-a477-06768608977d",
+    "data": [
+      {
+        "text": "mi saldo, por favor",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1526398449
+  },
+  {
+    "id": "7aac1c8a-6b26-497e-8186-c5a81d081464",
+    "data": [
+      {
+        "text": "Dame mi saldo",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1526398449
+  },
+  {
+    "id": "2cce2ccb-be92-411d-a56e-276d9ab83c2d",
+    "data": [
+      {
+        "text": "Puede",
+        "meta": "@sys.ignore",
+        "userDefined": true
+      },
+      {
+        "text": " decirme mi saldo",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1526398449
+  },
+  {
+    "id": "2c06a81c-7c25-4155-afb9-543ba5ae4c00",
+    "data": [
+      {
+        "text": "Quiero saber mi saldo",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1526398449
+  },
+  {
+    "id": "ec90c189-090e-452b-a3d5-36bc1bbec340",
+    "data": [
+      {
+        "text": "Me gustaría conocer mi ",
+        "userDefined": false
+      },
+      {
+        "text": "saldo",
+        "meta": "@sys.ignore",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1526398449
+  }
+]

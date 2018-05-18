@@ -39,3 +39,8 @@ Cambios 12/05/2018:
 
 Cambios 15/05/2018:
 - Se terminó la validación de los webservices de prueba para la fase uno, mismos que trabajan con DialogFlow y ngrok para exponer el servicio.
+
+Cambios 18/05/2018:
+- Se modificó la forma de ejecución del script "webhook_dialogflow.py" para que se ejecute con el interprete de anaconda.
+- Se añadió un método get para preguntar el estado del túnel.
+- Se actualizó la base de datos.

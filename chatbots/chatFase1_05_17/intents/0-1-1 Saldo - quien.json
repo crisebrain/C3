@@ -1,0 +1,48 @@
+{
+  "id": "613b1495-ab21-44ec-a5eb-214db27a1846",
+  "parentId": "fc968bf4-d4e5-4204-a896-c537619eb794",
+  "rootParentId": "fc968bf4-d4e5-4204-a896-c537619eb794",
+  "name": "0-1-1 Saldo - quien",
+  "auto": true,
+  "contexts": [
+    "0-1Saldo-followup"
+  ],
+  "responses": [
+    {
+      "resetContexts": false,
+      "action": "saldo",
+      "affectedContexts": [
+        {
+          "name": "0-1-1Saldo-quien-followup",
+          "parameters": {},
+          "lifespan": 2
+        }
+      ],
+      "parameters": [
+        {
+          "id": "f23047c0-2d32-4aae-9b50-99e77dfaabdd",
+          "required": false,
+          "dataType": "@sys.given-name",
+          "name": "nombre",
+          "value": "$nombre",
+          "isList": false
+        }
+      ],
+      "messages": [
+        {
+          "type": 0,
+          "lang": "es",
+          "speech": []
+        }
+      ],
+      "defaultResponsePlatforms": {},
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": true,
+  "webhookForSlotFilling": false,
+  "lastUpdate": 1526398682,
+  "fallbackIntent": false,
+  "events": []
+}

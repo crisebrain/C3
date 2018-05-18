@@ -1,0 +1,158 @@
+[
+  {
+    "id": "ec072e29-4d6d-4fab-9d45-5135220d6025",
+    "data": [
+      {
+        "text": "con ",
+        "userDefined": false
+      },
+      {
+        "text": "Juan",
+        "alias": "nombre",
+        "meta": "@sys.any",
+        "userDefined": true
+      },
+      {
+        "text": ", por favor",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1526334738
+  },
+  {
+    "id": "ca50f116-f578-4134-8a09-923458d040e9",
+    "data": [
+      {
+        "text": "comunicame con ",
+        "userDefined": false
+      },
+      {
+        "text": "Juan",
+        "alias": "nombre",
+        "meta": "@sys.any",
+        "userDefined": true
+      },
+      {
+        "text": ", por favor",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1526334738
+  },
+  {
+    "id": "e4c14834-f892-4052-b7d5-95d5bf373419",
+    "data": [
+      {
+        "text": "Puedes comunicarme con ",
+        "userDefined": false
+      },
+      {
+        "text": "Armando",
+        "alias": "nombre",
+        "meta": "@sys.any",
+        "userDefined": true
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1526334738
+  },
+  {
+    "id": "3b2f96ff-4eee-4dc2-8532-4c59200bb0b0",
+    "data": [
+      {
+        "text": "Por favor comunicame con ",
+        "userDefined": false
+      },
+      {
+        "text": "Gerardo",
+        "alias": "nombre",
+        "meta": "@sys.any",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1526334738
+  },
+  {
+    "id": "e7ffc0c1-c93e-4ab4-9728-8497d7d557ad",
+    "data": [
+      {
+        "text": "Me comunicas con ",
+        "userDefined": false
+      },
+      {
+        "text": "Ramon",
+        "alias": "nombre",
+        "meta": "@sys.any",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1526334738
+  },
+  {
+    "id": "df8b8192-5700-472a-9db8-1e2c24bde84b",
+    "data": [
+      {
+        "text": "Comunicame a la extension de ",
+        "userDefined": false
+      },
+      {
+        "text": "Gerardo",
+        "alias": "nombre",
+        "meta": "@sys.any",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1526334738
+  },
+  {
+    "id": "f5e38e15-d6e1-4797-8338-8638bde86ca1",
+    "data": [
+      {
+        "text": "Quiero hablar con ",
+        "userDefined": false
+      },
+      {
+        "text": "Gabriel",
+        "alias": "nombre",
+        "meta": "@sys.any",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1526334738
+  },
+  {
+    "id": "9ef87cbe-a58d-456d-8d01-f3eb94e97fd5",
+    "data": [
+      {
+        "text": "Comunicame con ",
+        "userDefined": false
+      },
+      {
+        "text": "Ramón",
+        "alias": "nombre",
+        "meta": "@sys.any",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1526334738
+  }
+]

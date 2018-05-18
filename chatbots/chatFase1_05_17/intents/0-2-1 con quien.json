@@ -1,0 +1,46 @@
+{
+  "id": "094b1bde-75cf-4c9c-b92d-8818ffa2522d",
+  "parentId": "5bb29d9e-efc4-47ac-a056-34434e22bf5b",
+  "rootParentId": "5bb29d9e-efc4-47ac-a056-34434e22bf5b",
+  "name": "0-2-1 con quien",
+  "auto": true,
+  "contexts": [
+    "0-2VDN-followup"
+  ],
+  "responses": [
+    {
+      "resetContexts": false,
+      "action": "VDN",
+      "affectedContexts": [
+        {
+          "name": "0-2-1conquien-followup",
+          "parameters": {},
+          "lifespan": 2
+        }
+      ],
+      "parameters": [
+        {
+          "id": "65d2803c-39e5-4ec3-bc8d-47f59485b55b",
+          "dataType": "@sys.any",
+          "name": "nombre",
+          "value": "$nombre"
+        }
+      ],
+      "messages": [
+        {
+          "type": 0,
+          "lang": "es",
+          "speech": []
+        }
+      ],
+      "defaultResponsePlatforms": {},
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": true,
+  "webhookForSlotFilling": false,
+  "lastUpdate": 1526332660,
+  "fallbackIntent": false,
+  "events": []
+}

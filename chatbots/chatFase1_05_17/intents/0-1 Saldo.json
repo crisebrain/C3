@@ -1,0 +1,55 @@
+{
+  "id": "fc968bf4-d4e5-4204-a896-c537619eb794",
+  "name": "0-1 Saldo",
+  "auto": true,
+  "contexts": [],
+  "responses": [
+    {
+      "resetContexts": false,
+      "action": "saldo",
+      "affectedContexts": [
+        {
+          "name": "0-1Saldo-followup",
+          "parameters": {},
+          "lifespan": 2
+        },
+        {
+          "name": "0-1Saldo-followup-2",
+          "parameters": {},
+          "lifespan": 2
+        }
+      ],
+      "parameters": [
+        {
+          "id": "d3915124-b0fe-4f54-a8ab-31b0870a7ae5",
+          "required": true,
+          "dataType": "@sys.any",
+          "name": "nombre",
+          "value": "$nombre",
+          "prompts": [
+            {
+              "lang": "es",
+              "value": "Dame tu nombre de usuario, por favor."
+            }
+          ],
+          "isList": false
+        }
+      ],
+      "messages": [
+        {
+          "type": 0,
+          "lang": "es",
+          "speech": "Falló el servicio de saldo"
+        }
+      ],
+      "defaultResponsePlatforms": {},
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": true,
+  "webhookForSlotFilling": false,
+  "lastUpdate": 1526427098,
+  "fallbackIntent": false,
+  "events": []
+}

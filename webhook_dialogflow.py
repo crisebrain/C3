@@ -1,9 +1,17 @@
+#!/home/ebraintec/anaconda3/bin/python
+#-*- coding: utf-8 -*-
 import urllib
 import json
 import os
 from flask import Flask, request, make_response
 
 app = Flask(__name__)
+
+@app.route("/", methods=["GET"])
+def retornodummy():
+    r = make_response("ItWorks")
+    return r
+
 
 @app.route("/webhook", methods=["POST", "GET"])
 def webhook():
@@ -19,7 +27,13 @@ def webhook():
         res = json.dumps(res, indent=4)
         r = make_response(res)
         print(err)
+    #####
+    #####
+    # construir respuesta en webhook
+    #####
+    #####
     r.headers["Content-Type"] = "application/json"
+    print(r)
     return r
 
 def makeWebhookResult(req):
@@ -31,8 +45,14 @@ def makeWebhookResult(req):
                "fulfillmentText": "Null"}
 
 def makeresponseAction(req, action):
-    from DFWrapper import BDbusquedas
+    #### funcion de consulta de base de datos
+    #### no es aqui
+    ####
+    from DFWrapper.bd_busqueda import BDbusquedas
     bd = BDbusquedas()
+    ####
+    ####
+    ####
     # Carga de base de datos
     result = req.get("queryResult").get("parameters")
     coincidencias = bd.busqueda(result.get("nombre"))

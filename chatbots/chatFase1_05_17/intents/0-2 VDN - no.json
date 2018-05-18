@@ -1,0 +1,34 @@
+{
+  "id": "fa5204aa-6026-45ef-9695-42fe05c9045b",
+  "parentId": "5bb29d9e-efc4-47ac-a056-34434e22bf5b",
+  "rootParentId": "5bb29d9e-efc4-47ac-a056-34434e22bf5b",
+  "name": "0-2 VDN - no",
+  "auto": true,
+  "contexts": [
+    "0-2VDN-followup",
+    "0-2VDN-followup-2"
+  ],
+  "responses": [
+    {
+      "resetContexts": false,
+      "action": "0-2VDN.0-2VDN-no",
+      "affectedContexts": [],
+      "parameters": [],
+      "messages": [
+        {
+          "type": 0,
+          "lang": "es",
+          "speech": []
+        }
+      ],
+      "defaultResponsePlatforms": {},
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": false,
+  "webhookForSlotFilling": false,
+  "lastUpdate": 1508189119002,
+  "fallbackIntent": false,
+  "events": []
+}
