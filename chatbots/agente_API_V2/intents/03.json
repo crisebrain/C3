@@ -1,0 +1,50 @@
+{
+  "id": "ae2ebcf9-7010-41a6-98a7-38637dbe3be1",
+  "name": "03",
+  "auto": true,
+  "contexts": [
+    "01-followup"
+  ],
+  "responses": [
+    {
+      "resetContexts": false,
+      "affectedContexts": [
+        {
+          "name": "salida_02",
+          "parameters": {},
+          "lifespan": 5
+        },
+        {
+          "name": "01-followup",
+          "parameters": {},
+          "lifespan": 5
+        }
+      ],
+      "parameters": [
+        {
+          "id": "6e977f94-32d0-4b5c-94aa-bb32e0d76ba4",
+          "required": true,
+          "dataType": "@sys.given-name",
+          "name": "given-name",
+          "value": "$given-name",
+          "isList": false
+        }
+      ],
+      "messages": [
+        {
+          "type": 0,
+          "lang": "es",
+          "speech": "mucho gusto $given-name"
+        }
+      ],
+      "defaultResponsePlatforms": {},
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": false,
+  "webhookForSlotFilling": false,
+  "lastUpdate": 1525990605,
+  "fallbackIntent": false,
+  "events": []
+}
