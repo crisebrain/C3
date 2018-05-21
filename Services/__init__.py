@@ -1,0 +1,1 @@
+from .wservices import makeWebhookResult

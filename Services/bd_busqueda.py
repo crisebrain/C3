@@ -15,7 +15,7 @@ def normaliza(data):
 class BDbusquedas:
     def __init__(self):
         pathfile = os.getcwd()
-        pathfile = os.path.join(pathfile, "DFWrapper", "basedatosficticia.txt")
+        pathfile = os.path.join(pathfile, "Services", "basedatosficticia.txt")
         self.BD = pd.read_csv(pathfile, header=0)
 
     def busqueda(self, valor):
@@ -30,3 +30,7 @@ class BDbusquedas:
         else:
             resultado = []
         return resultado
+
+def dbquery(valor):
+    bdbusqueda = BDbusquedas()
+    return bdbusqueda.busqueda(valor)
