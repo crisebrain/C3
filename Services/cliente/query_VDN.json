@@ -4,7 +4,7 @@
     "queryText": "Dame el saldo de Juan",
     "action": "saldo",
     "parameters": {
-      "nombre": "Ramón Apa"
+      "nombre": ""
     },
     "allRequiredParamsPresent": true,
     "fulfillmentMessages": [

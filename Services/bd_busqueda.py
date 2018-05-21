@@ -28,7 +28,7 @@ class BDbusquedas:
             # posibles = pd.concat([posibles, posiblesc])
             resultado = json.loads(posibles.drop(["Id"], axis=1).to_json(orient="table"))["data"]
         else:
-            resultado = []
+            raise ValueError
         return resultado
 
 def dbquery(valor):
