@@ -14,7 +14,7 @@ class InfoManager:
         Json with the info for the conversation nodes,
                  each node with the info about the id chatBot."""
         # jdata["msgAns"] = self.outputMsg(jdata["msgAns"])
-        return self.sc.WhosNextEntry()
+        # return self.sc.WhosNextEntry()
 
     def intentFlow(self, jdata, cbwrapper, se):
         """Extracts the value from the msgOriginal with the extractValue
@@ -27,7 +27,7 @@ class InfoManager:
         cbwrapper - ChatBotWrapper instance object.
         se - Search Engine function.
         """
-        if jdata["state"] == "valid":
+        if jdata["state"] == "valid":  # state valid no, mas bien si reconocio la estructura
             # Extraer valor ***********************************
             jdata = self.extractValue(jdata)
             # Extraer valor ***********************************
@@ -61,6 +61,7 @@ class InfoManager:
 
     def outputMsg(self, jdata):
         """formats the msgAns with the values from upper nodes."""
+        # Tiene que ver con los contextos
         msgString = jdata["msgAns"]
         namestr = jdata["name"]
         pattern = r"\$\w+"

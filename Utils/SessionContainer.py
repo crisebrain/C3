@@ -8,11 +8,13 @@ class SessionContainer:
         """Class to contain the intentTree, from ChatBotWrapper CBW instance."""
         self.addSessionTree(CBW.current_intentTree,
                             CBW.current_intentTree.idChatBot)
+        delattr(CBW, "current_intentTree")
 
     def addSessionTree(self, tree, idChatBot):
-        tree.node.assignCurrent()
+        # tree.node.assignCurrent()
         setattr(self, idChatBot, tree)
         self.current_intentTree = idChatBot
+        return 0
 
     def extractTree(self, idChatBot=None):
         if idChatBot is None:
@@ -24,13 +26,14 @@ class SessionContainer:
         print("Id : %s\n" %(self.current_intentTree))
         tree = self.extractTree()
         for i,(pre, fill, node) in enumerate(tree):
-            stchain = "%s #_%d  %s  %s %s" % (pre, i, node.idField,
-                                                  node.name, node.value)
-            if getattr(node, "current", None) is not None:
-                stchain = stchain + " --- "
-            if getattr(node, "mandatory", None) is not None:
-                stchain = stchain + " *** "
-            print(stchain)
+            if not node.is_root:
+                stchain = "%s #_%d  %s  %s" % (pre, i, node.msgReq,
+                                                  node.name)# node.value)
+                if getattr(node, "current", None) is not None:
+                    stchain = stchain + " --- "
+                if getattr(node, "mandatory", None) is not None:
+                    stchain = stchain + " *** "
+                print(stchain)
             # print("\n\n", node, "\n\n")
         print("\nmandatory: ****\ncurrent: ---")
 
@@ -44,7 +47,7 @@ class SessionContainer:
         for key, value in ddata_node.items():
             if key in ["idField", "msgAns", "name", "msgReq"]:
                 ddata.update(dict(zip([key], [value])))
-        ddata.update({"parent":node.spathlist[node.depth - 1]})
+        ddata.update({"parent":node.spathlist[node.depth - 1]}) # No va asi
         return ddata
 
     def feedNextEntry(self, json_data):

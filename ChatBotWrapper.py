@@ -1,4 +1,3 @@
-#import dialogflow
 import os
 import json
 import pickle
@@ -33,21 +32,30 @@ class ChatBotWrapper:
         """Text from IVR is sending to core chatbot and an intent is actioned.
         Output a jsonInput object with msgOriginal, idChatBot, idNode
         """
-        jdata = im.newConsult()
+        # Aquí corre webhook ++++++++++++++++++++++++
+        # jdata = im.newConsult()
         # IVR
+        im.sc.ShowSessionTree()
         print("Usuario:  ")
         msgOriginal = input()
+        tree = im.sc.extractTree()
+        # Esta busqueda es con el contexto
+        node = tree.find_node(msgOriginal, False, by_field="msgReq")
+        print(node.contextIn)
         # IVR
         # print(jdata["msgAns"])
+        jdata = {}
         jdata.update({"msgOriginal": msgOriginal})
+        print(jdata["msgOriginal"])
+        print(node)
         # simulacion de construccion de mensaje
         # ******* Operaciones de chatbotWrapper para deteccion de *******
         # ************* mensajes, simulada con el if ********************
-        if msgOriginal is not None:
-            jdata.update({"state": "valid"})
-        else:
-            jdata.update({"state": "no_valid"})
-        return jdata
+        # if msgOriginal is not None:
+        #     jdata.update({"state": "valid"})
+        # else:
+        #     jdata.update({"state": "no_valid"})
+        # return jdata
         # ***************************************************************
 
     def listAllAvailableChatbots(self):

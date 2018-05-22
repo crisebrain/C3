@@ -174,4 +174,4 @@ class IntentTree(RenderTree):
     def __LevelOrderlist(self):
         """Creates the node name list from intenttree with depth and sequence.
         """
-        self.orderlist = [node.name for node in PreOrderIter(self.node) if not node.is_root]
+        self.orderlist = [node.name for node in PreOrderIter(self.node)]
