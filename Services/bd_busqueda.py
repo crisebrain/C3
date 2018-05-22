@@ -21,14 +21,11 @@ class BDbusquedas:
     def busqueda(self, valor):
         valor = valor.strip()
         valor = normaliza(valor)
-        if valor != "":
-            Nombres = self.BD[["Nombre", "Apellido"]].apply(func=joinnames, axis=1)
-            posibles = self.BD.iloc[[True if valor.lower() in n else False for n in Nombres.str.lower().values]]
-            # posiblesc = self.BD.iloc[[True if n in valor.lower() else False for n in Nombres.str.lower().values]]
-            # posibles = pd.concat([posibles, posiblesc])
-            resultado = json.loads(posibles.drop(["Id"], axis=1).to_json(orient="table"))["data"]
-        else:
-            raise ValueError
+        Nombres = self.BD[["Nombre", "Apellido"]].apply(func=joinnames, axis=1)
+        posibles = self.BD.iloc[[True if valor.lower() in n else False for n in Nombres.str.lower().values]]
+        # posiblesc = self.BD.iloc[[True if n in valor.lower() else False for n in Nombres.str.lower().values]]
+        # posibles = pd.concat([posibles, posiblesc])
+        resultado = json.loads(posibles.drop(["Id"], axis=1).to_json(orient="table"))["data"]
         return resultado
 
 def dbquery(valor):
