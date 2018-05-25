@@ -44,3 +44,9 @@ Cambios 18/05/2018:
 - Se modificó la forma de ejecución del script "webhook_dialogflow.py" para que se ejecute con el interprete de anaconda.
 - Se añadió un método get para preguntar el estado del túnel.
 - Se actualizó la base de datos.
+
+Cambios 25/05/2018:
+- Servicio de webhook conectado a infomanager.
+- Se implementó lógica de bifurcaciones, de acuerdo a los contextos de salida y entrada de los intents, tomando la decisión de si es un intent válido o no.
+- Actualización y recuperación de valores de conference.
+- cuando el valor es inexistente o el contexto de entrada no está presente arroja sólo el mensaje y convierte al nodo en el que debería de posicionarse en el current (falta borrar contextos).
