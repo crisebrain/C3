@@ -1,0 +1,46 @@
+{
+  "responseId": "f302fdeb-6abb-4050-ae8c-7987f53be442",
+  "queryResult": {
+    "queryText": "soy Ramon",
+    "action": "resName",
+    "parameters": {
+      "name": "Ramon"
+    },
+    "allRequiredParamsPresent": true,
+    "fulfillmentText": "Gracias por comunicarte con nosotros Ramon, ¿en qué te puedo ayudar hoy?",
+    "fulfillmentMessages": [
+      {
+        "text": {
+          "text": [
+            "Gracias por comunicarte con nosotros Ramon, ¿en qué te puedo ayudar hoy?"
+          ]
+        }
+      }
+    ],
+    "outputContexts": [
+      {
+        "name": "projects/agente-ejemplo-b3f8d/agent/sessions/7a8edacf-9c25-40ee-94b9-34e3085b6721/contexts/defaultwelcomeintent-followup",
+        "lifespanCount": 1,
+        "parameters": {
+          "name": "Ramon",
+          "name.original": "Ramon"
+        }
+      },
+      {
+        "name": "projects/agente-ejemplo-b3f8d/agent/sessions/7a8edacf-9c25-40ee-94b9-34e3085b6721/contexts/resname-followup",
+        "lifespanCount": 2,
+        "parameters": {
+          "name": "Ramon",
+          "name.original": "Ramon"
+        }
+      }
+    ],
+    "intent": {
+      "name": "projects/agente-ejemplo-b3f8d/agent/intents/e152e645-a8cc-4b6b-b26f-c9b948a6277a",
+      "displayName": "resName"
+    },
+    "intentDetectionConfidence": 1,
+    "diagnosticInfo": {},
+    "languageCode": "es"
+  }
+}

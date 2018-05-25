@@ -1,0 +1,32 @@
+{
+  "responseId": "390bbdee-7ba5-4c2b-b3a2-ba50641902d6",
+  "queryResult": {
+    "queryText": "hola",
+    "action": "input.welcome",
+    "parameters": {},
+    "allRequiredParamsPresent": true,
+    "fulfillmentText": "Centro de Llamadas del Sur, buenas tardes, mi nombre es Maria Perez, ¿con quien tengo el gusto?",
+    "fulfillmentMessages": [
+      {
+        "text": {
+          "text": [
+            "Centro de Llamadas del Sur, buenas tardes,   mi nombre es Maria Perez, ¿con quien tengo el gusto?"
+          ]
+        }
+      }
+    ],
+    "outputContexts": [
+      {
+        "name": "projects/agente-ejemplo-b3f8d/agent/sessions/7a8edacf-9c25-40ee-94b9-34e3085b6721/contexts/defaultwelcomeintent-followup",
+        "lifespanCount": 2
+      }
+    ],
+    "intent": {
+      "name": "projects/agente-ejemplo-b3f8d/agent/intents/4fbc659c-cadd-41a1-b273-a068e0500351",
+      "displayName": "Default Welcome Intent"
+    },
+    "intentDetectionConfidence": 1,
+    "diagnosticInfo": {},
+    "languageCode": "es"
+  }
+}

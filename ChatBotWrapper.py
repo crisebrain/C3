@@ -1,3 +1,4 @@
+#-*- coding: utf-8 -*-
 import os
 import json
 import pickle
@@ -7,63 +8,23 @@ from Utils import IntentTree
 """Class to manage the conversation and publish the IntentTree"""
 class ChatBotWrapper:
 
-    def publishIntentTree(self, chatbots_folder):
+    def __init__(self, chatbots_folder, idChatBot=None):
+        self.publishIntentTree(chatbots_folder, idChatBot)
+
+    def publishIntentTree(self, chatbots_folder, idChatBot=None):
         """Consult and publish the current IntentTree using the chatbots folder.
         Here a project id is supplied to retrieve all intents from core
         and build the IntentTree. At the end self.current_intentTree must
-        be updated and the tree saved it into session
+        be updated and the tree saved it into session.
         """
         intentTree_list = traductor_df(chatbots_folder, IntentTree)
-        self.current_intentTree = intentTree_list[0]
+        # Traduce de json intents a intentTree
         pickle.dump(intentTree_list, open('Sessions/Conference.pck','wb'))
-
-
-    def generateAnswer(self, jsonGenerateAnswer):
-        """Read msgAnswer from the idIntentTree-idNode for current intent.
-
-        If the idIntentTree equals to idChatBot for the current_intentTree,
-        then find the idNode and load msgAnswer. Else, publishIntentTree
-        with the new idChatBot and find idNode to load msgAnswer.
-        The output is sending to the IVR as a text string.
-        """
-        print("Chatbot:  \n", jsonGenerateAnswer["msgAnsd"])
-
-    def interceptIntent(self, im):  # strText, idNode
-        """Text from IVR is sending to core chatbot and an intent is actioned.
-        Output a jsonInput object with msgOriginal, idChatBot, idNode
-        """
-        # Aquí corre webhook ++++++++++++++++++++++++
-        # jdata = im.newConsult()
-        # IVR
-        im.sc.ShowSessionTree()
-        print("Usuario:  ")
-        msgOriginal = input()
-        tree = im.sc.extractTree()
-        # Esta busqueda es con el contexto
-        node = tree.find_node(msgOriginal, False, by_field="msgReq")
-        print(node.contextIn)
-        # IVR
-        # print(jdata["msgAns"])
-        jdata = {}
-        jdata.update({"msgOriginal": msgOriginal})
-        print(jdata["msgOriginal"])
-        print(node)
-        # simulacion de construccion de mensaje
-        # ******* Operaciones de chatbotWrapper para deteccion de *******
-        # ************* mensajes, simulada con el if ********************
-        # if msgOriginal is not None:
-        #     jdata.update({"state": "valid"})
-        # else:
-        #     jdata.update({"state": "no_valid"})
-        # return jdata
-        # ***************************************************************
-
-    def listAllAvailableChatbots(self):
-        """Check all available chatbots on the core and assign them an id."""
-
-    def manageConversation(self):
-        """intercept the intent that it is actioned and change it by the
-        one received from GI."""
-
-    def __init__(self, chatbots_folder):
-        self.publishIntentTree(chatbots_folder)
+        if idChatBot is None:
+            self.current_intentTree = intentTree_list[0].idChatBot
+        else:
+            indices = [True if idChatBot == tree.idChatBot else False
+                       for tree in intentTree_list]
+            tree = intentTree_list[indices.index(True)]
+            self.current_intentTree = tree.idChatBot
+        print("Created intentTree for %s" %self.current_intentTree)

@@ -1,0 +1,29 @@
+{
+  "id": "7ca2d8db-ae7d-429f-87c9-8028054fcb29",
+  "name": "Default Fallback Intent",
+  "auto": true,
+  "contexts": [],
+  "responses": [
+    {
+      "resetContexts": false,
+      "action": "input.unknown",
+      "affectedContexts": [],
+      "parameters": [],
+      "messages": [
+        {
+          "type": 0,
+          "lang": "es",
+          "speech": "¡Hola!, no entendí exactamente que necesitas, pero te puedo ayudar a comunicarte con personas o consulta de saldo.\n\nSi tienes duda de como usar alguna función puedes preguntarme. Por ejemplo: \"¿Cómo funciona la consulta de saldo?\" o \"¿Cómo funciona la transferencia de llamadas?\""
+        }
+      ],
+      "defaultResponsePlatforms": {},
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": false,
+  "webhookForSlotFilling": false,
+  "lastUpdate": 1527002889,
+  "fallbackIntent": true,
+  "events": []
+}

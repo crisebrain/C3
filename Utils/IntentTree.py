@@ -11,13 +11,15 @@ class IntentNode(Node):
         parent : Parent Node.
         kwargs : dictionary object with the parameters for
                  IntentNode
-                 -name *,
-                 -idField *
-                 -value *
-                 -accuracyPrediction
-                 -mandatory
-                 -msgReq
-                 -msgAns.
+                 - id
+                 - name
+                 - accuracyPrediction
+                 - msgReq
+                 - msgAns
+                 - parameters
+                 - contextIn
+                 - contextOut
+                 - action
         binding fields are marked with *
         """
         self.parent = parent
@@ -30,12 +32,38 @@ class IntentNode(Node):
         for nodeparent in self.path:
             self.spathlist.append(nodeparent.name)
 
+    def writeParameter(self, value, name):
+        """Write the UserValue into node."""
+        parameters = self.parameters
+        indices = [True if param["name"] == name else False
+                   for param in parameters]
+        index = indices.index(True)
+        parameters[index]["userValue"] = value
+        self.parameters = parameters
+
+    def readParameter(self, name):
+        """Read the userValue if exists, else return None."""
+        parameters = self.parameters
+        indices = [True if param["name"] == name else False
+                   for param in parameters]
+        index = indices.index(True)
+        parameter = parameters[index]
+        if "userValue" not in parameter.keys():
+            return None
+        elif parameter["userValue"] == "":
+            return None
+        else:
+            return parameter["userValue"]
+
     def updateNode(self, **kwargs):
         for key, value in kwargs.items():
             setattr(self, key, value)
 
     def assignCurrent(self):
         self.current = "True"
+
+    def dropCurrent(self):
+        delattr(self, "current")
 
 """General Tree to manipulate all intents"""
 class IntentTree(RenderTree):
@@ -49,7 +77,7 @@ class IntentTree(RenderTree):
         ------------------------------------------------------------------
         Attributes:
         node - Root node.
-        nodels - node list for the tree
+        currentcontextls - context list for the tree
         loadedDate - str Date-Time
         idChatBot - Id for the current ChatBot
         """
@@ -59,7 +87,7 @@ class IntentTree(RenderTree):
         self.node = IntentNode(None, **json_data)
         self.childiter = list
         self.orderlist = list()
-        self.nodels=[self.node]
+        self.currentcontextls = list()  # self.node]
         self.loadedDate = loadedDate
         self.idChatBot = idChatBot
 
@@ -73,22 +101,22 @@ class IntentTree(RenderTree):
         """
         if "parent" in json_data:
             parent = json_data.pop("parent")
-        if isinstance(parent, str):
-            parent = self.find_node(parent, False)
-            node = IntentNode(parent, **json_data)
-            if current:
-                node.assignCurrent()
-                befnode = self.find_node(self.orderlist[self.index - 1], False)
-                delattr(befnode, "current")
-                print("deleting current attribute for {0}".format(befnode.name))
+        # if isinstance(parent, str):
+        parent = self.find_node(parent, False, "name")
+        node = IntentNode(parent, **json_data)
+        if current:
+            node.assignCurrent()
+            befnode = self.find_node(self.orderlist[self.index - 1], False)
+            delattr(befnode, "current")
+            print("deleting current attribute for {0}".format(befnode.name))
                 # ------------------------------------------------------------
                 # Si ya existe el nombre y el idField solo reasignar campos.
                 # ------------------------------------------------------------
-        elif isinstance(parent, int):
-            parent = self.find_node(self.nodels[parent].name, False)
-            node = IntentNode(parent, **json_data)
-        self.nodels.append(node)
-        self.__LevelOrderlist()
+        # elif isinstance(parent, int):
+        #     parent = self.find_node(self.nodels[parent].name, False)
+        #     node = IntentNode(parent, **json_data)
+        # self.nodels.append(node)
+        # self.__LevelOrderlist()
 
     def fill_node(self, json_data, current=False):
         """Fill the current Node with the new contained fields in json_data.
@@ -96,20 +124,13 @@ class IntentTree(RenderTree):
         to current Node, and set "current" for the next node in the order
         list.
         """
-        name = json_data["name"]
-        idField = json_data["idField"]
-        node = find(self.node,
-                    lambda nod: nod.name == name)# and nod.idField == idField)
-        if node is not None:
-            delattr(node, "current")
-            # print("deleting current attribute for {0}".format(node.name))
-            if self.index + 1 < len(self.orderlist):
-                nextnode = self.find_node(self.orderlist[self.index + 1], False)
-                setattr(nextnode, "current", "True")
-            _ = json_data.pop("parent")
-            node.updateNode(**json_data)
-        else:
-            self.add_node(json_data, current)
+        intentid = json_data["id"]
+        node = self.find_node(intentid, False, "id")
+        pastnode = self.find_node("True", False, "current")
+        if pastnode is not None:
+            pastnode.dropCurrent()
+        node.updateNode(**json_data)
+        node.assignCurrent()
 
     def find_node(self, value, to_dict=True, by_field="name"):
         """Find a node by an arbitrary "field" attribute.
@@ -124,16 +145,24 @@ class IntentTree(RenderTree):
         node - IntentNode object or dictionary with attributes
                as elements.
         """
-        if by_field == "name":
-            node = find(self.node,
-                        lambda node: node.name == value)
+        if by_field == "contextOut":
+            def la(node):
+                attr = getattr(node, by_field, None)
+                if attr is not None:
+                    if value in attr:
+                        return True
         else:
-            node = find(self.node,
-                        lambda node: getattr(node, by_field, None) == value)
+            la = lambda x: getattr(x, by_field, None) == value
+        node = find(self.node, la)
         if to_dict and node:
             return node.__dict__
         else:
             return node
+
+    def updateContext(self, contexts):
+        for context in contexts:
+            if context not in self.currentcontextls:
+                self.currentcontextls.append(context)
 
     def getOrderFromCurrent(self):
         """Get the name for the current node according to orderlist.
@@ -143,33 +172,6 @@ class IntentTree(RenderTree):
         index = self.orderlist.index(node.name)
         self.index = index
         return self.orderlist[index]
-
-    def findFieldContext(self, key, nodename):
-        nodetup = findall(self.node,
-                          lambda node: getattr(node, "idField") == key)
-        nodec = self.find_node(nodename, False)
-        path = nodec.spathlist
-        if len(nodetup) > 1:
-            incontext = list()
-            for n in nodetup:
-                if all([True for pn in n.spathlist if pn in path]):
-                    incontext.append(n)
-                if len(incontext) > 1:
-                    depths = [incon.depth for incon in incontext]
-                    mindepinc = np.argmin(depths)
-                    foundnode = incontext[mindepinc]
-                elif len(incontext) == 1:
-                    foundnode = incontext[0]
-                else:
-                    foundnode = None
-        elif len(nodetup) == 1:
-            foundnode = nodetup[0]
-        else:
-            foundnode = None
-        if foundnode is not None:
-            return foundnode
-        else:
-            return None
 
     def __LevelOrderlist(self):
         """Creates the node name list from intenttree with depth and sequence.

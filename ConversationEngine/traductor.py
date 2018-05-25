@@ -44,48 +44,53 @@ def traductor_df(chatbots_folder, IntentTree):
         botnodes = []
         intents_ids = {}
         for nint, intent in enumerate(json_intents[botname]["intents"]):
-            if not intent["fallbackIntent"]:
-                intents_ids[intent["id"]] = intent["name"]
-                # Para dialogflow sólo importa una de las posibles respuestas
-                # Para otros provedores se construye una lista de strings con
-                # las posibles respuestas por si llegara a haber.
-                msgAns = intent["responses"][0]["messages"][0]["speech"]
-                # Busca si el intent tiene su llamado mediante una frase
-                # del usuario en el arreglo _usersays_, añade msgReq
-                # si lo hay
-                contextIn = intent["contexts"]
-                # preguntar por el lifespan
-                contextOut = [d["name"] for d in intent["responses"][0]["affectedContexts"]]
-                parameters = intent["responses"][0]["parameters"]
-                ques = [True if botintgroup["intents"][nint][:-5] in elem else False
-                        for elem in botintgroup["usersays"]]
-                if any(ques):
-                    qind = ques.index(True)
-                    usersay_intent = json_intents[botname]["usersays"][qind]
-                    # Se pueden añadir varios mesgReq
-                    msgReq = usersay_intent[0]["data"][0]["text"]
-                else:
-                    msgReq=None
-                id_field = None
-                if len(intent["responses"][0]["parameters"]) > 0:
-                    id_field = intent["responses"][0]["parameters"][0]["name"]
-                build_json = {"name": intent["name"], "parent": None,
-                              "idField": id_field,
-                              "accuracyPrediction":0, #"mandatory":False,
-                              "contextIn": contextIn, "contextOut": contextOut,
-                              "msgReq": msgReq, "msgAns": msgAns,
-                              "parameters": parameters}
-                # En dialogflow no necesariamente hay un intent root
-                # por lo que se define un root arbitrario
-                # con el id del chatbot
-                it = IntentTree({"name":json_intents[botname]["idChatBot"]},
-                                time(), json_intents[botname]["idChatBot"])
-                intents_ids["root"] = json_intents[botname]["idChatBot"]
-                if "parentId" not in intent.keys():
-                    build_json["parent"] = "root"
-                else:
-                    build_json["parent"] = intent["parentId"]
-                botnodes.append(build_json)
+            # if not intent["fallbackIntent"]:
+            intents_ids[intent["id"]] = intent["name"]
+            # Para dialogflow sólo importa una de las posibles respuestas
+            # Para otros provedores se construye una lista de strings con
+            # las posibles respuestas por si llegara a haber.
+            msgAns = intent["responses"][0]["messages"][0]["speech"]
+            # Busca si el intent tiene su llamado mediante una frase
+            # del usuario en el arreglo _usersays_, añade msgReq
+            # si lo hay
+            contextIn = [context.lower() for context in intent["contexts"]]
+            # preguntar por el lifespan
+            contextOut = [d["name"].lower() for d
+                          in intent["responses"][0]["affectedContexts"]]
+            parameters = intent["responses"][0]["parameters"]
+            ques = [True if botintgroup["intents"][nint][:-5] in elem else False
+                    for elem in botintgroup["usersays"]]
+            if any(ques):
+                qind = ques.index(True)
+                usersay_intent = json_intents[botname]["usersays"][qind]
+                # Se pueden añadir varios mesgReq
+                msgReq = usersay_intent[0]["data"][0]["text"]
+            else:
+                msgReq=None
+            action = None
+            if "action" in intent["responses"][0].keys():
+                action = intent["responses"][0]["action"]
+            build_json = {"name": intent["name"],
+                          "id": intent["id"],
+                          "parent": None,
+                          "action": action,
+                          "accuracyPrediction":0, #"mandatory":False,
+                          "contextIn": contextIn,
+                          "contextOut": contextOut,
+                          "msgReq": msgReq,
+                          "msgAns": msgAns,
+                          "parameters": parameters}
+            # En dialogflow no necesariamente hay un intent root
+            # por lo que se define un root arbitrario
+            # con el id del chatbot
+            it = IntentTree({"name":json_intents[botname]["idChatBot"]},
+                            time(), json_intents[botname]["idChatBot"])
+            intents_ids["root"] = json_intents[botname]["idChatBot"]
+            if "parentId" not in intent.keys():
+                build_json["parent"] = "root"
+            else:
+                build_json["parent"] = intent["parentId"]
+            botnodes.append(build_json)
         i = 0
         while len(botnodes) > 0 :
             intent = botnodes[i]

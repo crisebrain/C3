@@ -1,34 +1,28 @@
 {
-  "id": "5bb29d9e-efc4-47ac-a056-34434e22bf5b",
-  "name": "02",
+  "id": "aa5634a0-416a-4828-8177-c3985c26b267",
+  "name": "0-4 Dudas VDN",
   "auto": true,
   "contexts": [],
   "responses": [
     {
       "resetContexts": false,
-      "affectedContexts": [
-        {
-          "name": "salida_02",
-          "parameters": {},
-          "lifespan": 5
-        }
-      ],
+      "affectedContexts": [],
       "parameters": [],
       "messages": [
         {
           "type": 0,
           "lang": "es",
-          "speech": "dame tu nombre por favor."
+          "speech": "El servicio de transferencia de llamada, lo comunica con la persona que usted indique. Simplemente solicite hablar con alguien e indique la persona con la que desea hablar."
         }
       ],
       "defaultResponsePlatforms": {},
       "speech": []
     }
   ],
-  "priority": 500000,
+  "priority": 750000,
   "webhookUsed": false,
   "webhookForSlotFilling": false,
-  "lastUpdate": 1525990516,
+  "lastUpdate": 1527025475,
   "fallbackIntent": false,
   "events": []
 }

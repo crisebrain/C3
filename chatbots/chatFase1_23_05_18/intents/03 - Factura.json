@@ -1,0 +1,43 @@
+{
+  "id": "fb06c878-343e-4ca5-b678-bffebb9813c3",
+  "name": "03 - Factura",
+  "auto": true,
+  "contexts": [],
+  "responses": [
+    {
+      "resetContexts": false,
+      "affectedContexts": [],
+      "parameters": [
+        {
+          "id": "545b1c79-4ddb-4498-8eaf-8ea787b73b55",
+          "dataType": "@sys.any",
+          "name": "any",
+          "value": "$any",
+          "isList": false
+        },
+        {
+          "id": "70fb569b-b8f6-49c0-bbed-2d4fd231a1fe",
+          "dataType": "@sys.date",
+          "name": "date",
+          "value": "$date",
+          "isList": false
+        }
+      ],
+      "messages": [
+        {
+          "type": 0,
+          "lang": "es",
+          "speech": "fecha $date"
+        }
+      ],
+      "defaultResponsePlatforms": {},
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": false,
+  "webhookForSlotFilling": false,
+  "lastUpdate": 1527099876,
+  "fallbackIntent": false,
+  "events": []
+}

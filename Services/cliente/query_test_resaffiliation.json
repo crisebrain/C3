@@ -1,0 +1,43 @@
+{
+  "responseId": "38bd5eeb-971d-4b8f-9d04-24a8b494e9dc",
+  "queryResult": {
+    "queryText": "es el 123123123",
+    "action": "resAffiliation",
+    "parameters": {
+      "name": "Ramon",
+      "affiliation": 123123123,
+      "provider_name": ""
+    },
+    "allRequiredParamsPresent": true,
+    "fulfillmentMessages": [
+      {
+        "text": {
+          "text": [
+            ""
+          ]
+        }
+      }
+    ],
+    "outputContexts": [
+      {
+        "name": "projects/agente-ejemplo-b3f8d/agent/sessions/7a8edacf-9c25-40ee-94b9-34e3085b6721/contexts/resprovider-followup",
+        "lifespanCount": 1,
+        "parameters": {
+          "name": "Ramon",
+          "provider_name": "",
+          "affiliation.original": "123123123",
+          "provider_name.original": "",
+          "affiliation": 123123123,
+          "name.original": ""
+        }
+      }
+    ],
+    "intent": {
+      "name": "projects/agente-ejemplo-b3f8d/agent/intents/34a6d8b2-5287-4a47-8cf3-126b1fc39995",
+      "displayName": "resAffiliation"
+    },
+    "intentDetectionConfidence": 0.76,
+    "diagnosticInfo": {},
+    "languageCode": "es"
+  }
+}

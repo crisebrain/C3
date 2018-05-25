@@ -1,0 +1,122 @@
+[
+  {
+    "id": "17080ead-3941-480a-a11c-90ba8fcf8bfa",
+    "data": [
+      {
+        "text": "Listame tus funciones",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527003159
+  },
+  {
+    "id": "35d5d56c-5055-499b-a0d1-86c29e68c2cd",
+    "data": [
+      {
+        "text": "Necesito que me orientes",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527003159
+  },
+  {
+    "id": "af060aa0-a7a7-4a47-af59-f138f452fdba",
+    "data": [
+      {
+        "text": "Ayúdame",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527003159
+  },
+  {
+    "id": "6799f54e-0b43-4a18-8935-9d5dcc62ed58",
+    "data": [
+      {
+        "text": "Ayuda",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527003159
+  },
+  {
+    "id": "230cd5d5-63a7-42ea-a491-f40fac7bece6",
+    "data": [
+      {
+        "text": "Que funciones tienes?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527003159
+  },
+  {
+    "id": "247904b3-a6b0-44af-9bc1-6bb819b767a9",
+    "data": [
+      {
+        "text": "Dame opciones",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527003159
+  },
+  {
+    "id": "932d7fff-b840-4cf4-980c-e3d776349967",
+    "data": [
+      {
+        "text": "y que puedo hacer?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527024857
+  },
+  {
+    "id": "cd573aff-607b-439b-ab65-8cb125858938",
+    "data": [
+      {
+        "text": "Necesito ayuda",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527003159
+  },
+  {
+    "id": "fba9c990-9970-45f4-980a-e6386a366a1c",
+    "data": [
+      {
+        "text": "Que puedes hacer?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527003159
+  },
+  {
+    "id": "76af5c04-fe2e-4f13-9262-9001a295b0aa",
+    "data": [
+      {
+        "text": "Dime que hacer.",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527003159
+  }
+]

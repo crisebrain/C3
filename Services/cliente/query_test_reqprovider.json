@@ -1,0 +1,41 @@
+{
+  "responseId": "b3b6c336-8ae7-43a1-bbfd-254f49446784",
+  "queryResult": {
+    "queryText": "el provedor del servicio es Bancomer",
+    "action": "resProvider",
+    "parameters": {
+      "name": "Ramon",
+      "provider_name": ""
+    },
+    "allRequiredParamsPresent": true,
+    "fulfillmentText": "Muchas gracias, Ramon, ¿Me puedes brindar el número de afiliación?",
+    "fulfillmentMessages": [
+      {
+        "text": {
+          "text": [
+            "Muchas gracias, Ramon,  ¿Me puedes brindar el número de afiliación?"
+          ]
+        }
+      }
+    ],
+    "outputContexts": [
+      {
+        "name": "projects/agente-ejemplo-b3f8d/agent/sessions/7a8edacf-9c25-40ee-94b9-34e3085b6721/contexts/resprovider-followup",
+        "lifespanCount": 2,
+        "parameters": {
+          "provider_name.original": "",
+          "provider_name": "",
+          "name.original": "",
+          "name": "Ramon"
+        }
+      }
+    ],
+    "intent": {
+      "name": "projects/agente-ejemplo-b3f8d/agent/intents/e639a925-2db1-4f36-801b-1dd050527b16",
+      "displayName": "resProvider"
+    },
+    "intentDetectionConfidence": 0.43,
+    "diagnosticInfo": {},
+    "languageCode": "es"
+  }
+}

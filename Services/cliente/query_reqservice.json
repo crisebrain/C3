@@ -1,0 +1,46 @@
+{
+  "responseId": "66d82bd5-1456-4b68-82d9-a4af906b0a6c",
+  "queryResult": {
+    "queryText": "quiero activar un servicio",
+    "action": "reqService",
+    "parameters": {
+      "name": "Ramon"
+    },
+    "allRequiredParamsPresent": true,
+    "fulfillmentText": "Por supuesto Ramon, de qué proveedor te comunicas?",
+    "fulfillmentMessages": [
+      {
+        "text": {
+          "text": [
+            "Por supuesto Ramon, de qué proveedor te comunicas?"
+          ]
+        }
+      }
+    ],
+    "outputContexts": [
+      {
+        "name": "projects/agente-ejemplo-b3f8d/agent/sessions/33e2863f-3893-45d6-ad00-71b25c8645c1/contexts/reqservice-followup",
+        "lifespanCount": 2,
+        "parameters": {
+          "name": "Ramon",
+          "name.original": ""
+        }
+      },
+      {
+        "name": "projects/agente-ejemplo-b3f8d/agent/sessions/33e2863f-3893-45d6-ad00-71b25c8645c1/contexts/resname-followup",
+        "lifespanCount": 1,
+        "parameters": {
+          "name.original": "",
+          "name": "Ramon"
+        }
+      }
+    ],
+    "intent": {
+      "name": "projects/agente-ejemplo-b3f8d/agent/intents/44c696b1-ba82-46b8-a62e-b738829c85fe",
+      "displayName": "reqService"
+    },
+    "intentDetectionConfidence": 0.75,
+    "diagnosticInfo": {},
+    "languageCode": "es"
+  }
+}

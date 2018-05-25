@@ -1,0 +1,71 @@
+{
+  "responseId": "7de74fa8-7e16-473f-b272-95667203290d",
+  "queryResult": {
+    "queryText": "el de juian",
+    "action": "saldo",
+    "parameters": {
+      "nombre": "juian"
+    },
+    "allRequiredParamsPresent": true,
+    "fulfillmentText": "No hay referencia de esa persona. ¿Con qué otra persona te comunico?",
+    "fulfillmentMessages": [
+      {
+        "text": {
+          "text": [
+            "No hay referencia de esa persona. ¿Con qué otra persona te comunico?"
+          ]
+        }
+      }
+    ],
+    "webhookPayload": {
+      "result": [],
+      "returnCode": 0
+    },
+    "outputContexts": [
+      {
+        "name": "projects/chatfase1-f4179/agent/sessions/33e2863f-3893-45d6-ad00-71b25c8645c1/contexts/a",
+        "lifespanCount": 4,
+        "parameters": {
+          "nombre": "juian",
+          "nombre.original": "juian"
+        }
+      },
+      {
+        "name": "projects/chatfase1-f4179/agent/sessions/33e2863f-3893-45d6-ad00-71b25c8645c1/contexts/0-1saldo-followup-2",
+        "lifespanCount": 1,
+        "parameters": {
+          "nombre": "juian",
+          "nombre.original": "juian"
+        }
+      },
+      {
+        "name": "projects/chatfase1-f4179/agent/sessions/33e2863f-3893-45d6-ad00-71b25c8645c1/contexts/ok",
+        "lifespanCount": 4,
+        "parameters": {
+          "nombre": "juian",
+          "nombre.original": "juian"
+        }
+      },
+      {
+        "name": "projects/chatfase1-f4179/agent/sessions/33e2863f-3893-45d6-ad00-71b25c8645c1/contexts/0-1saldo-followup",
+        "lifespanCount": 1,
+        "parameters": {
+          "nombre.original": "juian",
+          "nombre": "juian"
+        }
+      }
+    ],
+    "intent": {
+      "name": "projects/chatfase1-f4179/agent/intents/cf1f2852-4151-4018-9076-d3aee1d8db60",
+      "displayName": "0-1-1 Saldo - quien"
+    },
+    "intentDetectionConfidence": 1,
+    "diagnosticInfo": {
+      "webhook_latency_ms": 128
+    },
+    "languageCode": "es"
+  },
+  "webhookStatus": {
+    "message": "Webhook execution successful"
+  }
+}

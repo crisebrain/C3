@@ -1,82 +1,129 @@
 from time import time
 import re
+import os
+import json
+import numpy as np
 
 class InfoManager:
-    def __init__(self, SessionContainer, ChatBotWrapper):
+    """InfoManager class.
+    Responsabilities:
+    - Stays SessionContainer with an IntentTree loaded from pickle file (empty or
+      partially filled) during "__init__".
+    - Admins the adapter_DF request on "interceptIntent":
+        -- identify if the intent is not fallback and feeds it (with "intentFlow").
+           If intent is fallback the intent message from data will be processed by
+           "Cognite_req". If the request asks for the values the function fetches
+           them (wiht extractValue).
+    - Feeds the correspondat intent Node with "intentFlow".
+        -- Order to SessionContainer object to fill the correspondant intent Node
+        -- Fetch the intents values with the SessionContainer if adapter_DF asks.
+    - Fetches the valus from the contexts or id required with "extractValue".
+    """
+    def __init__(self, SessionContainer, rootdirectory, idChatBot=None):
         """Creates the Info Manager for the current conference session."""
         self.conference_date = time()
         self.conference = {}
-        self.sc = SessionContainer(ChatBotWrapper)
+        pathpicklefile = os.path.join(rootdirectory, "Sessions/Conference.pck")
+        self.sc = SessionContainer(pathpicklefile, idChatBot)
+        self.sc.ShowSessionTree()
 
-    def newConsult(self):
-        """Creates new conversation Flow with the IntentTree class.
-        Outputs:
-        Json with the info for the conversation nodes,
-                 each node with the info about the id chatBot."""
-        # jdata["msgAns"] = self.outputMsg(jdata["msgAns"])
-        # return self.sc.WhosNextEntry()
+    def interceptIntent(self, jdata):  # strText, idNode
+        """Text from IVR is sending to core chatbot and an intent is actioned.
+        Output a jsonInput object with msgOriginal, idChatBot, idNode
+        """
+        # nombre = jdata.get("queryResult").get("parameters").get("nombre")
+        # print("Usuario: %s" % nombre)
+        it = self.sc.extractTree()
+        # self.sc.extractTree()
+        intentid = jdata.get("queryResult").get("intent").get("name")
+        intentid = intentid.split("/")[-1]
+        node = it.find_node(intentid, to_dict=False, by_field="id")
+        print(it.currentcontextls)
+        if "fallback" not in node.name.lower():
+            msgAns = self.intentFlow(jdata, node)
+        else:
+            self.extractValue(jdata.get("queryResult").get("queryText"))
+        return {"textFullfillment": msgAns,
+                "intent": node.name}
 
-    def intentFlow(self, jdata, cbwrapper, se):
+    def intentFlow(self, jdata, node):
         """Extracts the value from the msgOriginal with the extractValue
         function, then is stored into node from msgReq and msgAns taken.
-        If state is valid the msg is formated, saved to msgAnsd element into
-        jdata dictionary and passed to cbwrapper.
-        In other cases this searchs into the database or CSE for the intent.
         Parameters:
-        jdata - Node information dictionary.
-        cbwrapper - ChatBotWrapper instance object.
-        se - Search Engine function.
+        jdata - query information dictionary.
+        node - detected intentNode
         """
-        if jdata["state"] == "valid":  # state valid no, mas bien si reconocio la estructura
-            # Extraer valor ***********************************
-            jdata = self.extractValue(jdata)
-            # Extraer valor ***********************************
-            self.sc.feedNextEntry(jdata)
-            msgAns = self.outputMsg(jdata)
-            if isinstance(msgAns, str):
-                jdata["msgAnsd"] = msgAns
-                cbwrapper.generateAnswer(jdata)
-            else:
-                print("Funcion para saltar hacia el nodo no lleno y reordenar")
+        queryResult = jdata.get("queryResult")
+        it = self.sc.extractTree()
+        it.updateContext(node.contextOut)
+        inputcontext = [True if context in it.currentcontextls else False
+                        for context in node.contextIn]
+        values = dict()
+        forward = True
+        currentNode = node
+        if all(inputcontext):
+            parameters = node.parameters
+            userdictinfo = queryResult.get("parameters")
+            for parameter in parameters:
+                name = parameter["name"]
+                value = userdictinfo[name]
+                if "$" in parameter["value"]:  # local
+                    # Guarda valor local
+                    node.writeParameter(value, name)
+                    values.update({parameter["value"]:value})
+                elif "#" in parameter["value"]:
+                    aux = parameter["value"].split(".")[0]
+                    context = aux.replace("#", "").lower()
+                    parameterValue = "$" + parameter["value"].split(".")[1]
+                    # busca valor referenciado
+                    nodereferenced = it.find_node(context,
+                                                  by_field="contextOut",
+                                                  to_dict=False)
+                    userValue = nodereferenced.readParameter(name)
+                    if userValue is not None:
+                        if userValue != value:
+                            nodereferenced.writeParameter(value, name)
+                        values.update({parameterValue: value})
+                    else:
+                        node.assignCurrent()
+                        currentNode = nodereferenced
+                        forward = False
+                        break
+        else:
+            currentNode = it.find_node("True", False, "current")
+            if currentNode is None:
+                currentNode = it.node.children[0]
+            forward = False
 
-            # self.sc.fill_node(jdata)
-        elif jdata["state"] == "no_valid":
-            print("ChatBotWrapper no solucionó")
-            print("Buscando en bases de datos\n")
-            print("Buscando con mecanismo cognitivo\n")
-            jdata_ans = se(jdata)
-            for intent in jdata_ans:
-                self.sc.feedNextEntry(intent)
-                cbwrapper.generateAnswer(intent)
+        response = self.outputMsg(jdata, currentNode, values, forward)
+        return response
 
-    def extractValue(self, jdata):
+
+    def extractValue(self, msgOriginal):
         """Extracts the value from msgOriginal string from jdata dict."""
-        msgOriginal = jdata["msgOriginal"]
-        # ****************************************************
-        # extraer valor, condiciones *************************
+        # msgOriginal = jdata["msgOriginal"]
         value = msgOriginal.split(" ")[-1]
-        # ****************************************************
-        jdata.update({"value":value})
-        return jdata
+        print(value)
+        print(msgOriginal)
+        #jdata.update({"value":value})
+        return value
 
-    def outputMsg(self, jdata):
+    def outputMsg(self, jdata, node, values, forward):
         """formats the msgAns with the values from upper nodes."""
         # Tiene que ver con los contextos
-        msgString = jdata["msgAns"]
-        namestr = jdata["name"]
-        pattern = r"\$\w+"
-        fields = re.findall(pattern=pattern, string=msgString)
-        if isinstance(fields, list):
-            for field in fields:
-                fieldw = field[1:]
-                tree = self.sc.extractTree()
-                node = tree.findFieldContext(fieldw, namestr)
-                if node is None:
-                    raise ValueError("Key not stored at context %s"%fieldw)
-                else:
-                    if node.value is None:
-                        print("No previosly filled node, jumping")
-                        return node
-                    else:
-                        msgString = msgString.replace(field, node.value)
-        return msgString
+        print(values)
+        queryResult = jdata.get("queryResult")
+        if "action" in queryResult.keys():
+            action = queryResult.get("action")
+        if forward:
+            msgString = node.msgAns
+            # namestr = jdata["name"]
+            pattern = r"\$\w+"
+            fields = re.findall(pattern=pattern, string=msgString)
+            if isinstance(fields, list):
+                for field in fields:
+                    fieldw = field[1:]
+                    msgString = msgString.replace(field, values[field])
+            return msgString
+        else:
+            return node.msgAns

@@ -1,0 +1,155 @@
+[
+  {
+    "id": "b39af7a0-fd71-460d-ae44-bf231a6ffb48",
+    "data": [
+      {
+        "text": "Explicame como comunicarme con alguien",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1526939583
+  },
+  {
+    "id": "8acbf6d4-2411-4f0d-ac34-0870ac220e5c",
+    "data": [
+      {
+        "text": "Explicame como hablar con alguien",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1526939583
+  },
+  {
+    "id": "01bed1c1-4be5-47c3-b896-0aa17ddc94cb",
+    "data": [
+      {
+        "text": "Que hace el servicio de llamada?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1526938982
+  },
+  {
+    "id": "a46913f4-c3fe-4e92-85d3-aa5b758ce557",
+    "data": [
+      {
+        "text": "Llamada con quien?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1526938982
+  },
+  {
+    "id": "a3bca53c-efbd-46ba-9e46-f2b5e2e058e6",
+    "data": [
+      {
+        "text": "¿Como puedo hablar con alguien?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1526938982
+  },
+  {
+    "id": "52630405-2672-4668-a2f0-bd22b4b79b29",
+    "data": [
+      {
+        "text": "con que personas puedo comunicarme?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527025475
+  },
+  {
+    "id": "93df3b73-52c8-4d9e-9f8d-56a70549211e",
+    "data": [
+      {
+        "text": "Que es eso de llamada?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1526938982
+  },
+  {
+    "id": "73153ca0-20ca-4d44-ad00-db0544afa0ab",
+    "data": [
+      {
+        "text": "¿Cómo funciona el servicio de llamada?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1526938982
+  },
+  {
+    "id": "2fbcefcb-a521-4445-8f63-d0ef4807e1ec",
+    "data": [
+      {
+        "text": "¿Como funciona la ",
+        "userDefined": false
+      },
+      {
+        "text": "transferencia",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1526938982
+  },
+  {
+    "id": "d54534f1-2e16-4310-93f4-4dfe0d9520ad",
+    "data": [
+      {
+        "text": "como puedes comunicarme con alguien?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1526939583
+  },
+  {
+    "id": "975030f6-3fd7-4552-85ef-acd8298ee9c6",
+    "data": [
+      {
+        "text": "Dime como hablar con alguien",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1526939583
+  },
+  {
+    "id": "c2409fc6-6e50-41d6-becd-71e976b9f8cb",
+    "data": [
+      {
+        "text": "¿Como puedo comunicarme con alguien?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1526938982
+  }
+]

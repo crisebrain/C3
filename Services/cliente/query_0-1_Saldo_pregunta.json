@@ -1,0 +1,71 @@
+{
+  "responseId": "d4297f39-fab6-4000-8aa7-fe118f78060d",
+  "queryResult": {
+    "queryText": "quiero saber mi saldo",
+    "action": "saldo",
+    "parameters": {
+      "nombre": ""
+    },
+    "allRequiredParamsPresent": true,
+    "fulfillmentText": "¿Cuál es el nombre de usuario?",
+    "fulfillmentMessages": [
+      {
+        "text": {
+          "text": [
+            "¿Cuál es el nombre de usuario?"
+          ]
+        }
+      }
+    ],
+    "webhookPayload": {
+      "result": [],
+      "returnCode": 1
+    },
+    "outputContexts": [
+      {
+        "name": "projects/chatfase1/agent/sessions/475a8f68-f64c-40e6-8d2d-df29937530be/contexts/a",
+        "lifespanCount": 5,
+        "parameters": {
+          "nombre": "",
+          "nombre.original": ""
+        }
+      },
+      {
+        "name": "projects/chatfase1/agent/sessions/475a8f68-f64c-40e6-8d2d-df29937530be/contexts/0-1saldo-followup-2",
+        "lifespanCount": 2,
+        "parameters": {
+          "nombre": "",
+          "nombre.original": ""
+        }
+      },
+      {
+        "name": "projects/chatfase1/agent/sessions/475a8f68-f64c-40e6-8d2d-df29937530be/contexts/ok",
+        "lifespanCount": 5,
+        "parameters": {
+          "nombre": "",
+          "nombre.original": ""
+        }
+      },
+      {
+        "name": "projects/chatfase1/agent/sessions/475a8f68-f64c-40e6-8d2d-df29937530be/contexts/0-1saldo-followup",
+        "lifespanCount": 2,
+        "parameters": {
+          "nombre": "",
+          "nombre.original": ""
+        }
+      }
+    ],
+    "intent": {
+      "name": "projects/chatfase1/agent/intents/fc968bf4-d4e5-4204-a896-c537619eb794",
+      "displayName": "0-1 Saldo"
+    },
+    "intentDetectionConfidence": 1,
+    "diagnosticInfo": {
+      "webhook_latency_ms": 131
+    },
+    "languageCode": "es"
+  },
+  "webhookStatus": {
+    "message": "Webhook execution successful"
+  }
+}

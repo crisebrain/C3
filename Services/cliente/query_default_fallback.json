@@ -1,0 +1,26 @@
+{
+  "responseId": "d9ef69ea-72b2-44e0-a3f1-9e1e9757fd33",
+  "queryResult": {
+    "queryText": "comer comida buena",
+    "action": "input.unknown",
+    "parameters": {},
+    "allRequiredParamsPresent": true,
+    "fulfillmentText": "¡Hola!, no entendí exactamente que necesitas, pero te puedo ayudar a comunicarte con personas o consulta de saldo. Si tienes duda de como usar alguna función puedes preguntarme. Por ejemplo: \"¿Cómo funciona la consulta de saldo?\" o \"¿Cómo funciona la transferencia de llamadas?\"",
+    "fulfillmentMessages": [
+      {
+        "text": {
+          "text": [
+            "¡Hola!, no entendí exactamente que necesitas, pero te puedo ayudar a comunicarte con personas o consulta de saldo.\n\nSi tienes duda de como usar alguna función puedes preguntarme. Por ejemplo: \"¿Cómo funciona la consulta de saldo?\" o \"¿Cómo funciona la transferencia de llamadas?\""
+          ]
+        }
+      }
+    ],
+    "intent": {
+      "name": "projects/chatfase1/agent/intents/7ca2d8db-ae7d-429f-87c9-8028054fcb29",
+      "displayName": "Default Fallback Intent"
+    },
+    "intentDetectionConfidence": 1,
+    "diagnosticInfo": {},
+    "languageCode": "es"
+  }
+}

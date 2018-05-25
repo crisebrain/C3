@@ -1,0 +1,44 @@
+{
+  "id": "fd3465d1-0ff2-483e-9b99-b7432ead193a",
+  "parentId": "5bb29d9e-efc4-47ac-a056-34434e22bf5b",
+  "rootParentId": "5bb29d9e-efc4-47ac-a056-34434e22bf5b",
+  "name": "0-2-2 VDN - No se",
+  "auto": true,
+  "contexts": [
+    "0-2VDN-followup"
+  ],
+  "responses": [
+    {
+      "resetContexts": false,
+      "action": "0-2VDN.0-2VDN-custom",
+      "affectedContexts": [
+        {
+          "name": "0-2VDN-followup",
+          "parameters": {},
+          "lifespan": 0
+        },
+        {
+          "name": "0-2VDN-followup-2",
+          "parameters": {},
+          "lifespan": 0
+        }
+      ],
+      "parameters": [],
+      "messages": [
+        {
+          "type": 0,
+          "lang": "es",
+          "speech": "Requiero saber el nombre de la persona con la que te quieres comunicar"
+        }
+      ],
+      "defaultResponsePlatforms": {},
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": false,
+  "webhookForSlotFilling": false,
+  "lastUpdate": 1527033589,
+  "fallbackIntent": false,
+  "events": []
+}

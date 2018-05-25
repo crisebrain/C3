@@ -1,0 +1,48 @@
+{
+  "id": "00f06861-8680-4f50-90f0-3f1572914d1e",
+  "parentId": "fc968bf4-d4e5-4204-a896-c537619eb794",
+  "rootParentId": "fc968bf4-d4e5-4204-a896-c537619eb794",
+  "name": "0-1-2 Saldo - no",
+  "auto": true,
+  "contexts": [
+    "0-1Saldo-followup-2",
+    "0-1Saldo-followup"
+  ],
+  "responses": [
+    {
+      "resetContexts": false,
+      "action": "0-1Saldo.0-1Saldo-no",
+      "affectedContexts": [
+        {
+          "name": "0-1Saldo-followup",
+          "parameters": {},
+          "lifespan": 0
+        },
+        {
+          "name": "0-1Saldo-followup-2",
+          "parameters": {},
+          "lifespan": 0
+        }
+      ],
+      "parameters": [],
+      "messages": [
+        {
+          "type": 0,
+          "lang": "es",
+          "speech": [
+            "Hasta luego.",
+            "Un placer atenderlo."
+          ]
+        }
+      ],
+      "defaultResponsePlatforms": {},
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": false,
+  "webhookForSlotFilling": false,
+  "lastUpdate": 1527034416,
+  "fallbackIntent": false,
+  "events": []
+}

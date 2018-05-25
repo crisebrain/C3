@@ -1,0 +1,178 @@
+[
+  {
+    "id": "2b5b5cb5-b622-49c0-9cfa-6a70febfc101",
+    "data": [
+      {
+        "text": "el de ",
+        "userDefined": false
+      },
+      {
+        "text": "Juan",
+        "alias": "nombre",
+        "meta": "@sys.any",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527026210
+  },
+  {
+    "id": "a0b31e5c-91ca-4903-8dd7-d2892c364b58",
+    "data": [
+      {
+        "text": "Jaime",
+        "alias": "nombre",
+        "meta": "@sys.any",
+        "userDefined": true
+      },
+      {
+        "text": ", por favor.",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1526959727
+  },
+  {
+    "id": "83deb4f2-7b37-4079-b599-e0fcb8a7eaaf",
+    "data": [
+      {
+        "text": "Por favor, ",
+        "userDefined": false
+      },
+      {
+        "text": "Manuel",
+        "alias": "nombre",
+        "meta": "@sys.any",
+        "userDefined": true
+      },
+      {
+        "text": ".",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1526959727
+  },
+  {
+    "id": "938a26d6-2631-4538-852d-fa663a32514a",
+    "data": [
+      {
+        "text": "de ",
+        "userDefined": false
+      },
+      {
+        "text": "Gabriel",
+        "alias": "nombre",
+        "meta": "@sys.any",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1526959727
+  },
+  {
+    "id": "21aecc42-5dcf-40b7-9c64-fa821fb8c389",
+    "data": [
+      {
+        "text": "Gabriel Osorio",
+        "alias": "nombre",
+        "meta": "@sys.any",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 1,
+    "updated": 1526959727
+  },
+  {
+    "id": "1af69d4a-6ff9-489b-bc71-420428ff407c",
+    "data": [
+      {
+        "text": "De ",
+        "userDefined": false
+      },
+      {
+        "text": "Martinez",
+        "alias": "nombre",
+        "meta": "@sys.any",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1526959727
+  },
+  {
+    "id": "d62b3381-8205-4a25-9c7e-4192288209db",
+    "data": [
+      {
+        "text": "de ",
+        "userDefined": false
+      },
+      {
+        "text": "Manuel Gonzalez",
+        "alias": "nombre",
+        "meta": "@sys.any",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1526959727
+  },
+  {
+    "id": "95a21edc-5b0c-4d3c-a358-40cc241215c7",
+    "data": [
+      {
+        "text": "Soy ",
+        "userDefined": false
+      },
+      {
+        "text": "Jazmin",
+        "alias": "nombre",
+        "meta": "@sys.any",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1526959727
+  },
+  {
+    "id": "0b5fe8a8-a21b-49ab-9fb4-43e348cf4d49",
+    "data": [
+      {
+        "text": "Garcia",
+        "alias": "nombre",
+        "meta": "@sys.any",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527026547
+  },
+  {
+    "id": "c76f3f14-0735-4a37-8499-5bcd17e673b7",
+    "data": [
+      {
+        "text": "Mi usuario es ",
+        "userDefined": false
+      },
+      {
+        "text": "Magaly",
+        "alias": "nombre",
+        "meta": "@sys.any",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1526959727
+  }
+]
