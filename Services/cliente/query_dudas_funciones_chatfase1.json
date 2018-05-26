@@ -1,0 +1,25 @@
+{
+  "responseId": "6f00c1cb-8ddb-4fe0-8296-825ca00b6d91",
+  "queryResult": {
+    "queryText": "listame tus funciones",
+    "parameters": {},
+    "allRequiredParamsPresent": true,
+    "fulfillmentText": "¡Hola!, soy un servicio inteligente que puede ayudarte a comunicarte con personas o consultar tu saldo. Si tienes duda de como usar alguna función puedes preguntarme. Por ejemplo: \"¿Cómo funciona la consulta de saldo?\" o \"¿Cómo funciona la transferencia de llamadas?\"",
+    "fulfillmentMessages": [
+      {
+        "text": {
+          "text": [
+            "¡Hola!, soy un servicio inteligente que puede ayudarte a comunicarte con personas o consultar tu saldo.\n\nSi tienes duda de como usar alguna función puedes preguntarme. Por ejemplo: \"¿Cómo funciona la consulta de saldo?\" o \"¿Cómo funciona la transferencia de llamadas?\""
+          ]
+        }
+      }
+    ],
+    "intent": {
+      "name": "projects/chatfase1-f4179/agent/intents/25ef133a-01ab-4959-ba3e-5154b5f35aac",
+      "displayName": "Dudas Funciones"
+    },
+    "intentDetectionConfidence": 1,
+    "diagnosticInfo": {},
+    "languageCode": "es"
+  }
+}

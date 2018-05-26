@@ -1,0 +1,25 @@
+{
+  "responseId": "b51e5e23-4132-4d2c-8fbf-b661a53d084f",
+  "queryResult": {
+    "queryText": "explicame como comunicarme con alguien",
+    "parameters": {},
+    "allRequiredParamsPresent": true,
+    "fulfillmentText": "El servicio de transferencia de llamada, lo comunica con la persona que usted indique. Simplemente solicite hablar con alguien e indique la persona con la que desea hablar.",
+    "fulfillmentMessages": [
+      {
+        "text": {
+          "text": [
+            "El servicio de transferencia de llamada, lo comunica con la persona que usted indique. Simplemente solicite hablar con alguien e indique la persona con la que desea hablar."
+          ]
+        }
+      }
+    ],
+    "intent": {
+      "name": "projects/chatfase1-f4179/agent/intents/aa5634a0-416a-4828-8177-c3985c26b267",
+      "displayName": "0-4 Dudas VDN"
+    },
+    "intentDetectionConfidence": 1,
+    "diagnosticInfo": {},
+    "languageCode": "es"
+  }
+}

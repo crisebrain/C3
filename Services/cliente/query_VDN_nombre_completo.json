@@ -1,0 +1,60 @@
+{
+  "responseId": "1cc70279-207d-4f8e-8d78-ca031a42caa2",
+  "queryResult": {
+    "queryText": "juan lopez",
+    "action": "VDN",
+    "parameters": {
+      "nombre": "juan lopez"
+    },
+    "allRequiredParamsPresent": true,
+    "fulfillmentText": "Será transferido con Juan Lopez y tel: 5543535353.\nHasta luego.",
+    "fulfillmentMessages": [
+      {
+        "text": {
+          "text": [
+            "Será transferido con Juan Lopez y tel: 5543535353.\nHasta luego."
+          ]
+        }
+      }
+    ],
+    "webhookPayload": {
+      "result": [
+        {
+          "nombre": "Juan",
+          "VDN": 5543535353
+        }
+      ],
+      "returnCode": 1
+    },
+    "outputContexts": [
+      {
+        "name": "projects/chatfase1-f4179/agent/sessions/33e2863f-3893-45d6-ad00-71b25c8645c1/contexts/0-2vdn-followup-2",
+        "lifespanCount": 1,
+        "parameters": {
+          "nombre": "juan lopez",
+          "nombre.original": "juan lopez"
+        }
+      },
+      {
+        "name": "projects/chatfase1-f4179/agent/sessions/33e2863f-3893-45d6-ad00-71b25c8645c1/contexts/0-2vdn-followup",
+        "lifespanCount": 1,
+        "parameters": {
+          "nombre": "juan lopez",
+          "nombre.original": "juan lopez"
+        }
+      }
+    ],
+    "intent": {
+      "name": "projects/chatfase1-f4179/agent/intents/44b5faef-dd23-435e-8a19-b4ee781f5572",
+      "displayName": "0-2-1 VDN - con quien"
+    },
+    "intentDetectionConfidence": 1,
+    "diagnosticInfo": {
+      "webhook_latency_ms": 124
+    },
+    "languageCode": "es"
+  },
+  "webhookStatus": {
+    "message": "Webhook execution successful"
+  }
+}

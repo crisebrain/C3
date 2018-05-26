@@ -19,12 +19,14 @@ class InfoManager:
         -- Fetch the intents values with the SessionContainer if adapter_DF asks.
     - Fetches the valus from the contexts or id required with "extractValue".
     """
-    def __init__(self, SessionContainer, rootdirectory, idChatBot=None):
+    def __init__(self, SessionContainer, makeWebhookResult,
+                 rootdirectory, idChatBot=None):
         """Creates the Info Manager for the current conference session."""
         self.conference_date = time()
         self.conference = {}
         pathpicklefile = os.path.join(rootdirectory, "Sessions/Conference.pck")
         self.sc = SessionContainer(pathpicklefile, idChatBot)
+        self.makeWebhookResult = makeWebhookResult
         self.sc.ShowSessionTree()
 
     def interceptIntent(self, jdata):  # strText, idNode
@@ -113,17 +115,20 @@ class InfoManager:
         # Tiene que ver con los contextos
         print(values)
         queryResult = jdata.get("queryResult")
-        if "action" in queryResult.keys():
-            action = queryResult.get("action")
         if forward:
-            msgString = node.msgAns
-            # namestr = jdata["name"]
-            pattern = r"\$\w+"
-            fields = re.findall(pattern=pattern, string=msgString)
-            if isinstance(fields, list):
-                for field in fields:
-                    fieldw = field[1:]
-                    msgString = msgString.replace(field, values[field])
-            return msgString
+            response = self.makeWebhookResult(jdata)
+            if response["payload"]["returnCode"] == 0:
+                msgString = node.msgAns
+                # namestr = jdata["name"]
+                pattern = r"\$\w+"
+                fields = re.findall(pattern=pattern, string=msgString)
+                if isinstance(fields, list):
+                    for field in fields:
+                        fieldw = field[1:]
+                        msgString = msgString.replace(field, values[field])
+                return msgString
+            else:
+                msgString = response["fulfillmentText"]
+                return msgString
         else:
             return node.msgAns

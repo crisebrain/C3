@@ -1,0 +1,33 @@
+{
+  "responseId": "86ed56c5-7bc0-48f2-a9c3-95cdae962c2e",
+  "queryResult": {
+    "queryText": "ya no quiero",
+    "action": "0-2VDN.0-2VDN-no",
+    "parameters": {},
+    "allRequiredParamsPresent": true,
+    "fulfillmentText": "¿En que otra cosa te puedo ayudar?",
+    "fulfillmentMessages": [
+      {
+        "text": {
+          "text": [
+            ""
+          ]
+        }
+      },
+      {
+        "text": {
+          "text": [
+            "¿En que otra cosa te puedo ayudar?"
+          ]
+        }
+      }
+    ],
+    "intent": {
+      "name": "projects/chatfase1-f4179/agent/intents/5f334ca0-a760-4277-9c61-04f0839b94d2",
+      "displayName": "0-2-2 VDN - no"
+    },
+    "intentDetectionConfidence": 1,
+    "diagnosticInfo": {},
+    "languageCode": "es"
+  }
+}

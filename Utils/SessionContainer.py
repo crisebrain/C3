@@ -39,12 +39,14 @@ class SessionContainer:
         for i,(pre, fill, node) in enumerate(tree):
             if not node.is_root:
                 stchain = "%s #_%d  %s" % (pre, i, node.name)
-                isfilled = [True if "userValue" in param.keys() else False
-                            for param in node.parameters]
-                if any(isfilled):
-                    index = isfilled.index(True)
-                    value = node.parameters[index]["userValue"]
-                    stchain += "      %s  " % value
+                # isfilled = [True if "userValue" in param.keys() else False
+                #             for param in node.parameters]
+                # if any(isfilled):
+                #     index = isfilled.index(True)
+                #     value = node.parameters[index]["userValue"]
+                #     stchain += "      %s  " % value
+                if getattr(node, "msgReq", None) is not None:
+                    stchain = stchain + "  {0}".format(node.msgReq)
                 if getattr(node, "current", None) is not None:
                     stchain = stchain + " --- "
                 if getattr(node, "mandatory", None) is not None:

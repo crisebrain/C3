@@ -1,0 +1,64 @@
+{
+  "responseId": "0c3522d1-a3f2-4cb8-a4df-1d2339554c96",
+  "queryResult": {
+    "queryText": "me puedes transferir con Juan",
+    "action": "VDN",
+    "parameters": {
+      "nombre": "Juan"
+    },
+    "allRequiredParamsPresent": true,
+    "fulfillmentText": "¿A cual persona te refieres? a Juan Lopez o Juan Garcia",
+    "fulfillmentMessages": [
+      {
+        "text": {
+          "text": [
+            "¿A cual persona te refieres? a Juan Lopez o Juan Garcia"
+          ]
+        }
+      }
+    ],
+    "webhookPayload": {
+      "result": [
+        {
+          "VDN": 5543535353,
+          "nombre": "Juan"
+        },
+        {
+          "nombre": "Juan",
+          "VDN": 5543234232
+        }
+      ],
+      "returnCode": 2
+    },
+    "outputContexts": [
+      {
+        "name": "projects/chatfase1-f4179/agent/sessions/33e2863f-3893-45d6-ad00-71b25c8645c1/contexts/0-2vdn-followup-2",
+        "lifespanCount": 2,
+        "parameters": {
+          "nombre": "Juan",
+          "nombre.original": "Juan"
+        }
+      },
+      {
+        "name": "projects/chatfase1-f4179/agent/sessions/33e2863f-3893-45d6-ad00-71b25c8645c1/contexts/0-2vdn-followup",
+        "lifespanCount": 2,
+        "parameters": {
+          "nombre.original": "Juan",
+          "nombre": "Juan"
+        }
+      }
+    ],
+    "intent": {
+      "name": "projects/chatfase1-f4179/agent/intents/5bb29d9e-efc4-47ac-a056-34434e22bf5b",
+      "displayName": "0-2 VDN"
+    },
+    "intentDetectionConfidence": 1,
+    "diagnosticInfo": {
+      "webhook_latency_ms": 125
+    },
+    "languageCode": "es"
+  },
+  "webhookStatus": {
+    "message": "Webhook execution successful"
+  }
+}

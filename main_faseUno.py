@@ -1,9 +1,10 @@
-# from SearchEngine import cognitive_req
+#-*- coding: utf-8 -*-
 import os
 import json
 from Utils import SessionContainer
 from InfoManager import InfoManager
 from ChatBotWrapper import ChatBotWrapper
+from Services import makeWebhookResult
 from flask import Flask, request, make_response
 #from SearchEngine import cognitive_req
 # from ConversationEngine import ChatBotWrapper
@@ -21,9 +22,11 @@ def webhook2():
 
 if __name__ == "__main__":
     # Por ahora con estas dos funciones se puede trabajar
-    chbw = ChatBotWrapper("chatbots", "testing-b6df8")   # Rellena el arbol con la info del CB
+    chbw = ChatBotWrapper("chatbots", "testing-b6df8")
+    # Rellena el arbol con la info del CB
     idChatBot = chbw.current_intentTree
     im = InfoManager(SessionContainer,
+                     makeWebhookResult,
                      rootdirectory=os.getcwd(),
                      idChatBot=idChatBot)  # carga el arbol al contenedor SC
     port = int(os.getenv("PORT", 5050))
