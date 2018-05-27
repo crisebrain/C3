@@ -3,11 +3,12 @@ import time
 import json
 import requests
 
-def post_data(jdata):
-    r = requests.post("http://0.0.0.0:5050/infomanager", data=jdata)
+def post_data(jdata, link="http://0.0.0.0:5050/infomanager"):
+    r = requests.post(link, data=jdata)
     print(json.dumps(r.json(), indent=4))
     # Ajustar salida si r no es la respuesta esperada
     return True
+
 
 def send_request(filejsonname):
     filejson = open(filejsonname, "r")

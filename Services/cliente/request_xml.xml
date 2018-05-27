@@ -1,0 +1,23 @@
+<soapenv:Envelope
+xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+xmlns:b2b="http://www.enl.com.mx/B2BFactura/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <b2b:consultarFactura>
+         <Empresa>RICOH</Empresa>
+         <Periodo>Hoy</Periodo>
+         <FechaEmisionInicio>2017-07-12</FechaEmisionInicio>
+         <FechaEmisionFin>2017-07-12</FechaEmisionFin>
+         <Status>Recibido</Status>
+         <NumeroFactura>RCA20202ABFL</NumeroFactura>
+         <Factura>???</Factura>
+         <Cuenta>1209ABC</Cuenta>
+         <Cuenta>1209ABC</Cuenta>
+         <Prefijo>AAAA,99AA</Prefijo>
+         <FolioInicio>900082982</FolioInicio>
+         <FolioFin>900082990</FolioFin>
+         <Acuse>Aceptado</Acuse>
+         <NITAdquiriente>88888821</NITAdquiriente>
+      </b2b:consultarFactura>
+   </soapenv:Body>
+</soapenv:Envelope> 
