@@ -15,8 +15,10 @@ def normaliza(data):
 class BDbusquedas:
     def __init__(self):
         pathfile = os.getcwd()
-        pathfile = os.path.join(pathfile, "Services", "basedatosficticia.txt")
+        # pathfile = os.path.join(pathfile, "Services", "basedatosficticia.txt")
+        pathfile = os.path.join(pathfile, "Services", "DataSetExtensiones_utf8.csv")
         self.BD = pd.read_csv(pathfile, header=0)
+        # self.BD = pd.read_csv(pathfile, header=0, encoding="ISO-8859-1")
 
     def busqueda(self, valor):
         valor = valor.strip()

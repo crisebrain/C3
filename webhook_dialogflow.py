@@ -5,6 +5,7 @@ import json
 import os
 from flask import Flask, request, make_response
 from Services import makeWebhookResult
+from Services.cliente.webhook_client import send_request
 
 app = Flask(__name__)
 
@@ -18,7 +19,9 @@ def retornodummy():
 def webhook():
     req = request.get_json(silent=True, force=True)
     print(json.dumps(req, indent=4))
-    res = makeWebhookResult(req)
+    req2 = send_request(req)
+    # print(req2)
+    # res = makeWebhookResult(req)
     res = json.dumps(res, indent=4)
     r = make_response(res)
     r.headers["Content-Type"] = "application/json"

@@ -50,3 +50,9 @@ Cambios 25/05/2018:
 - Se implementó lógica de bifurcaciones, de acuerdo a los contextos de salida y entrada de los intents, tomando la decisión de si es un intent válido o no.
 - Actualización y recuperación de valores de conference.
 - cuando el valor es inexistente o el contexto de entrada no está presente arroja sólo el mensaje y convierte al nodo en el que debería de posicionarse en el current (falta borrar contextos).
+
+Cambios 28/05/2018:
+- Se conectaron los webservices al infomanager
+- Se creó el código para la consulta de un web service de facturas, aun no se implementa en el infomanager
+- Se conectaron los dos webhooks, de dialogflow y de infomanager.
+- Se modificó la base de datos simulada por DataSetExtensiones_utf8

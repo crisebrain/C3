@@ -40,13 +40,13 @@ class InfoManager:
         intentid = jdata.get("queryResult").get("intent").get("name")
         intentid = intentid.split("/")[-1]
         node = it.find_node(intentid, to_dict=False, by_field="id")
-        print(it.currentcontextls)
         if "fallback" not in node.name.lower():
-            msgAns = self.intentFlow(jdata, node)
+            response = self.intentFlow(jdata, node)
         else:
             self.extractValue(jdata.get("queryResult").get("queryText"))
-        return {"textFullfillment": msgAns,
-                "intent": node.name}
+        print(it.currentcontextls)
+        print(response)
+        return response
 
     def intentFlow(self, jdata, node):
         """Extracts the value from the msgOriginal with the extractValue
@@ -57,7 +57,6 @@ class InfoManager:
         """
         queryResult = jdata.get("queryResult")
         it = self.sc.extractTree()
-        it.updateContext(node.contextOut)
         inputcontext = [True if context in it.currentcontextls else False
                         for context in node.contextIn]
         values = dict()
@@ -94,9 +93,11 @@ class InfoManager:
         else:
             currentNode = it.find_node("True", False, "current")
             if currentNode is None:
-                currentNode = it.node.children[0]
+                currentNode = it.find_node("Default Fallback Intent", False,
+                                           "name")  # node.children[0]
             forward = False
-
+        if forward:
+            it.updateContext(node.contextOut)
         response = self.outputMsg(jdata, currentNode, values, forward)
         return response
 
@@ -117,18 +118,20 @@ class InfoManager:
         queryResult = jdata.get("queryResult")
         if forward:
             response = self.makeWebhookResult(jdata)
-            if response["payload"]["returnCode"] == 0:
+            if response["payload"]["returnCode"] == "0":
                 msgString = node.msgAns
-                # namestr = jdata["name"]
                 pattern = r"\$\w+"
                 fields = re.findall(pattern=pattern, string=msgString)
                 if isinstance(fields, list):
                     for field in fields:
                         fieldw = field[1:]
                         msgString = msgString.replace(field, values[field])
-                return msgString
+                # return msgString
             else:
                 msgString = response["fulfillmentText"]
-                return msgString
+                # return msgString
         else:
-            return node.msgAns
+            msgString = node.msgAns
+            # return node.msgAns
+        response["fulfillmentText"] =  msgString
+        return response
