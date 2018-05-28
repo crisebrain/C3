@@ -5,7 +5,7 @@ import json
 import os
 from flask import Flask, request, make_response
 from Services import makeWebhookResult
-from Services.cliente.webhook_client import send_request
+from Services.cliente.webhook_client import post_data
 
 app = Flask(__name__)
 
