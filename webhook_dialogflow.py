@@ -19,7 +19,7 @@ def retornodummy():
 def webhook():
     req = request.get_json(silent=True, force=True)
     print(json.dumps(req, indent=4))
-    req2 = send_request(req)
+    req2 = post_data(req)
     # print(req2)
     # res = makeWebhookResult(req)
     res = json.dumps(res, indent=4)
