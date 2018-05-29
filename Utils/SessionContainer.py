@@ -2,6 +2,7 @@ from .IntentTree import IntentTree, IntentNode
 import os
 import json
 import pickle
+import copy
 
 class SessionContainer:
     """Admin class for the intentTree.
@@ -14,23 +15,19 @@ class SessionContainer:
     """
     def __init__(self, pathpicklefile, idChatBot=None):
         """Class to contain the intentTree loaded from piclefile"""
-        intentTree_list = pickle.load(open(pathpicklefile, "rb"))
-        if idChatBot is not None:
-            indices = [True if idChatBot == tree.idChatBot else False
-                       for tree in intentTree_list]
-            tree = intentTree_list[indices.index(True)]
-        else:
-            tree = intentTree_list[0]
-            idChatBot = tree.idChatBot
+        intentTree_dict = pickle.load(open(pathpicklefile, "rb"))
+        tree = intentTree_dict[idChatBot][0]
         setattr(self, idChatBot, tree)
         self.current_intentTree = tree.idChatBot
 
+    def reassingTree(self, sessionnumber):
+        tree = self.extractTree()
+        tree.setSession(sessionnumber)
+        setattr(self, self.current_intentTree, tree)
+
     def extractTree(self, idChatBot=None):
         """Extracts the intent tree from the sc object."""
-        if idChatBot is None:
-            return getattr(self, self.current_intentTree)
-        else:
-            return getattr(self, idChatBot)
+        return getattr(self, self.current_intentTree)
 
     def ShowSessionTree(self):
         """Prints the tree contained in sc object."""
@@ -49,13 +46,11 @@ class SessionContainer:
                     stchain = stchain + "  {0}".format(node.msgReq)
                 if getattr(node, "current", None) is not None:
                     stchain = stchain + " --- "
-                if getattr(node, "mandatory", None) is not None:
-                    stchain = stchain + " *** "
                 print(stchain)
             else:
                 print("root")
             # print("\n\n", node, "\n\n")
-        print("\nmandatory: ****\ncurrent: ---")
+        print("\ncurrent: ---")
 
     # def WhosNextEntry(self):
     #     """Extracts the next field to fill."""

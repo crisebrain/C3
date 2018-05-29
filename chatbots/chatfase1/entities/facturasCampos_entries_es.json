@@ -1,0 +1,44 @@
+[
+  {
+    "value": "@status:status",
+    "synonyms": [
+      "@status:status"
+    ]
+  },
+  {
+    "value": "@acuse:acuse",
+    "synonyms": [
+      "@acuse:acuse"
+    ]
+  },
+  {
+    "value": "@prefijo:prefijo",
+    "synonyms": [
+      "@prefijo:prefijo"
+    ]
+  },
+  {
+    "value": "@periodo:periodo ",
+    "synonyms": [
+      "@periodo:periodo "
+    ]
+  },
+  {
+    "value": "@numeroFactura:numeroFactura ",
+    "synonyms": [
+      "@numeroFactura:numeroFactura "
+    ]
+  },
+  {
+    "value": "@tipoDocumento:tipoDocumento ",
+    "synonyms": [
+      "@tipoDocumento:tipoDocumento "
+    ]
+  },
+  {
+    "value": "estado pendiente",
+    "synonyms": [
+      "estado pendiente"
+    ]
+  }
+]

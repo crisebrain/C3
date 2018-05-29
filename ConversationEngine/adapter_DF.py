@@ -39,16 +39,20 @@ def traductor_df(chatbots_folder, IntentTree):
         json_intents.update({botname:intents_mode})
 
     # json to nodes
-    intentTree_list = []
+    intentTree_dict = {}
     for botname, botintgroup in botnames.items():
         botnodes = []
         intents_ids = {}
+        it = IntentTree({"name":json_intents[botname]["idChatBot"]},
+                        time(), json_intents[botname]["idChatBot"])
+        intents_ids["root"] = json_intents[botname]["idChatBot"]
         for nint, intent in enumerate(json_intents[botname]["intents"]):
             # if not intent["fallbackIntent"]:
             intents_ids[intent["id"]] = intent["name"]
             # Para dialogflow sólo importa una de las posibles respuestas
             # Para otros provedores se construye una lista de strings con
             # las posibles respuestas por si llegara a haber.
+            events = intent["events"]
             msgAns = intent["responses"][0]["messages"][0]["speech"]
             # Busca si el intent tiene su llamado mediante una frase
             # del usuario en el arreglo _usersays_, añade msgReq
@@ -79,17 +83,21 @@ def traductor_df(chatbots_folder, IntentTree):
                           "contextOut": contextOut,
                           "msgReq": msgReq,
                           "msgAns": msgAns,
-                          "parameters": parameters}
+                          "parameters": parameters,
+                          "events": events}
             # En dialogflow no necesariamente hay un intent root
             # por lo que se define un root arbitrario
             # con el id del chatbot
-            it = IntentTree({"name":json_intents[botname]["idChatBot"]},
-                            time(), json_intents[botname]["idChatBot"])
-            intents_ids["root"] = json_intents[botname]["idChatBot"]
             if "parentId" not in intent.keys():
                 build_json["parent"] = "root"
             else:
                 build_json["parent"] = intent["parentId"]
+            # Descomentar para que los intents en el intentTree sólo sean
+            # considerados en el árbol cuando haya llamadas por webhook
+            # --------------------------------------------------------------
+            # if intent["webhookUsed"] != True:
+            #     continue
+            # --------------------------------------------------------------
             botnodes.append(build_json)
         i = 0
         while len(botnodes) > 0 :
@@ -102,9 +110,9 @@ def traductor_df(chatbots_folder, IntentTree):
                 i = 0
             else:
                 i += 1
-        intentTree_list.append(it)
+        intentTree_dict.update({json_intents[botname]["idChatBot"]:[it]})
     # pick.dump(intentTree_list, open("./Sessions/Conference.pck", "wb"))
-    return intentTree_list
+    return intentTree_dict
 
 if __name__ == "__main__":
     print("Uno")

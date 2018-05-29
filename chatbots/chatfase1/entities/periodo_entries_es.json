@@ -1,0 +1,31 @@
+[
+  {
+    "value": "hoy",
+    "synonyms": [
+      "hoy",
+      "periodo hoy",
+      "periodo de hoy",
+      "este dia",
+      "dia vigente",
+      "dia de hoy"
+    ]
+  },
+  {
+    "value": "semana",
+    "synonyms": [
+      "semana",
+      "periodo semana",
+      "periodo de la semana",
+      "periodo de la semana"
+    ]
+  },
+  {
+    "value": "mes",
+    "synonyms": [
+      "mes",
+      "periodo del mes",
+      "periodo mensual",
+      "mes actual"
+    ]
+  }
+]

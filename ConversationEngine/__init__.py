@@ -1,1 +1,1 @@
-from .traductor import traductor_df
+from .adapter_DF import traductor_df

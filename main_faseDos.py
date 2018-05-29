@@ -16,8 +16,9 @@ def webhook2():
     req = request.get_json(silent=True, force=True)
     # print(json.dumps(req, indent=4))
     res = im.interceptIntent(req)
-    res = json.dumps(res, indent=4)
+    res = json.dumps(res)
     r = make_response(res)
+    r.headers["Content-Type"] = "application/json"
     return r
 
 if __name__ == "__main__":

@@ -33,11 +33,9 @@ class InfoManager:
         """Text from IVR is sending to core chatbot and an intent is actioned.
         Output a jsonInput object with msgOriginal, idChatBot, idNode
         """
-        # nombre = jdata.get("queryResult").get("parameters").get("nombre")
-        # print("Usuario: %s" % nombre)
         it = self.sc.extractTree()
-        # self.sc.extractTree()
         intentid = jdata.get("queryResult").get("intent").get("name")
+        # sessionid =
         intentid = intentid.split("/")[-1]
         node = it.find_node(intentid, to_dict=False, by_field="id")
         if "fallback" not in node.name.lower():

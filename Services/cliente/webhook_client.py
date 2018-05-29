@@ -5,9 +5,9 @@ import requests
 
 def post_data(jdata, link="http://0.0.0.0:5050/infomanager"):
     r = requests.post(link, data=jdata)
-    print(json.dumps(r.json(), indent=4))
+    # print(json.dumps(r.json(), indent=4))
     # Ajustar salida si r no es la respuesta esperada
-    return True
+    return r
 
 
 def send_request(filejsonname):

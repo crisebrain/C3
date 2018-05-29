@@ -20,6 +20,7 @@ class IntentNode(Node):
                  - contextIn
                  - contextOut
                  - action
+                 - events
         binding fields are marked with *
         """
         self.parent = parent
@@ -80,6 +81,8 @@ class IntentTree(RenderTree):
         currentcontextls - context list for the tree
         loadedDate - str Date-Time
         idChatBot - Id for the current ChatBot
+        sessionid - Id for the session, created when the firs request from
+                    dialog flow is send.
         """
         self.style=ContStyle()
         if "parent" in json_data:
@@ -90,6 +93,9 @@ class IntentTree(RenderTree):
         self.currentcontextls = list()  # self.node]
         self.loadedDate = loadedDate
         self.idChatBot = idChatBot
+
+    def setSession(self, sessionid):
+        setattr(self, "sessionid", sessionid)
 
     def add_node(self, json_data, current=False):
         """Add a node to the intent tree.

@@ -1,0 +1,26 @@
+[
+  {
+    "value": "numero @numeroFacturaAux:numeroFactura",
+    "synonyms": [
+      "numero @numeroFacturaAux:numeroFactura"
+    ]
+  },
+  {
+    "value": "numero de factura @numeroFacturaAux:numeroFactura",
+    "synonyms": [
+      "numero de factura @numeroFacturaAux:numeroFactura"
+    ]
+  },
+  {
+    "value": "factura @numeroFacturaAux:numeroFactura",
+    "synonyms": [
+      "factura @numeroFacturaAux:numeroFactura"
+    ]
+  },
+  {
+    "value": "es la @numeroFacturaAux:numeroFactura",
+    "synonyms": [
+      "es la @numeroFacturaAux:numeroFactura"
+    ]
+  }
+]

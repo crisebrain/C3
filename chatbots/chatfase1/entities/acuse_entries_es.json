@@ -1,0 +1,30 @@
+[
+  {
+    "value": "@acuseAuxAcuse:acuseAuxAcuse",
+    "synonyms": [
+      "aceptado",
+      "aceptada",
+      "acuse aceptado",
+      "acuse aceptada",
+      "aceptados",
+      "aceptadas",
+      "acuse de aceptado",
+      "acuse de aceptada",
+      "acuse de aceptadas",
+      "acuse de aceptados"
+    ]
+  },
+  {
+    "value": "@acuseAuxCompleme:acuseAuxCompleme  @acuseAuxAcuse:acuseAuxAcuse",
+    "synonyms": [
+      "rechazado",
+      "rechazada",
+      "acuse rechazado",
+      "acuse rechazado",
+      "rechazados",
+      "rechazadas",
+      "acuse de rechazados",
+      "acuse de rechazadas"
+    ]
+  }
+]

@@ -2,7 +2,7 @@
   "id": "fd3465d1-0ff2-483e-9b99-b7432ead193a",
   "parentId": "5bb29d9e-efc4-47ac-a056-34434e22bf5b",
   "rootParentId": "5bb29d9e-efc4-47ac-a056-34434e22bf5b",
-  "name": "0-2-2 VDN - No se",
+  "name": "0-2-3 VDN - No se",
   "auto": true,
   "contexts": [
     "0-2VDN-followup"
@@ -38,7 +38,7 @@
   "priority": 500000,
   "webhookUsed": false,
   "webhookForSlotFilling": false,
-  "lastUpdate": 1527033589,
+  "lastUpdate": 1527185629,
   "fallbackIntent": false,
   "events": []
 }
