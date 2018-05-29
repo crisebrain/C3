@@ -17,35 +17,71 @@ class SessionContainer:
         """Class to contain the intentTree loaded from piclefile"""
         intentTree_dict = pickle.load(open(pathpicklefile, "rb"))
         tree = intentTree_dict[idChatBot][0]
-        setattr(self, idChatBot, tree)
+        self.pathpicklefile = pathpicklefile
+        self.idChatBot = idChatBot
         self.current_intentTree = tree.idChatBot
-
-    def reassingTree(self, sessionnumber):
-        tree = self.extractTree()
-        tree.setSession(sessionnumber)
         setattr(self, self.current_intentTree, tree)
 
-    def extractTree(self, idChatBot=None):
+    def reassignTree(self, sessionnumber):
+        it = self.extractTree()
+        if getattr(it, "sessionid", None) != sessionnumber:
+            it = self.consultIntentTree(sessionnumber)
+            if getattr(it, "sessionid", None) == None:
+                it.setSession(sessionnumber)
+            # buscar en el pickle file por el que tenga esa sesion
+            # cuando tuviese que recuperarse una sesion
+            # if buscar en piclefile
+            setattr(self, self.current_intentTree, it)
+
+    def consultIntentTree(self, sessionnumber):
+        intentTree_dict = pickle.load(open(self.pathpicklefile, "rb"))
+        intentTree_list = intentTree_dict[self.idChatBot]
+        indices = [True if getattr(tree, "sessionid", None) == sessionnumber
+                   else False for tree in intentTree_list]
+        if any(indices):
+            index = indices.index(True)
+            return intentTree_list[index]
+        else:
+            # devuelve el primer árbol creado, que es la plantilla
+            return intentTree_list[0]
+
+    def extractTree(self):
         """Extracts the intent tree from the sc object."""
         return getattr(self, self.current_intentTree)
 
+    def updateConferencefile(self):
+        intentTree_dict = pickle.load(open(self.pathpicklefile, "rb"))
+        intentTree_list = intentTree_dict[self.idChatBot]
+        it = self.extractTree()
+        sessionnumber = it.sessionid
+        indices = [True if getattr(tree, "sessionid", None) == sessionnumber
+                   else False for tree in intentTree_list]
+        if any(indices):
+            index = indices.index(True)
+            intentTree_list[index] = copy.deepcopy(it)
+        else:
+            intentTree_list.append(it)
+        pickle.dump(intentTree_dict, open('Sessions/Conference.pck','wb'))
+
     def ShowSessionTree(self):
         """Prints the tree contained in sc object."""
-        print("Id : %s\n" %(self.current_intentTree))
+        print("Id: \t%s\n" %(self.current_intentTree))
         tree = self.extractTree()
+        if getattr(tree, "sessionid", None) is not None:
+            print("Session: \t%s\n" %(tree.sessionid))
         for i,(pre, fill, node) in enumerate(tree):
             if not node.is_root:
                 stchain = "%s #_%d  %s" % (pre, i, node.name)
-                # isfilled = [True if "userValue" in param.keys() else False
-                #             for param in node.parameters]
-                # if any(isfilled):
-                #     index = isfilled.index(True)
-                #     value = node.parameters[index]["userValue"]
-                #     stchain += "      %s  " % value
+                isfilled = [True if "userValue" in param.keys() else False
+                            for param in node.parameters]
+                if any(isfilled):
+                    index = isfilled.index(True)
+                    value = node.parameters[index]["userValue"]
+                    stchain += "\tValue: %s, " % value
                 if getattr(node, "msgReq", None) is not None:
-                    stchain = stchain + "  {0}".format(node.msgReq)
+                    stchain = stchain + "\tmsgReq: {0}, ".format(node.msgReq)
                 if getattr(node, "current", None) is not None:
-                    stchain = stchain + " --- "
+                    stchain = stchain + "\t --- "
                 print(stchain)
             else:
                 print("root")

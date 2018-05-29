@@ -33,6 +33,8 @@ class InfoManager:
         """Text from IVR is sending to core chatbot and an intent is actioned.
         Output a jsonInput object with msgOriginal, idChatBot, idNode
         """
+        sessionid = jdata.get("session").split("/")[-1]
+        self.sc.reassignTree(sessionid)
         it = self.sc.extractTree()
         intentid = jdata.get("queryResult").get("intent").get("name")
         # sessionid =
@@ -44,6 +46,8 @@ class InfoManager:
             self.extractValue(jdata.get("queryResult").get("queryText"))
         print(it.currentcontextls)
         print(response)
+        self.sc.updateConferencefile()
+        self.sc.ShowSessionTree()
         return response
 
     def intentFlow(self, jdata, node):
