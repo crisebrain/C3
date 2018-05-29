@@ -18,7 +18,7 @@ def retornodummy():
 @app.route("/webhook", methods=["POST", "GET"])
 def webhook():
     req = request.get_json(silent=True, force=True)
-    print(json.dumps(req, indent=4))
+    #print(json.dumps(req, indent=4))
     # req2 = post_data(req)
     # print(req2)
     res = makeWebhookResult(req)
