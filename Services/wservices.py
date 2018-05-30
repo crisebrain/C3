@@ -10,6 +10,8 @@ def makeWebhookResult(req):
             return informacion(req.get("queryResult").get("parameters").get("servicio"))
         elif action == "dudasFacturasCampos":
             return dudasFacturasCampos(req.get("queryResult").get("parameters").get("campo"))
+        elif action == "factura":
+            return factura(req.get("queryResult").get("parameters"))
         else:
             return {"payload": {"result": "Null", "returnCode": "0"},
                    "fulfillmentText": "Null"}
@@ -141,3 +143,43 @@ def dudasFacturasCampos(campo):
     resp = campos.get(campo)
 
     return {"fulfillmentText": resp}
+
+
+def factura(parametros):
+    #print(json.dumps(parametros, indent=4))
+
+    # Ya que los elemenetos vienen en una lista deben tener un
+    # tratamiento algo particular
+    listaCampos = parametros["facturasCampos"]
+    diccFusionado = {}
+
+    # Fusionamos todos los diccionarios
+    for dicc in listaCampos:
+        diccFusionado.update(dicc)
+
+    tipoDocumento = diccFusionado.get("tipoDocumento")
+    estado = diccFusionado.get("status")
+    prefijo = diccFusionado.get("prefijo")
+    periodo = diccFusionado.get("periodo")
+    numFactura = diccFusionado.get("numeroFactura")
+    acuse = diccFusionado.get("acuse")
+
+    # Caso que no traiga ninguna restricción
+    if not(estado or prefijo or periodo or numFactura or acuse):
+        respuesta = "Debe acotar su consulta, ya que el resultado puede ser muy" \
+                    " grande. Puede delimitarla con los campos:" \
+                    "\nTipo de documento." \
+                    "\nEstado" \
+                    "\nSerie" \
+                    "\nPeriodo" \
+                    "\nAcuse" \
+                    "\nNumero de Factura"
+
+        return {"fulfillmentText" : respuesta}
+
+
+
+    #print(diccFusionado)
+
+    #print(listaCampos[0].get("tipoDocumento"))
+    return {"fulfillmentText" : "Falta implementar el consumo del WS."}
