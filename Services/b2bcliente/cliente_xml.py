@@ -7,7 +7,8 @@ import json
 
 def sendReq(fieldsdict):
     import xml.etree.ElementTree
-    et = xml.etree.ElementTree.parse("request_template.xml")
+    #et = xml.etree.ElementTree.parse("request_template.xml")
+    et = xml.etree.ElementTree.parse("Services/b2bcliente/request_template.xml")
     et.getroot()
     root = et.getroot()
     body = root.getchildren()[1]
