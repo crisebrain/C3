@@ -1,4 +1,5 @@
 from .bd_busqueda import dbquery
+from .b2bcliente import sendReq, getResponseValues
 import json
 
 def makeWebhookResult(req):
@@ -173,7 +174,7 @@ def factura(parametros):
     if diccFusionado.get("acuse"):
         acuse = diccFusionado.get("acuse").get("value")
     if diccFusionado.get("numeroFactura"):
-        numFactura = diccFusionado.get("numeroFactura").get("value").get("value")
+        numFactura = str(int(diccFusionado.get("numeroFactura").get("value").get("value")))
 
     # Caso que no traiga ninguna restricción. Consulta muy amplia
     if not(estado or prefijo or periodo or numFactura or acuse):
@@ -188,10 +189,37 @@ def factura(parametros):
 
         return {"fulfillmentText" : respuesta}
 
-    return {"fulfillmentText" : "\nTipo documento: {0}"
-                                "\nEstado: {1}"
-                                "\nPeriodo {2}"
-                                "\nNumero de Factura: {3}"
-                                "\nPrefijo {4}"
-                                "\nAcuse {5}"
-        .format(tipoDocumento, estado, periodo, numFactura, prefijo, acuse)}
+    diccFinal = {
+            "Empresa": "RICOH",
+            "Periodo": periodo,
+            "FechaEmisionInicio": "",
+            "FechaEmisionFin": "",
+            "Status": estado,
+            "NumeroFactura": numFactura,
+            "Factura": tipoDocumento,
+            "Cuenta": "",
+            "Cuenta": "",
+            "Prefijo": prefijo,
+            "FolioInicio": "",
+            "FolioFin" : "",
+            "Acuse": acuse,
+            "NITAdquiriente": ""
+    }
+
+
+    req = sendReq(diccFinal)
+    lista_dicc = getResponseValues(req.content)
+    print("Estoy aqui")
+    print(lista_dicc)
+
+    return {
+            "fulfillmentText" : "" + str(lista_dicc) + ""
+    }
+
+    # return {"fulfillmentText" : "\nTipo documento: {0}"
+    #                             "\nEstado: {1}"
+    #                             "\nPeriodo {2}"
+    #                             "\nNumero de Factura: {3}"
+    #                             "\nPrefijo {4}"
+    #                             "\nAcuse {5}"
+    #     .format(tipoDocumento, estado, periodo, numFactura, prefijo, acuse)}
