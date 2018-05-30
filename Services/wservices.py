@@ -147,6 +147,12 @@ def dudasFacturasCampos(campo):
 
 def factura(parametros):
     #print(json.dumps(parametros, indent=4))
+    estado = None
+    tipoDocumento = None
+    periodo = None
+    prefijo = None
+    acuse = None
+    numFactura = None
 
     # Ya que los elemenetos vienen en una lista deben tener un
     # tratamiento algo particular
@@ -157,14 +163,19 @@ def factura(parametros):
     for dicc in listaCampos:
         diccFusionado.update(dicc)
 
+    # Obtenemos los valores
     tipoDocumento = diccFusionado.get("tipoDocumento")
-    estado = diccFusionado.get("status")
-    prefijo = diccFusionado.get("prefijo")
     periodo = diccFusionado.get("periodo")
-    numFactura = diccFusionado.get("numeroFactura")
-    acuse = diccFusionado.get("acuse")
+    if diccFusionado.get("status"):
+        estado = diccFusionado.get("status").get("value")
+    if diccFusionado.get("prefijo"):
+        prefijo = diccFusionado.get("prefijo").get("value")
+    if diccFusionado.get("acuse"):
+        acuse = diccFusionado.get("acuse").get("value")
+    if diccFusionado.get("numeroFactura"):
+        numFactura = diccFusionado.get("numeroFactura").get("value").get("value")
 
-    # Caso que no traiga ninguna restricción
+    # Caso que no traiga ninguna restricción. Consulta muy amplia
     if not(estado or prefijo or periodo or numFactura or acuse):
         respuesta = "Debe acotar su consulta, ya que el resultado puede ser muy" \
                     " grande. Puede delimitarla con los campos:" \
@@ -177,9 +188,10 @@ def factura(parametros):
 
         return {"fulfillmentText" : respuesta}
 
-
-
-    #print(diccFusionado)
-
-    #print(listaCampos[0].get("tipoDocumento"))
-    return {"fulfillmentText" : "Falta implementar el consumo del WS."}
+    return {"fulfillmentText" : "\nTipo documento: {0}"
+                                "\nEstado: {1}"
+                                "\nPeriodo {2}"
+                                "\nNumero de Factura: {3}"
+                                "\nPrefijo {4}"
+                                "\nAcuse {5}"
+        .format(tipoDocumento, estado, periodo, numFactura, prefijo, acuse)}
