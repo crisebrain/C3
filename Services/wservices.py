@@ -212,14 +212,14 @@ def factura(parametros):
     print("Estoy aqui")
     print(lista_dicc)
 
-    return {
-            "fulfillmentText" : "" + str(lista_dicc) + ""
-    }
+    # return {
+    #         "fulfillmentText" : "" + str(lista_dicc) + ""
+    # }
 
-    # return {"fulfillmentText" : "\nTipo documento: {0}"
-    #                             "\nEstado: {1}"
-    #                             "\nPeriodo {2}"
-    #                             "\nNumero de Factura: {3}"
-    #                             "\nPrefijo {4}"
-    #                             "\nAcuse {5}"
-    #     .format(tipoDocumento, estado, periodo, numFactura, prefijo, acuse)}
+    return {"fulfillmentText" : "\nTipo documento: {0}"
+                                "\nEstado: {1}"
+                                "\nPeriodo {2}"
+                                "\nNumero de Factura: {3}"
+                                "\nPrefijo {4}"
+                                "\nAcuse {5}"
+        .format(tipoDocumento, estado, periodo, numFactura, prefijo, acuse)}
