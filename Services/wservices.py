@@ -8,6 +8,10 @@ def makeWebhookResult(req):
             return makeresponseAction(req, action)
         elif action == "informacion":
             return informacion(req.get("queryResult").get("parameters").get("servicio"))
+        elif action == "dudasFacturasCampos":
+            return dudasFacturasCampos(req.get("queryResult").get("parameters").get("campo"))
+        elif action == "factura":
+            return factura(req.get("queryResult").get("parameters"))
         else:
             return {"payload": {"result": "Null", "returnCode": "0"},
                    "fulfillmentText": "Null"}
@@ -77,7 +81,7 @@ def mensajson(array, code, action, valor):
             Text = "¿A cual persona te refieres? a {0}".format(textnames)
 
         else:
-            Text = "Existen demasiadas coincidencias, necesitas ser mas especifico"
+            Text = "Existen demasiadas coincidencias, necesitas ser mas específico"
 
     elif action == "saldo":
         if valor == "":
@@ -100,7 +104,7 @@ def mensajson(array, code, action, valor):
             Text = "¿A cual persona te refieres? a {0}".format(textnames)
 
         else:
-            Text = "Existen demasiadas coincidencias, necesitas ser mas especifico"
+            Text = "Existen demasiadas coincidencias, necesitas ser mas específico"
     return Text
 
 def informacion(servicio):
@@ -112,3 +116,70 @@ def informacion(servicio):
     resp = servicios.get(servicio)
 
     return {"fulfillmentText": resp}
+
+
+def dudasFacturasCampos(campo):
+    entrada = "Para factura, "
+    campos = {
+        "documento": entrada + "el campo Tipo Documento como su nombre lo indica "
+                    "hace referencia a las variantes de documento con que cuenta "
+                    "el sistema, en este momento se encuentran disponibles "
+                    "documentos de tipo Factura o Nota de Crédito.",
+        "estado": entrada + "el campo Estatus indica los posibles estados en los "
+                    "cuales se encuetra el documento, siendo estos: "
+                    "Recibido, Firmado, Aceptado, Rechazado, Error o Enviado.",
+        "prefijo": entrada + "el campo Serie (Prefijo) identifica los documentos "
+                    "por un nivel general de organización, en este caso se "
+                    "representa mediante un valor alfanumérico, por ejemplo puede "
+                    "ser la serie B.",
+        "acuse": entrada + "el campo Acuse indica el estado de recepción del "
+                    "documento pudiendo ser Aceptado, Rechazado o Pendiente.",
+        "numero": entrada + "el campo Número de Factura se refiere al identificador "
+                    "específico del documento, este valor acepta números y letras. ",
+        "periodo": entrada + "el campo Periodo hace referencia a valores de "
+                    "tiempo predefinidos, siendo estos: Hoy, Semana y Mes."
+        }
+
+    resp = campos.get(campo)
+
+    return {"fulfillmentText": resp}
+
+
+def factura(parametros):
+    #print(json.dumps(parametros, indent=4))
+
+    # Ya que los elemenetos vienen en una lista deben tener un
+    # tratamiento algo particular
+    listaCampos = parametros["facturasCampos"]
+    diccFusionado = {}
+
+    # Fusionamos todos los diccionarios
+    for dicc in listaCampos:
+        diccFusionado.update(dicc)
+
+    tipoDocumento = diccFusionado.get("tipoDocumento")
+    estado = diccFusionado.get("status")
+    prefijo = diccFusionado.get("prefijo")
+    periodo = diccFusionado.get("periodo")
+    numFactura = diccFusionado.get("numeroFactura")
+    acuse = diccFusionado.get("acuse")
+
+    # Caso que no traiga ninguna restricción
+    if not(estado or prefijo or periodo or numFactura or acuse):
+        respuesta = "Debe acotar su consulta, ya que el resultado puede ser muy" \
+                    " grande. Puede delimitarla con los campos:" \
+                    "\nTipo de documento." \
+                    "\nEstado" \
+                    "\nSerie" \
+                    "\nPeriodo" \
+                    "\nAcuse" \
+                    "\nNumero de Factura"
+
+        return {"fulfillmentText" : respuesta}
+
+
+
+    #print(diccFusionado)
+
+    #print(listaCampos[0].get("tipoDocumento"))
+    return {"fulfillmentText" : "Falta implementar el consumo del WS."}
