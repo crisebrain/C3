@@ -271,17 +271,18 @@ def factura(parametros):
 
 
     req = sendReq(diccFinal)
-    lista_dicc = getResponseValues(req.content)
-    print(lista_dicc)
+    msg = getResponseValues(req.content)
+    print(msg)
 
     # return {
     #         "fulfillmentText" : "" + str(lista_dicc) + ""
     # }
+    return {"fulfillmentText" : msg}
 
-    return {"fulfillmentText" : "\nTipo documento: {0}"
-                                "\nEstado: {1}"
-                                "\nPeriodo {2}"
-                                "\nNumero de Factura: {3}"
-                                "\nPrefijo {4}"
-                                "\nAcuse {5}"
-        .format(tipoDocumento, estado, periodo, numFactura, prefijo, acuse)}
+    # return {"fulfillmentText" : "\nTipo documento: {0}"
+    #                             "\nEstado: {1}"
+    #                             "\nPeriodo {2}"
+    #                             "\nNumero de Factura: {3}"
+    #                             "\nPrefijo {4}"
+    #                             "\nAcuse {5}"
+        # .format(tipoDocumento, estado, periodo, numFactura, prefijo, acuse)}

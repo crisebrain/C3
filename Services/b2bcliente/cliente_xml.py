@@ -1,5 +1,4 @@
 import requests
-from requests_xml import XML
 import xml.etree.ElementTree as ET
 import ast
 import json
@@ -15,7 +14,7 @@ def sendReq(fieldsdict):
     consultarfactura = body.getchildren()[0]
     for children in consultarfactura.getchildren():
         children.text = fieldsdict[children.tag]
-        print("%s : %s" %(children.tag, children.text))
+        print("%s : %s" % (children.tag, children.text))
     # esta instruccion es para convertir el objeto tipo elementTree a texto
     xmlreq = xml.etree.ElementTree.tostring(et.getroot()).decode()
     # ---------------------------------------------------------------------
@@ -36,10 +35,39 @@ def getResponseValues(xmlstring):
     for fields in facturaslista:
         diccionario = {}
         for field in fields:
-            diccionario.update({field.tag:field.text})
+            diccionario.update({field.tag: field.text})
         lista_dicc.append(diccionario)
-    return lista_dicc
+    return HumanResult(lista_dicc)
 
+def HumanResult(lista_dicc):
+    mensajote = ""
+    counter = 0
+    for resultado in lista_dicc:
+        almenos1 = 0
+        for key, value in resultado.items():
+            keystr = '{:-<20}:'.format(key)
+            va = True
+            if value is not None:
+                if value == "?":
+                    va = False
+                    valuestr = '{:->20}'.format("sin respuesta")
+                else:
+                    valuestr = '{:->30}'.format(value)
+            else:
+                va = False
+                valuestr = '{:->20}'.format('Sin respuesta')
+            msgfield = keystr + valuestr
+            if va:
+                mensajote += msgfield + "\n"
+                almenos1 += 1
+        if almenos1 > 0:
+            endline = '{:*^49}'.format('Factura') + "\n"
+            mensajote += endline
+            counter += 1
+    if counter > 0:
+        return(mensajote)
+    else:
+        return("No se encontraron coincidencias")
 
 if __name__ == "__main__":
     dictfields = {"Empresa": "RICOH",
@@ -53,10 +81,10 @@ if __name__ == "__main__":
                   "Cuenta": "",
                   "Prefijo": "",
                   "FolioInicio": "",
-                  "FolioFin" : "",
+                  "FolioFin": "",
                   "Acuse": "Aceptado",
                   "NITAdquiriente": ""}
     # funciona con un diccionario
     req = sendReq(dictfields)
-    lista_dicc = getResponseValues(req.content)
-    print(lista_dicc)
+    humanmsg = getResponseValues(req.content)
+    print(humanmsg)
