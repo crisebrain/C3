@@ -56,3 +56,9 @@ Cambios 28/05/2018:
 - Se creó el código para la consulta de un web service de facturas, aun no se implementa en el infomanager
 - Se conectaron los dos webhooks, de dialogflow y de infomanager.
 - Se modificó la base de datos simulada por DataSetExtensiones_utf8
+
+Cambios 31/05/2018
+- Se corrigió la búsqueda en la base de datos para que el orden no 
+importe.
+- Se dió tratamiento en el mensaje de respuesta de facts.
+- se modificó la forma de llamar al cliente xml.
