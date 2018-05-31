@@ -39,11 +39,45 @@ def makeresponseAction(req, action):
                                     [coin["Nombre"], coin[action]])))
 
 
-    resp = {#"speech": textresp,
+    resp = {
             "payload": {"result": resultarray, "returnCode": returnCode},
-            "fulfillmentText": textresp}
-            #"source": "telegram"}#req.get("queryResult").get("intent").get("displayName")}
+            "fulfillmentText": textresp
+    }
+
+
+
+    respContext = evaluaContextos(returnCode, action, result.get("nombre"), req.get("session"))
+
+    if respContext:
+        resp.update(respContext)
+
     return resp
+
+def evaluaContextos(code, action, valor, session):
+    if action == "VDN" and code == 1 and valor:
+        return {"outputContexts": [
+            {
+                "name": session + "/contexts/0-2vdn-followup",
+                "lifespanCount": 0
+            },
+            {
+                "name": session + "/contexts/0-2vdn-followup-2",
+                "lifespanCount": 0
+            }
+        ]}
+
+    if action == "saldo" and code == 1 and valor:
+        return {"outputContexts": [
+            {
+                "name": session + "/contexts/0-1saldo-followup",
+                "lifespanCount": 0
+            },
+            {
+                "name": session + "/contexts/0-1saldo-followup-2",
+                "lifespanCount": 0
+            }
+        ]}
+
 
 def calcCode(array, empty=False):
     if not empty:
@@ -63,7 +97,7 @@ def calcCode(array, empty=False):
 def mensajson(array, code, action, valor):
     if action == "VDN":
         if valor == "":
-            Text = "¿Con quién desea hablar"
+            Text = "¿Con quién desea hablar?"
             return Text
 
         if code == 0:
@@ -178,13 +212,17 @@ def factura(parametros):
 
     # Caso que no traiga ninguna restricción. Consulta muy amplia
     if not(estado or prefijo or periodo or numFactura or acuse):
+
+        # TODO: Implementar caso de que traiga valores inválidos
+
+
         respuesta = "Debe acotar su consulta, ya que el resultado puede ser muy" \
                     " grande. Puede delimitarla con los campos:" \
-                    "\nTipo de documento." \
-                    "\nEstado" \
-                    "\nSerie" \
-                    "\nPeriodo" \
-                    "\nAcuse" \
+                    "\nTipo de documento," \
+                    "\nEstado," \
+                    "\nSerie," \
+                    "\nPeriodo," \
+                    "\nAcuse," \
                     "\nNumero de Factura"
 
         return {"fulfillmentText" : respuesta}
@@ -209,7 +247,6 @@ def factura(parametros):
 
     req = sendReq(diccFinal)
     lista_dicc = getResponseValues(req.content)
-    print("Estoy aqui")
     print(lista_dicc)
 
     # return {
