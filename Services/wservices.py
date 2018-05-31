@@ -24,15 +24,18 @@ def makeresponseAction(req, action):
     # Carga de base de datos
     result = req.get("queryResult").get("parameters")
 
-    if result.get("nombre") != "":
-        coincidencias = dbquery(result.get("nombre"))
+    nombre = construyeNombre(result)
+
+
+    if nombre != "":
+        coincidencias = dbquery(nombre)
         print(json.dumps(coincidencias, indent=4))
         returnCode = calcCode(coincidencias)
     else:
         returnCode = calcCode([], True)
         coincidencias = []
 
-    textresp = mensajson(coincidencias, returnCode, action, result.get("nombre"))
+    textresp = mensajson(coincidencias, returnCode, action, nombre)
     resultarray = []
     for coin in coincidencias:
         resultarray.append(dict(zip(["nombre", action],
@@ -46,12 +49,34 @@ def makeresponseAction(req, action):
 
 
 
-    respContext = evaluaContextos(returnCode, action, result.get("nombre"), req.get("session"))
+    respContext = evaluaContextos(returnCode, action, nombre, req.get("session"))
 
     if respContext:
         resp.update(respContext)
 
     return resp
+
+
+def construyeNombre(parametros):
+    import numpy as np
+    listaNombre = parametros.get("nombre")
+
+    # Obtenemos los nombres que vengan, se consideran valores repetidos
+    keys = [list(dicc.keys()) for dicc in listaNombre]
+    unicos = np.unique(np.array(keys).reshape(-1, ))
+    dicNombres = dict(zip(unicos, [""]*len(unicos)))
+    for dicc in listaNombre:
+        for unico in unicos:
+            if unico in dicc.keys():
+                dicNombres[unico] = " ".join([dicNombres[unico].strip(), dicc[unico].strip()])
+
+    # Concatenamos los nombres
+    nombre = "" + str(dicNombres.setdefault("nombre", "")) + " "\
+             + str(dicNombres.setdefault("apellido", "")) + " "\
+             + str(dicNombres.setdefault("nombresExtras", ""))
+
+    return nombre.strip()
+
 
 def evaluaContextos(code, action, valor, session):
     if action == "VDN" and code == 1 and valor:
