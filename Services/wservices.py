@@ -17,8 +17,15 @@ def makeWebhookResult(req):
             return {"payload": {"result": "Null", "returnCode": "0"},
                    "fulfillmentText": "Null"}
     except Exception as err:
+        error = err
+
+        if err.code == 7:
+            error = "El servicio de factura no ha respondido correctamente. " \
+                    "Favor de reportalo con su administrador."
+
+
         return {"payload": {"result": "Null", "returnCode": "0"},
-                "fulfillmentText": "{0}".format(err)}
+                "fulfillmentText": "{0}".format(error)}
 
 def makeresponseAction(req, action):
     # Carga de base de datos
@@ -283,6 +290,6 @@ def factura(parametros):
                   "\nNumero de Factura: {3}" +
                   "\nPrefijo {4}" +
                   "\nAcuse {5}\n").format(tipoDocumento, estado,
-                                        periodo, numFactura, prefijo, acuse)}
+                                        periodo, numFactura, prefijo, acuse)
 
     return {"fulfillmentText" : peticionstr + msg}
