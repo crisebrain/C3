@@ -238,29 +238,34 @@ def factura(parametros):
         estado = diccFusionado.get("status").get("value")
     if diccFusionado.get("prefijo"):
         prefijo = diccFusionado.get("prefijo").get("value")
+        if not isinstance(prefijo, str):
+            prefijo = str(int(prefijo))
+        else:
+            prefijo = prefijo.upper()
     if diccFusionado.get("acuse"):
         acuse = diccFusionado.get("acuse").get("value")
     if diccFusionado.get("numeroFactura"):
         numfactura = diccFusionado.get("numeroFactura").get("value").get("value")
         if not isinstance(numfactura, str):
             numFactura = str(int(numfactura))
+        else:
+            numFactura = numFactura.upper()
 
     # Caso que no traiga ninguna restricción. Consulta muy amplia
-    if not(estado or prefijo or periodo or numFactura or acuse):
-
-        # TODO: Implementar caso de que traiga valores inválidos
-
-
-        respuesta = "Debe acotar su consulta, ya que el resultado puede ser muy" \
-                    " grande. Puede delimitarla con los campos:" \
-                    "\nTipo de documento," \
-                    "\nEstado," \
-                    "\nSerie," \
-                    "\nPeriodo," \
-                    "\nAcuse," \
-                    "\nNumero de Factura"
-
-        return {"fulfillmentText" : respuesta}
+    # if not(estado or prefijo or periodo or numFactura or acuse):
+    #
+    #     # TODO: Implementar caso de que traiga valores inválidos
+    #
+    #     respuesta = "Debe acotar su consulta, ya que el resultado puede ser muy" \
+    #                 " grande. Puede delimitarla con los campos:" \
+    #                 "\nTipo de documento," \
+    #                 "\nEstado," \
+    #                 "\nSerie," \
+    #                 "\nPeriodo," \
+    #                 "\nAcuse," \
+    #                 "\nNumero de Factura"
+    #
+    #     return {"fulfillmentText" : respuesta}
 
     diccFinal = {"Empresa": "RICOH",
                  "Periodo": periodo,
@@ -289,4 +294,5 @@ def factura(parametros):
     for i, var in enumerate(mostrar):
         if simostrar[i]:
             peticionstr += formatos[i] + "{0}".format(var)
-    return {"fulfillmentText" : peticionstr + msg}
+    return {"fulfillmentText" : peticionstr +
+                                ".\n-----------------------------------\n" + msg}
