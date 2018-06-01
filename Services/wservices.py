@@ -149,7 +149,8 @@ def mensajson(array, code, action, valor):
             return Text
 
         if code == 0:
-           Text = "No hay referencia de esa persona. ¿Con qué otra persona te comunico?"
+           Text = "No hay referencia de ese usuario. Si necesita el saldo de " \
+                  "alguien más sólo díga el nombre de usuario correcto."
 
         elif code == 1:
             elem = array[0]
