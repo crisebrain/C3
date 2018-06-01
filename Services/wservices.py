@@ -234,7 +234,9 @@ def factura(parametros):
     if diccFusionado.get("acuse"):
         acuse = diccFusionado.get("acuse").get("value")
     if diccFusionado.get("numeroFactura"):
-        numFactura = str(int(diccFusionado.get("numeroFactura").get("value").get("value")))
+        numfactura = diccFusionado.get("numeroFactura").get("value").get("value")
+        if not isinstance(numfactura, str):
+            numFactura = str(int(numfactura))
 
     # Caso que no traiga ninguna restricción. Consulta muy amplia
     if not(estado or prefijo or periodo or numFactura or acuse):
@@ -270,20 +272,17 @@ def factura(parametros):
             "NITAdquiriente": ""
     }
 
-
+    # servicio de factura
     req = sendReq(diccFinal)
     msg = getResponseValues(req.content)
     print(msg)
 
-    # return {
-    #         "fulfillmentText" : "" + str(lista_dicc) + ""
-    # }
-    return {"fulfillmentText" : msg}
+    peticionstr = ("\nTipo documento: {0}" +
+                  "\nEstado: {1}" +
+                  "\nPeriodo {2}" +
+                  "\nNumero de Factura: {3}" +
+                  "\nPrefijo {4}" +
+                  "\nAcuse {5}\n").format(tipoDocumento, estado,
+                                        periodo, numFactura, prefijo, acuse)}
 
-    # return {"fulfillmentText" : "\nTipo documento: {0}"
-    #                             "\nEstado: {1}"
-    #                             "\nPeriodo {2}"
-    #                             "\nNumero de Factura: {3}"
-    #                             "\nPrefijo {4}"
-    #                             "\nAcuse {5}"
-        # .format(tipoDocumento, estado, periodo, numFactura, prefijo, acuse)}
+    return {"fulfillmentText" : peticionstr + msg}
