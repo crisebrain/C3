@@ -5,6 +5,7 @@ import apiai
 import ast
 from flask import Flask, make_response, request
 import pandas as pd
+from Services.bd_busqueda import normaliza
 
 CLIENT_ACCESS_TOKEN = '28165eab709744ca9efbcf21e9519df5'
 
@@ -22,8 +23,8 @@ def superPandasRespuesta(lista_dicc):
                 dicpeq.update({key:value})
         df = df.append(dicpeq, ignore_index=True)
     df.fillna(" ", inplace=True)
-    df.to_html("temp.html", table_id="t01")
-    stringout = open("temp.html", "r").read()
+    df.to_html("metadata/temp.html", table_id="t01")
+    stringout = open("metadata/temp.html", "r").read()
     return stringout
 
 def superPandasEntrada(dicc):
@@ -38,8 +39,8 @@ def superPandasEntrada(dicc):
             dicpeq.update({key:value})
     df = df.append(dicpeq, ignore_index=True)
     df.fillna(" ", inplace=True)
-    df.to_html("temp.html", table_id="t00")
-    stringout = open("temp.html", "r").read()
+    df.to_html("metadata/temp.html", table_id="t00")
+    stringout = open("metadata/temp.html", "r").read()
     return stringout
 
 def Chat(text="", leng="es", id="123456" ):
@@ -49,22 +50,28 @@ def Chat(text="", leng="es", id="123456" ):
     request.session_id = id
     request.query = text
     response = request.getresponse()
-    print(response)
+    plantilla = open("metadata/plantilla_tabla.html", 'r').read()
     results = json.loads(response.read().decode("utf-8"))
+    print(results)
     try:
         salida_tabla = results["result"]["fulfillment"]["data"]["resultOut"]
         entrada_tabla = results["result"]["fulfillment"]["data"]["resultIn"]
         googleSpeech = results["result"]["fulfillment"]["messages"][0]["speech"]
+        formatotexto = '<br><font face="verdana">{0}</font><br><br>'
         if len(googleSpeech) < 200:
-            msg = "Valores identificados: <br>" + superPandasEntrada(entrada_tabla)
+            msg = formatotexto.format("Valores identificados:") + superPandasEntrada(entrada_tabla)
             msg +=  "<br>" + googleSpeech
         else:
-            msg = "Valores identificados: <br>" + superPandasEntrada(entrada_tabla)
-            msg += "<br> Resultados: <br>" + superPandasRespuesta(salida_tabla)
+            msg = formatotexto.format("Valores identificados:") + superPandasEntrada(entrada_tabla)
+            msg += formatotexto.format("Resultados:") + superPandasRespuesta(salida_tabla)
+        msg = plantilla + msg
     except KeyError:
-        msg = "Disculpe, su peticion no corresponde al servicio de facturas."
+        googleSpeech = results["result"]["fulfillment"]["messages"][0]["speech"]
+        # msg = "Los parametros ingresados no generan una respuesta valida."
+        msg = normaliza(googleSpeech)
     # msg = ""superPandasEntrada(entrada_tabla) + superPandasRespuesta(salida_tabla)
-    return msg
+    complemento = '<br><br><input type="button" onclick="javascript:history.go(-1)" value="regresar">'
+    return msg + complemento
 
 app = Flask(__name__)
 
