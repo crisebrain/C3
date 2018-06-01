@@ -254,34 +254,31 @@ def factura(parametros):
 
         return {"fulfillmentText" : respuesta}
 
-    diccFinal = {
-            "Empresa": "RICOH",
-            "Periodo": periodo,
-            "FechaEmisionInicio": "",
-            "FechaEmisionFin": "",
-            "Status": estado,
-            "NumeroFactura": numFactura,
-            "Factura": tipoDocumento,
-            "Cuenta": "",
-            "Cuenta": "",
-            "Prefijo": prefijo,
-            "FolioInicio": "",
-            "FolioFin" : "",
-            "Acuse": acuse,
-            "NITAdquiriente": ""
-    }
+    diccFinal = {"Empresa": "RICOH",
+                 "Periodo": periodo,
+                 "FechaEmisionInicio": "",
+                 "FechaEmisionFin": "",
+                 "Status": estado,
+                 "NumeroFactura": numFactura,
+                 "Factura": tipoDocumento,
+                 "Cuenta": "",
+                 "Cuenta": "",
+                 "Prefijo": prefijo,
+                 "FolioInicio": "",
+                 "FolioFin" : "",
+                 "Acuse": acuse,
+                 "NITAdquiriente": ""}
 
     # servicio de factura
     req = sendReq(diccFinal)
     msg = getResponseValues(req.content)
     print(msg)
-
-    peticionstr = ("\nTipo documento: {0}" +
-                  "\nEstado: {1}" +
-                  "\nPeriodo {2}" +
-                  "\nNumero de Factura: {3}" +
-                  "\nPrefijo {4}" +
-                  "\nAcuse {5}\n").format(tipoDocumento, estado,
-                                        periodo, numFactura, prefijo, acuse)}
-
+    mostrar = [tipoDocumento, estado, periodo, numFactura, prefijo, acuse]
+    simostrar = [True if var is not None else False for var in mostrar]
+    formatos = ["\nTipo documento: ", "\nEstado: ", "\nPeriodo ",
+                "\nNumero de Factura: ", "\nPrefijo ", "\nAcuse "]
+    peticionstr = ""
+    for i, var in enumerate(mostrar):
+        if simostrar[i]:
+            peticionstr += formatos[i] + "{0}".format(var)
     return {"fulfillmentText" : peticionstr + msg}
