@@ -17,8 +17,15 @@ def makeWebhookResult(req):
             return {"payload": {"result": "Null", "returnCode": "0"},
                    "fulfillmentText": "Null"}
     except Exception as err:
+        error = err
+
+        if err.code == 7:
+            error = "El servicio de factura no ha respondido correctamente. " \
+                    "Favor de reportalo con su administrador."
+
+
         return {"payload": {"result": "Null", "returnCode": "0"},
-                "fulfillmentText": "{0}".format(err)}
+                "fulfillmentText": "{0}".format(error)}
 
 def makeresponseAction(req, action):
     # Carga de base de datos
@@ -149,7 +156,8 @@ def mensajson(array, code, action, valor):
             return Text
 
         if code == 0:
-           Text = "No hay referencia de esa persona. ¿Con qué otra persona te comunico?"
+           Text = "No hay referencia de ese usuario. Si necesita el saldo de " \
+                  "alguien más sólo díga el nombre de usuario correcto."
 
         elif code == 1:
             elem = array[0]
