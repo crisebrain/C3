@@ -1,3 +1,4 @@
+#-*- coding: utf-8 -*-
 import json
 import os
 import apiai
@@ -50,15 +51,20 @@ def Chat(text="", leng="es", id="123456" ):
     response = request.getresponse()
     print(response)
     results = json.loads(response.read().decode("utf-8"))
-    salida_tabla = results["result"]["fulfillment"]["data"]["resultOut"]
-    entrada_tabla = results["result"]["fulfillment"]["data"]["resultIn"]
-    googleSpeech = results["result"]["fulfillment"]["messages"][0]["speech"]
-    print(googleSpeech)
+    try:
+        salida_tabla = results["result"]["fulfillment"]["data"]["resultOut"]
+        entrada_tabla = results["result"]["fulfillment"]["data"]["resultIn"]
+        googleSpeech = results["result"]["fulfillment"]["messages"][0]["speech"]
+        if len(googleSpeech) < 200:
+            msg = "Valores identificados: <br>" + superPandasEntrada(entrada_tabla)
+            msg +=  "<br>" + googleSpeech
+        else:
+            msg = "Valores identificados: <br>" + superPandasEntrada(entrada_tabla)
+            msg += "<br> Resultados: <br>" + superPandasRespuesta(salida_tabla)
+    except KeyError:
+        msg = "Disculpe, su peticion no corresponde al servicio de facturas."
     # msg = ""superPandasEntrada(entrada_tabla) + superPandasRespuesta(salida_tabla)
-    if len(googleSpeech) < 40:
-        return googleSpeech
-    else:
-        return superPandasEntrada(entrada_tabla) + superPandasRespuesta(salida_tabla) + googleSpeech
+    return msg
 
 app = Flask(__name__)
 
@@ -76,6 +82,7 @@ def conversa():
     #                       indent=4)
     r = make_response(response)
     r.headers["Content-Type"] = "text/html"
+    r.headers["charset"] = "UTF-8",
     return r
 
 if __name__ == "__main__":
