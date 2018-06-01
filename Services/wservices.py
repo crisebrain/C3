@@ -16,16 +16,12 @@ def makeWebhookResult(req):
         else:
             return {"payload": {"result": "Null", "returnCode": "0"},
                    "fulfillmentText": "Null"}
-    except Exception as err:
-        error = err
-
-        if err.code == 7:
-            error = "El servicio de factura no ha respondido correctamente. " \
-                    "Favor de reportalo con su administrador."
-
+    except AttributeError:
+        error = "El servicio de factura no ha respondido correctamente. " \
+                "Favor de reportalo con su administrador."
 
         return {"payload": {"result": "Null", "returnCode": "0"},
-                "fulfillmentText": "{0}".format(error)}
+                "fulfillmentText": error}
 
 def makeresponseAction(req, action):
     # Carga de base de datos
