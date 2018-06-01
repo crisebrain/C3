@@ -2,7 +2,7 @@ import requests
 import xml.etree.ElementTree as ET
 import ast
 import json
-
+import pandas as pd
 
 def sendReq(fieldsdict):
     import xml.etree.ElementTree
@@ -37,7 +37,24 @@ def getResponseValues(xmlstring):
         for field in fields:
             diccionario.update({field.tag: field.text})
         lista_dicc.append(diccionario)
-    return HumanResult(lista_dicc)
+    return lista_dicc  # HumanResult(lista_dicc)
+
+def superPandasRespuesta(lista_dicc):
+    columns = ['NumeroDocumento', 'FechaEmision', 'Monto', 'NITAdquiriente',
+               'NombreAdquiriente', 'NITFacturador', 'Estatus', 'Acuse',
+               'Referencia']
+    df = pd.DataFrame(columns=columns)
+    for dicc in lista_dicc:
+        dicpeq = dict()
+        for key, value in dicc.items():
+            if (value is None) or (value == "?"):
+                dicpeq.update({key:"&nbsp;"})
+            else:
+                dicpeq.update({key:value})
+        df = df.append(dicpeq, ignore_index=True)
+    df.to_html("temp.html", table_id="t01")
+    stringout = open("temp.html", "rb").read()
+    return stringout
 
 def HumanResult(lista_dicc):
     mensajote = ""
@@ -50,12 +67,12 @@ def HumanResult(lista_dicc):
             if value is not None:
                 if value == "?":
                     va = False
-                    valuestr = '{:->20}'.format("sin respuesta")
+                    valuestr = '{:->20}'.format("&nbsp;")
                 else:
                     valuestr = '{:->30}'.format(value)
             else:
                 va = False
-                valuestr = '{:->20}'.format('Sin respuesta')
+                valuestr = '{:->20}'.format('&nbsp;')
             msgfield = keystr + valuestr
             if va:
                 mensajote += msgfield + "\n"
@@ -86,5 +103,6 @@ if __name__ == "__main__":
                   "NITAdquiriente": ""}
     # funciona con un diccionario
     req = sendReq(dictfields)
-    humanmsg = getResponseValues(req.content)
-    print(humanmsg)
+    listadicc = getResponseValues(req.content)
+    browsertable = superPandasRespuesta(listadicc)
+    print(browsertable)

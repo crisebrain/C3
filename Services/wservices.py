@@ -1,5 +1,5 @@
 from .bd_busqueda import dbquery
-from .b2bcliente import sendReq, getResponseValues
+from .b2bcliente import sendReq, getResponseValues, HumanResult
 import json
 
 def makeWebhookResult(req):
@@ -279,7 +279,7 @@ def factura(parametros):
 
     # servicio de factura
     req = sendReq(diccFinal)
-    msg = getResponseValues(req.content)
+    msg = HumanResult(getResponseValues(req.content))
     print(msg)
     mostrar = [tipoDocumento, estado, periodo, numFactura, prefijo, acuse]
     simostrar = [True if var is not None else False for var in mostrar]
