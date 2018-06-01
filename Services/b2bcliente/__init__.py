@@ -1,1 +1,1 @@
-from .cliente_xml import sendReq, getResponseValues
+from .cliente_xml import sendReq, getResponseValues, HumanResult

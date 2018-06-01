@@ -295,4 +295,16 @@ def factura(parametros):
         if simostrar[i]:
             peticionstr += formatos[i] + "{0}".format(var)
     return {"fulfillmentText" : peticionstr +
-                                ".\n-----------------------------------\n" + msg}
+                                ".\n-----------------------------------\n" + msg,
+            "payload": {
+                "resultIn": {
+                    "periodo": periodo,
+                    "estado": estado,
+                    "numFactura": numFactura,
+                    "prefijo": prefijo,
+                    "acuse": acuse,
+                    "factura": tipoDocumento
+
+                },
+                "resultOut": getResponseValues(req.content)}
+            }
