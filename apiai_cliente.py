@@ -3,18 +3,62 @@ import os
 import apiai
 import ast
 from flask import Flask, make_response, request
+import pandas as pd
 
 CLIENT_ACCESS_TOKEN = '28165eab709744ca9efbcf21e9519df5'
-def Chat(text="",leng="es",id="123456" ):
+
+def superPandasRespuesta(lista_dicc):
+    columns = ['NumeroDocumento', 'FechaEmision', 'Monto', 'NITAdquiriente',
+               'NombreAdquiriente', 'NITFacturador', 'Estatus', 'Acuse',
+               'Referencia']
+    df = pd.DataFrame(columns=columns)
+    for dicc in lista_dicc:
+        dicpeq = dict()
+        for key, value in dicc.items():
+            if (value is None) or (value == "?"):
+                dicpeq.update({key:" "})
+            else:
+                dicpeq.update({key:value})
+        df = df.append(dicpeq, ignore_index=True)
+    df.fillna(" ", inplace=True)
+    df.to_html("temp.html", table_id="t01")
+    stringout = open("temp.html", "r").read()
+    return stringout
+
+def superPandasEntrada(dicc):
+    columns = ["periodo", "estado", "numFactura",
+               "prefijo", "acuse", "factura"]
+    df = pd.DataFrame(columns=columns)
+    dicpeq = dict()
+    for key, value in dicc.items():
+        if (value is None) or (value == "?"):
+            dicpeq.update({key:" "})
+        else:
+            dicpeq.update({key:value})
+    df = df.append(dicpeq, ignore_index=True)
+    df.fillna(" ", inplace=True)
+    df.to_html("temp.html", table_id="t00")
+    stringout = open("temp.html", "r").read()
+    return stringout
+
+def Chat(text="", leng="es", id="123456" ):
     ai = apiai.ApiAI(CLIENT_ACCESS_TOKEN)
     request = ai.text_request()
     request.lang = leng
     request.session_id = id
     request.query = text
     response = request.getresponse()
+    print(response)
     results = json.loads(response.read().decode("utf-8"))
+    salida_tabla = results["result"]["fulfillment"]["data"]["resultOut"]
+    entrada_tabla = results["result"]["fulfillment"]["data"]["resultIn"]
     googleSpeech = results["result"]["fulfillment"]["messages"][0]["speech"]
-    return googleSpeech
+    print(googleSpeech)
+    # msg = ""superPandasEntrada(entrada_tabla) + superPandasRespuesta(salida_tabla)
+    if len(googleSpeech) < 40:
+        return googleSpeech
+    else:
+        return superPandasEntrada(entrada_tabla) + superPandasRespuesta(salida_tabla) + googleSpeech
 
 app = Flask(__name__)
 
@@ -28,10 +72,10 @@ def conversa():
     # req = request.get_json(silent=True, force=True)
     req = ast.literal_eval(request.form["json"])  # .get_json(silent=True, force=True)
     response = Chat(req["reqText"])
-    response = json.dumps({'fulfillmentText': response},
-                          indent=4)
+    # response = json.dumps({'fulfillmentText': response},
+    #                       indent=4)
     r = make_response(response)
-    r.headers["Content-Type"] = "application/json"
+    r.headers["Content-Type"] = "text/html"
     return r
 
 if __name__ == "__main__":

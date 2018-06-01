@@ -39,23 +39,6 @@ def getResponseValues(xmlstring):
         lista_dicc.append(diccionario)
     return lista_dicc  # HumanResult(lista_dicc)
 
-def superPandasRespuesta(lista_dicc):
-    columns = ['NumeroDocumento', 'FechaEmision', 'Monto', 'NITAdquiriente',
-               'NombreAdquiriente', 'NITFacturador', 'Estatus', 'Acuse',
-               'Referencia']
-    df = pd.DataFrame(columns=columns)
-    for dicc in lista_dicc:
-        dicpeq = dict()
-        for key, value in dicc.items():
-            if (value is None) or (value == "?"):
-                dicpeq.update({key:"&nbsp;"})
-            else:
-                dicpeq.update({key:value})
-        df = df.append(dicpeq, ignore_index=True)
-    df.to_html("temp.html", table_id="t01")
-    stringout = open("temp.html", "rb").read()
-    return stringout
-
 def HumanResult(lista_dicc):
     mensajote = ""
     counter = 0
@@ -104,5 +87,5 @@ if __name__ == "__main__":
     # funciona con un diccionario
     req = sendReq(dictfields)
     listadicc = getResponseValues(req.content)
-    browsertable = superPandasRespuesta(listadicc)
-    print(browsertable)
+    # browsertable = superPandasRespuesta(listadicc)
+    # print(browsertable)
