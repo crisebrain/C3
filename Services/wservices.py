@@ -16,12 +16,18 @@ def makeWebhookResult(req):
         else:
             return {"payload": {"result": "Null", "returnCode": "0"},
                    "fulfillmentText": "Null"}
-    except AttributeError:
-        error = "El servicio de factura no ha respondido correctamente. " \
-                "Favor de reportalo con su administrador."
+    except Exception as exception:
+        if type(exception).__name__ == "AttributeError"
+            msgerror = "El servicio de factura no ha respondido correctamente. " \
+                       "Favor de reportalo con su administrador."
+        else:
+            nline = exception.__traceback__.tb_lineno
+            cause = exception.__str__()
+            msgerror = "Estimado usuario, ocurrió el siguiente error: {0} en {1}."format(cause, nline) \
+                       "Favor de reportarlo con su administrador"
 
         return {"payload": {"result": "Null", "returnCode": "0"},
-                "fulfillmentText": error}
+                "fulfillmentText": msgerror}
 
 def makeresponseAction(req, action):
     # Carga de base de datos
