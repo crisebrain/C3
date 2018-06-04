@@ -2,8 +2,11 @@ from .bd_busqueda import dbquery
 from .b2bcliente import sendReq, getResponseValues, HumanResult
 import json
 
-def makeWebhookResult(req):
+def makeWebhookResult(req, setup_logger):
     action = req.get("queryResult").get("action")
+    logquerys = setup_logger("querys", "/home/ramon/petitions.log")
+    logquerys.info(json.dumps(req.get("queryResult")) + "\n")
+    logerrors = setup_logger("errors", "/home/ramon/errors.log")
     try:
         if action == "VDN" or action == "saldo":
             return makeresponseAction(req, action)
@@ -17,14 +20,17 @@ def makeWebhookResult(req):
             return {"payload": {"result": "Null", "returnCode": "0"},
                    "fulfillmentText": "Null"}
     except Exception as exception:
-        if type(exception).__name__ == "AttributeError"
+        logerrors.exception(exception)
+        logerrors.info(json.dumps(req.get("queryResult")) + "\n")
+        if type(exception).__name__ == "AttributeError":
             msgerror = "El servicio de factura no ha respondido correctamente. " \
                        "Favor de reportalo con su administrador."
         else:
             nline = exception.__traceback__.tb_lineno
             cause = exception.__str__()
-            msgerror = "Estimado usuario, ocurrió el siguiente error: {0} en {1}."format(cause, nline) \
-                       "Favor de reportarlo con su administrador"
+            msgerror = "Estimado usuario,"\
+                       "Ocurrió el error: {0} en {1}".format(cause, nline)
+            msgerror += "Favor de reportarlo con su administrador"
 
         return {"payload": {"result": "Null", "returnCode": "0"},
                 "fulfillmentText": msgerror}
@@ -32,7 +38,6 @@ def makeWebhookResult(req):
 def makeresponseAction(req, action):
     # Carga de base de datos
     result = req.get("queryResult").get("parameters")
-
     nombre = construyeNombre(result)
 
 

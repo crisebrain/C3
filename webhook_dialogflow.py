@@ -5,7 +5,7 @@ import json
 import os
 from flask import Flask, request, make_response
 from Services import makeWebhookResult
-# from Services.cliente.webhook_client import post_data
+from Utils import setup_logger
 
 app = Flask(__name__)
 
@@ -19,9 +19,9 @@ def retornodummy():
 def webhook():
     req = request.get_json(silent=True, force=True)
     #print(json.dumps(req, indent=4))
-    # req2 = post_data(req)
-    # print(req2)
-    res = makeWebhookResult(req)
+    # aqui se necesita pasar la funcion creadora de
+    # logfile porque los imports relativos no lo permiten
+    res = makeWebhookResult(req, setup_logger)
     res = json.dumps(res, indent=4)
     r = make_response(res)
     r.headers["Content-Type"] = "application/json"
