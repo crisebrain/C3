@@ -4,9 +4,9 @@ import json
 
 def makeWebhookResult(req, setup_logger):
     action = req.get("queryResult").get("action")
-    logquerys = setup_logger("querys", "/home/ramon/petitions.log")
+    logquerys = setup_logger("querys", "/var/log/C3/petitions.log")
     logquerys.info(json.dumps(req.get("queryResult")) + "\n")
-    logerrors = setup_logger("errors", "/home/ramon/errors.log")
+    logerrors = setup_logger("errors", "/var/log/C3/errors.log")
     try:
         if action == "VDN" or action == "saldo":
             return makeresponseAction(req, action)
