@@ -56,10 +56,11 @@ def makeresponseAction(req, action):
                                     [coin["Nombre"], coin[action]])))
 
 
-    resp = {
-            "payload": {"result": resultarray, "returnCode": returnCode},
-            "fulfillmentText": textresp
-    }
+    resp = {"payload": {"result": resultarray, "returnCode": returnCode},
+            "fulfillmentText": textresp}
+    # "followupEventInput": {"name": "salida",
+    #                        "parameters": {"prueba": "1"},
+    #                        "languageCode": "es"}}
 
 
 
