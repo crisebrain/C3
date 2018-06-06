@@ -52,7 +52,10 @@ def traductor_df(chatbots_folder, IntentTree):
             # Para dialogflow sólo importa una de las posibles respuestas
             # Para otros provedores se construye una lista de strings con
             # las posibles respuestas por si llegara a haber.
-            events = intent["events"]
+            if len(intent["events"]) > 0:
+                events = intent["events"]
+            else:
+                events = None
             msgAns = intent["responses"][0]["messages"][0]["speech"]
             # Busca si el intent tiene su llamado mediante una frase
             # del usuario en el arreglo _usersays_, añade msgReq

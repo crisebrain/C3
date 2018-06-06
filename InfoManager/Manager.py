@@ -106,11 +106,26 @@ class InfoManager:
 
     def extractValue(self, msgOriginal):
         """Extracts the value from msgOriginal string from jdata dict."""
-        # msgOriginal = jdata["msgOriginal"]
-        value = msgOriginal.split(" ")[-1]
-        print(value)
-        print(msgOriginal)
-        #jdata.update({"value":value})
+        # -----------------------------------------------------------------
+        # simulando el cse
+        # identified_list = cognite_req(msgoriginal)
+        # esta lista estara construida con los intents que haya identificados
+        # el cse, clasificados de acuerdo a sus nombres
+        # -----------------------------------------------------------------
+        sentencias = msgOriginal.split(",")
+        it = self.sc.extractTree()
+        intent0 = it.find_node(sentencias[0], False, "msgReq")  # "Hola"
+        intent1 = it.find_node(sentencias[1], False, "msgReq")
+        parameters = {ma}
+        # intents identificados
+        if len(identified_list) > 0:
+            self.imControl = True
+        identified_list = list(intent0, intent1)
+        for intent in identified_list:
+            if intent.is_leaf:
+                msg = 
+
+
         return value
 
     def outputMsg(self, jdata, node, values, forward):

@@ -80,6 +80,8 @@ class SessionContainer:
                     stchain += "\tValue: %s, " % value
                 if getattr(node, "msgReq", None) is not None:
                     stchain = stchain + "\tmsgReq: {0}, ".format(node.msgReq)
+                if getattr(node, "events", None) is not None:
+                    stchain += "{0}".format(node.events)
                 if getattr(node, "current", None) is not None:
                     stchain = stchain + "\t --- "
                 print(stchain)
