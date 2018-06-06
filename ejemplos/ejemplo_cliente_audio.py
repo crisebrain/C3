@@ -31,6 +31,8 @@ def getIntent(valoresAudio, token):
 token = obtenemosToken()
 audioBase64 = encode_audio64_DF("saldo8.wav")
 
+# Actualizar los valores dependiendo el audio a procesar
+# https://dialogflow.com/docs/reference/api-v2/rest/v2/projects.agent.sessions/detectIntent
 valores = {
             "queryInput":{
                 "audioConfig": {
