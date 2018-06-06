@@ -1,19 +1,33 @@
 import requests
 import json
+import subprocess
 
-def sendReq(jdata):
+
+def sendReq(jdata, token):
     # ---------------------------------------------------------------------
     headers = {"Content-Type": "application/json",
-               "Authorization": "Bearer ya29.c.El_QBQWnd2RGa4q3OlSFseyRPS_NBrH3D40iWeALXy6goUq4I05M0uIrWuTaWcolTxg27zozBNX5rCqdCI6jSukvTyrKIUc8zXi6dJwBucgdsmwEXbe7U9lAburX6xVliA",
+               "Authorization": "Bearer " + token,
                "charset": "UTF-8"}
-    req = requests.post("https://dialogflow.googleapis.com/v2/projects/chatfase1/agent/sessions/4fe0f059:detectIntent",
+    req = requests.post("https://dialogflow.googleapis.com/v2/projects/transferenciaautomatica2/agent/sessions/4fe0f059:detectIntent",
                         data=json.dumps(jdata, indent=4), headers=headers)
     return req
 
 
-data = {"queryInput":{"event": {"name": "salida","parameters": {"prueba": "1"},
-                                "languageCode": "es"}},
-        "queryParams":{ "timeZone": "America/Mexico_City"}}
 
-req = sendReq(data)
+# Obtenemos token de google (Ver documentación de como generar el token)
+token = subprocess.check_output(["gcloud", "auth", "print-access-token"])
+token = token.decode("utf-8").strip()
+
+
+data = {"queryInput":{"event": { 'name': 'e_prueba',
+                                 'parameters': { 'nombre': 'Gabriel' },
+                                 'languageCode': 'en'}},
+        "queryParams":{
+            "timeZone": "America/Mexico_City"}
+#'parameters': { 'nombre': 'Gabriel' },
+
+        }
+
+# llamamos petición
+req = sendReq(data, token)
 print(req.json())
