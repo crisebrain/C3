@@ -3,7 +3,14 @@ import json
 import subprocess
 
 
-def sendReq(jdata, token):
+def obtenemosToken():
+    # Obtenemos token de google (Ver documentación de como generar el token)
+    token = subprocess.check_output(["gcloud", "auth", "print-access-token"])
+    token = token.decode("utf-8").strip()
+    return token
+
+
+def sendEvent(jdata, token):
     # ---------------------------------------------------------------------
     headers = {"Content-Type": "application/json",
                "Authorization": "Bearer " + token,
@@ -14,20 +21,27 @@ def sendReq(jdata, token):
 
 
 
-# Obtenemos token de google (Ver documentación de como generar el token)
-token = subprocess.check_output(["gcloud", "auth", "print-access-token"])
-token = token.decode("utf-8").strip()
+# Programa principal
+token = obtenemosToken()
 
-
-data = {"queryInput":{"event": { 'name': 'e_prueba',
-                                 'parameters': { 'nombre': 'Gabriel' },
-                                 'languageCode': 'en'}},
-        "queryParams":{
-            "timeZone": "America/Mexico_City"}
-#'parameters': { 'nombre': 'Gabriel' },
+# Actualizar los valores dependiendo el evento a procesar
+# https://dialogflow.com/docs/reference/api-v2/rest/v2/projects.agent.sessions/detectIntent
+valores = {
+            "queryInput": {
+                "event": {
+                    'name': 'e_prueba',
+                    'parameters': { 'nombre': 'Gabriel' },
+                    'languageCode': 'en'
+                }
+            },
+            "queryParams": {
+                "timeZone": "America/Mexico_City"
+                #'parameters': { 'nombre': 'Gabriel' },
+            }
 
         }
 
-# llamamos petición
-req = sendReq(data, token)
-print(req.json())
+# Salta al evento
+res = sendEvent(valores, token)
+resJson = json.dumps(res.json(), indent=4)
+print(resJson.encode('ascii').decode('unicode-escape')) # Imprime correctamente los caracteres
