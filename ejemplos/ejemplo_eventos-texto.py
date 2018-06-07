@@ -28,19 +28,20 @@ token = obtenemosToken()
 # https://dialogflow.com/docs/reference/api-v2/rest/v2/projects.agent.sessions/detectIntent
 valores = {
             "queryInput": {
-                "event": {
-                    'name': 'e_prueba',
-                    'parameters': { 'nombre': 'Gabriel' },
-                    'languageCode': 'en'
-                }
-                # "text": {
-                #     "text": "Prueba Gabriel",
-                #     "languageCode": "es"
+                # Aquí puede descomentarse cualquiera de los dos bloques de
+                # código. Sirve para enviar eventos o textos.
+                # "event": {
+                #     'name': 'e_prueba',
+                #     'parameters': { 'nombre': 'Gabriel' },
+                #     'languageCode': 'en'
                 # }
+                "text": {
+                    "text": "Prueba Gabriel",
+                    "languageCode": "es"
+                }
             },
             "queryParams": {
                 "timeZone": "America/Mexico_City"
-                #'parameters': { 'nombre': 'Gabriel' },
             }
         }
 
