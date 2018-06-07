@@ -1,19 +1,38 @@
 from time import time
+import requests
+import subprocess
 import re
 import os
 import json
 import numpy as np
 
+def sendEvent(jdata, token, session):
+    # ---------------------------------------------------------------------
+    headers = {"Content-Type": "application/json",
+               "Authorization": "Bearer " + token,
+               "charset": "UTF-8"}
+    link = "https://dialogflow.googleapis.com/v2/projects/transferenciaautomatica2/agent/sessions/{0}:detectIntent"
+    link = link.format(session)
+    req = requests.post(link,
+                        data=json.dumps(jdata, indent=4), headers=headers)
+    return req
+
+def getToken():
+    # Obtenemos token de google (Ver documentación de como generar el token)
+    token = subprocess.check_output(["gcloud", "auth", "print-access-token"])
+    token = token.decode("utf-8").strip()
+    return token
+
 class InfoManager:
     """InfoManager class.
     Responsabilities:
-    - Stays SessionContainer with an IntentTree loaded from pickle file (empty or
-      partially filled) during "__init__".
+    - Stays SessionContainer with an IntentTree loaded from pickle file (empty
+      or partially filled) during "__init__".
     - Admins the adapter_DF request on "interceptIntent":
-        -- identify if the intent is not fallback and feeds it (with "intentFlow").
-           If intent is fallback the intent message from data will be processed by
-           "Cognite_req". If the request asks for the values the function fetches
-           them (wiht intentDecompose).
+        -- identify if the intent is not fallback and feeds it (with
+           "intentFlow"). If intent is fallback the intent message from data
+           will be processed by "Cognite_req". If the request asks for the
+           values the function fetches them (wiht intentDecompose).
     - Feeds the correspondat intent Node with "intentFlow".
         -- Order to SessionContainer object to fill the correspondant intent Node
         -- Fetch the intents values with the SessionContainer if adapter_DF asks.
@@ -28,10 +47,14 @@ class InfoManager:
         self.sc = SessionContainer(pathpicklefile, idChatBot)
         self.makeWebhookResult = makeWebhookResult
         self.sc.ShowSessionTree()
+        self.imControl = False
 
     def interceptIntent(self, jdata):  # strText, idNode
-        """Text from IVR is sending to core chatbot and an intent is actioned.
-        Output a jsonInput object with msgOriginal, idChatBot, idNode
+        """Intercept the intent query info from the bot client (DF format) and
+        decides which kind of treatment apply it, if the detection was
+        successful the info will be sended to intentFlow method, if the intent
+        was not detected the message will be used for exctract (intentDecompose)
+        the possible intents, and entities staying into the original message.
         """
         sessionid = jdata.get("session").split("/")[-1]
         self.sc.reassignTree(sessionid)
@@ -40,10 +63,13 @@ class InfoManager:
         # sessionid =
         intentid = intentid.split("/")[-1]
         node = it.find_node(intentid, to_dict=False, by_field="id")
-        if "fallback" not in node.name.lower():
+        if "fallback" not in node.name.lower() and self.imControl == False:
             response = self.intentFlow(jdata, node)
+        elif self.imControl == True:
+            self.jumpToIntent()
         else:
-            self.intentDecompose(jdata.get("queryResult").get("queryText"))
+            self.complexMsg = jdata.get("queryResult").get("queryText")
+            self.intentDecompose()
         print(it.currentcontextls)
         print(response)
         self.sc.updateConferencefile()
@@ -103,41 +129,56 @@ class InfoManager:
         response = self.outputMsg(jdata, currentNode, values, forward)
         return response
 
-
-    def intentDecompose(self, msgOriginal):
-        """Extracts the value from msgOriginal string from jdata dict."""
+    def intentDecompose(self):
+        """Extracts the value from msgOriginal string from jdata dict.
+        Creates a sequence in a list kind object, with the intents detected
+        by the CSE classification.
+        """
         # -----------------------------------------------------------------
         # simulando el cse
         # identified_list = cognite_req(msgoriginal)
         # esta lista estara construida con los intents que haya identificados
         # el cse, clasificados de acuerdo a sus nombres
         # -----------------------------------------------------------------
-        sentencias = msgOriginal.split(",")
-        it = self.sc.extractTree()
+        sentencias = self.complexMsg.split(",")
         intent0 = it.find_node(sentencias[0], False, "msgReq")  # "Hola"
         intent1 = it.find_node(sentencias[1], False, "msgReq")
         # -----------------------------------------------------------------
         # intents identificados, los nombres de los intents equivalen a las
         # etiquetas de clase
         identified_list = list(intent0.name, intent1.name)  # simulando cse
-        self.sequenceConstructor(identified_list)
-
-        # if len(identified_list) > 0:
-        #     self.imControl = True
-        # for intent in identified_list:
-        #     if intent.is_leaf:
-        #         msg =
-
-
-        return value
-
-    def sequenceConstructor(self, intentNames):
-        """Creates the intent sequence for Intent names kind list, detected by the CSE classification"""
         nodes = []
         it = self.sc.extractTree()
         for intentname in intentNames:
             nodes.append(it.find_node(intentName, False, "name"))
         self.sequenceNodes = nodes
+        if len(self.sequenceNodes) > 0:
+            self.imControl = True
+        # Para enviar la peticion de salto
+        self.jumpToIntent()
+
+    def jumpToIntent(self):
+        """Send the post query to dialog flow to jump into necessary intent."""
+        it = self.sc.extractTree()
+        session = it.sessionid
+        node = self.sequenceNodes.pop(0)
+        events = getattr(node, "events", None)
+        condicion = events is not None
+        assert condicion, "No hay evento gatillo en nodo: {0}".format(node.name)
+        if len(node.parameters) > 0:
+            # parameters = clasifyparameters()  # encuentra entidades clasifica
+            parameters = {'nombre': 'Gabriel'}
+            data = {"queryInput": {"event": {'name': events[0],
+                                             'parameters': {'nombre': 'Gabriel'},
+                                             'languageCode': 'en'}},
+                    "queryParams": {"timeZone": "America/Mexico_City"}}
+        else:
+            data = {"queryInput": {"event": {'name': events[0],
+                                             'parameters': {},
+                                             'languageCode': 'en'}},
+                    "queryParams": {"timeZone": "America/Mexico_City"}}
+        res = sendEvent(data, getToken(), session)
+
 
     def outputMsg(self, jdata, node, values, forward):
         """formats the msgAns with the values from upper nodes."""
