@@ -33,12 +33,15 @@ valores = {
                     'parameters': { 'nombre': 'Gabriel' },
                     'languageCode': 'en'
                 }
+                # "text": {
+                #     "text": "Prueba Gabriel",
+                #     "languageCode": "es"
+                # }
             },
             "queryParams": {
                 "timeZone": "America/Mexico_City"
                 #'parameters': { 'nombre': 'Gabriel' },
             }
-
         }
 
 # Salta al evento
