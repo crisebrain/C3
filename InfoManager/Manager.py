@@ -13,11 +13,11 @@ class InfoManager:
         -- identify if the intent is not fallback and feeds it (with "intentFlow").
            If intent is fallback the intent message from data will be processed by
            "Cognite_req". If the request asks for the values the function fetches
-           them (wiht extractValue).
+           them (wiht intentDecompose).
     - Feeds the correspondat intent Node with "intentFlow".
         -- Order to SessionContainer object to fill the correspondant intent Node
         -- Fetch the intents values with the SessionContainer if adapter_DF asks.
-    - Fetches the valus from the contexts or id required with "extractValue".
+    - Fetches the valus from the contexts or id required with "intentDecompose".
     """
     def __init__(self, SessionContainer, makeWebhookResult,
                  rootdirectory, idChatBot=None):
@@ -43,7 +43,7 @@ class InfoManager:
         if "fallback" not in node.name.lower():
             response = self.intentFlow(jdata, node)
         else:
-            self.extractValue(jdata.get("queryResult").get("queryText"))
+            self.intentDecompose(jdata.get("queryResult").get("queryText"))
         print(it.currentcontextls)
         print(response)
         self.sc.updateConferencefile()
@@ -51,7 +51,7 @@ class InfoManager:
         return response
 
     def intentFlow(self, jdata, node):
-        """Extracts the value from the msgOriginal with the extractValue
+        """Extracts the value from the msgOriginal with the intentDecompose
         function, then is stored into node from msgReq and msgAns taken.
         Parameters:
         jdata - query information dictionary.
@@ -104,7 +104,7 @@ class InfoManager:
         return response
 
 
-    def extractValue(self, msgOriginal):
+    def intentDecompose(self, msgOriginal):
         """Extracts the value from msgOriginal string from jdata dict."""
         # -----------------------------------------------------------------
         # simulando el cse
@@ -116,17 +116,28 @@ class InfoManager:
         it = self.sc.extractTree()
         intent0 = it.find_node(sentencias[0], False, "msgReq")  # "Hola"
         intent1 = it.find_node(sentencias[1], False, "msgReq")
-        parameters = {ma}
-        # intents identificados
-        if len(identified_list) > 0:
-            self.imControl = True
-        identified_list = list(intent0, intent1)
-        for intent in identified_list:
-            if intent.is_leaf:
-                msg = 
+        # -----------------------------------------------------------------
+        # intents identificados, los nombres de los intents equivalen a las
+        # etiquetas de clase
+        identified_list = list(intent0.name, intent1.name)  # simulando cse
+        self.sequenceConstructor(identified_list)
+
+        # if len(identified_list) > 0:
+        #     self.imControl = True
+        # for intent in identified_list:
+        #     if intent.is_leaf:
+        #         msg =
 
 
         return value
+
+    def sequenceConstructor(self, intentNames):
+        """Creates the intent sequence for Intent names kind list, detected by the CSE classification"""
+        nodes = []
+        it = self.sc.extractTree()
+        for intentname in intentNames:
+            nodes.append(it.find_node(intentName, False, "name"))
+        self.sequenceNodes = nodes
 
     def outputMsg(self, jdata, node, values, forward):
         """formats the msgAns with the values from upper nodes."""
