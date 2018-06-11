@@ -58,9 +58,9 @@ def makeresponseAction(req, action):
 
     resp = {"payload": {"result": resultarray, "returnCode": returnCode},
             "fulfillmentText": textresp}
-    # "followupEventInput": {"name": "salida",
-    #                        "parameters": {"prueba": "1"},
-    #                        "languageCode": "es"}}
+            # "followupEventInput": {"name": "salida",
+            #                "parameters": {"prueba": "1"},
+            #                "languageCode": "es"}}
 
 
 
