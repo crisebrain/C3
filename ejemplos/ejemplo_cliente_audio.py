@@ -29,15 +29,17 @@ def getIntent(valoresAudio, token):
 
 # Inicialización
 token = obtenemosToken()
-audioBase64 = encode_audio64_DF("saldo8.wav")
+audioBase64 = encode_audio64_DF("audios/saldo16.flac")
 
 # Actualizar los valores dependiendo el audio a procesar
 # https://dialogflow.com/docs/reference/api-v2/rest/v2/projects.agent.sessions/detectIntent
+# sample rate ideal en 16000
 valores = {
             "queryInput":{
                 "audioConfig": {
-                    "audioEncoding": "AUDIO_ENCODING_LINEAR_16",
-                    "sampleRateHertz": 8000,
+                    # FLAC: AUDIO_ENCODING_FLAC, WAV: AUDIO_ENCODING_LINEAR_16
+                    "audioEncoding": "AUDIO_ENCODING_FLAC",
+                    "sampleRateHertz": 16000,
                     "languageCode": "es"
                 }
             },
