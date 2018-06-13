@@ -1,12 +1,15 @@
 from .bd_busqueda import dbquery
 from .b2bcliente import sendReq, getResponseValues, HumanResult
 import json
+import sys
+sys.path.append("../Utils")
+from logtofile import CreateLogger
 
-def makeWebhookResult(req, setup_logger):
+def makeWebhookResult(req):
     action = req.get("queryResult").get("action")
-    logquerys = setup_logger("querys", "/var/log/C3/petitions.log")
-    logquerys.info(json.dumps(req.get("queryResult")) + "\n")
-    logerrors = setup_logger("errors", "/var/log/C3/errors.log")
+    querys = CreateLogger("querys")
+    querys.logger.info(json.dumps(req.get("queryResult")) + "\n")
+    errors = CreateLogger("errors")
     try:
         if action == "VDN" or action == "saldo":
             return makeresponseAction(req, action)
@@ -20,8 +23,8 @@ def makeWebhookResult(req, setup_logger):
             return {"payload": {"result": "Null", "returnCode": "0"},
                    "fulfillmentText": "Null"}
     except Exception as exception:
-        logerrors.exception(exception)
-        logerrors.info(json.dumps(req.get("queryResult")) + "\n")
+        errors.logger.exception(exception)
+        errors.logger.info(json.dumps(req.get("queryResult")) + "\n")
         if type(exception).__name__ == "AttributeError":
             msgerror = "El servicio de factura no ha respondido correctamente. " \
                        "Favor de reportalo con su administrador."

@@ -1,20 +1,30 @@
 import logging
 
-def setup_logger(name, log_file, level=logging.INFO):
-    """Function setup as many loggers as you want"""
-    formatter = logging.Formatter('%(asctime)s %(levelname)s %(message)s')
-    handler = logging.FileHandler(log_file)
-    handler.setFormatter(formatter)
+class CreateLogger(object):
+    def __init__(self, i):
+        self.create_logger(i)
 
-    logger = logging.getLogger(name)
-    logger.setLevel(level)
-    logger.addHandler(handler)
+    def create_logger(self, i):
+        i = str(i)
+        pathfile = '/var/log/C3/{0}.log'.format(i)
+        logger = logging.getLogger(i)
+        formatter = logging.Formatter('%(asctime)s %(levelname)s %(message)s')
+        hdlr = logging.FileHandler(pathfile)
+        hdlr.setFormatter(formatter)
+        logger.addHandler(hdlr)
+        logger.setLevel(logging.INFO)
+        self.logger = logger
 
-    return logger
+    def __del__(self):
+        if self.logger:
+            for hdlr in self.logger.handlers:
+                self.logger.removeHandler(hdlr)
+                hdlr.flush()
+                hdlr.close()
 
 if __name__ == "__main__":
-    logerrors = setup_logger("errors", "errors.log")
-    logerrors.error("ZeroDivisionError")
+    errors = CreateLogger("errors")
+    errors.logger.exception(KeyError)
 
-    logquerys = setup_logger("querys", "querys.log")
-    logquerys.error("KeyError")
+    infos = CreateLogger("querys")
+    infos.logger.info("Pacto")
