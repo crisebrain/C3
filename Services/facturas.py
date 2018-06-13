@@ -1,3 +1,5 @@
+from .b2bcliente import sendReq, getResponseValues, HumanResult
+import json
 
 def dudasFacturasCampos(campo):
     entrada = "Para factura, "
@@ -23,26 +25,6 @@ def dudasFacturasCampos(campo):
     resp = campos.get(campo)
     return {"fulfillmentText": resp}
 
-def construyeNombre(parametros):
-    import numpy as np
-    listaNombre = parametros.get("nombre")
-
-    # Obtenemos los nombres que vengan, se consideran valores repetidos
-    keys = [list(dicc.keys()) for dicc in listaNombre]
-    unicos = np.unique(np.array(keys).reshape(-1, ))
-    dicNombres = dict(zip(unicos, [""]*len(unicos)))
-    for dicc in listaNombre:
-        for unico in unicos:
-            if unico in dicc.keys():
-                dicNombres[unico] = " ".join([dicNombres[unico].strip(),
-                                              dicc[unico].strip()])
-
-    # Concatenamos los nombres
-    nombre = "" + str(dicNombres.setdefault("nombre", "")) + " "\
-             + str(dicNombres.setdefault("apellido", "")) + " "\
-             + str(dicNombres.setdefault("nombresExtras", ""))
-
-    return nombre.strip()
 
 def factura(parametros):
     estado = None
@@ -76,8 +58,7 @@ def factura(parametros):
         if not isinstance(numfactura, str):
             numFactura = str(int(numfactura))
         else:
-            numfactura = [c if c.isdigit() else c.upper() for c in numfactura]
-            numfactura = "".join(numfactura)
+            numFactura = numFactura.upper()
     # Caso que no traiga ninguna restricción. Consulta muy amplia
     # if not(estado or prefijo or periodo or numFactura or acuse):
     #

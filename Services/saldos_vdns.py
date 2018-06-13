@@ -1,45 +1,10 @@
 from .bd_busqueda import dbquery
-from .b2bcliente import sendReq, getResponseValues, HumanResult
+from .generales import construyeNombre
 import json
-import sys
-sys.path.append("../Utils")
-from logtofile import CreateLogger
-
-def makeWebhookResult(req):
-    action = req.get("queryResult").get("action")
-    querys = CreateLogger("querys")
-    querys.logger.info(json.dumps(req.get("queryResult")) + "\n")
-    errors = CreateLogger("errors")
-    try:
-        if action == "VDN" or action == "saldo":
-            return makeresponseAction(req, action)
-        elif action == "informacion":
-            return informacion(req.get("queryResult").get("parameters").get("servicio"))
-        elif action == "dudasFacturasCampos":
-            return dudasFacturasCampos(req.get("queryResult").get("parameters").get("campo"))
-        elif action == "factura":
-            return factura(req.get("queryResult").get("parameters"))
-        else:
-            return {"payload": {"result": "Null", "returnCode": "0"},
-                   "fulfillmentText": "Null"}
-    except Exception as exception:
-        errors.logger.exception(exception)
-        errors.logger.info(json.dumps(req.get("queryResult")) + "\n")
-        if type(exception).__name__ == "AttributeError":
-            msgerror = "El servicio de factura no ha respondido correctamente. " \
-                       "Favor de reportalo con su administrador."
-        else:
-            nline = exception.__traceback__.tb_lineno
-            cause = exception.__str__()
-            msgerror = "Estimado usuario,"\
-                       "Ocurrió el error: {0} en {1}".format(cause, nline)
-            msgerror += "Favor de reportarlo con su administrador"
-
-        return {"payload": {"result": "Null", "returnCode": "0"},
-                "fulfillmentText": msgerror}
 
 def makeresponseAction(req, action):
     """Creates the response json object to send as answer to the webhook.
+    Is used for both actions 'Saldos' and 'VDN'
     Parameters:
     req - json request object with the petition.
     action - string with the action to process as webservices. "VDN", "Saldo" o
@@ -53,9 +18,7 @@ def makeresponseAction(req, action):
     """
     # Carga de base de datos
     result = req.get("queryResult").get("parameters")
-
     nombre = construyeNombre(result)
-
     if nombre != "":
         coincidencias = dbquery(nombre)
         print(json.dumps(coincidencias, indent=4))
@@ -69,8 +32,6 @@ def makeresponseAction(req, action):
     for coin in coincidencias:
         resultarray.append(dict(zip(["nombre", action],
                                     [coin["Nombre"], coin[action]])))
-
-
     resp = {"payload": {"result": resultarray, "returnCode": returnCode},
             "fulfillmentText": textresp}
             # "followupEventInput": {"name": "salida",
@@ -86,6 +47,7 @@ def makeresponseAction(req, action):
     return resp
 
 def evaluaContextos(code, action, valor, session):
+    """Check and reset contexts for the vdn and saldos."""
     if action == "VDN" and code == 1 and valor:
         outputContexts = [{"name": session + "/contexts/0-2vdn-followup",
                            "lifespanCount": 0},
