@@ -2,7 +2,8 @@ from .bd_busqueda import dbquery
 from .b2bcliente import sendReq, getResponseValues, HumanResult
 import json
 import sys
-sys.path.append("../Utils")
+import os
+sys.path.append("Utils")
 from logtofile import CreateLogger
 
 def makeWebhookResult(req):
