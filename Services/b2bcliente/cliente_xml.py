@@ -40,6 +40,7 @@ def getResponseValues(xmlstring):
     return lista_dicc  # HumanResult(lista_dicc)
 
 def HumanResult(lista_dicc):
+    """Constructs the string response, for the n coincidences."""
     mensajote = ""
     counter = 0
     for resultado in lista_dicc:
@@ -65,9 +66,9 @@ def HumanResult(lista_dicc):
             mensajote += endline
             counter += 1
     if counter > 0:
-        return(mensajote)
+        return (mensajote, 2)
     else:
-        return("No se encontraron coincidencias")
+        return ("No se encontraron coincidencias", 1)
 
 if __name__ == "__main__":
     dictfields = {"Empresa": "RICOH",

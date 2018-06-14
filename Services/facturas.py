@@ -1,4 +1,5 @@
 from .b2bcliente import sendReq, getResponseValues, HumanResult
+from .saldos_vdns import calcCode
 import json
 
 def dudasFacturasCampos(campo):
@@ -23,7 +24,7 @@ def dudasFacturasCampos(campo):
                     "tiempo predefinidos, siendo estos: Hoy, Semana y Mes."
         }
     resp = campos.get(campo)
-    return {"fulfillmentText": resp}
+    return {"fulfillmentText": resp, "payload":{"returnCode": 1}}
 
 
 def factura(parametros):
@@ -92,7 +93,7 @@ def factura(parametros):
 
     # servicio de factura
     req = sendReq(diccFinal)
-    msg = HumanResult(getResponseValues(req.content))
+    msg, returnCode = HumanResult(getResponseValues(req.content))
     print(msg)
     mostrar = [tipoDocumento, estado, periodo, numFactura, prefijo, acuse]
     simostrar = [True if var is not None else False for var in mostrar]
@@ -104,11 +105,12 @@ def factura(parametros):
             peticionstr += formatos[i] + "{0}".format(var)
     peticionstr += ".\n-----------------------------------\n" + msg
     respuesta =  {"fulfillmentText" : peticionstr,
-                  "payload": { "resultIn": {"periodo": periodo,
-                                            "estado": estado,
-                                            "numFactura": numFactura,
-                                            "prefijo": prefijo,
-                                            "acuse": acuse,
-                                            "factura": tipoDocumento},
-                  "resultOut": getResponseValues(req.content)}}
+                  "payload": {"resultIn": {"periodo": periodo,
+                                           "estado": estado,
+                                           "numFactura": numFactura,
+                                           "prefijo": prefijo,
+                                           "acuse": acuse,
+                                           "factura": tipoDocumento},
+                              "returnCode": returnCode,
+                              "resultOut": getResponseValues(req.content)}}
     return respuesta

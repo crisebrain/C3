@@ -200,5 +200,5 @@ class InfoManager:
         else:
             msgString = node.msgAns
             # return node.msgAns
-        response["fulfillmentText"] =  msgString
+        response["fulfillmentText"] = msgString
         return response
