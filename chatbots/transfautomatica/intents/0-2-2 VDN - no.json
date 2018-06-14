@@ -1,0 +1,50 @@
+{
+  "id": "5f334ca0-a760-4277-9c61-04f0839b94d2",
+  "parentId": "5bb29d9e-efc4-47ac-a056-34434e22bf5b",
+  "rootParentId": "5bb29d9e-efc4-47ac-a056-34434e22bf5b",
+  "name": "0-2-2 VDN - no",
+  "auto": true,
+  "contexts": [
+    "0-2VDN-followup",
+    "0-2VDN-followup-2"
+  ],
+  "responses": [
+    {
+      "resetContexts": false,
+      "action": "0-2VDN.0-2VDN-no",
+      "affectedContexts": [
+        {
+          "name": "0-2VDN-followup",
+          "parameters": {},
+          "lifespan": 0
+        },
+        {
+          "name": "0-2VDN-followup-2",
+          "parameters": {},
+          "lifespan": 0
+        }
+      ],
+      "parameters": [],
+      "messages": [
+        {
+          "type": 0,
+          "lang": "es",
+          "speech": []
+        },
+        {
+          "type": 0,
+          "lang": "es",
+          "speech": "¿En que otra cosa te puedo ayudar?"
+        }
+      ],
+      "defaultResponsePlatforms": {},
+      "speech": []
+    }
+  ],
+  "priority": 750000,
+  "webhookUsed": false,
+  "webhookForSlotFilling": false,
+  "lastUpdate": 1527791177,
+  "fallbackIntent": false,
+  "events": []
+}

@@ -1,0 +1,225 @@
+[
+  {
+    "id": "c0908900-9d5c-44c6-a4c6-d41cf2aafce2",
+    "data": [
+      {
+        "text": "Jaime",
+        "alias": "nombre",
+        "meta": "@nombre",
+        "userDefined": true
+      },
+      {
+        "text": ", por favor.",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527800239
+  },
+  {
+    "id": "7869d68f-5027-4ef1-aaed-3644a5a2c33a",
+    "data": [
+      {
+        "text": "a",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "Gabriel Osorio",
+        "alias": "nombre",
+        "meta": "@nombre",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527800239
+  },
+  {
+    "id": "54e4a97d-5c7d-45af-9ac9-1c4710db65fd",
+    "data": [
+      {
+        "text": "el de ",
+        "userDefined": false
+      },
+      {
+        "text": "Juan",
+        "alias": "nombre",
+        "meta": "@nombre",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527800239
+  },
+  {
+    "id": "25c89806-6867-4954-94cd-70b44e1943a4",
+    "data": [
+      {
+        "text": "de ",
+        "userDefined": false
+      },
+      {
+        "text": "Gabriel",
+        "alias": "nombre",
+        "meta": "@nombre",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527800239
+  },
+  {
+    "id": "e4a2842e-cb96-4c7d-bad4-ba7acb3be7d7",
+    "data": [
+      {
+        "text": "De ",
+        "userDefined": false
+      },
+      {
+        "text": "Martinez",
+        "alias": "nombre",
+        "meta": "@nombre",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527800239
+  },
+  {
+    "id": "5deb6d5d-3bef-4cfb-b811-cda66010b981",
+    "data": [
+      {
+        "text": "Soy ",
+        "userDefined": false
+      },
+      {
+        "text": "Jazmin",
+        "alias": "nombre",
+        "meta": "@nombre",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527800239
+  },
+  {
+    "id": "eddacd1a-8a06-4922-b3f5-cf77783c8561",
+    "data": [
+      {
+        "text": "gabriela",
+        "alias": "nombre",
+        "meta": "@nombre",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "alejandra",
+        "alias": "nombre",
+        "meta": "@nombre",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527804798
+  },
+  {
+    "id": "52555e49-4cb1-4266-ae55-be6bb4d0e371",
+    "data": [
+      {
+        "text": "de ",
+        "userDefined": false
+      },
+      {
+        "text": "Manuel Gonzalez",
+        "alias": "nombre",
+        "meta": "@nombre",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527800239
+  },
+  {
+    "id": "3bae2da1-2cd6-4964-9955-6fc2630ba48a",
+    "data": [
+      {
+        "text": "Por favor, ",
+        "userDefined": false
+      },
+      {
+        "text": "Manuel",
+        "alias": "nombre",
+        "meta": "@nombre",
+        "userDefined": true
+      },
+      {
+        "text": ".",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527800239
+  },
+  {
+    "id": "80d54718-c0e2-403f-84cc-88b1c2b68b55",
+    "data": [
+      {
+        "text": "Gabriel Osorio",
+        "alias": "nombre",
+        "meta": "@nombre",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 1,
+    "updated": 1527800239
+  },
+  {
+    "id": "85d9f532-413c-4a98-987f-ac7a62519f40",
+    "data": [
+      {
+        "text": "Mi usuario es ",
+        "userDefined": false
+      },
+      {
+        "text": "Magaly",
+        "alias": "nombre",
+        "meta": "@nombre",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527800239
+  },
+  {
+    "id": "332e6e2c-3734-43fe-8bec-b59bd3cb0b58",
+    "data": [
+      {
+        "text": "Garcia",
+        "alias": "nombre",
+        "meta": "@nombre",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527800239
+  }
+]

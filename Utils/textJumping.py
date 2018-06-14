@@ -14,13 +14,13 @@ def detect_intent_texts(project_id, session_id, texts, language_code):
     session = session_client.session_path(project_id, session_id)
     print('Session path: {}\n'.format(session))
     for text in texts:
-        text_input = dialogflow.types.TextInput(
-            text=text, language_code=language_code)
+        text_input = dialogflow.types.TextInput(text=text,
+                                                language_code=language_code)
 
         query_input = dialogflow.types.QueryInput(text=text_input)
 
-        response = session_client.detect_intent(
-            session=session, query_input=query_input)
+        response = session_client.detect_intent(session=session,
+                                                query_input=query_input)
 
         print('=' * 20)
         print('Query text: {}'.format(response.query_result.query_text))
@@ -31,5 +31,6 @@ def detect_intent_texts(project_id, session_id, texts, language_code):
             response.query_result.fulfillment_text))
 
 if __name__ == "__main__":
-    detect_intent_texts("transferenciaautomatica2", "089ca6d2-c6dc-9772-861b-ab98ba0ab24f",
+    detect_intent_texts("transferenciaautomatica2",
+                        "089ca6d2-c6dc-9772-861b-ab98ba0ab24f",
                         ["quiero hablar con Javier", "Javier Escalante"], "es")

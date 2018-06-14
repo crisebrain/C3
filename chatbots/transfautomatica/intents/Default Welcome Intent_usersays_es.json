@@ -1,0 +1,107 @@
+[
+  {
+    "id": "192b2048-a216-4fd8-b9a3-51e1346e46f2",
+    "data": [
+      {
+        "text": "Buenos días",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1526922077
+  },
+  {
+    "id": "b1b13420-c8d9-42f0-b01a-fb0005484bec",
+    "data": [
+      {
+        "text": "¿Que pasa?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1526922077
+  },
+  {
+    "id": "efa23a10-1eba-403d-9f50-de46bd1c4b00",
+    "data": [
+      {
+        "text": "Que ",
+        "userDefined": false
+      },
+      {
+        "text": "hay",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1526922077
+  },
+  {
+    "id": "8934fec4-b369-4974-999b-86f44da989ed",
+    "data": [
+      {
+        "text": "Saludos.",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1526922077
+  },
+  {
+    "id": "b58865ae-5dd6-4608-90b4-f5128548486b",
+    "data": [
+      {
+        "text": "Buenas noches",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1526922077
+  },
+  {
+    "id": "0c1181f6-2f5f-427f-87e0-ab7d32861941",
+    "data": [
+      {
+        "text": "Hola, ¿como estas?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1526922077
+  },
+  {
+    "id": "68e0c8d1-f373-4621-89d6-8d6630e099f3",
+    "data": [
+      {
+        "text": "Hola",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1526922077
+  },
+  {
+    "id": "99d10a65-c2d9-4d37-9b4a-3d55fd88f9de",
+    "data": [
+      {
+        "text": "Hey",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1526922077
+  }
+]

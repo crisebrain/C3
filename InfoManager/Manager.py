@@ -7,10 +7,10 @@ import json
 import numpy as np
 import sys
 sys.path.append("Utils")
-# sys.path.append("Services")
 from textJumping import detect_intent_texts
-from SessionContainer import SessionContainer
-# from wservices_modular import makeWebhookResult
+from Utils import SessionContainer
+sys.path.append("Services")
+from Services import makeWebhookResult
 
 class InfoManager:
     """InfoManager class.
@@ -27,8 +27,7 @@ class InfoManager:
         -- Fetch the intents values with the SessionContainer if adapter_DF asks.
     - Fetches the valus from the contexts or id required with "intentDecompose".
     """
-    def __init__(self, makeWebhookResult,
-                 rootdirectory, idChatBot=None):
+    def __init__(self, rootdirectory, idChatBot=None):
         """Creates the Info Manager for the current conference session."""
         self.conference_date = time()
         self.conference = {}
@@ -37,6 +36,7 @@ class InfoManager:
         self.makeWebhookResult = makeWebhookResult
         self.sc.ShowSessionTree()
         self.imControl = False
+        self.info = dict()
 
     def interceptIntent(self, jdata):  # strText, idNode
         """Intercept the intent query info from the bot client (DF format) and
@@ -45,7 +45,9 @@ class InfoManager:
         was not detected the message will be used for exctract (intentDecompose)
         the possible intents, and entities staying into the original message.
         """
+        projectid = jdata.get("session").split("/")[1]
         sessionid = jdata.get("session").split("/")[-1]
+        self.info.update(dict(projectid=projectid, sessionid=sessionid))
         self.sc.reassignTree(sessionid)
         it = self.sc.extractTree()
         intentid = jdata.get("queryResult").get("intent").get("name")
@@ -57,7 +59,7 @@ class InfoManager:
         elif self.imControl == True:
             self.jumpToIntent()
         else:
-            self.complexMsg = jdata.get("queryResult").get("queryText")
+            self.info["complexMsg"] = jdata.get("queryResult").get("queryText")
             self.intentDecompose()
         print(it.currentcontextls)
         print(response)
@@ -129,44 +131,51 @@ class InfoManager:
         # esta lista estara construida con los intents que haya identificados
         # el cse, clasificados de acuerdo a sus nombres
         # -----------------------------------------------------------------
-        sentencias = self.complexMsg.split(",")
+        it = self.sc.extractTree()
+        sentencias = self.info["complexMsg"].split(",")
         intent0 = it.find_node(sentencias[0], False, "msgReq")  # "Hola"
         intent1 = it.find_node(sentencias[1], False, "msgReq")
         # -----------------------------------------------------------------
         # intents identificados, los nombres de los intents equivalen a las
         # etiquetas de clase
         identified_list = list(intent0.name, intent1.name)  # simulando cse
+        self.info["sentencias"] = dict(zip(identified_list, sentencias))
         nodes = []
-        it = self.sc.extractTree()
-        for intentname in intentNames:
-            nodes.append(it.find_node(intentName, False, "name"))
+        for intentname in identified_list:
+            nodes.append(it.find_node(intentname, False, "name"))
         self.sequenceNodes = nodes
         if len(self.sequenceNodes) > 0:
             self.imControl = True
         # Para enviar la peticion de salto
         self.jumpToIntent()
 
-    def jumpToIntent(self):
+    def jumpToIntent(self, by="text"):
         """Send the post query to dialog flow to jump into necessary intent."""
         it = self.sc.extractTree()
-        session = it.sessionid
         node = self.sequenceNodes.pop(0)
-        events = getattr(node, "events", None)
-        condicion = events is not None
-        assert condicion, "No hay evento gatillo en nodo: {0}".format(node.name)
-        if len(node.parameters) > 0:
-            # parameters = clasifyparameters()  # encuentra entidades clasifica
-            parameters = {'nombre': 'Gabriel'}
-            data = {"queryInput": {"event": {'name': events[0],
-                                             'parameters': {'nombre': 'Gabriel'},
-                                             'languageCode': 'en'}},
-                    "queryParams": {"timeZone": "America/Mexico_City"}}
-        else:
-            data = {"queryInput": {"event": {'name': events[0],
-                                             'parameters': {},
-                                             'languageCode': 'en'}},
-                    "queryParams": {"timeZone": "America/Mexico_City"}}
-        res = sendEvent(data, getToken(), session)
+        if by == "event":
+            events = getattr(node, "events", None)
+            condicion = events is not None
+            assert condicion, "No hay evento gatillo en nodo: {0}".format(node.name)
+            if len(node.parameters) > 0:
+                # parameters = clasifyparameters()  # encuentra entidades clasifica
+                parameters = {'nombre': 'Gabriel'}
+                data = {"queryInput": {"event": {'name': events[0],
+                                                 'parameters': {'nombre': 'Gabriel'},
+                                                 'languageCode': 'en'}},
+                        "queryParams": {"timeZone": "America/Mexico_City"}}
+            else:
+                data = {"queryInput": {"event": {'name': events[0],
+                                                 'parameters': {},
+                                                 'languageCode': 'en'}},
+                        "queryParams": {"timeZone": "America/Mexico_City"}}
+            res = sendEvent(data, getToken(), session)
+        elif by == "text":
+            name = node.name
+            detect_intent_texts(self.info["projectid"],
+                                self.info["sessionid"],
+                                [self.info["sentencias"][name]],
+                                "es")
 
 
     def outputMsg(self, jdata, node, values, forward):

@@ -1,0 +1,25 @@
+[
+  {
+    "value": "@statusAuxStatus:value ",
+    "synonyms": [
+      "recibido",
+      "recibida",
+      "estado recibido",
+      "estado recibida",
+      "status recibido",
+      "status recibida",
+      "recibidos",
+      "recibidas",
+      "estado recibidos",
+      "estado recibidas",
+      "status recibidos",
+      "status recibidas"
+    ]
+  },
+  {
+    "value": "@statusAuxCompleme:statusAuxCompleme @statusAuxStatus:value",
+    "synonyms": [
+      "@statusAuxCompleme:statusAuxCompleme @statusAuxStatus:value"
+    ]
+  }
+]

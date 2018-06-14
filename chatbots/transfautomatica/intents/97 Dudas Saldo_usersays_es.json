@@ -1,0 +1,101 @@
+[
+  {
+    "id": "a9cedaae-480a-4b90-80fb-dc2646bf0900",
+    "data": [
+      {
+        "text": "¿Qué hace el servicio de consulta de ",
+        "userDefined": false
+      },
+      {
+        "text": "saldo",
+        "meta": "@sys.ignore",
+        "userDefined": true
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527003000
+  },
+  {
+    "id": "89210a71-fba1-4dc4-94b3-24d647af0645",
+    "data": [
+      {
+        "text": "Dime como consultar el saldo",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527003000
+  },
+  {
+    "id": "8f135696-3365-466b-9550-99c0deb27edf",
+    "data": [
+      {
+        "text": "¿Como funciona el servicio de ",
+        "userDefined": false
+      },
+      {
+        "text": "saldo",
+        "meta": "@sys.ignore",
+        "userDefined": true
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527003000
+  },
+  {
+    "id": "2d591175-e357-401b-9751-c5b2781e150c",
+    "data": [
+      {
+        "text": "¿Qué hace el servicio de ",
+        "userDefined": false
+      },
+      {
+        "text": "saldo",
+        "meta": "@sys.ignore",
+        "userDefined": true
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527003000
+  },
+  {
+    "id": "aaf192a8-e6a2-4843-a4af-a907544824ba",
+    "data": [
+      {
+        "text": "Dime como funciona mi saldo",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 1,
+    "updated": 1527003000
+  },
+  {
+    "id": "bad7b1c8-2851-462d-97dc-bfcf8502922b",
+    "data": [
+      {
+        "text": "Como funciona saldo?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527003000
+  }
+]

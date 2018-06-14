@@ -1,0 +1,1756 @@
+[
+  {
+    "id": "3e858501-07fc-417c-af40-dc5a37155aeb",
+    "data": [
+      {
+        "text": "dame las ",
+        "userDefined": false
+      },
+      {
+        "text": "facturas",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "rechazadas",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527695622
+  },
+  {
+    "id": "e57721a4-266b-4ce6-955e-f1a064b9885f",
+    "data": [
+      {
+        "text": "Requiero las ",
+        "userDefined": false
+      },
+      {
+        "text": "notas de credito",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      },
+      {
+        "text": " que tienen ",
+        "userDefined": false
+      },
+      {
+        "text": "prefijo H",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 1,
+    "updated": 1527695622
+  },
+  {
+    "id": "556527f5-4c6a-47b4-863f-38dfc1f07d6b",
+    "data": [
+      {
+        "text": "Me ayudas con las ",
+        "userDefined": false
+      },
+      {
+        "text": "facturas",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      },
+      {
+        "text": " con ",
+        "userDefined": false
+      },
+      {
+        "text": "estado rechazado",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      },
+      {
+        "text": " y con ",
+        "userDefined": false
+      },
+      {
+        "text": "acuse pendiente",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527695622
+  },
+  {
+    "id": "f3f5d0e2-6b5a-4352-8998-d1b79aa9f554",
+    "data": [
+      {
+        "text": "Cuales son las ",
+        "userDefined": false
+      },
+      {
+        "text": "facturas",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      },
+      {
+        "text": " cuyo ",
+        "userDefined": false
+      },
+      {
+        "text": "estado de",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "acuse es pendiente",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527695622
+  },
+  {
+    "id": "30235d1c-68a5-45fb-a218-6fe2210a2538",
+    "data": [
+      {
+        "text": "Dame las ",
+        "userDefined": false
+      },
+      {
+        "text": "notas de credito",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      },
+      {
+        "text": " de esta ",
+        "userDefined": false
+      },
+      {
+        "text": "semana",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527695622
+  },
+  {
+    "id": "60bc5236-5290-4e59-a55b-bea93a3f1305",
+    "data": [
+      {
+        "text": "quiero todas las ",
+        "userDefined": false
+      },
+      {
+        "text": "facturas",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": true
+      },
+      {
+        "text": " con ",
+        "userDefined": false
+      },
+      {
+        "text": "serie b",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527695622
+  },
+  {
+    "id": "e6c1c78a-3b0c-4355-97e9-c661dc1df70c",
+    "data": [
+      {
+        "text": "Tu me puedes conseguir las ",
+        "userDefined": false
+      },
+      {
+        "text": "facturas",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      },
+      {
+        "text": " del ",
+        "userDefined": false
+      },
+      {
+        "text": "mes",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      },
+      {
+        "text": " pasado que fueron ",
+        "userDefined": false
+      },
+      {
+        "text": "firmadas",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      },
+      {
+        "text": "? gracias",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527695622
+  },
+  {
+    "id": "74fe7f4d-efca-4de6-bc43-a5bdaca4024d",
+    "data": [
+      {
+        "text": "dame las ",
+        "userDefined": false
+      },
+      {
+        "text": "facturas",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      },
+      {
+        "text": " con ",
+        "userDefined": false
+      },
+      {
+        "text": "serie aaaa",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527695622
+  },
+  {
+    "id": "a2c6aedb-7b4c-404e-9e1e-817c0ba85f57",
+    "data": [
+      {
+        "text": "quiero todas las ",
+        "userDefined": false
+      },
+      {
+        "text": "notas de credito",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": true
+      },
+      {
+        "text": " con ",
+        "userDefined": false
+      },
+      {
+        "text": "acuse rechazado",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527695622
+  },
+  {
+    "id": "a5ac8590-1872-4557-a8f0-84420a6b0d94",
+    "data": [
+      {
+        "text": "traeme todas las ",
+        "userDefined": false
+      },
+      {
+        "text": "facturas",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": true
+      },
+      {
+        "text": " de ",
+        "userDefined": false
+      },
+      {
+        "text": "hoy",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527695622
+  },
+  {
+    "id": "fbe03c9a-881d-4b09-bfe5-2e5cb0deb366",
+    "data": [
+      {
+        "text": "quiero las ",
+        "userDefined": false
+      },
+      {
+        "text": "facturas",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      },
+      {
+        "text": " del ",
+        "userDefined": false
+      },
+      {
+        "text": "mes",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      },
+      {
+        "text": " con ",
+        "userDefined": false
+      },
+      {
+        "text": "estado enviado",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "prefijo B",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "acuse pendiente",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527720920
+  },
+  {
+    "id": "6ccba5ed-34c3-4ac1-9bfe-0f79d59e5bb3",
+    "data": [
+      {
+        "text": "Me hacen falta las ",
+        "userDefined": false
+      },
+      {
+        "text": "facturas",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "rechazadas",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527695622
+  },
+  {
+    "id": "123795f2-883e-47f8-b32a-e52fe7edc264",
+    "data": [
+      {
+        "text": "dame mi ",
+        "userDefined": false
+      },
+      {
+        "text": "factura",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": true
+      },
+      {
+        "text": " de ",
+        "userDefined": false
+      },
+      {
+        "text": "hoy",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527695622
+  },
+  {
+    "id": "cea52d71-3ddc-4a0c-af2b-5de2a7c6a954",
+    "data": [
+      {
+        "text": "quiero conocer las ",
+        "userDefined": false
+      },
+      {
+        "text": "facturas",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "aceptadas",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527695622
+  },
+  {
+    "id": "bf9c1d1e-b81a-4a4b-8a07-1fca19da5063",
+    "data": [
+      {
+        "text": "quiero las ",
+        "userDefined": false
+      },
+      {
+        "text": "facturas",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "enviadas",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      },
+      {
+        "text": " de este ",
+        "userDefined": false
+      },
+      {
+        "text": "mes",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527720689
+  },
+  {
+    "id": "3d86b445-7548-4b29-adab-163850c51e4e",
+    "data": [
+      {
+        "text": "quiero las ",
+        "userDefined": false
+      },
+      {
+        "text": "facturas",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      },
+      {
+        "text": " con ",
+        "userDefined": false
+      },
+      {
+        "text": "estado firmado",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "y",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "acuse rechazado",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "y",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " con ",
+        "userDefined": false
+      },
+      {
+        "text": "periodo del mes",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "y",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "prefijo a",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527699495
+  },
+  {
+    "id": "d04f5b85-92af-48a7-be34-a03f9e001f2c",
+    "data": [
+      {
+        "text": "Cuantas ",
+        "userDefined": false
+      },
+      {
+        "text": "facturas",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      },
+      {
+        "text": " de ",
+        "userDefined": false
+      },
+      {
+        "text": "hoy",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      },
+      {
+        "text": " con ",
+        "userDefined": false
+      },
+      {
+        "text": "acuse de pendiente",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      },
+      {
+        "text": " existen?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527695622
+  },
+  {
+    "id": "b915777d-bdb6-40aa-b157-7dee68231627",
+    "data": [
+      {
+        "text": "me das las ",
+        "userDefined": false
+      },
+      {
+        "text": "facturas",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      },
+      {
+        "text": " de ",
+        "userDefined": false
+      },
+      {
+        "text": "hoy",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      },
+      {
+        "text": " que ya han sido ",
+        "userDefined": false
+      },
+      {
+        "text": "firmadas",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527695622
+  },
+  {
+    "id": "267d8b51-913f-45f9-888a-723edd1999d4",
+    "data": [
+      {
+        "text": "Necesito la ",
+        "userDefined": false
+      },
+      {
+        "text": "factura",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      },
+      {
+        "text": " con ",
+        "userDefined": false
+      },
+      {
+        "text": "numero QWRERE",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527695622
+  },
+  {
+    "id": "4334cd73-c133-4c7f-8d23-7a201ed94a1c",
+    "data": [
+      {
+        "text": "traeme todas las ",
+        "userDefined": false
+      },
+      {
+        "text": "notas",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": true
+      },
+      {
+        "text": " de esta ",
+        "userDefined": false
+      },
+      {
+        "text": "semana",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      },
+      {
+        "text": " y con ",
+        "userDefined": false
+      },
+      {
+        "text": "acuse recibido",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527695622
+  },
+  {
+    "id": "228f891a-138a-4dc3-b2d7-a95717230149",
+    "data": [
+      {
+        "text": "Me interesan las ",
+        "userDefined": false
+      },
+      {
+        "text": "notas de credito",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      },
+      {
+        "text": " con ",
+        "userDefined": false
+      },
+      {
+        "text": "serie D",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1528129836
+  },
+  {
+    "id": "d49f92c0-bdc1-4e13-bf6e-8ef4be5b6e67",
+    "data": [
+      {
+        "text": "Hola me ayudas con mis ",
+        "userDefined": false
+      },
+      {
+        "text": "facturas",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      },
+      {
+        "text": " con ",
+        "userDefined": false
+      },
+      {
+        "text": "rechazo",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      },
+      {
+        "text": " del ",
+        "userDefined": false
+      },
+      {
+        "text": "dia de hoy",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      },
+      {
+        "text": " por favor, gracias",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527695622
+  },
+  {
+    "id": "c639fb80-bc49-46ff-ab28-60d8fb6ffc39",
+    "data": [
+      {
+        "text": "Requiero las ",
+        "userDefined": false
+      },
+      {
+        "text": "notas de credito",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      },
+      {
+        "text": " cuyo prefijo ",
+        "userDefined": false
+      },
+      {
+        "text": "es Z",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527695622
+  },
+  {
+    "id": "05863275-b155-42cf-8e16-c364434341c4",
+    "data": [
+      {
+        "text": "Notas de credito",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      },
+      {
+        "text": " con ",
+        "userDefined": false
+      },
+      {
+        "text": "estado de rechazo",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      },
+      {
+        "text": " por favor",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527695622
+  },
+  {
+    "id": "5821fdf1-27cd-4216-88ad-90f625ed1cf0",
+    "data": [
+      {
+        "text": "dame la ",
+        "userDefined": false
+      },
+      {
+        "text": "factura",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "123232",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527695622
+  },
+  {
+    "id": "ee99adb8-0869-40e5-ab49-6a5d45094aa6",
+    "data": [
+      {
+        "text": "Le pregunto por todas las ",
+        "userDefined": false
+      },
+      {
+        "text": "facturas",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "firmadas",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "y",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " me las regresa?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527695622
+  },
+  {
+    "id": "3b027e75-7298-45c7-9c32-b21523dab72a",
+    "data": [
+      {
+        "text": "quiero todas las ",
+        "userDefined": false
+      },
+      {
+        "text": "facturas",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "rechazadas",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527695622
+  },
+  {
+    "id": "1ded6b51-3e23-4825-92ef-3f01595d3cd7",
+    "data": [
+      {
+        "text": "quiero consultas mis documentos tipo ",
+        "userDefined": false
+      },
+      {
+        "text": "factura",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      },
+      {
+        "text": " con ",
+        "userDefined": false
+      },
+      {
+        "text": "estatus aceptado",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527695622
+  },
+  {
+    "id": "d9f21685-880b-4c5e-852a-4a9d6ee20ea6",
+    "data": [
+      {
+        "text": "factura",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527695622
+  },
+  {
+    "id": "2ca67efe-cebc-46c2-b9a7-bbde5b8db274",
+    "data": [
+      {
+        "text": "las ",
+        "userDefined": false
+      },
+      {
+        "text": "notas de credito",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "pendientes",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 1,
+    "updated": 1527695622
+  },
+  {
+    "id": "0cc7ebc5-882b-42a1-ab80-625a92ba1ff7",
+    "data": [
+      {
+        "text": "Las ",
+        "userDefined": false
+      },
+      {
+        "text": "facturas",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      },
+      {
+        "text": " con ",
+        "userDefined": false
+      },
+      {
+        "text": "estado de rechazo",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      },
+      {
+        "text": " yo necesito",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527695622
+  },
+  {
+    "id": "c7c91db8-26ac-4ba5-9b62-459e46bfb0cd",
+    "data": [
+      {
+        "text": "quiero conocer las ",
+        "userDefined": false
+      },
+      {
+        "text": "notas de credito",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      },
+      {
+        "text": " con ",
+        "userDefined": false
+      },
+      {
+        "text": "prefijo a",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527815279
+  },
+  {
+    "id": "abd95b4b-c156-4e69-bc4c-7f674f739022",
+    "data": [
+      {
+        "text": "muestrame las ",
+        "userDefined": false
+      },
+      {
+        "text": "facturas",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": true
+      },
+      {
+        "text": " con ",
+        "userDefined": false
+      },
+      {
+        "text": "estado recibido",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      },
+      {
+        "text": " y de ",
+        "userDefined": false
+      },
+      {
+        "text": "hoy",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527695622
+  },
+  {
+    "id": "1949cc48-b39e-4609-9138-fbedb3e2d779",
+    "data": [
+      {
+        "text": "quiero las ",
+        "userDefined": false
+      },
+      {
+        "text": "facturas",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "aceptadas",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527695622
+  },
+  {
+    "id": "96aded57-0949-46bb-aef9-7e1f9bddf212",
+    "data": [
+      {
+        "text": "quiero las ",
+        "userDefined": false
+      },
+      {
+        "text": "facturas",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      },
+      {
+        "text": " del ",
+        "userDefined": false
+      },
+      {
+        "text": "mes",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      },
+      {
+        "text": " que hayan sido ",
+        "userDefined": false
+      },
+      {
+        "text": "enviadas",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "prefijo b",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "y",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "acuse pendiente",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527816092
+  },
+  {
+    "id": "88f7719c-6c98-42a9-a4c8-d01809d35b6a",
+    "data": [
+      {
+        "text": "quiero conocer las ",
+        "userDefined": false
+      },
+      {
+        "text": "facturas",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "y",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " que tengan ",
+        "userDefined": false
+      },
+      {
+        "text": "estado firmado",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527696434
+  },
+  {
+    "id": "9f28890e-037d-4ceb-b8d3-be82396240d9",
+    "data": [
+      {
+        "text": "las ",
+        "userDefined": false
+      },
+      {
+        "text": "facturas",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      },
+      {
+        "text": " por favor que aun se encuentran en ",
+        "userDefined": false
+      },
+      {
+        "text": "estado firmado",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527818693
+  },
+  {
+    "id": "4384aa6b-d82d-4e79-b9d1-8a0034fd4afc",
+    "data": [
+      {
+        "text": "la ",
+        "userDefined": false
+      },
+      {
+        "text": "factura es la 23",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      },
+      {
+        "text": ", corrijo es la ",
+        "userDefined": false
+      },
+      {
+        "text": "factura 25",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527695622
+  },
+  {
+    "id": "4ef84468-8bae-4d99-82be-31c9eeec9b75",
+    "data": [
+      {
+        "text": "quiero la ",
+        "userDefined": false
+      },
+      {
+        "text": "factura",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "1234",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 1,
+    "updated": 1527695622
+  },
+  {
+    "id": "cbddc2bd-5fda-4cdd-aa84-df962c26a58c",
+    "data": [
+      {
+        "text": "Me ayudas con las ",
+        "userDefined": false
+      },
+      {
+        "text": "facturas",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "rechazadas",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "y",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " con ",
+        "userDefined": false
+      },
+      {
+        "text": "acuse en estado pendiente",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527695622
+  },
+  {
+    "id": "9ef650ea-8c1e-42c5-9b65-66b14e10e332",
+    "data": [
+      {
+        "text": "quiero todas las ",
+        "userDefined": false
+      },
+      {
+        "text": "facturas",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      },
+      {
+        "text": " de la ",
+        "userDefined": false
+      },
+      {
+        "text": "serie aaaa",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527695622
+  },
+  {
+    "id": "8ba0f7ae-e5f6-49a2-b20f-f83fecb07f95",
+    "data": [
+      {
+        "text": "mis ",
+        "userDefined": false
+      },
+      {
+        "text": "facturas",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      },
+      {
+        "text": " por favor",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527695622
+  },
+  {
+    "id": "2344f48e-5952-4617-af76-673a579be5bd",
+    "data": [
+      {
+        "text": "traeme todas las ",
+        "userDefined": false
+      },
+      {
+        "text": "notas de credito",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": true
+      },
+      {
+        "text": " de esta ",
+        "userDefined": false
+      },
+      {
+        "text": "semana",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527695622
+  },
+  {
+    "id": "71384410-f991-48f7-9089-9bc63cb51921",
+    "data": [
+      {
+        "text": "quiero consultar los documentos tipo ",
+        "userDefined": false
+      },
+      {
+        "text": "nota",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      },
+      {
+        "text": " con ",
+        "userDefined": false
+      },
+      {
+        "text": "estado firmado",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527695622
+  },
+  {
+    "id": "0e01df06-f0af-4e0f-8f4a-063fc4f5e9ee",
+    "data": [
+      {
+        "text": "quiero consultar mis documentos de tipos de ",
+        "userDefined": false
+      },
+      {
+        "text": "factura",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      },
+      {
+        "text": " con ",
+        "userDefined": false
+      },
+      {
+        "text": "estatus aceptado",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527695622
+  },
+  {
+    "id": "d95c4cfc-8057-4ee2-be6e-6e9bd2b323b3",
+    "data": [
+      {
+        "text": "necesito todas las ",
+        "userDefined": false
+      },
+      {
+        "text": "facturas",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      },
+      {
+        "text": " de la ",
+        "userDefined": false
+      },
+      {
+        "text": "serie W",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527695622
+  },
+  {
+    "id": "1d16fc33-2a9f-4bf2-b7ca-e529ceaee60d",
+    "data": [
+      {
+        "text": "por favor las ",
+        "userDefined": false
+      },
+      {
+        "text": "notas de credito",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      },
+      {
+        "text": " de la ",
+        "userDefined": false
+      },
+      {
+        "text": "serie X",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527695622
+  },
+  {
+    "id": "240e6d7e-d199-4d99-9b83-08cbf460bfe1",
+    "data": [
+      {
+        "text": "yo necesito Las ",
+        "userDefined": false
+      },
+      {
+        "text": "facturas",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      },
+      {
+        "text": " con ",
+        "userDefined": false
+      },
+      {
+        "text": "estado de rechazo",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527695622
+  },
+  {
+    "id": "e4d53f35-44cf-4a2e-adba-e346eeba1ece",
+    "data": [
+      {
+        "text": "quiero mis ",
+        "userDefined": false
+      },
+      {
+        "text": "facturas",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      },
+      {
+        "text": " con ",
+        "userDefined": false
+      },
+      {
+        "text": "estado firmado",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527698031
+  },
+  {
+    "id": "7efecd89-30d7-429a-ada8-4579e834cbfc",
+    "data": [
+      {
+        "text": "quiero la ",
+        "userDefined": false
+      },
+      {
+        "text": "factura",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": true
+      },
+      {
+        "text": " de ",
+        "userDefined": false
+      },
+      {
+        "text": "hoy",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527695622
+  },
+  {
+    "id": "f51a6c04-a577-4171-9b9b-34c7928047e0",
+    "data": [
+      {
+        "text": "Pasame todas las ",
+        "userDefined": false
+      },
+      {
+        "text": "facturas",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "firmadas",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527695622
+  },
+  {
+    "id": "de0329cc-b9ee-49bd-b1d6-a5baacb23403",
+    "data": [
+      {
+        "text": "Notas de credito",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      },
+      {
+        "text": " de este ",
+        "userDefined": false
+      },
+      {
+        "text": "mes",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      },
+      {
+        "text": " si me hace favor",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527695622
+  },
+  {
+    "id": "be78567f-f9d1-4813-afcf-b1fc4338fa2c",
+    "data": [
+      {
+        "text": "Por favor dame las ",
+        "userDefined": false
+      },
+      {
+        "text": "notas de credito",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      },
+      {
+        "text": " con ",
+        "userDefined": false
+      },
+      {
+        "text": "serie W",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527695622
+  },
+  {
+    "id": "8e4ef9a1-7df7-4bf6-9c0d-a59c998f7c15",
+    "data": [
+      {
+        "text": "consulta de ",
+        "userDefined": false
+      },
+      {
+        "text": "factura",
+        "alias": "facturasCampos",
+        "meta": "@facturasCampos",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527695622
+  }
+]

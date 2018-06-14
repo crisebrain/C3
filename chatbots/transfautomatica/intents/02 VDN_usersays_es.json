@@ -1,0 +1,1104 @@
+[
+  {
+    "id": "d781d3ab-04e0-48cc-8930-6151dada6c4f",
+    "data": [
+      {
+        "text": "Hablale ",
+        "userDefined": false
+      },
+      {
+        "text": "a",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "Gabriel",
+        "alias": "nombre",
+        "meta": "@nombre",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527867239
+  },
+  {
+    "id": "d0508001-3259-463d-93e6-99131deb65f7",
+    "data": [
+      {
+        "text": "Con ",
+        "userDefined": false
+      },
+      {
+        "text": "Magaly",
+        "alias": "nombre",
+        "meta": "@nombre",
+        "userDefined": false
+      },
+      {
+        "text": ", por favor",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527867239
+  },
+  {
+    "id": "21facf54-924e-4938-bf08-e1af6d7bc369",
+    "data": [
+      {
+        "text": "estar ",
+        "userDefined": false
+      },
+      {
+        "text": "a",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "pedro",
+        "alias": "nombre",
+        "meta": "@nombre",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527867239
+  },
+  {
+    "id": "5b3431ca-fcb3-42a7-b259-e07388e68d72",
+    "data": [
+      {
+        "text": "estara ",
+        "userDefined": false
+      },
+      {
+        "text": "gabriel",
+        "alias": "nombre",
+        "meta": "@nombre",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527867239
+  },
+  {
+    "id": "ff0c23fa-c1a9-4d20-a40f-c975be9e95ad",
+    "data": [
+      {
+        "text": "Otra llamada",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527867239
+  },
+  {
+    "id": "dc38ad4f-3817-4de9-9e61-5223543c2040",
+    "data": [
+      {
+        "text": "Quiero otra llamada",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527867239
+  },
+  {
+    "id": "cfae12a2-de4f-4427-8ac1-8f86e2171af2",
+    "data": [
+      {
+        "text": "comunícame la extensión ",
+        "userDefined": false
+      },
+      {
+        "text": "de",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "Karina",
+        "alias": "nombre",
+        "meta": "@nombre",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527870975
+  },
+  {
+    "id": "f1623b7e-5912-45a4-9e23-e523f2efb140",
+    "data": [
+      {
+        "text": "Me comunicas con ",
+        "userDefined": false
+      },
+      {
+        "text": "Ramon",
+        "alias": "nombre",
+        "meta": "@nombre",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527867239
+  },
+  {
+    "id": "f1af4690-2026-4a40-adc9-a70c52ebb297",
+    "data": [
+      {
+        "text": "Quiero hablar con ",
+        "userDefined": false
+      },
+      {
+        "text": "Gabriel",
+        "alias": "nombre",
+        "meta": "@nombre",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527867239
+  },
+  {
+    "id": "86328e73-71ea-4271-9af9-96ecd1ecb2c1",
+    "data": [
+      {
+        "text": "necesito comunicarme con ",
+        "userDefined": false
+      },
+      {
+        "text": "una",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " persona, ¿tu me ayudas?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527867239
+  },
+  {
+    "id": "0ed23b0a-9c1b-4dfc-a1d7-f85fb4b8ca47",
+    "data": [
+      {
+        "text": "requiero hablar con ",
+        "userDefined": false
+      },
+      {
+        "text": "Gabriel",
+        "alias": "nombre",
+        "meta": "@nombre",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527867239
+  },
+  {
+    "id": "a5ffbb9a-c72a-4bab-b068-c44086fe44ae",
+    "data": [
+      {
+        "text": "Comunícame ",
+        "userDefined": false
+      },
+      {
+        "text": "a",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " la extensión de ",
+        "userDefined": false
+      },
+      {
+        "text": "Gabriel",
+        "alias": "nombre",
+        "meta": "@nombre",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527867239
+  },
+  {
+    "id": "ab01538f-72e0-4df2-8260-c455be06a9a2",
+    "data": [
+      {
+        "text": "A",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " la extension de ",
+        "userDefined": false
+      },
+      {
+        "text": "Gabriel",
+        "alias": "nombre",
+        "meta": "@nombre",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527867239
+  },
+  {
+    "id": "70cbecc0-2e0b-41e2-bad6-ff9658dd0ba7",
+    "data": [
+      {
+        "text": "Llamar a ",
+        "userDefined": false
+      },
+      {
+        "text": "Gabriel",
+        "alias": "nombre",
+        "meta": "@nombre",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527867239
+  },
+  {
+    "id": "b0347d6a-f01b-48c0-876a-3ba4ff3f8807",
+    "data": [
+      {
+        "text": "una",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " llamada a ",
+        "userDefined": false
+      },
+      {
+        "text": "un",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " numero",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527867239
+  },
+  {
+    "id": "227bccdb-8c31-4691-b64d-8b4c50d24b82",
+    "data": [
+      {
+        "text": "Comunícame con ",
+        "userDefined": false
+      },
+      {
+        "text": "Marisol",
+        "alias": "nombre",
+        "meta": "@nombre",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527867239
+  },
+  {
+    "id": "5d689ddd-54a0-48a5-bf96-62a348fcbfca",
+    "data": [
+      {
+        "text": "me interesa hacer ",
+        "userDefined": false
+      },
+      {
+        "text": "una",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " llamada",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527867239
+  },
+  {
+    "id": "567cf83a-7222-4be2-8be4-783d37abf4b3",
+    "data": [
+      {
+        "text": "Me comunicas con ",
+        "userDefined": false
+      },
+      {
+        "text": "Miguel",
+        "alias": "nombre",
+        "meta": "@nombre",
+        "userDefined": false
+      },
+      {
+        "text": ", por favor",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527869024
+  },
+  {
+    "id": "cea53dad-2c85-47ac-8b84-9557617a0b4d",
+    "data": [
+      {
+        "text": "pásame ",
+        "userDefined": false
+      },
+      {
+        "text": "a",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "marisol",
+        "alias": "nombre",
+        "meta": "@nombre",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527867239
+  },
+  {
+    "id": "7bc4bb29-fa28-4e42-a888-123afafc36ee",
+    "data": [
+      {
+        "text": "me puedes transferir con ",
+        "userDefined": false
+      },
+      {
+        "text": "ramon",
+        "alias": "nombre",
+        "meta": "@nombre",
+        "userDefined": true
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527867239
+  },
+  {
+    "id": "5cba55a8-f51c-43e8-a7ef-4925a962391d",
+    "data": [
+      {
+        "text": "Quiero llamar a alguien",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527867239
+  },
+  {
+    "id": "08881aa9-36cd-43a5-9d94-394703a389e3",
+    "data": [
+      {
+        "text": "mandame ",
+        "userDefined": false
+      },
+      {
+        "text": "a",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " la extension de ",
+        "userDefined": false
+      },
+      {
+        "text": "Gabriel",
+        "alias": "nombre",
+        "meta": "@nombre",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527867239
+  },
+  {
+    "id": "d09a9865-83ce-4953-a5c8-1b07730c994b",
+    "data": [
+      {
+        "text": "estar ",
+        "userDefined": false
+      },
+      {
+        "text": "gerardo",
+        "alias": "nombre",
+        "meta": "@nombre",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527867239
+  },
+  {
+    "id": "4ac36bdd-78ea-429a-9c6d-c0e212534c8e",
+    "data": [
+      {
+        "text": "una",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " llamada, por favor",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527867239
+  },
+  {
+    "id": "d677e7a1-4de7-45b2-8c2f-286226af9d24",
+    "data": [
+      {
+        "text": "Por favor comunicame con ",
+        "userDefined": false
+      },
+      {
+        "text": "Gerardo",
+        "alias": "nombre",
+        "meta": "@nombre",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527867239
+  },
+  {
+    "id": "0ad40703-0873-4613-87be-87515bea7e12",
+    "data": [
+      {
+        "text": "con ",
+        "userDefined": false
+      },
+      {
+        "text": "Juan",
+        "alias": "nombre",
+        "meta": "@nombre",
+        "userDefined": true
+      },
+      {
+        "text": ", por favor",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527867239
+  },
+  {
+    "id": "78d159aa-e992-438d-ad3a-a5f42319c090",
+    "data": [
+      {
+        "text": "una",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " llamada con el señor ",
+        "userDefined": false
+      },
+      {
+        "text": "Pedro",
+        "alias": "nombre",
+        "meta": "@nombre",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527867239
+  },
+  {
+    "id": "8b64cebc-9283-40db-b3cb-a478bd5b71fd",
+    "data": [
+      {
+        "text": "Comunicame a la extension de ",
+        "userDefined": false
+      },
+      {
+        "text": "Gerardo",
+        "alias": "nombre",
+        "meta": "@nombre",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527867239
+  },
+  {
+    "id": "3b1476f0-90f7-4802-b2cd-af2652f0f730",
+    "data": [
+      {
+        "text": "Por favor ",
+        "userDefined": false
+      },
+      {
+        "text": "a",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " la extensión de ",
+        "userDefined": false
+      },
+      {
+        "text": "Marcos",
+        "alias": "nombre",
+        "meta": "@nombre",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527867469
+  },
+  {
+    "id": "40e31dd5-7278-46a9-857f-fdcdfa6ac05a",
+    "data": [
+      {
+        "text": "pásame con ",
+        "userDefined": false
+      },
+      {
+        "text": "marisol",
+        "alias": "nombre",
+        "meta": "@nombre",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527867239
+  },
+  {
+    "id": "9edb8e52-d564-4838-8484-df684d2ccc9c",
+    "data": [
+      {
+        "text": "pasame ",
+        "userDefined": false
+      },
+      {
+        "text": "a",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "marisol",
+        "alias": "nombre",
+        "meta": "@nombre",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527867239
+  },
+  {
+    "id": "3760b017-9072-46f5-b11d-84b3521fdebf",
+    "data": [
+      {
+        "text": "Puedes comunicarme con ",
+        "userDefined": false
+      },
+      {
+        "text": "Armando",
+        "alias": "nombre",
+        "meta": "@nombre",
+        "userDefined": true
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527867239
+  },
+  {
+    "id": "c6b8afc2-a9da-4649-a9eb-78fc880c137b",
+    "data": [
+      {
+        "text": "por favor con ",
+        "userDefined": false
+      },
+      {
+        "text": "Juan",
+        "alias": "nombre",
+        "meta": "@nombre",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527867239
+  },
+  {
+    "id": "cdadbd17-8af3-4e0e-86b4-a64b87ba305d",
+    "data": [
+      {
+        "text": "Quiero comunicarme con ",
+        "userDefined": false
+      },
+      {
+        "text": "Gabriel",
+        "alias": "nombre",
+        "meta": "@nombre",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527867239
+  },
+  {
+    "id": "8284f9d0-065f-4a65-b881-9b7f1a816333",
+    "data": [
+      {
+        "text": "Háblale ",
+        "userDefined": false
+      },
+      {
+        "text": "a",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "Gabriel",
+        "alias": "nombre",
+        "meta": "@nombre",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527867239
+  },
+  {
+    "id": "7f7add07-333e-471c-ad77-0f72eaa59709",
+    "data": [
+      {
+        "text": "Con ",
+        "userDefined": false
+      },
+      {
+        "text": "ramon",
+        "alias": "nombre",
+        "meta": "@nombre",
+        "userDefined": false
+      },
+      {
+        "text": ", gracias",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527867239
+  },
+  {
+    "id": "f54f068e-8e00-4b13-ad9a-3c0252a4eb2c",
+    "data": [
+      {
+        "text": "puedo hablar con ",
+        "userDefined": false
+      },
+      {
+        "text": "salvador",
+        "alias": "nombre",
+        "meta": "@nombre",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527867239
+  },
+  {
+    "id": "db7de970-067d-46eb-b57b-f731dffa4bae",
+    "data": [
+      {
+        "text": "Quiero hablar con alguien",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527867239
+  },
+  {
+    "id": "9a338699-021f-4927-ba97-d8f83744d245",
+    "data": [
+      {
+        "text": "Quiero comunicarme con alguien",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527867239
+  },
+  {
+    "id": "3a2b16f8-83a8-4984-b5e9-6c748e8f0bbb",
+    "data": [
+      {
+        "text": "Comunicame con ",
+        "userDefined": false
+      },
+      {
+        "text": "Ramón",
+        "alias": "nombre",
+        "meta": "@nombre",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527867239
+  },
+  {
+    "id": "38113775-ea83-49e8-b95a-5ef38b43876f",
+    "data": [
+      {
+        "text": "quiero hablar con ",
+        "userDefined": false
+      },
+      {
+        "text": "luis",
+        "alias": "nombre",
+        "meta": "@nombre",
+        "userDefined": false
+      },
+      {
+        "text": ", por favor",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527868885
+  },
+  {
+    "id": "4e8be4f1-5c29-4645-8e7d-b261d76559b3",
+    "data": [
+      {
+        "text": "me gustaria hablar con ",
+        "userDefined": false
+      },
+      {
+        "text": "marisol",
+        "alias": "nombre",
+        "meta": "@nombre",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 1,
+    "updated": 1527867239
+  },
+  {
+    "id": "1db33363-a660-466a-8540-62a6ab9fe4ce",
+    "data": [
+      {
+        "text": "Una",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " llamada",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527867239
+  },
+  {
+    "id": "85240157-93c3-4e82-a8f2-850eab2f510c",
+    "data": [
+      {
+        "text": "me puedes comunicar con ",
+        "userDefined": false
+      },
+      {
+        "text": "Gilberto",
+        "alias": "nombre",
+        "meta": "@nombre",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527867239
+  },
+  {
+    "id": "fadc31c5-a175-4f5d-b25d-801fb498690c",
+    "data": [
+      {
+        "text": "A",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " la extensión de ",
+        "userDefined": false
+      },
+      {
+        "text": "Gabriel",
+        "alias": "nombre",
+        "meta": "@nombre",
+        "userDefined": false
+      },
+      {
+        "text": ", por favor",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527867239
+  },
+  {
+    "id": "303eb6f1-126d-4bc8-b3a3-f8b86afbf311",
+    "data": [
+      {
+        "text": "pasame con ",
+        "userDefined": false
+      },
+      {
+        "text": "marisol",
+        "alias": "nombre",
+        "meta": "@nombre",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527867239
+  },
+  {
+    "id": "a0e9318f-01e6-4a9a-9029-c3a3b93ac092",
+    "data": [
+      {
+        "text": "me comunicas con ",
+        "userDefined": false
+      },
+      {
+        "text": "benito",
+        "alias": "nombre",
+        "meta": "@nombre",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527867239
+  },
+  {
+    "id": "6b2e917a-013f-4bb1-b49c-8c4c66b46948",
+    "data": [
+      {
+        "text": "Estoy buscando a alguien, ¿tu me puedes comunicar?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527867239
+  },
+  {
+    "id": "72f2e88e-0946-4a31-bfd1-19fb63709f92",
+    "data": [
+      {
+        "text": "comunicame con ",
+        "userDefined": false
+      },
+      {
+        "text": "Juan",
+        "alias": "nombre",
+        "meta": "@nombre",
+        "userDefined": true
+      },
+      {
+        "text": ", por favor",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527867239
+  },
+  {
+    "id": "a4bea020-e8c8-47ff-9b11-2ec703823743",
+    "data": [
+      {
+        "text": "quiero hacer ",
+        "userDefined": false
+      },
+      {
+        "text": "una",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " llamada",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527867239
+  },
+  {
+    "id": "d0d85e03-7ce9-42b1-b273-07b0385cf98f",
+    "data": [
+      {
+        "text": "al numero de ",
+        "userDefined": false
+      },
+      {
+        "text": "Pedro",
+        "alias": "nombre",
+        "meta": "@nombre",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527867239
+  },
+  {
+    "id": "a2009dc2-5d1f-40c4-9f11-d3b9799b8696",
+    "data": [
+      {
+        "text": "quiero llamar",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527867239
+  },
+  {
+    "id": "6afcbb57-80dd-4d7c-8e85-ed0baba205b2",
+    "data": [
+      {
+        "text": "Por favor ",
+        "userDefined": false
+      },
+      {
+        "text": "a",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " la extension de ",
+        "userDefined": false
+      },
+      {
+        "text": "Marcos",
+        "alias": "nombre",
+        "meta": "@nombre",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 1,
+    "updated": 1527867469
+  },
+  {
+    "id": "7a2b317f-5fa7-4c38-aac1-c6b5a460e424",
+    "data": [
+      {
+        "text": "transfiereme con ",
+        "userDefined": false
+      },
+      {
+        "text": "ramon",
+        "alias": "nombre",
+        "meta": "@nombre",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527867239
+  }
+]

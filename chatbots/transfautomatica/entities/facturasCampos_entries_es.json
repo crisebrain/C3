@@ -1,0 +1,38 @@
+[
+  {
+    "value": "@prefijo:prefijo",
+    "synonyms": [
+      "@prefijo:prefijo"
+    ]
+  },
+  {
+    "value": "@acuse:acuse",
+    "synonyms": [
+      "@acuse:acuse"
+    ]
+  },
+  {
+    "value": "@periodo:periodo ",
+    "synonyms": [
+      "@periodo:periodo "
+    ]
+  },
+  {
+    "value": "@status:status",
+    "synonyms": [
+      "@status:status"
+    ]
+  },
+  {
+    "value": "@numeroFactura:numeroFactura ",
+    "synonyms": [
+      "@numeroFactura:numeroFactura "
+    ]
+  },
+  {
+    "value": "@tipoDocumento:tipoDocumento ",
+    "synonyms": [
+      "@tipoDocumento:tipoDocumento "
+    ]
+  }
+]

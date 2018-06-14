@@ -1,0 +1,42 @@
+{
+  "id": "44b5faef-dd23-435e-8a19-b4ee781f5572",
+  "parentId": "5bb29d9e-efc4-47ac-a056-34434e22bf5b",
+  "rootParentId": "5bb29d9e-efc4-47ac-a056-34434e22bf5b",
+  "name": "0-2-1 VDN - con quien",
+  "auto": true,
+  "contexts": [
+    "0-2VDN-followup"
+  ],
+  "responses": [
+    {
+      "resetContexts": false,
+      "action": "VDN",
+      "affectedContexts": [],
+      "parameters": [
+        {
+          "id": "5fca06d1-a0e5-465c-9d7d-69484922bfb6",
+          "required": false,
+          "dataType": "@nombre",
+          "name": "nombre",
+          "value": "$nombre",
+          "isList": true
+        }
+      ],
+      "messages": [
+        {
+          "type": 0,
+          "lang": "es",
+          "speech": "La comunicación con el servicio de extensiones ha tardado más de lo esperado. Inténtenlo después nuevamente."
+        }
+      ],
+      "defaultResponsePlatforms": {},
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": true,
+  "webhookForSlotFilling": false,
+  "lastUpdate": 1527800191,
+  "fallbackIntent": false,
+  "events": []
+}

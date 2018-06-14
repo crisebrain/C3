@@ -1,0 +1,27 @@
+[
+  {
+    "value": "es",
+    "synonyms": [
+      "es",
+      "es la"
+    ]
+  },
+  {
+    "value": "numero",
+    "synonyms": [
+      "numero"
+    ]
+  },
+  {
+    "value": "numero de factura",
+    "synonyms": [
+      "numero de factura"
+    ]
+  },
+  {
+    "value": "factura",
+    "synonyms": [
+      "factura"
+    ]
+  }
+]

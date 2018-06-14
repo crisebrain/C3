@@ -1,0 +1,360 @@
+[
+  {
+    "id": "86e0083c-3f1b-459c-8ccc-d3b6d5c1869a",
+    "data": [
+      {
+        "text": "facturas",
+        "alias": "tipoDocumento",
+        "meta": "@tipoDocumento",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527619523
+  },
+  {
+    "id": "c64855b2-e866-4059-a8d7-1e8fae98bb6b",
+    "data": [
+      {
+        "text": "quiero consultas unas ",
+        "userDefined": false
+      },
+      {
+        "text": "facturas",
+        "alias": "tipoDocumento",
+        "meta": "@tipoDocumento",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527619523
+  },
+  {
+    "id": "fdac5eec-9b14-4d12-9438-371d0a71f5e0",
+    "data": [
+      {
+        "text": "dime como consultar mis ",
+        "userDefined": false
+      },
+      {
+        "text": "facturas",
+        "alias": "tipoDocumento",
+        "meta": "@tipoDocumento",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527619523
+  },
+  {
+    "id": "6b1aaab6-c14b-4254-afa0-552f349f9a5b",
+    "data": [
+      {
+        "text": "notas de credito",
+        "alias": "tipoDocumento",
+        "meta": "@tipoDocumento",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527619523
+  },
+  {
+    "id": "9a134c02-f5b9-4fee-89d9-c0ad4daa104e",
+    "data": [
+      {
+        "text": "para consultar ",
+        "userDefined": false
+      },
+      {
+        "text": "facturas",
+        "alias": "tipoDocumento",
+        "meta": "@tipoDocumento",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527619523
+  },
+  {
+    "id": "c773d440-542c-428f-81f5-41e3d73cd926",
+    "data": [
+      {
+        "text": "quiero consultar mis ",
+        "userDefined": false
+      },
+      {
+        "text": "facturas",
+        "alias": "tipoDocumento",
+        "meta": "@tipoDocumento",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527619523
+  },
+  {
+    "id": "c030dc74-1968-49f6-99a7-5b7def4a62f9",
+    "data": [
+      {
+        "text": "como hago para consultar ",
+        "userDefined": false
+      },
+      {
+        "text": "una",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "factura",
+        "alias": "tipoDocumento",
+        "meta": "@tipoDocumento",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527619523
+  },
+  {
+    "id": "dbbc802c-93cb-4d59-ac91-fcf5df2c98cb",
+    "data": [
+      {
+        "text": "que hace el servicio de ",
+        "userDefined": false
+      },
+      {
+        "text": "facturas",
+        "alias": "tipoDocumento",
+        "meta": "@tipoDocumento",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527619523
+  },
+  {
+    "id": "1ef7c9e7-547e-47ce-8d79-f5df5be48fbe",
+    "data": [
+      {
+        "text": "como funciona el servicio de ",
+        "userDefined": false
+      },
+      {
+        "text": "facturas",
+        "alias": "tipoDocumento",
+        "meta": "@tipoDocumento",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 1,
+    "updated": 1527619523
+  },
+  {
+    "id": "40b6baf9-b0c7-4da7-b511-17eae8a99218",
+    "data": [
+      {
+        "text": "como funcionan las ",
+        "userDefined": false
+      },
+      {
+        "text": "facturas",
+        "alias": "tipoDocumento",
+        "meta": "@tipoDocumento",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527619523
+  },
+  {
+    "id": "4998bd90-9c62-4cd2-b2c5-11ec298d7e6a",
+    "data": [
+      {
+        "text": "como hago para consultar ",
+        "userDefined": false
+      },
+      {
+        "text": "una",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "nota",
+        "alias": "tipoDocumento",
+        "meta": "@tipoDocumento",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527619523
+  },
+  {
+    "id": "7d4b1c63-b6e8-40ad-baf8-77f60af4bb95",
+    "data": [
+      {
+        "text": "consulta de ",
+        "userDefined": false
+      },
+      {
+        "text": "facturas",
+        "alias": "tipoDocumento",
+        "meta": "@tipoDocumento",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527619523
+  },
+  {
+    "id": "5aa7578f-3282-4d62-9819-3824c7051119",
+    "data": [
+      {
+        "text": "quiero ver mis ",
+        "userDefined": false
+      },
+      {
+        "text": "facturas",
+        "alias": "tipoDocumento",
+        "meta": "@tipoDocumento",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527619523
+  },
+  {
+    "id": "34dd9c09-a003-46cd-8d05-c4ff925c3958",
+    "data": [
+      {
+        "text": "como puedo conocer mis ",
+        "userDefined": false
+      },
+      {
+        "text": "facturas",
+        "alias": "tipoDocumento",
+        "meta": "@tipoDocumento",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527619523
+  },
+  {
+    "id": "d83da286-139e-40ad-9164-590342f4528d",
+    "data": [
+      {
+        "text": "dime como funcionan mis ",
+        "userDefined": false
+      },
+      {
+        "text": "facturas",
+        "alias": "tipoDocumento",
+        "meta": "@tipoDocumento",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527619523
+  },
+  {
+    "id": "d761a232-aee9-47df-a3ca-93937779b462",
+    "data": [
+      {
+        "text": "mis ",
+        "userDefined": false
+      },
+      {
+        "text": "facturas",
+        "alias": "tipoDocumento",
+        "meta": "@tipoDocumento",
+        "userDefined": false
+      },
+      {
+        "text": " por favor",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 1,
+    "updated": 1527619523
+  },
+  {
+    "id": "efd20b95-6600-4282-a535-06662c7d2597",
+    "data": [
+      {
+        "text": "por favor dame todas las ",
+        "userDefined": false
+      },
+      {
+        "text": "facturas",
+        "alias": "tipoDocumento",
+        "meta": "@tipoDocumento",
+        "userDefined": false
+      },
+      {
+        "text": " con ",
+        "userDefined": false
+      },
+      {
+        "text": "serie w",
+        "alias": "tipoDocumento",
+        "meta": "@tipoDocumento",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527818294
+  }
+]

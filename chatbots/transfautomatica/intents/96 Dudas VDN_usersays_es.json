@@ -1,0 +1,155 @@
+[
+  {
+    "id": "bc10b641-b0ad-47e1-a020-7edbcef20510",
+    "data": [
+      {
+        "text": "Explicame como comunicarme con alguien",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1526939583
+  },
+  {
+    "id": "88f41f08-07fb-4860-b8de-e5cf79cf1ce1",
+    "data": [
+      {
+        "text": "¿Como funciona la ",
+        "userDefined": false
+      },
+      {
+        "text": "transferencia",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1526938982
+  },
+  {
+    "id": "aa35e9dd-4dce-449e-a2e4-9f3e2405b9ae",
+    "data": [
+      {
+        "text": "Explicame como hablar con alguien",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1526939583
+  },
+  {
+    "id": "3bcdb30f-69f2-4364-82c4-772d4264cc18",
+    "data": [
+      {
+        "text": "Llamada con quien?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1526938982
+  },
+  {
+    "id": "b1fd7ec3-ac99-4c8b-9ff2-487dc2f3a6f0",
+    "data": [
+      {
+        "text": "Dime como hablar con alguien",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1526939583
+  },
+  {
+    "id": "3d8d7b11-47c1-41b8-8f91-00bbdcf24130",
+    "data": [
+      {
+        "text": "Que es eso de llamada?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1526938982
+  },
+  {
+    "id": "e208808d-bcfc-4e20-9d6b-1b0221c6a2ea",
+    "data": [
+      {
+        "text": "¿Cómo funciona el servicio de llamada?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1526938982
+  },
+  {
+    "id": "b9474f48-f247-4bd0-ba16-d97666894479",
+    "data": [
+      {
+        "text": "¿Como puedo hablar con alguien?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1526938982
+  },
+  {
+    "id": "a293de86-f3cd-42db-8d90-e052d36ece25",
+    "data": [
+      {
+        "text": "Que hace el servicio de llamada?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1526938982
+  },
+  {
+    "id": "c18fffe5-06fa-4fb8-9697-47467f53a364",
+    "data": [
+      {
+        "text": "como puedes comunicarme con alguien?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1526939583
+  },
+  {
+    "id": "39f19fc9-1563-415a-82f6-2819fdd5f563",
+    "data": [
+      {
+        "text": "con que personas puedo comunicarme?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527025475
+  },
+  {
+    "id": "8e7ad97f-b1f4-49ae-b77a-02c15c16b13e",
+    "data": [
+      {
+        "text": "¿Como puedo comunicarme con alguien?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1526938982
+  }
+]
