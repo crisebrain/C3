@@ -1,44 +1,64 @@
 from .bd_busqueda import dbquery
+from .generales import construyeNombre
 import json
 
-def makeWebhookResult(req):
-    action = req.get("queryResult").get("action")
-    try:
-        if action == "VDN" or action == "saldo":
-            return makeresponseAction(req, action)
-        elif action == "informacion":
-            return informacion(req.get("queryResult").get("parameters").get("servicio"))
-        else:
-            return {"payload": {"result": "Null", "returnCode": "0"},
-                   "fulfillmentText": "Null"}
-    except Exception as err:
-        return {"payload": {"result": "Null", "returnCode": "0"},
-                "fulfillmentText": "{0}".format(err)}
-
 def makeresponseAction(req, action):
+    """Creates the response json object to send as answer to the webhook.
+    Is used for both actions 'Saldos' and 'VDN'
+    Parameters:
+    req - json request object with the petition.
+    action - string with the action to process as webservices. "VDN", "Saldo" o
+             "factura"
+    Output:
+    resp - json object with the response to send by webhook to DF.
+           includes the fields:
+           "payload": {"result": result Array like of the query,
+                       "returnCode": error code of the query},
+           "fulfillmentText": TextString
+    """
     # Carga de base de datos
     result = req.get("queryResult").get("parameters")
-
-    if result.get("nombre") != "":
-        coincidencias = dbquery(result.get("nombre"))
+    nombre = construyeNombre(result)
+    if nombre != "":
+        coincidencias = dbquery(nombre)
         print(json.dumps(coincidencias, indent=4))
         returnCode = calcCode(coincidencias)
     else:
         returnCode = calcCode([], True)
         coincidencias = []
 
-    textresp = mensajson(coincidencias, returnCode, action, result.get("nombre"))
+    textresp = mensajson(coincidencias, returnCode, action, nombre)
     resultarray = []
     for coin in coincidencias:
         resultarray.append(dict(zip(["nombre", action],
                                     [coin["Nombre"], coin[action]])))
-
-
-    resp = {#"speech": textresp,
-            "payload": {"result": resultarray, "returnCode": returnCode},
+    resp = {"payload": {"result": resultarray, "returnCode": returnCode},
             "fulfillmentText": textresp}
-            #"source": "telegram"}#req.get("queryResult").get("intent").get("displayName")}
+            # "followupEventInput": {"name": "salida",
+            #                "parameters": {"prueba": "1"},
+            #                "languageCode": "es"}}
+
+    respContext = evaluaContextos(returnCode, action,
+                                  nombre, req.get("session"))
+
+    if respContext:
+        resp.update(respContext)
+
     return resp
+
+def evaluaContextos(code, action, valor, session):
+    """Check and reset contexts for the vdn and saldos."""
+    if action == "VDN" and code == 1 and valor:
+        outputContexts = [{"name": session + "/contexts/0-2vdn-followup",
+                           "lifespanCount": 0},
+                          {"name": session + "/contexts/0-2vdn-followup-2",
+                           "lifespanCount": 0}]
+    if action == "saldo" and code == 1 and valor:
+        outputContexts = [{"name": session + "/contexts/0-1saldo-followup",
+                           "lifespanCount": 0},
+                          {"name": session + "/contexts/0-1saldo-followup-2",
+                           "lifespanCount": 0}]
+        return {"outputContexts": outputContexts}
 
 def calcCode(array, empty=False):
     if not empty:
@@ -58,7 +78,7 @@ def calcCode(array, empty=False):
 def mensajson(array, code, action, valor):
     if action == "VDN":
         if valor == "":
-            Text = "¿Con quién desea hablar"
+            Text = "¿Con quién desea hablar?"
             return Text
 
         if code == 0:
@@ -77,7 +97,7 @@ def mensajson(array, code, action, valor):
             Text = "¿A cual persona te refieres? a {0}".format(textnames)
 
         else:
-            Text = "Existen demasiadas coincidencias, necesitas ser mas especifico"
+            Text = "Existen demasiadas coincidencias, necesitas ser mas específico"
 
     elif action == "saldo":
         if valor == "":
@@ -85,7 +105,8 @@ def mensajson(array, code, action, valor):
             return Text
 
         if code == 0:
-           Text = "No hay referencia de esa persona. ¿Con qué otra persona te comunico?"
+           Text = "No hay referencia de ese usuario. Si necesita el saldo de " \
+                  "alguien más sólo díga el nombre de usuario correcto."
 
         elif code == 1:
             elem = array[0]
@@ -100,7 +121,7 @@ def mensajson(array, code, action, valor):
             Text = "¿A cual persona te refieres? a {0}".format(textnames)
 
         else:
-            Text = "Existen demasiadas coincidencias, necesitas ser mas especifico"
+            Text = "Existen demasiadas coincidencias, necesitas ser mas específico"
     return Text
 
 def informacion(servicio):

@@ -57,6 +57,11 @@ Cambios 28/05/2018:
 - Se conectaron los dos webhooks, de dialogflow y de infomanager.
 - Se modificó la base de datos simulada por DataSetExtensiones_utf8
 
+Cambios 31/05/2018
+- Se corrigió la búsqueda en la base de datos para que el orden no importe.
+- Se dió tratamiento en el mensaje de respuesta de facts.
+- se modificó la forma de llamar al cliente xml.
+
 Modificaciones 14/06/2018:
 - Se añadiò la funciòn de saltar por texto que se localiza en Utils.
 - Se construyò la lògica de saltos por texto y por eventos.

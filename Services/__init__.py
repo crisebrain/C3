@@ -1,1 +1,1 @@
-from .wservices import makeWebhookResult
+from .wservices_modular import makeWebhookResult

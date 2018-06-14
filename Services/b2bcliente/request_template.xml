@@ -6,18 +6,18 @@ xmlns:b2b="http://www.enl.com.mx/B2BFactura/">
       <b2b:consultarFactura>
          <Empresa>RICOH</Empresa>
          <Periodo>Hoy</Periodo>
-         <FechaEmisionInicio>2017-07-12</FechaEmisionInicio>
-         <FechaEmisionFin>2017-07-12</FechaEmisionFin>
-         <Status>Recibido</Status>
-         <NumeroFactura>RCA20202ABFL</NumeroFactura>
-         <Factura>???</Factura>
-         <Cuenta>1209ABC</Cuenta>
-         <Cuenta>1209ABC</Cuenta>
-         <Prefijo>AAAA,99AA</Prefijo>
-         <FolioInicio>900082982</FolioInicio>
-         <FolioFin>900082990</FolioFin>
+         <FechaEmisionInicio></FechaEmisionInicio>
+         <FechaEmisionFin></FechaEmisionFin>
+         <Status></Status>
+         <NumeroFactura></NumeroFactura>
+         <Factura>Factura</Factura>
+         <Cuenta></Cuenta>
+         <Cuenta></Cuenta>
+         <Prefijo></Prefijo>
+         <FolioInicio></FolioInicio>
+         <FolioFin></FolioFin>
          <Acuse>Aceptado</Acuse>
-         <NITAdquiriente>88888821</NITAdquiriente>
+         <NITAdquiriente></NITAdquiriente>
       </b2b:consultarFactura>
    </soapenv:Body>
 </soapenv:Envelope> 

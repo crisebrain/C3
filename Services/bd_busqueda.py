@@ -30,16 +30,17 @@ class BDbusquedas:
         self.BD = pd.read_csv(pathfile, header=0)
         # self.BD = pd.read_csv(pathfile, header=0, encoding="ISO-8859-1")
 
+    def comparaPalabras(self, stringinput, stringname):
+        wordlist = stringinput.lower().split(" ")
+        coincidencias = [True if word in stringname else False
+                         for word in wordlist]
+        return True if all(coincidencias) else False
+
     def busqueda(self, valor):
         valor = joinnames(valor)
-        print(valor)
         Nombres = self.BD[["Nombre", "Apellido"]].apply(func=joinnames, axis=1)
-        print(Nombres)
-        posibles = self.BD.iloc[[True if valor.lower() in n else False
+        posibles = self.BD.iloc[[self.comparaPalabras(valor, n)
                                  for n in Nombres.str.lower().values]]
-        # posiblesc = self.BD.iloc[[True if n in valor.lower() else False
-                                #   for n in Nombres.str.lower().values]]
-        # posibles = pd.concat([posibles, posiblesc])
         resultado = json.loads(posibles.drop(["Id"],
                                axis=1).to_json(orient="table"))
         return resultado["data"]
