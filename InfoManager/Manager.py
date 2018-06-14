@@ -6,23 +6,6 @@ import os
 import json
 import numpy as np
 
-def sendEvent(jdata, token, session):
-    # ---------------------------------------------------------------------
-    headers = {"Content-Type": "application/json",
-               "Authorization": "Bearer " + token,
-               "charset": "UTF-8"}
-    link = "https://dialogflow.googleapis.com/v2/projects/transferenciaautomatica2/agent/sessions/{0}:detectIntent"
-    link = link.format(session)
-    req = requests.post(link,
-                        data=json.dumps(jdata, indent=4), headers=headers)
-    return req
-
-def getToken():
-    # Obtenemos token de google (Ver documentación de como generar el token)
-    token = subprocess.check_output(["gcloud", "auth", "print-access-token"])
-    token = token.decode("utf-8").strip()
-    return token
-
 class InfoManager:
     """InfoManager class.
     Responsabilities:
