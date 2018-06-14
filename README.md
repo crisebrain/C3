@@ -56,3 +56,11 @@ Cambios 28/05/2018:
 - Se creó el código para la consulta de un web service de facturas, aun no se implementa en el infomanager
 - Se conectaron los dos webhooks, de dialogflow y de infomanager.
 - Se modificó la base de datos simulada por DataSetExtensiones_utf8
+
+Modificaciones 14/06/2018:
+- Se añadiò la funciòn de saltar por texto que se localiza en Utils.
+- Se construyò la lògica de saltos por texto y por eventos.
+- El infomanager ahora importa directamente al sessionContainer y al makewebhookResult, directamente desde sus carpetas (falta actualizar con el desarrollo de faseUno para los wservices_modular)
+- Se corrigió el problema de los multiarchivos abiertos en el log session.
+- Se convirtieron las funciones para wservices en scripts separados, para vdn, saldo y facturas.
+- Se continùa simulando al cse.
