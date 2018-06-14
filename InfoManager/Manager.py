@@ -5,6 +5,12 @@ import re
 import os
 import json
 import numpy as np
+import sys
+sys.path.append("Utils")
+# sys.path.append("Services")
+from textJumping import detect_intent_texts
+from SessionContainer import SessionContainer
+# from wservices_modular import makeWebhookResult
 
 class InfoManager:
     """InfoManager class.
@@ -21,7 +27,7 @@ class InfoManager:
         -- Fetch the intents values with the SessionContainer if adapter_DF asks.
     - Fetches the valus from the contexts or id required with "intentDecompose".
     """
-    def __init__(self, SessionContainer, makeWebhookResult,
+    def __init__(self, makeWebhookResult,
                  rootdirectory, idChatBot=None):
         """Creates the Info Manager for the current conference session."""
         self.conference_date = time()
