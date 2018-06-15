@@ -37,19 +37,18 @@ def factura(parametros):
         diccFusionado.update(dicc)
 
     dicReady = preparaParametros(diccFusionado)
-    print(dicReady)
 
     # servicio de factura
     req = sendReq(dicReady)
-    findedFac = HumanResult(getResponseValues(req.content))
-    print(findedFac)
+    facturasEncontradas = HumanResult(getResponseValues(req.content))
+    print(facturasEncontradas)
 
     peticionStr = ""
     for elemento in dicReady:
         if dicReady[elemento] is not None:
             peticionStr += elemento + ": {0} \n".format(dicReady[elemento])
 
-    peticionStr += ".\n----------------Resultados:-------------------\n" + findedFac
+    peticionStr += ".\n----------------Resultados:-------------------\n" + facturasEncontradas
 
     respuesta =  {
                     "fulfillmentText" : peticionStr,
@@ -58,8 +57,6 @@ def factura(parametros):
                         "resultOut": getResponseValues(req.content)
                     }
     }
-    
-    print(respuesta)
 
     return respuesta
 
