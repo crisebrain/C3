@@ -39,22 +39,6 @@ def factura(parametros):
     dicReady = preparaParametros(diccFusionado)
     print(dicReady)
 
-    # Caso que no traiga ninguna restricción. Consulta muy amplia.
-    # if not(estado or prefijo or periodo or numFactura or acuse):
-    #
-    #     # TODO: Implementar caso de que traiga valores inválidos
-    #
-    #     respuesta = "Debe acotar su consulta, ya que el resultado puede ser muy" \
-    #                 " grande. Puede delimitarla con los campos:" \
-    #                 "\nTipo de documento," \
-    #                 "\nEstado," \
-    #                 "\nSerie," \
-    #                 "\nPeriodo," \
-    #                 "\nAcuse," \
-    #                 "\nNumero de Factura"
-    #
-    #     return {"fulfillmentText" : respuesta}
-
     # servicio de factura
     req = sendReq(dicReady)
     findedFac = HumanResult(getResponseValues(req.content))
