@@ -27,39 +27,19 @@ def dudasFacturasCampos(campo):
 
 
 def factura(parametros):
-    estado = None
-    tipoDocumento = None
-    periodo = None
-    prefijo = None
-    acuse = None
-    numFactura = None
     # Ya que los elemenetos vienen en una lista deben tener un tratamiento
     # particular
     listaCampos = parametros["facturasCampos"]
     diccFusionado = {}
+
     # Fusionamos todos los diccionarios
     for dicc in listaCampos:
         diccFusionado.update(dicc)
-    # Obtenemos los valores
-    tipoDocumento = diccFusionado.get("tipoDocumento")
-    periodo = diccFusionado.get("periodo")
-    if diccFusionado.get("status"):
-        estado = diccFusionado.get("status").get("value")
-    if diccFusionado.get("prefijo"):
-        prefijo = diccFusionado.get("prefijo").get("value")
-        if not isinstance(prefijo, str):
-            prefijo = str(int(prefijo))
-        else:
-            prefijo = prefijo.upper()
-    if diccFusionado.get("acuse"):
-        acuse = diccFusionado.get("acuse").get("value")
-    if diccFusionado.get("numeroFactura"):
-        numfactura = diccFusionado.get("numeroFactura").get("value").get("value")
-        if not isinstance(numfactura, str):
-            numFactura = str(int(numfactura))
-        else:
-            numFactura = numFactura.upper()
-    # Caso que no traiga ninguna restricción. Consulta muy amplia
+
+    dicReady = preparaParametros(diccFusionado)
+    print(dicReady)
+
+    # Caso que no traiga ninguna restricción. Consulta muy amplia.
     # if not(estado or prefijo or periodo or numFactura or acuse):
     #
     #     # TODO: Implementar caso de que traiga valores inválidos
@@ -75,40 +55,67 @@ def factura(parametros):
     #
     #     return {"fulfillmentText" : respuesta}
 
-    diccFinal = {"Empresa": "RICOH",
-                 "Periodo": periodo,
-                 "FechaEmisionInicio": "",
-                 "FechaEmisionFin": "",
-                 "Status": estado,
-                 "NumeroFactura": numFactura,
-                 "Factura": tipoDocumento,
-                 "Cuenta": "",
-                 "Cuenta": "",
-                 "Prefijo": prefijo,
-                 "FolioInicio": "",
-                 "FolioFin" : "",
-                 "Acuse": acuse,
-                 "NITAdquiriente": ""}
-
     # servicio de factura
-    req = sendReq(diccFinal)
-    msg = HumanResult(getResponseValues(req.content))
-    print(msg)
-    mostrar = [tipoDocumento, estado, periodo, numFactura, prefijo, acuse]
-    simostrar = [True if var is not None else False for var in mostrar]
-    formatos = ["\nTipo documento: ", "\nEstado: ", "\nPeriodo ",
-                "\nNumero de Factura: ", "\nPrefijo ", "\nAcuse "]
-    peticionstr = ""
-    for i, var in enumerate(mostrar):
-        if simostrar[i]:
-            peticionstr += formatos[i] + "{0}".format(var)
-    peticionstr += ".\n-----------------------------------\n" + msg
-    respuesta =  {"fulfillmentText" : peticionstr,
-                  "payload": { "resultIn": {"periodo": periodo,
-                                            "estado": estado,
-                                            "numFactura": numFactura,
-                                            "prefijo": prefijo,
-                                            "acuse": acuse,
-                                            "factura": tipoDocumento},
-                  "resultOut": getResponseValues(req.content)}}
+    req = sendReq(dicReady)
+    findedFac = HumanResult(getResponseValues(req.content))
+    print(findedFac)
+
+    peticionStr = ""
+    for elemento in dicReady:
+        if dicReady[elemento] is not None:
+            peticionStr += elemento + ": {0} \n".format(dicReady[elemento])
+
+    peticionStr += ".\n----------------Resultados:-------------------\n" + findedFac
+
+    respuesta =  {
+                    "fulfillmentText" : peticionStr,
+                    "payload": {
+                        "resultIn": dicReady ,
+                        "resultOut": getResponseValues(req.content)
+                    }
+    }
+    
+    print(respuesta)
+
     return respuesta
+
+
+def preparaParametros(dic):
+    dicReady = {}
+
+    # Obtenemos los valores y los preparamos
+    dicReady.setdefault("Factura", dic.get("tipoDocumento"))
+
+    dicReady.setdefault("Periodo", dic.get("periodo"))
+
+    if dic.get("status"):
+        dicReady.setdefault("Status", dic.get("status").get("value"))
+
+    # TODO: Corregir los upper para NONE.
+    if dic.get("prefijo"):
+        prefijo = dic.get("prefijo").get("value")
+        if not isinstance(prefijo, str):
+            dicReady.setdefault("Prefijo", str(int(prefijo)))
+        else:
+            dicReady.setdefault("Prefijo", prefijo.upper())
+
+    if dic.get("acuse"):
+        dicReady.setdefault("Acuse", dic.get("acuse").get("value"))
+
+    if dic.get("numeroFactura"):
+        numfactura = dic.get("numeroFactura").get("value").get("value")
+        if not isinstance(numfactura, str):
+            dicReady.setdefault("NumeroFactura", str(int(numfactura)))
+        else:
+            dicReady.setdefault("NumeroFactura", numFactura.upper())
+
+    # hardcoded:
+    dicReady.setdefault("Empresa", "RICOH")
+    dicReady.setdefault("FechaEmisionInicio", None)
+    dicReady.setdefault("FechaEmisionFin", None)
+    dicReady.setdefault("Cuenta", None)
+    dicReady.setdefault("FolioInicio", None)
+    dicReady.setdefault("FolioFin", None)
+    dicReady.setdefault("NITAdquiriente", None)
+
+    return dicReady

@@ -29,6 +29,7 @@ def superPandasRespuesta(lista_dicc):
     return stringout
 
 def superPandasEntrada(dicc):
+    # TODO: Revizar bien este código, es posible que se haya roto.
     columns = ["periodo", "estado", "numFactura",
                "prefijo", "acuse", "factura"]
     df = pd.DataFrame(columns=columns)

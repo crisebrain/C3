@@ -23,6 +23,7 @@ def makeWebhookResult(req):
         else:
             return {"payload": {"result": "Null", "returnCode": "0"},
                    "fulfillmentText": "Null"}
+
     except Exception as exception:
         errors.logger.info(json.dumps(req.get("queryResult")) + "\n")
         errors.logger.exception(exception)
