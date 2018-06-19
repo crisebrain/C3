@@ -138,7 +138,7 @@ def preparaParametros(dic, queryOriginal):
         dicReady.setdefault("NITAdquiriente", dic.get("nit").get("value"))
     else:
         seaker = Regexseaker()
-        print(seaker.seakexpresion(queryOriginal, "NitAdquirienteMex"))
+        dicReady.setdefault("NITAdquiriente", seaker.seakexpresion(queryOriginal, "NitAdquirienteMex"))
 
 
     # hardcoded:

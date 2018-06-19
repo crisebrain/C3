@@ -6,7 +6,7 @@ class Regexseaker:
         self.patterns = dict(Cuenta=r"\b[A-Za-z]{3}\d{3}\b",
                              Prefijo=r"\b[1-9a-zA-Z]\w{0,3}\b",  # wvect
                              NoDocumento=r"\b[0-9a-zA-Z\-]{1,40}\b",  # w2vect
-                             NitAdquirienteMex=r"\b[A-Za-z]{4}\d{6}[A-Za-z]{6}\w\d\b")
+                             NitAdquirienteMex=r"\b[A-Za-z]{4}\d{6}[A-Za-z0-9]{3}\b")
 
     def seakexpresion(self, expression, field="Cuenta"):
         pattern = self.patterns[field]
