@@ -1,4 +1,5 @@
 from .b2bcliente import sendReq, getResponseValues, HumanResult
+from .b2bcliente import Regexseaker
 import json
 
 def dudasFacturasCampos(campo):
@@ -26,10 +27,10 @@ def dudasFacturasCampos(campo):
     return {"fulfillmentText": resp}
 
 
-def factura(parametros):
+def factura(req):
     # Ya que los elemenetos vienen en una lista deben tener un tratamiento
     # particular
-    listaCampos = parametros["facturasCampos"]
+    listaCampos = req.get("queryResult").get("parameters")["facturasCampos"]
     repitedItems = ["folio"]
     diccFusionado = {}
 
@@ -45,7 +46,7 @@ def factura(parametros):
             diccFusionado.update(dicc)
 
 
-    dicReady = preparaParametros(diccFusionado)
+    dicReady = preparaParametros(diccFusionado, req.get("queryResult").get("queryText"))
     print(dicReady)
 
     peticionStr = ""
@@ -62,7 +63,7 @@ def factura(parametros):
     return respuesta
 
 
-def preparaParametros(dic):
+def preparaParametros(dic, queryOriginal):
     dicReady = {}
 
     # Tipo de documento
@@ -132,12 +133,19 @@ def preparaParametros(dic):
     if dic.get("foliofinal"):
         dicReady.setdefault("FolioFinal", dic.get("foliofinal").get("value"))
 
+    # NIT
+    if dic.get("nit"):
+        dicReady.setdefault("NITAdquiriente", dic.get("nit").get("value"))
+    else:
+        seaker = Regexseaker()
+        print(seaker.seakexpresion(queryOriginal, "NitAdquirienteMex"))
+
 
     # hardcoded:
     # dicReady.setdefault("Empresa", "RICOH")
     dicReady.setdefault("FechaEmisionInicio", None)
     dicReady.setdefault("FechaEmisionFin", None)
     dicReady.setdefault("Cuenta", None)
-    dicReady.setdefault("NITAdquiriente", None)
+
 
     return dicReady

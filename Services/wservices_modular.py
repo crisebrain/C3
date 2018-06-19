@@ -19,11 +19,10 @@ def makeWebhookResult(req):
         elif action == "dudasFacturasCampos":
             return dudasFacturasCampos(req.get("queryResult").get("parameters").get("campo"))
         elif action == "factura":
-            return factura(req.get("queryResult").get("parameters"))
+            return factura(req)
         else:
             return {"payload": {"result": "Null", "returnCode": "0"},
                    "fulfillmentText": "Null"}
-
     except Exception as exception:
         errors.logger.info(json.dumps(req.get("queryResult")) + "\n")
         errors.logger.exception(exception)
