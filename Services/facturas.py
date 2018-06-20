@@ -1,4 +1,5 @@
 from .b2bcliente import sendReq, getResponseValues, HumanResult
+from .b2bcliente import Regexseaker
 import json
 
 def dudasFacturasCampos(campo):
@@ -26,51 +27,75 @@ def dudasFacturasCampos(campo):
     return {"fulfillmentText": resp}
 
 
-def factura(parametros):
+def factura(req):
     # Ya que los elemenetos vienen en una lista deben tener un tratamiento
     # particular
-    listaCampos = parametros["facturasCampos"]
+    listaCampos = req.get("queryResult").get("parameters")["facturasCampos"]
+    repitedItems = ["folio"]
     diccFusionado = {}
 
     # Fusionamos todos los diccionarios
     for dicc in listaCampos:
-        diccFusionado.update(dicc)
+        items = list(dicc.items())
 
-    dicReady = preparaParametros(diccFusionado)
+        # Evalúamos si el item es de los posibles repetidos
+        if items[0][0] in repitedItems:
+            # Construye su nombre con respecto al tipo.
+            diccFusionado.setdefault(items[0][0] + items[0][1]["tipo"], items[0][1])
+        else:
+            diccFusionado.update(dicc)
 
-    # servicio de factura
-    req = sendReq(dicReady)
-    facturasEncontradas = HumanResult(getResponseValues(req.content))
-    print(facturasEncontradas)
+
+    dicReady = preparaParametros(diccFusionado, req.get("queryResult").get("queryText"))
+    print(dicReady)
 
     peticionStr = ""
     for elemento in dicReady:
         if dicReady[elemento] is not None:
             peticionStr += elemento + ": {0} \n".format(dicReady[elemento])
 
-    peticionStr += ".\n----------------Resultados:-------------------\n" + facturasEncontradas
-
     respuesta =  {
                     "fulfillmentText" : peticionStr,
-                    "payload": {
-                        "resultIn": dicReady ,
-                        "resultOut": getResponseValues(req.content)
-                    }
+                    "payload": dicReady
+
     }
 
     return respuesta
 
 
-def preparaParametros(dic):
+def preparaParametros(dic, queryOriginal):
     dicReady = {}
 
-    # Obtenemos los valores y los preparamos
-    dicReady.setdefault("Factura", dic.get("tipoDocumento"))
+    # Tipo de documento
+    if dic.get("tipoDocumento") == "Factura":
+        dicReady.setdefault("Factura", "F")
+    elif dic.get("tipoDocumento") == "Nota":
+        dicReady.setdefault("Factura", "N")
 
-    dicReady.setdefault("Periodo", dic.get("periodo"))
+    # Periodo
+    switcherPeriodo = {
+        "Hoy": 1,
+        "Semana": 2,
+        "Mes": 3
+    }
+    # Valor por default 0
+    periodo = switcherPeriodo.get(dic.get("periodo"), 0)
+    dicReady.setdefault("Periodo", periodo)
 
+
+    # Estatus
+    switcherStatus = {
+        "Recibido": 1,
+        "Error": 6,
+        "Firmado": 22,
+        "Rechazado": 23,
+        "Aceptado": 24,
+        "Enviado": 25
+    }
     if dic.get("status"):
-        dicReady.setdefault("Status", dic.get("status").get("value"))
+        status = switcherStatus.get(dic.get("status").get("value"))
+        dicReady.setdefault("Status", status)
+
 
     # TODO: Corregir los upper para NONE.
     if dic.get("prefijo"):
@@ -80,9 +105,21 @@ def preparaParametros(dic):
         else:
             dicReady.setdefault("Prefijo", prefijo.upper())
 
-    if dic.get("acuse"):
-        dicReady.setdefault("Acuse", dic.get("acuse").get("value"))
 
+    # Acuse
+    switcherAcuse = {
+        "Aceptado": 1,
+        "Rechazado": 2,
+        "Pendiente": 3
+    }
+    acuse = ""
+    if dic.get("acuse"):
+        acuse = dic.get("acuse").get("value")
+    # Valor por default 0
+    dicReady.setdefault("Acuse", switcherAcuse.get(acuse, 0))
+
+
+    # TODO: Corregir los upper para NONE.
     if dic.get("numeroFactura"):
         numfactura = dic.get("numeroFactura").get("value").get("value")
         if not isinstance(numfactura, str):
@@ -90,13 +127,25 @@ def preparaParametros(dic):
         else:
             dicReady.setdefault("NumeroFactura", numFactura.upper())
 
+    # Folio
+    if dic.get("folioinicial"):
+        dicReady.setdefault("FolioInicio", dic.get("folioinicial").get("value"))
+    if dic.get("foliofinal"):
+        dicReady.setdefault("FolioFinal", dic.get("foliofinal").get("value"))
+
+    # NIT
+    if dic.get("nit"):
+        dicReady.setdefault("NITAdquiriente", dic.get("nit").get("value"))
+    else:
+        seaker = Regexseaker()
+        dicReady.setdefault("NITAdquiriente", seaker.seakexpresion(queryOriginal, "NitAdquirienteMex"))
+
+
     # hardcoded:
-    dicReady.setdefault("Empresa", "RICOH")
+    # dicReady.setdefault("Empresa", "RICOH")
     dicReady.setdefault("FechaEmisionInicio", None)
     dicReady.setdefault("FechaEmisionFin", None)
     dicReady.setdefault("Cuenta", None)
-    dicReady.setdefault("FolioInicio", None)
-    dicReady.setdefault("FolioFin", None)
-    dicReady.setdefault("NITAdquiriente", None)
+
 
     return dicReady
