@@ -65,6 +65,7 @@ def factura(req):
 
 def preparaParametros(dic, queryOriginal):
     dicReady = {}
+    seaker = Regexseaker()
 
     # Tipo de documento
     if dic.get("tipoDocumento") == "Factura":
@@ -119,14 +120,6 @@ def preparaParametros(dic, queryOriginal):
     dicReady.setdefault("Acuse", switcherAcuse.get(acuse, 0))
 
 
-    # TODO: Corregir los upper para NONE.
-    if dic.get("numeroFactura"):
-        numfactura = dic.get("numeroFactura").get("value").get("value")
-        if not isinstance(numfactura, str):
-            dicReady.setdefault("NumeroFactura", str(int(numfactura)))
-        else:
-            dicReady.setdefault("NumeroFactura", numFactura.upper())
-
     # Folio
     if dic.get("folioinicial"):
         dicReady.setdefault("FolioInicio", dic.get("folioinicial").get("value"))
@@ -137,15 +130,32 @@ def preparaParametros(dic, queryOriginal):
     if dic.get("nit"):
         dicReady.setdefault("NITAdquiriente", dic.get("nit").get("value"))
     else:
-        seaker = Regexseaker()
         dicReady.setdefault("NITAdquiriente", seaker.seakexpresion(queryOriginal, "NitAdquirienteMex"))
+
+
+    # Código que indica el valor inválido.
+    # if dicReady.get("NITAdquiriente") is None:
+    #     import re
+    #     patternNIT = re.search(r"nit", queryOriginal)
+    #     temp = queryOriginal[patternNIT.end():len(queryOriginal)]
+    #     dicReady["NITAdquiriente"] = "Valor invalido: " + temp
+
+
+
+
+    # Cuenta
+    dicReady.setdefault("Cuenta", seaker.seakexpresion(queryOriginal, "Cuenta"))
 
 
     # hardcoded:
     # dicReady.setdefault("Empresa", "RICOH")
     dicReady.setdefault("FechaEmisionInicio", None)
     dicReady.setdefault("FechaEmisionFin", None)
-    dicReady.setdefault("Cuenta", None)
+    # NumeroFactura (Num. Documento)
+    dicReady.setdefault("NumeroFactura", None)
 
 
     return dicReady
+
+def addEntryToDic(dic, campo, value, status):
+    dic.setdefault(campo, {"value": value, "status": status})
