@@ -154,8 +154,8 @@ def preparaParametros(dic, queryOriginal):
 
     # Fechas
     fechaInicio, fechaFin = calcDates(dic.get("date"), dic.get("date-period"))
-    dicReady.setdefault("FechaEmisionInicio", fechaInicio.isoformat())
-    dicReady.setdefault("FechaEmisionFin", fechaFin.isoformat())
+    dicReady.setdefault("FechaEmisionInicio", fechaInicio.isoformat() if fechaInicio is not None else None)
+    dicReady.setdefault("FechaEmisionFin", fechaFin.isoformat() if fechaInicio is not None else None)
 
 
 
@@ -202,7 +202,7 @@ def calcDates(listDate, listDatePeriod):
 
     # Periodo
     if len(listDatePeriod) > 0 \
-            and dateStart is not None and dateEnd is not None:
+            and dateStart is None and dateEnd is None:
         i = len(listDatePeriod) - 1
         year = int(listDatePeriod[i].get("startDate")[0:4])
         month = int(listDatePeriod[i].get("startDate")[5:7])
