@@ -1,6 +1,7 @@
 from .b2bcliente import sendReq, getResponseValues, HumanResult
 from .b2bcliente import Regexseaker
 import json
+import datetime
 
 def dudasFacturasCampos(campo):
     entrada = "Para factura, "
@@ -34,16 +35,21 @@ def factura(req):
     repitedItems = ["folio"]
     diccFusionado = {}
 
-    # Fusionamos todos los diccionarios
-    for dicc in listaCampos:
-        items = list(dicc.items())
+    # Fusionamos todos los diccionarios y listas, para obtener un diccionario de todo
+    for element in listaCampos:
+        items = list(element.items())
 
         # Evalúamos si el item es de los posibles repetidos
         if items[0][0] in repitedItems:
             # Construye su nombre con respecto al tipo.
             diccFusionado.setdefault(items[0][0] + items[0][1]["tipo"], items[0][1])
         else:
-            diccFusionado.update(dicc)
+            diccFusionado.update(element)
+
+    diccFusionado.setdefault(
+        "date", req.get("queryResult").get("parameters").get("date"))
+    diccFusionado.setdefault(
+        "date-period", req.get("queryResult").get("parameters").get("date-period"))
 
 
     dicReady = preparaParametros(diccFusionado, req.get("queryResult").get("queryText"))
@@ -122,9 +128,11 @@ def preparaParametros(dic, queryOriginal):
 
     # Folio
     if dic.get("folioinicial"):
-        dicReady.setdefault("FolioInicio", dic.get("folioinicial").get("value"))
+        folioInicio = int(dic.get("folioinicial").get("value"))
+        dicReady.setdefault("FolioInicio", folioInicio)
     if dic.get("foliofinal"):
-        dicReady.setdefault("FolioFinal", dic.get("foliofinal").get("value"))
+        folioFinal = int(dic.get("foliofinal").get("value"))
+        dicReady.setdefault("FolioFinal", folioFinal)
 
     # NIT
     if dic.get("nit"):
@@ -141,16 +149,18 @@ def preparaParametros(dic, queryOriginal):
     #     dicReady["NITAdquiriente"] = "Valor invalido: " + temp
 
 
-
-
     # Cuenta
     dicReady.setdefault("Cuenta", seaker.seakexpresion(queryOriginal, "Cuenta"))
+
+    # Fechas
+    fechaInicio, fechaFin = calcDates(dic.get("date"), dic.get("date-period"))
+    dicReady.setdefault("FechaEmisionInicio", fechaInicio.isoformat())
+    dicReady.setdefault("FechaEmisionFin", fechaFin.isoformat())
+
 
 
     # hardcoded:
     # dicReady.setdefault("Empresa", "RICOH")
-    dicReady.setdefault("FechaEmisionInicio", None)
-    dicReady.setdefault("FechaEmisionFin", None)
     # NumeroFactura (Num. Documento)
     dicReady.setdefault("NumeroFactura", None)
 
@@ -159,3 +169,49 @@ def preparaParametros(dic, queryOriginal):
 
 def addEntryToDic(dic, campo, value, status):
     dic.setdefault(campo, {"value": value, "status": status})
+
+def calcDates(listDate, listDatePeriod):
+    dateStart = None
+    dateEnd = None
+
+    # Fechas individuales
+    if len(listDate) > 0:
+        i = len(listDate) - 1
+        year = int(listDate[i][0:4])
+        month = int(listDate[i][5:7])
+        day = int(listDate[i][8:10])
+        date1 = datetime.date(year, month, day)
+
+        # Evalúamos que exista otro elemento
+        if i >= 1:
+            i -= 1
+
+        year = int(listDate[i][0:4])
+        month = int(listDate[i][5:7])
+        day = int(listDate[i][8:10])
+        date2 = datetime.date(year, month, day)
+
+        # Evalúa fecha mayor
+        if date1 < date2:
+            dateStart = date1
+            dateEnd = date2
+        else:
+            dateStart = date2
+            dateEnd = date1
+
+
+    # Periodo
+    if len(listDatePeriod) > 0 \
+            and dateStart is not None and dateEnd is not None:
+        i = len(listDatePeriod) - 1
+        year = int(listDatePeriod[i].get("startDate")[0:4])
+        month = int(listDatePeriod[i].get("startDate")[5:7])
+        day = int(listDatePeriod[i].get("startDate")[8:10])
+        dateStart = datetime.date(year, month, day)
+
+        year = int(listDatePeriod[i].get("endDate")[0:4])
+        month = int(listDatePeriod[i].get("endDate")[5:7])
+        day = int(listDatePeriod[i].get("endDate")[8:10])
+        dateEnd = datetime.date(year, month, day)
+
+    return dateStart, dateEnd
