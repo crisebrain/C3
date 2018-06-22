@@ -177,14 +177,12 @@ def calcDates(listDate, listDatePeriod):
     # Fechas individuales
     if len(listDate) > 0:
         i = len(listDate) - 1
-        year, month, day = getYMD_Date(listDate[i])
-        date1 = datetime.date(year, month, day)
+        date1 = getYMD_Date(listDate[i])
 
         # Evalúamos que exista otro elemento
         if i >= 1:
             i -= 1
-        year, month, day = getYMD_Date(listDate[i])
-        date2 = datetime.date(year, month, day)
+        date2 = getYMD_Date(listDate[i])
 
         # Evalúa fecha mayor
         if date1 < date2:
@@ -194,16 +192,13 @@ def calcDates(listDate, listDatePeriod):
             dateStart = date2
             dateEnd = date1
 
-
     # Periodo
     if len(listDatePeriod) > 0 \
             and dateStart is None and dateEnd is None:
         i = len(listDatePeriod) - 1
-        year, month, day = getYMD_Date(listDatePeriod[i].get("startDate"))
-        dateStart = datetime.date(year, month, day)
+        dateStart = getYMD_Date(listDatePeriod[i].get("startDate"))
+        dateEnd = getYMD_Date(listDatePeriod[i].get("endDate"))
 
-        year, month, day = getYMD_Date(listDatePeriod[i].get("endDate"))
-        dateEnd = datetime.date(year, month, day)
 
     return dateStart, dateEnd
 
@@ -212,4 +207,4 @@ def getYMD_Date(dateString):
     month = int(dateString[5:7])
     day = int(dateString[8:10])
 
-    return year, month, day
+    return datetime.date(year, month, day)
