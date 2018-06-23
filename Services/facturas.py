@@ -1,6 +1,7 @@
 from .b2bcliente import sendReq, getResponseValues, HumanResult
 from .b2bcliente import Regexseaker
 import json
+import datetime
 
 def dudasFacturasCampos(campo):
     entrada = "Para factura, "
@@ -34,16 +35,21 @@ def factura(req):
     repitedItems = ["folio"]
     diccFusionado = {}
 
-    # Fusionamos todos los diccionarios
-    for dicc in listaCampos:
-        items = list(dicc.items())
+    # Fusionamos todos los diccionarios y listas, para obtener un diccionario de todo
+    for element in listaCampos:
+        items = list(element.items())
 
         # Evalúamos si el item es de los posibles repetidos
         if items[0][0] in repitedItems:
             # Construye su nombre con respecto al tipo.
             diccFusionado.setdefault(items[0][0] + items[0][1]["tipo"], items[0][1])
         else:
-            diccFusionado.update(dicc)
+            diccFusionado.update(element)
+
+    diccFusionado.setdefault(
+        "date", req.get("queryResult").get("parameters").get("date"))
+    diccFusionado.setdefault(
+        "date-period", req.get("queryResult").get("parameters").get("date-period"))
 
 
     dicReady = preparaParametros(diccFusionado, req.get("queryResult").get("queryText"))
@@ -65,6 +71,7 @@ def factura(req):
 
 def preparaParametros(dic, queryOriginal):
     dicReady = {}
+    seaker = Regexseaker()
 
     # Tipo de documento
     if dic.get("tipoDocumento") == "Factura":
@@ -119,33 +126,85 @@ def preparaParametros(dic, queryOriginal):
     dicReady.setdefault("Acuse", switcherAcuse.get(acuse, 0))
 
 
-    # TODO: Corregir los upper para NONE.
-    if dic.get("numeroFactura"):
-        numfactura = dic.get("numeroFactura").get("value").get("value")
-        if not isinstance(numfactura, str):
-            dicReady.setdefault("NumeroFactura", str(int(numfactura)))
-        else:
-            dicReady.setdefault("NumeroFactura", numFactura.upper())
-
     # Folio
     if dic.get("folioinicial"):
-        dicReady.setdefault("FolioInicio", dic.get("folioinicial").get("value"))
+        folioInicio = int(dic.get("folioinicial").get("value"))
+        dicReady.setdefault("FolioInicio", folioInicio)
     if dic.get("foliofinal"):
-        dicReady.setdefault("FolioFinal", dic.get("foliofinal").get("value"))
+        folioFinal = int(dic.get("foliofinal").get("value"))
+        dicReady.setdefault("FolioFinal", folioFinal)
 
     # NIT
     if dic.get("nit"):
         dicReady.setdefault("NITAdquiriente", dic.get("nit").get("value"))
     else:
-        seaker = Regexseaker()
         dicReady.setdefault("NITAdquiriente", seaker.seakexpresion(queryOriginal, "NitAdquirienteMex"))
+
+
+    # Código que indica el valor inválido.
+    # if dicReady.get("NITAdquiriente") is None:
+    #     import re
+    #     patternNIT = re.search(r"nit", queryOriginal)
+    #     temp = queryOriginal[patternNIT.end():len(queryOriginal)]
+    #     dicReady["NITAdquiriente"] = "Valor invalido: " + temp
+
+
+    # Cuenta
+    dicReady.setdefault("Cuenta", seaker.seakexpresion(queryOriginal, "Cuenta"))
+
+    # Fechas
+    fechaInicio, fechaFin = calcDates(dic.get("date"), dic.get("date-period"))
+    dicReady.setdefault("FechaEmisionInicio", fechaInicio.isoformat() if fechaInicio is not None else None)
+    dicReady.setdefault("FechaEmisionFin", fechaFin.isoformat() if fechaInicio is not None else None)
+
 
 
     # hardcoded:
     # dicReady.setdefault("Empresa", "RICOH")
-    dicReady.setdefault("FechaEmisionInicio", None)
-    dicReady.setdefault("FechaEmisionFin", None)
-    dicReady.setdefault("Cuenta", None)
+    # NumeroFactura (Num. Documento)
+    dicReady.setdefault("NumeroFactura", None)
 
 
     return dicReady
+
+def addEntryToDic(dic, campo, value, status):
+    dic.setdefault(campo, {"value": value, "status": status})
+
+def calcDates(listDate, listDatePeriod):
+    dateStart = None
+    dateEnd = None
+
+    # Fechas individuales
+    if len(listDate) > 0:
+        i = len(listDate) - 1
+        date1 = getYMD_Date(listDate[i])
+
+        # Evalúamos que exista otro elemento
+        if i >= 1:
+            i -= 1
+        date2 = getYMD_Date(listDate[i])
+
+        # Evalúa fecha mayor
+        if date1 < date2:
+            dateStart = date1
+            dateEnd = date2
+        else:
+            dateStart = date2
+            dateEnd = date1
+
+    # Periodo
+    if len(listDatePeriod) > 0 \
+            and dateStart is None and dateEnd is None:
+        i = len(listDatePeriod) - 1
+        dateStart = getYMD_Date(listDatePeriod[i].get("startDate"))
+        dateEnd = getYMD_Date(listDatePeriod[i].get("endDate"))
+
+
+    return dateStart, dateEnd
+
+def getYMD_Date(dateString):
+    year = int(dateString[0:4])
+    month = int(dateString[5:7])
+    day = int(dateString[8:10])
+
+    return datetime.date(year, month, day)
