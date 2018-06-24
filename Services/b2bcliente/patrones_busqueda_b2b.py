@@ -53,21 +53,30 @@ class Regexseaker:
             grammar = r"""NP: {<Prefijo> <(vs\w+)|(nc\w+)|(wmi\w+)|(spc\w+)>* <dato|Z>}
                           NP: {<Prefijo> <(vmi\w+)|(aq\w+)|unknown>? <sp\w+>? <dato|Z>}
                           NP: {<dato|Z> <(vs\w+)> <(da\w+)> <Prefijo>}
-                          NP: {<dato|Z> <cs> <Prefijo>}
+                          NP: {<dato|Z> <(p030\w+)>? <vmip3s0>? <cs> <Prefijo>}
                        """
                       # r"""NP: {<Prefijo> <(vs\w+)|dato>*}"""
                               #{<dato> <nc\w+>* <Prefijo>} """
         elif key == "NoDocumento":
-            grammar = r"NP: {<NoDocumento>? <nc\w+>* <sp\w+>* <nc\w+>* <dato>}"
+            grammar = r"""NP: {<NoDocumento> <(nc\w+)|(sp\w+)|(vs)\w+>* <dato|Z>}
+                          NP: {<NoDocumento|(ncm\w+)> <(vm\w+)|(vs\w+)|(aq\w+)>* <cs|(sps\w+)|(spc\w+)>? <dato|Z>}
+                          NP: {<NoDocumento> <(vm\w+)|(vs\w+)>* <cs|spcms>? <dato|Z>}
+                          NP: {<dato|Z> <vsip3s0|cs> <ncms000>? <da0ms0|(sps\w+)>? <NoDocumento|ncms000>}
+                          NP: {<dato|Z> <(p0\w+)> <vm\w+> <cs> <NoDocumento>}
+                       """
+                       #NP: {<dato> <vsip3s0|cs> <NoDocumento>}
+
         cp = nltk.RegexpParser(grammar)
         chunked = cp.parse(tagged)
         continuous_chunk = []
         entity = []
+        subt = []
         for i, subtree in enumerate(chunked):
             if type(subtree) == nltk.Tree:
                 print(subtree)
                 entity += [token for token, pos in subtree.leaves()
                            if pos == "dato" or pos == "Z"]
+                subt.append(subtree)
         if entity == []:
             entity = None
             code = 1
@@ -77,7 +86,7 @@ class Regexseaker:
         else:
             code = 1
             entity = entity[0]
-        return entity, code
+        return entity, code, subt, tagged
 
     def seakexpresion(self, expression, field="Cuenta", nl=3):
         if field in ["Cuenta", "NitAdquirienteMex"]:
