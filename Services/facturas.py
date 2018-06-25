@@ -63,7 +63,6 @@ def factura(req):
     respuesta =  {
                     "fulfillmentText" : peticionStr,
                     "payload": dicReady
-
     }
 
     return respuesta
@@ -75,9 +74,9 @@ def preparaParametros(dic, queryOriginal):
 
     # Tipo de documento
     if dic.get("tipoDocumento") == "Factura":
-        dicReady.setdefault("Factura", "F")
+        addEntryToDic(dicReady, "tipoDocumento", "F", 1)
     elif dic.get("tipoDocumento") == "Nota":
-        dicReady.setdefault("Factura", "N")
+        addEntryToDic(dicReady, "tipoDocumento", "N", 1)
 
     # Periodo
     switcherPeriodo = {
@@ -87,8 +86,7 @@ def preparaParametros(dic, queryOriginal):
     }
     # Valor por default 0
     periodo = switcherPeriodo.get(dic.get("periodo"), 0)
-    dicReady.setdefault("Periodo", periodo)
-
+    addEntryToDic(dicReady, "Periodo", periodo, 1)
 
     # Estatus
     switcherStatus = {
@@ -101,16 +99,19 @@ def preparaParametros(dic, queryOriginal):
     }
     if dic.get("status"):
         status = switcherStatus.get(dic.get("status").get("value"))
-        dicReady.setdefault("Status", status)
+        addEntryToDic(dicReady, "Status", status, 1)
 
 
-    # TODO: Corregir los upper para NONE.
+    # Prefijo
     if dic.get("prefijo"):
         prefijo = dic.get("prefijo").get("value")
-        if not isinstance(prefijo, str):
-            dicReady.setdefault("Prefijo", str(int(prefijo)))
-        else:
-            dicReady.setdefault("Prefijo", prefijo.upper())
+        if isinstance(prefijo, float):
+            prefijo = str(int(prefijo))
+            addEntryToDic(dicReady, "Prefijo", prefijo, 1)
+
+        elif isinstance(prefijo, str):
+            prefijo = prefijo.upper().replace(" ", "")
+            addEntryToDic(dicReady, "Prefijo", prefijo, 1)
 
 
     # Acuse
@@ -123,22 +124,26 @@ def preparaParametros(dic, queryOriginal):
     if dic.get("acuse"):
         acuse = dic.get("acuse").get("value")
     # Valor por default 0
-    dicReady.setdefault("Acuse", switcherAcuse.get(acuse, 0))
+    acuse = switcherAcuse.get(acuse, 0)
+    addEntryToDic(dicReady, "Acuse", acuse, 1)
 
 
     # Folio
     if dic.get("folioinicial"):
         folioInicio = int(dic.get("folioinicial").get("value"))
-        dicReady.setdefault("FolioInicio", folioInicio)
+        addEntryToDic(dicReady, "FolioInicio", folioInicio, 1)
     if dic.get("foliofinal"):
         folioFinal = int(dic.get("foliofinal").get("value"))
-        dicReady.setdefault("FolioFinal", folioFinal)
+        addEntryToDic(dicReady, "FolioFinal", folioFinal, 1)
+
 
     # NIT
     if dic.get("nit"):
-        dicReady.setdefault("NITAdquiriente", dic.get("nit").get("value"))
+        nit = str(int(dic.get("nit").get("value")))
+        addEntryToDic(dicReady, "NITAdquiriente", nit, 1)
     else:
-        dicReady.setdefault("NITAdquiriente", seaker.seakexpresion(queryOriginal, "NitAdquirienteMex"))
+        nit = seaker.seakexpresion(queryOriginal, "NitAdquirienteMex")
+        addEntryToDic(dicReady, "NITAdquiriente", nit, 1)
 
 
     # Código que indica el valor inválido.
@@ -150,24 +155,28 @@ def preparaParametros(dic, queryOriginal):
 
 
     # Cuenta
-    dicReady.setdefault("Cuenta", seaker.seakexpresion(queryOriginal, "Cuenta"))
+    cuenta = seaker.seakexpresion(queryOriginal, "Cuenta")
+    addEntryToDic(dicReady, "Cuenta", cuenta, 1)
 
     # Fechas
     fechaInicio, fechaFin = calcDates(dic.get("date"), dic.get("date-period"))
-    dicReady.setdefault("FechaEmisionInicio", fechaInicio.isoformat() if fechaInicio is not None else None)
-    dicReady.setdefault("FechaEmisionFin", fechaFin.isoformat() if fechaInicio is not None else None)
-
+    # Si la existe la fecha, le pone formato ISO, sino, la deja en None
+    fechaInicioStr = fechaInicio.isoformat() if fechaInicio is not None else None
+    fechaFinStr = fechaFin.isoformat() if fechaInicio is not None else None
+    addEntryToDic(dicReady, "FechaEmisionInicio", fechaInicioStr, 1)
+    addEntryToDic(dicReady, "FechaEmisionFin", fechaFinStr, 1)
 
 
     # hardcoded:
     # dicReady.setdefault("Empresa", "RICOH")
     # NumeroFactura (Num. Documento)
-    dicReady.setdefault("NumeroFactura", None)
+    addEntryToDic(dicReady, "NumeroFactura", None, 1)
 
 
     return dicReady
 
 def addEntryToDic(dic, campo, value, status):
+    # Status 1 correcto, status 0 incorrecto.
     dic.setdefault(campo, {"value": value, "status": status})
 
 def calcDates(listDate, listDatePeriod):
@@ -177,12 +186,12 @@ def calcDates(listDate, listDatePeriod):
     # Fechas individuales
     if len(listDate) > 0:
         i = len(listDate) - 1
-        date1 = getYMD_Date(listDate[i])
+        date1 = calcDate(listDate[i])
 
         # Evalúamos que exista otro elemento
         if i >= 1:
             i -= 1
-        date2 = getYMD_Date(listDate[i])
+        date2 = calcDate(listDate[i])
 
         # Evalúa fecha mayor
         if date1 < date2:
@@ -196,13 +205,13 @@ def calcDates(listDate, listDatePeriod):
     if len(listDatePeriod) > 0 \
             and dateStart is None and dateEnd is None:
         i = len(listDatePeriod) - 1
-        dateStart = getYMD_Date(listDatePeriod[i].get("startDate"))
-        dateEnd = getYMD_Date(listDatePeriod[i].get("endDate"))
+        dateStart = calcDate(listDatePeriod[i].get("startDate"))
+        dateEnd = calcDate(listDatePeriod[i].get("endDate"))
 
 
     return dateStart, dateEnd
 
-def getYMD_Date(dateString):
+def calcDate(dateString):
     year = int(dateString[0:4])
     month = int(dateString[5:7])
     day = int(dateString[8:10])
