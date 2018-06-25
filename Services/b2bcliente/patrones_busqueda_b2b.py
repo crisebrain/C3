@@ -48,12 +48,13 @@ class Regexseaker:
                     tagged[unknown, 1] = "unknown"
         return [tuple(wordtagged) for wordtagged in tagged]
 
-    def do_chunking(self, tagged, key):
+    def do_chunking(self, tagged, key, code):
         if key == "Prefijo":
-            grammar = r"""NP: {<Prefijo> <(vs\w+)|(nc\w+)|(wmi\w+)|(spc\w+)>* <dato|Z>}
-                          NP: {<Prefijo> <(vmi\w+)|(aq\w+)|unknown>? <sp\w+>? <dato|Z>}
-                          NP: {<dato|Z> <(vs\w+)> <(da\w+)> <Prefijo>}
-                          NP: {<dato|Z> <(p030\w+)>? <vmip3s0>? <cs> <Prefijo>}
+            grammar = r"""NP: {<Prefijo> <(vs\w+)|(nc\w+)|(wmi\w+)|(spc\w+)>* <dato|Z|unknown>}
+                          NP: {<Prefijo> <(vmi\w+)|(aq\w+)|unknown>? <sp\w+>? <dato|Z|unknown>}
+                          NP: {<Prefijo> <dd0fs0> <vmp00sm> <sps00> <dato|Z|unknown>}
+                          NP: {<dato|Z|unknown> <(vs\w+)> <(da\w+)> <Prefijo>}
+                          NP: {<dato|Z|unknown> <(p030\w+)>? <vmip3s0>? <cs> <Prefijo>}
                        """
                       # r"""NP: {<Prefijo> <(vs\w+)|dato>*}"""
                               #{<dato> <nc\w+>* <Prefijo>} """
@@ -70,19 +71,27 @@ class Regexseaker:
         chunked = cp.parse(tagged)
         continuous_chunk = []
         entity = []
+        unknowns = []
         subt = []
         for i, subtree in enumerate(chunked):
             if type(subtree) == nltk.Tree:
                 print(subtree)
                 entity += [token for token, pos in subtree.leaves()
                            if pos == "dato" or pos == "Z"]
+                unknowns += [token for token, pos in subtree.leaves()
+                             if pos == "unknown"]
                 subt.append(subtree)
         if entity == []:
-            entity = None
-            code = 1
+            code = 0
+            if len(unknowns) > 1:
+                entity = unknowns[-1]
+            elif unknowns != []:
+                entity = unknowns[0]
+            else:
+                entity = None
         elif len(entity) > 1:
             code = 0
-            entity = entity[0]
+            entity = entity[-1]
         else:
             code = 1
             entity = entity[0]
@@ -117,15 +126,20 @@ class Regexseaker:
             print(posible)
             if posible is None:
                 return (None, 1)
+            else:
+                code = 1
             tagged = self.do_tagging(posible, field)
             print(tagged)
-            return self.do_chunking(tagged, field)
+            return self.do_chunking(tagged, field, code)
 
 if __name__ == "__main__":
     reg = Regexseaker()
-    expr = "Quiero facturas de acuse recibido con número de documento 33443 y el prefijo es x"
+    #expr = "Quiero facturas de acuse recibido con número de documento 33443 y el prefijo es x"
+    #expr = "Hola, me ayudas con las facturas donde ABCD ES el valor definido para el prefijo"
+    #expr = "Hola, me ayudas con las facturas donde ABCD ES el prefijo"
+    expr = "Por favor con las facturas donde ABCD ES el prefijo, perdon el prefijo es el XXXX"
     print("\n")
     print(expr)
     print("\n")
-    print("Prefijo: ", reg.seakexpresion(expr, "Prefijo", nl=3))
-    print("NoDocumento: ", reg.seakexpresion(expr, "NoDocumento", nl=3))
+    print("Prefijo: ", reg.seakexpresion(expr.lower(), "Prefijo", nl=5))
+    # print("NoDocumento: ", reg.seakexpresion(expr.lower(), "NoDocumento", nl=3))
