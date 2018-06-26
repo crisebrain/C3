@@ -1,5 +1,5 @@
 from .saldos_vdns import makeresponseAction, informacion
-from .facturas import factura, dudasFacturasCampos
+from .facturas import factura
 
 import json
 import sys
@@ -16,8 +16,6 @@ def makeWebhookResult(req):
             return makeresponseAction(req, action)
         elif action == "informacion":
             return informacion(req.get("queryResult").get("parameters").get("servicio"))
-        elif action == "dudasFacturasCampos":
-            return dudasFacturasCampos(req.get("queryResult").get("parameters").get("campo"))
         elif action == "factura":
             return factura(req)
         else:
