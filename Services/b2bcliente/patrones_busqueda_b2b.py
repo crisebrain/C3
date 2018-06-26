@@ -26,18 +26,16 @@ class Regexseaker:
             return None
 
     def do_tagging(self, exp, field):
-        lista = self.dictfacturas[field]
         tokens = nltk.word_tokenize(exp)
         tagged = sgt.pos_tag(tokens)
-        tagged = np.array([list(tup) for tup in tagged])
-        mask = tagged[:, 1] == None
-        # Hardcode :( para serie
+        tagged = np.array([list(tup) for tup in tagged]).astype(str)
+        mask = tagged[:, 1] == 'None'
         for i, token in enumerate(tokens):
             if token in self.dictfacturas[field]:
-                tagged[i, 1] = field
+                tagged[i, 1] = str(field)
         unknowns, = np.where(mask)
         for unknown in unknowns:
-            if tagged[unknown, 0] in lista:
+            if tagged[unknown, 0] in self.dictfacturas[field]:
                 tagged[unknown, 1] = field
             else:
                 if self.regexextractor(tokens[unknown], field) is not None:
@@ -46,17 +44,18 @@ class Regexseaker:
                     tagged[unknown, 1] = "unknown"
         return [tuple(wordtagged) for wordtagged in tagged]
 
-    def do_chunking(self, tagged, field, code):
+    def choice_grammar(self, field):
         if field == "Prefijo":
             # directas
             # inversas
             # añadir que se hace con sustantivos y nodos terminales
-            grammar = r"""NP: {<Prefijo> <(vs\w+)|(nc\w+)|(wmi\w+)|(spc\w+)>* <dato|Z|unknown>}
-                          NP: {<Prefijo> <(vmi\w+)|(aq\w+)|unknown>? <sp\w+>? <dato|Z|unknown>}
-                          NP: {<Prefijo> <dd0fs0> <vmp00sm> <sps00> <dato|Z|unknown>}
-                          NP: {<dato|Z|unknown> <(vs\w+)> <(da\w+)> <Prefijo>}
-                          NP: {<dato|Z|unknown> <(p030\w+)>? <vmip3s0>? <cs> <Prefijo>}
-                       """
+            grammar = r"""NP: {<Prefijo> <(vs\w+)|(nc\w+)|(wmi\w+)|(spc\w+)>* Q}
+                          NP: {<Prefijo> <(vmi\w+)|(aq\w+)|unknown>? <sp\w+>? Q}
+                          NP: {<Prefijo> <dd0fs0> <vmp00sm> <sps00> Q}
+                          NP: {Q <(vs\w+)> <(da\w+)> <Prefijo>}
+                          NP: {Q <(p030\w+)>? <vmip3s0>? <cs> <Prefijo>}
+                          Q: {<dato|Z|unknown|ncfs000|ncms000>}
+                        """
                       # r"""NP: {<Prefijo> <(vs\w+)|dato>*}"""
                               #{<dato> <nc\w+>* <Prefijo>} """
         elif field == "NoDocumento":
@@ -67,36 +66,44 @@ class Regexseaker:
                           NP: {<dato|Z> <(p0\w+)> <vm\w+> <cs> <NoDocumento>}
                        """
                        #NP: {<dato> <vsip3s0|cs> <NoDocumento>}
+        return grammar
 
+
+    def do_chunking(self, tagged, field, code):
+        grammar = self.choice_grammar(field)
         cp = nltk.RegexpParser(grammar)
         chunked = cp.parse(tagged)
+        # añadir las condiciones que sean necesarias para contemplar
+        # los posibles valores
+        posibles = ["dato", "Z", "ncfs000", "ncms000", "ncfs000"]
+        # posibles son los tipos de palabras que pueden representar al dato
         continuous_chunk = []
         entity = []
         unknowns = []
         subt = []
         for i, subtree in enumerate(chunked):
-            if type(subtree) == nltk.Tree:
-                print(subtree)
+            if isinstance(subtree, nltk.Tree):
+                # print(subtree)
                 entity += [token for token, pos in subtree.leaves()
-                           if pos == "dato" or pos == "Z"]
+                           if pos in posibles]
                 unknowns += [token for token, pos in subtree.leaves()
                              if pos == "unknown"]
                 subt.append(subtree)
         if entity == []:
             code = 0
-            if len(unknowns) > 1:
+            if unknowns != []:
                 entity = unknowns[-1].upper()
-            elif unknowns != []:
-                entity = unknowns[0].upper()
             else:
                 entity = None
         elif len(entity) > 1:
             code = 0
             entity = entity[-1].upper()
-            entity = entity
         else:
-            code = 1
             entity = entity[0].upper()
+            if self.regexextractor(entity, field) is not None:
+                code = 1
+            else:
+                code = 0
         return entity, code, subt, tagged
 
     def seakexpresion(self, expression, field="Cuenta", nl=3):
@@ -112,14 +119,14 @@ class Regexseaker:
                                      else False]))
             # Crea un arreglo con los indices de ocurrencias de alias
             d2arr = np.array([arr[1] for arr in arrs])
-            print(d2arr)
+            # print(d2arr)
             # priorizacion de alias
             if any(d2arr[:, 0]):
                 inds = np.argsort(d2arr[:, 0])
                 mask = np.sort(d2arr[:, 0]) != 0
-                print(inds)
+                # print(inds)
                 inp = inds[mask][0]
-                print(inds[mask])
+                # print(inds[mask])
                 if inp - nl < 0:
                     posible = " ".join(tokens[: inp + nl])
                 else:
@@ -127,7 +134,7 @@ class Regexseaker:
             else:
                 # resultado = None
                 posible = None
-            print(posible)
+            # print(posible)
             if posible is None:
                 return (None, 1)
             else:
@@ -135,7 +142,7 @@ class Regexseaker:
             # codigo 1 es para busqueda de campo exitosa
             # inocente hasta que se demuestre lo contrario
             tagged = self.do_tagging(posible, field)
-            print(tagged)
+            # print(tagged)
             return self.do_chunking(tagged, field, code)
 
 if __name__ == "__main__":
