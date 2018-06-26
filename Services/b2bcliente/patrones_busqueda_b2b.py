@@ -1,5 +1,5 @@
 # from __future__ import print_function
-import spaghetti as sgt
+from .spaghetti import pos_tag
 import re
 import nltk
 import numpy as np
@@ -15,7 +15,7 @@ class Regexseaker:
                              Prefijo=r"\b[1-9a-zA-Z]\w{0,3}\b",  # wvect
                              NoDocumento=r"\b[0-9a-zA-Z\-]{1,40}\b",  # w2vect
                              NitAdquirienteMex=r"\b[A-Za-z]{4}\d{6}[A-Za-z0-9]{3}\b")
-        self.dictfacturas = json.load(open("facturaskeys.json"))
+        self.dictfacturas = json.load(open("Services/b2bcliente/facturaskeys.json"))
 
     def regexextractor(self, expression, field):
         pattern = self.patterns[field]
@@ -27,7 +27,7 @@ class Regexseaker:
 
     def do_tagging(self, exp, field):
         tokens = nltk.word_tokenize(exp)
-        tagged = sgt.pos_tag(tokens)
+        tagged = pos_tag(tokens)
         tagged = np.array([list(tup) for tup in tagged]).astype(str)
         mask = tagged[:, 1] == 'None'
         for i, token in enumerate(tokens):
