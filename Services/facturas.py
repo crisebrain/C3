@@ -33,32 +33,47 @@ def factura(req):
     # particular
     listaCampos = req.get("queryResult").get("parameters")["facturasCampos"]
     repitedItems = ["folio"]
+    itemsShouldList = ["date", "date-period"]
     diccFusionado = {}
 
     # Fusionamos todos los diccionarios y listas, para obtener un diccionario de todo
     for element in listaCampos:
-        items = list(element.items())
+        try:
+            items = list(element.items())
+            key = items[0][0]
 
-        # Evalúamos si el item es de los posibles repetidos
-        if items[0][0] in repitedItems:
-            # Construye su nombre con respecto al tipo.
-            diccFusionado.setdefault(items[0][0] + items[0][1]["tipo"], items[0][1])
-        else:
-            diccFusionado.update(element)
+            # Evalúamos si el item es de los posibles repetidos
+            if key in repitedItems:
+                # Construye su nombre con respecto al tipo.
+                diccFusionado.setdefault(key + items[0][1]["tipo"], items[0][1])
 
-    diccFusionado.setdefault(
-        "date", req.get("queryResult").get("parameters").get("date"))
-    diccFusionado.setdefault(
-        "date-period", req.get("queryResult").get("parameters").get("date-period"))
+            elif key in itemsShouldList:
+                # Fusionamos los date y date-period en diccionarios con listas.
+                # Esto permite tener varias fechas a la vez.
+                if not key in diccFusionado:
+                    diccFusionado.setdefault(key, [element[key]])
+                else:
+                    diccFusionado[key].append(element[key])
+
+            else:
+                diccFusionado.update(element)
+        except:
+            print("WARNING: el elemento: {} , no se usó para el diccionario.".format(element))
+
+    # diccFusionado.setdefault(
+    #     "date", req.get("queryResult").get("parameters").get("date"))
+    # diccFusionado.setdefault(
+    #     "date-period", req.get("queryResult").get("parameters").get("date-period"))
 
 
     dicReady = preparaParametros(diccFusionado, req.get("queryResult").get("queryText"))
     print(dicReady)
 
     peticionStr = ""
-    for elemento in dicReady:
-        if dicReady[elemento] is not None:
-            peticionStr += elemento + ": {0} \n".format(dicReady[elemento])
+    for element in dicReady:
+        #if dicReady[element].get("value") is not None:
+        peticionStr += "{0}: {1}, {2} \n".format(
+            element, dicReady[element]["value"], dicReady[element]["status"])
 
     respuesta =  {
                     "fulfillmentText" : peticionStr,
@@ -77,6 +92,9 @@ def preparaParametros(dic, queryOriginal):
         addEntryToDic(dicReady, "tipoDocumento", "F", 1)
     elif dic.get("tipoDocumento") == "Nota":
         addEntryToDic(dicReady, "tipoDocumento", "N", 1)
+    else:
+        addEntryToDic(dicReady, "tipoDocumento", None, 0)
+
 
     # Periodo
     switcherPeriodo = {
@@ -100,7 +118,6 @@ def preparaParametros(dic, queryOriginal):
     if dic.get("status"):
         status = switcherStatus.get(dic.get("status").get("value"))
         addEntryToDic(dicReady, "Status", status, 1)
-
 
     # Prefijo
     if dic.get("prefijo"):
@@ -146,14 +163,6 @@ def preparaParametros(dic, queryOriginal):
         addEntryToDic(dicReady, "NITAdquiriente", nit, 1)
 
 
-    # Código que indica el valor inválido.
-    # if dicReady.get("NITAdquiriente") is None:
-    #     import re
-    #     patternNIT = re.search(r"nit", queryOriginal)
-    #     temp = queryOriginal[patternNIT.end():len(queryOriginal)]
-    #     dicReady["NITAdquiriente"] = "Valor invalido: " + temp
-
-
     # Cuenta
     cuenta = seaker.seakexpresion(queryOriginal, "Cuenta")
     addEntryToDic(dicReady, "Cuenta", cuenta, 1)
@@ -184,29 +193,31 @@ def calcDates(listDate, listDatePeriod):
     dateEnd = None
 
     # Fechas individuales
-    if len(listDate) > 0:
-        i = len(listDate) - 1
-        date1 = calcDate(listDate[i])
+    if listDate is not None:
+        if len(listDate) > 0:
+            i = len(listDate) - 1
+            date1 = calcDate(listDate[i])
 
-        # Evalúamos que exista otro elemento
-        if i >= 1:
-            i -= 1
-        date2 = calcDate(listDate[i])
+            # Evalúamos que exista otro elemento
+            if i >= 1:
+                i -= 1
+            date2 = calcDate(listDate[i])
 
-        # Evalúa fecha mayor
-        if date1 < date2:
-            dateStart = date1
-            dateEnd = date2
-        else:
-            dateStart = date2
-            dateEnd = date1
+            # Evalúa fecha mayor
+            if date1 < date2:
+                dateStart = date1
+                dateEnd = date2
+            else:
+                dateStart = date2
+                dateEnd = date1
 
     # Periodo
-    if len(listDatePeriod) > 0 \
+    if listDatePeriod is not None:
+        if len(listDatePeriod) > 0 \
             and dateStart is None and dateEnd is None:
-        i = len(listDatePeriod) - 1
-        dateStart = calcDate(listDatePeriod[i].get("startDate"))
-        dateEnd = calcDate(listDatePeriod[i].get("endDate"))
+            i = len(listDatePeriod) - 1
+            dateStart = calcDate(listDatePeriod[i].get("startDate"))
+            dateEnd = calcDate(listDatePeriod[i].get("endDate"))
 
 
     return dateStart, dateEnd
