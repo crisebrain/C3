@@ -171,12 +171,12 @@ def calcDates(listDate, listDatePeriod):
     if listDate is not None:
         if len(listDate) > 0:
             i = len(listDate) - 1
-            date1 = calcDate(listDate[i])
+            date1 = buildDate(listDate[i])
 
             # Evalúamos que exista otro elemento
             if i >= 1:
                 i -= 1
-            date2 = calcDate(listDate[i])
+            date2 = buildDate(listDate[i])
 
             # Evalúa fecha mayor
             if date1 < date2:
@@ -191,13 +191,13 @@ def calcDates(listDate, listDatePeriod):
         if len(listDatePeriod) > 0 \
             and dateStart is None and dateEnd is None:
             i = len(listDatePeriod) - 1
-            dateStart = calcDate(listDatePeriod[i].get("startDate"))
-            dateEnd = calcDate(listDatePeriod[i].get("endDate"))
+            dateStart = buildDate(listDatePeriod[i].get("startDate"))
+            dateEnd = buildDate(listDatePeriod[i].get("endDate"))
 
 
     return dateStart, dateEnd
 
-def calcDate(dateString):
+def buildDate(dateString):
     year = int(dateString[0:4])
     month = int(dateString[5:7])
     day = int(dateString[8:10])
