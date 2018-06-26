@@ -35,11 +35,6 @@ def factura(req):
         except:
             print("WARNING: el elemento: {} , no se usó para el diccionario.".format(element))
 
-    # diccFusionado.setdefault(
-    #     "date", req.get("queryResult").get("parameters").get("date"))
-    # diccFusionado.setdefault(
-    #     "date-period", req.get("queryResult").get("parameters").get("date-period"))
-
 
     dicReady = preparaParametros(diccFusionado, req.get("queryResult").get("queryText"))
     print(dicReady)
