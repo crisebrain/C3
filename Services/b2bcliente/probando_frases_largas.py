@@ -18,9 +18,17 @@ for i, expr in enumerate(frases):
     archivo.write("\n{0}.- {1}\n".format(i, expr))
     pref = reg.seakexpresion(expr.lower(), "Prefijo", nl=4)
     nodoc = reg.seakexpresion(expr.lower(), "NoDocumento", nl=4)
+    if len(pref)>2:
+        archivo.write("{0}\n".format(pref[2:]))
+    else:
+        archivo.write("{0}\n".format([]))
+    if len(nodoc)>2:
+        archivo.write("{0}\n".format(nodoc[2:]))
+    else:
+        archivo.write("{0}\n".format([]))
     print("Prefijo: ", pref[:2])
     print("NoDocumento: ", nodoc[:2])
-    if pref[0] is not None and pref[1] == 1:
+    if pref[0] is not None:# and pref[1] == 1:
         prefs += 1
         dpref["cump"].append(pref[2])
     else:
@@ -43,9 +51,9 @@ for i, expr in enumerate(frases):
                                                                    nodocs,
                                                                    totalnodocs))
 print("\nincumplidas pref:\n")
-for c in dpref["inc"]:
-    print(c)
+for i, c in enumerate(dpref["inc"]):
+    print("{0}.-".format(i), c)
 print("\nincumplidas doc:\n")
-for c in ddoc["inc"]:
-    print(c)
+for i, c in enumerate(ddoc["inc"]):
+    print("{0}.-".format(i), c)
 archivo.close()

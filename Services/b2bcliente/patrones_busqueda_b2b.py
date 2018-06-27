@@ -1,7 +1,8 @@
 # from __future__ import print_function
-from .spaghetti import pos_tag
+from spaghetti import pos_tag
 import re
-import nltk
+from nltk import word_tokenize, RegexpParser, Tree
+from gc import collect
 import numpy as np
 import json
 
@@ -15,7 +16,8 @@ class Regexseaker:
                              Prefijo=r"\b[1-9a-zA-Z]\w{0,3}\b",  # wvect
                              NoDocumento=r"\b[0-9a-zA-Z\-]{1,40}\b",  # w2vect
                              NitAdquirienteMex=r"\b[A-Za-z]{4}\d{6}[A-Za-z0-9]{3}\b")
-        self.dictfacturas = json.load(open("Services/b2bcliente/facturaskeys.json"))
+        self.dictfacturas = json.load(open("facturaskeys.json"))
+        # Services/b2bcliente/facturaskeys.json"))
 
     def regexextractor(self, expression, field):
         pattern = self.patterns[field]
@@ -26,7 +28,7 @@ class Regexseaker:
             return None
 
     def do_tagging(self, exp, field):
-        tokens = nltk.word_tokenize(exp)
+        tokens = word_tokenize(exp)
         tagged = pos_tag(tokens)
         tagged = np.array([list(tup) for tup in tagged]).astype(str)
         mask = tagged[:, 1] == 'None'
@@ -49,17 +51,19 @@ class Regexseaker:
             # directas
             # inversas
             # añadir que se hace con sustantivos y nodos terminales
-            grammar = r"""NP: {<Prefijo> <(vs\w+)|(nc\w+)|(wmi\w+)|(spc\w+)>* Q}
-                          NP: {<Prefijo> <(vmi\w+)|(aq\w+)|unknown>? <sp\w+>? Q}
-                          NP: {<Prefijo> <dd0fs0> <vmp00sm> <sps00> Q}
-                          NP: {Q <(vs\w+)> <(da\w+)> <Prefijo>}
-                          NP: {Q <(p030\w+)>? <vmip3s0>? <cs> <Prefijo>}
-                          Q: {<dato|Z|unknown|ncfs000|ncms000>}
+            grammar = r"""Q: {<dato|Z|Fz|unknown|ncfs000>}
+                          T: {<dato|Fz|unknown|sps00>}
+                          NP: {<Prefijo> <(vs\w+)|(nc\w+)|(wmi\w+)|(spc\w+)>* <Q>}
+                          NP: {<Prefijo> <T>}
+                          NP: {<Prefijo> <(vmi\w+)|(aq\w+)|unknown>? <sp\w+>? <Q>}
+                          NP: {<Prefijo> <dd0fs0> <vmp00sm> <sps00> <Q>}
+                          NP: {<Q> <(vs\w+)> <(da\w+)> <Prefijo>}
+                          NP: {<Q> <(p030\w+)>? <vmip3s0>? <cs> <Prefijo>}
                         """
                       # r"""NP: {<Prefijo> <(vs\w+)|dato>*}"""
                               #{<dato> <nc\w+>* <Prefijo>} """
         elif field == "NoDocumento":
-            grammar = r"""NP: {<NoDocumento> <(nc\w+)|(sp\w+)|(vs)\w+>* <dato|Z>}
+            grammar = r"""NP: {<NoDocu\w+> <(nc\w+)|(sp\w+)|(vs)\w+>* <dato|Z>}
                           NP: {<NoDocumento|(ncm\w+)> <(vm\w+)|(vs\w+)|(aq\w+)>* <cs|(sps\w+)|(spc\w+)>? <dato|Z>}
                           NP: {<NoDocumento> <(vm\w+)|(vs\w+)>* <cs|spcms>? <dato|Z>}
                           NP: {<dato|Z> <vsip3s0|cs> <ncms000>? <da0ms0|(sps\w+)>? <NoDocumento|ncms000>}
@@ -71,18 +75,19 @@ class Regexseaker:
 
     def do_chunking(self, tagged, field, code):
         grammar = self.choice_grammar(field)
-        cp = nltk.RegexpParser(grammar)
+        cp = RegexpParser(grammar)
         chunked = cp.parse(tagged)
         # añadir las condiciones que sean necesarias para contemplar
         # los posibles valores
-        posibles = ["dato", "Z", "ncfs000", "ncms000", "ncfs000"]
+        posibles = ["dato", "Z", "ncfs000", "ncms000", "Fz",
+                    "sps00"]
         # posibles son los tipos de palabras que pueden representar al dato
         continuous_chunk = []
         entity = []
         unknowns = []
         subt = []
         for i, subtree in enumerate(chunked):
-            if isinstance(subtree, nltk.Tree):
+            if isinstance(subtree, Tree) and subtree.label() == "NP":
                 # print(subtree)
                 entity += [token for token, pos in subtree.leaves()
                            if pos in posibles]
@@ -96,6 +101,7 @@ class Regexseaker:
             else:
                 entity = None
         elif len(entity) > 1:
+            print(entity)
             code = 0
             entity = entity[-1].upper()
         else:
@@ -111,7 +117,7 @@ class Regexseaker:
             return self.regexextractor(expression, field)
         elif field in ["Prefijo", "NoDocumento"]:
             words = self.dictfacturas[field]
-            tokens = nltk.word_tokenize(expression)
+            tokens = word_tokenize(expression)
             arrs = []
             # Busca palabra pivote
             for token in tokens:
@@ -143,6 +149,7 @@ class Regexseaker:
             # inocente hasta que se demuestre lo contrario
             tagged = self.do_tagging(posible, field)
             # print(tagged)
+            collect()
             return self.do_chunking(tagged, field, code)
 
 if __name__ == "__main__":
@@ -150,7 +157,8 @@ if __name__ == "__main__":
     #expr = "Quiero facturas de acuse recibido con número de documento 33443 y el prefijo es x"
     #expr = "Hola, me ayudas con las facturas donde ABCD ES el valor definido para el prefijo"
     #expr = "Hola, me ayudas con las facturas donde ABCD ES el prefijo"
-    expr = "Por favor con las facturas donde ABCD ES el prefijo, perdon el prefijo es XXXX"
+    # expr = "Por favor con las facturas donde ABCD ES el prefijo, perdon el prefijo es XXXX"
+    expr = "quiero facturas de hoy y ayer con número de factura escuela con prefijo aaas gracias"
     print("\n")
     print(expr)
     print("\n")
