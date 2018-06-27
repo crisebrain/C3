@@ -95,10 +95,12 @@ def preparaParametros(dic, queryOriginal):
         if isinstance(prefijo, float):
             prefijo = str(int(prefijo))
             addEntryToDic(dicReady, "Prefijo", prefijo, 1)
-
         elif isinstance(prefijo, str):
             prefijo = prefijo.upper().replace(" ", "")
             addEntryToDic(dicReady, "Prefijo", prefijo, 1)
+    else:
+        prefijo = seaker.seakexpresion(queryOriginal, "Prefijo")
+        addEntryToDic(dicReady, "Prefijo", prefijo[0], prefijo[1])
 
 
     # Acuse
@@ -146,11 +148,14 @@ def preparaParametros(dic, queryOriginal):
     addEntryToDic(dicReady, "FechaEmisionFin", fechaFinStr, 1)
 
 
+    # NumeroFactura (Num. Documento)
+    numDoc = seaker.seakexpresion(queryOriginal, "NoDocumento")
+    addEntryToDic(dicReady, "NumeroFactura", numDoc[0], numDoc[1])
+
+
+
     # hardcoded:
     # dicReady.setdefault("Empresa", "RICOH")
-    # NumeroFactura (Num. Documento)
-    addEntryToDic(dicReady, "NumeroFactura", None, 1)
-
 
     return dicReady
 
