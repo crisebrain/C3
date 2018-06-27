@@ -1,5 +1,5 @@
 # from __future__ import print_function
-from spaghetti import pos_tag
+from .spaghetti import pos_tag
 import re
 from nltk import word_tokenize, RegexpParser, Tree
 from gc import collect
@@ -112,7 +112,9 @@ class Regexseaker:
                 code = 0
         return entity, code, subt, tagged
 
-    def seakexpresion(self, expression, field="Cuenta", nl=3):
+    def seakexpresion(self, expression, field="Cuenta", nl=3, lowerc=True):
+        if lowerc:
+            expression = expression.lower()
         if field in ["Cuenta", "NitAdquirienteMex"]:
             return self.regexextractor(expression, field)
         elif field in ["Prefijo", "NoDocumento"]:
