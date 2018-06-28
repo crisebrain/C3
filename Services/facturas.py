@@ -2,6 +2,7 @@ from .b2bcliente import sendReq, getResponseValues, HumanResult
 from .b2bcliente import Regexseaker
 import json
 import datetime
+from datetime import date
 
 def factura(req):
     # Ya que los elemenetos vienen en una lista deben tener un tratamiento
@@ -193,6 +194,14 @@ def calcDates(listDate, listDatePeriod):
             i = len(listDatePeriod) - 1
             dateStart = buildDate(listDatePeriod[i].get("startDate"))
             dateEnd = buildDate(listDatePeriod[i].get("endDate"))
+
+
+    # Evalúamos fechas posteriores a este año
+    hoy = date.today()
+    if dateStart > hoy:
+        dateStart = dateStart.replace(year=hoy.year)
+    if dateEnd > hoy:
+        dateEnd = dateEnd.replace(year=hoy.year)
 
 
     return dateStart, dateEnd
