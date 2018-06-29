@@ -195,14 +195,12 @@ def calcDates(listDate, listDatePeriod):
             dateStart = buildDate(listDatePeriod[i].get("startDate"))
             dateEnd = buildDate(listDatePeriod[i].get("endDate"))
 
-
     # Evalúamos fechas posteriores a este año
     hoy = date.today()
     if dateStart > hoy:
         dateStart = dateStart.replace(year=hoy.year)
     if dateEnd > hoy:
         dateEnd = dateEnd.replace(year=hoy.year)
-
 
     return dateStart, dateEnd
 

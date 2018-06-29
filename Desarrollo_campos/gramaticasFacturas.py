@@ -23,15 +23,26 @@ def regexextractor(expression, field):
     else:
         return None
 
-def do_tagging(exp, field):
+def do_tagging(exp, field, listTags):
     tokens = nltk.word_tokenize(exp)
     tagged = sgt.pos_tag(tokens)
     tagged = np.array([list(tup) for tup in tagged]).astype(str)
 
+    # Inicializamos el diccionario de las etiquetas
+    dicTags = {}
+    for tag in listTags:
+        dicTags.setdefault(tag, dictfacturas[tag])
+
+    # Establecemos las etiquetas de cada palabra
     for i, token in enumerate(tokens):
         if token in dictfacturas[field]:
             tagged[i, 1] = str(field)
+        for tag in dicTags:
+            if token in dicTags[tag]:
+                tagged[i, 1] = tag
 
+    # Convertimos a tuplas y evalúamos si el dato potencialmente nos
+    # interesa o no.
     mask = tagged[:, 1] == 'None'
     unknowns, = np.where(mask)
     for unknown in unknowns:
@@ -40,7 +51,7 @@ def do_tagging(exp, field):
         else:
             tagged[unknown, 1] = "unknown"
     return [tuple(wordtagged) for wordtagged in tagged]
-#tag = inicio [palabras]
+
 
 def do_chunking(grammar, tagged, field, code):
     cp = nltk.RegexpParser(grammar)
@@ -83,8 +94,8 @@ def do_chunking(grammar, tagged, field, code):
 
 
 
-def prueba(exp, field):
-    tagged = do_tagging(exp.lower(), field)
+def prueba(exp, field, listTags):
+    tagged = do_tagging(exp.lower(), field, listTags)
     return do_chunking(grammar, tagged, field, 1)
 
 
@@ -95,11 +106,14 @@ grammar = r"""
               NP: {<unknow> <pr\w+> <da0ms0> <Folio> <sps00> <Inicio> <vsip\w+> <dato>}
             """
 
-exp = 'facturas donde el folio de inicio fin es 123'
+exp = 'facturas donde el folio de inicio fin final inicial empieza es 123'
 field = "Folio"
+listTags = ["Inicio", "Fin"]
 
 
 print("Tagging:\n{0}\n".format(
-    str(do_tagging(exp, field))))
+    str(do_tagging(exp, field, listTags))))
 
-print("chunking:\n{0}".format(prueba(exp, field)))
+# print("chunking:\n{0}".format(prueba(exp, field)))
+
+#print(nltk.corpus.cess_esp.readme())
