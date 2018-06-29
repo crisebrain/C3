@@ -42,15 +42,16 @@ def do_tagging(exp, field, listTags):
     return [tuple(wordtagged) for wordtagged in tagged]
 
 
-def do_chunking(grammar, tagged, field, code):
+def do_chunking(grammar, tagged, field, code , posibles):
     # añadir las condiciones que sean necesarias para contemplar
     # los posibles valores
-    posibles = ["dato", "Z", "ncfs000", "ncms000", "Fz",
-                "sps00"]
+    # posibles = ["dato", "Z", "ncfs000", "ncms000", "Fz",
+    #             "sps00"]
     # posibles son los tipos de palabras que pueden representar al dato
 
     cp = nltk.RegexpParser(grammar)
     chunked = cp.parse(tagged)
+    #print(chunked)
     continuous_chunk = []
     entity = []
     unknowns = []
@@ -63,6 +64,8 @@ def do_chunking(grammar, tagged, field, code):
             unknowns += [token for token, pos in subtree.leaves()
                          if pos == "unknown"]
             subt.append(subtree)
+
+    # Evalúa código de retorno
     if entity == []:
         code = 0
         if len(unknowns) > 1:
@@ -80,13 +83,14 @@ def do_chunking(grammar, tagged, field, code):
             code = 1
         else:
             code = 0
-    return entity, code, subt, tagged
+    return entity, code, #subt, "___________", tagged
 
 
 
-def prueba(exp, field, listTags):
+def prueba(grammar, exp, field, listTags):
     tagged = do_tagging(exp.lower(), field, listTags)
-    return do_chunking(grammar, tagged, field, 1)
+    posibles = ["dato"]
+    return do_chunking(grammar, tagged, field, 1, posibles)
 
 
 
@@ -103,21 +107,52 @@ patterns = dict(Cuenta=r"\b[A-Za-z]{3}\d{3}\b",
 
 
 ######## Pruebas Gabriel ####################
-grammar = r"""
-              NP: {<unknow> <pr\w+> <da0ms0> <Folio> <sps00> <Inicio> <vsip\w+> <dato>}
-            """
+def gabriel():
+    expsMalas = [
+                    "y con folio de inicio igual a XXX",
+                    "con rango de folio  entre el inical de AAAAA",
+                    "REWEWETW  es el folio de inicio",
+                    "El folio de inicio es el ERWERWREWT",
+                    "En folio de inicio asignamos el QWEERE",
+                    "Para folio de inicio el valor de QWERWERWER",
+                    "cuyo folio de inicio es el WQERRTW",
+                    "folio de inicio igual a QWERRT",
+                    "El folio de inicio definido en QWERTTW",
+                ]
 
-# exp = 'facturas donde el folio de inicio fin final inicial empieza es 123'
-exp = 'facturas donde el folio de inicio es 0123 y'
-field = "Folio"
-listTags = ["Inicio", "Fin"]
+    expsBuenas = [
+                    "facturas donde el folio de inicial es 0123",
+                    "y con folio de inicio igual a 000012",
+                    "con rango de folio  entre el inical de 123456789",
+                    "9037432  es el folio de inicio",
+                    "El folio de inicio es el 002930200",
+                    "En folio de inicio asignamos el 2373893",
+                    "Para folio de inicio el valor de 11111111",
+                    "cuyo folio de inicio es el 222222",
+                    "folio de inicio igual a 78923430",
+                    "El folio de inicio definido en 23432"
+                ]
 
 
-print("Tagging:\n{0}\n".format(
-    str(do_tagging(exp, field, listTags))))
+    grammar = r"""
+                  NP: {<Folio> <sps00> <Inicio> <Es> <dato>}
+                  NP: {<Folio> <sps00> <Inicio> <Es> <sps00> <dato>}
+                  NP: {<dato> <Es> <da0ms0> <Folio> <sps00> <Inicio>}
+                """
 
-print("chunking:\n{0}".format(prueba(exp, field, listTags)))
+    field = "Folio"
+    listTags = ["Inicio", "Fin", "Es"]
 
-#print(nltk.corpus.cess_esp.readme())
+
+    for exp in expsBuenas:
+        print("\n {0}".format(exp) )
+        print(str(do_tagging(exp, field, listTags)))
+        print(prueba(grammar, exp, field, listTags))
+
+    # print("chunking:\n{0}".format(prueba(grammar, exp, field, listTags)))
+
+    #print(nltk.corpus.cess_esp.readme())
 
 #########################################################
+
+gabriel()

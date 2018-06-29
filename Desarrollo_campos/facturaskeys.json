@@ -1,3 +1,11 @@
-{"Prefijo": ["prefijo","serie"],
- "NoDocumento": ["documento", "documentos", "nota", "notas", "credito",
-                 "creditos", "facturas", "factura", "numero"]}
+{
+	"Prefijo": ["prefijo","serie"],
+	"NoDocumento": ["documento", "documentos", "nota", "notas", "credito",
+					"creditos", "facturas", "factura", "numero"],
+	"Folio": ["folio", "folios"],
+	"Inicio": ["inicial", "inicio", "comienza", "empieza", "principio",
+				"arranque", "inicia", "inicien", "inician"],
+	"Fin": ["final", "fin", "finaliza", "termina", "concluye", "terminal",
+			"finalicen", "finalizan", "finalizado", "finalice"],
+	"Es": ["es", "ser", "son", "igual"]
+}
