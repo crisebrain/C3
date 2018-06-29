@@ -4,17 +4,6 @@ import nltk
 import numpy as np
 import json
 
-dictfacturas = json.load(open("facturaskeys.json"))
-print("Diccionario:\n{0}\n\n".format(str(dictfacturas)))
-
-patterns = dict(Cuenta=r"\b[A-Za-z]{3}\d{3}\b",
-                Prefijo=r"\b[1-9a-zA-Z]\w{0,3}\b",  # wvect
-                NoDocumento=r"\b[0-9a-zA-Z\-]{1,40}\b",  # w2vect
-                NitAdquirienteMex=r"\b[A-Za-z]{4}\d{6}[A-Za-z0-9]{3}\b",
-                Inicio=r".+",
-                Folio=r"\d{1,16}")
-
-
 def regexextractor(expression, field):
     pattern = patterns[field]
     result = re.search(pattern=pattern, string=expression)
@@ -54,13 +43,14 @@ def do_tagging(exp, field, listTags):
 
 
 def do_chunking(grammar, tagged, field, code):
-    cp = nltk.RegexpParser(grammar)
-    chunked = cp.parse(tagged)
     # añadir las condiciones que sean necesarias para contemplar
     # los posibles valores
     posibles = ["dato", "Z", "ncfs000", "ncms000", "Fz",
                 "sps00"]
     # posibles son los tipos de palabras que pueden representar al dato
+
+    cp = nltk.RegexpParser(grammar)
+    chunked = cp.parse(tagged)
     continuous_chunk = []
     entity = []
     unknowns = []
@@ -100,13 +90,25 @@ def prueba(exp, field, listTags):
 
 
 
+######### Programa  ##############
+dictfacturas = json.load(open("facturaskeys.json"))
+#print("Diccionario:\n{0}\n\n".format(str(dictfacturas)))
+
+patterns = dict(Cuenta=r"\b[A-Za-z]{3}\d{3}\b",
+                Prefijo=r"\b[1-9a-zA-Z]\w{0,3}\b",  # wvect
+                NoDocumento=r"\b[0-9a-zA-Z\-]{1,40}\b",  # w2vect
+                NitAdquirienteMex=r"\b[A-Za-z]{4}\d{6}[A-Za-z0-9]{3}\b",
+                Folio=r"\d{1,16}")
 
 
+
+######## Pruebas Gabriel ####################
 grammar = r"""
               NP: {<unknow> <pr\w+> <da0ms0> <Folio> <sps00> <Inicio> <vsip\w+> <dato>}
             """
 
-exp = 'facturas donde el folio de inicio fin final inicial empieza es 123'
+# exp = 'facturas donde el folio de inicio fin final inicial empieza es 123'
+exp = 'facturas donde el folio de inicio es 0123 y'
 field = "Folio"
 listTags = ["Inicio", "Fin"]
 
@@ -114,6 +116,8 @@ listTags = ["Inicio", "Fin"]
 print("Tagging:\n{0}\n".format(
     str(do_tagging(exp, field, listTags))))
 
-# print("chunking:\n{0}".format(prueba(exp, field)))
+print("chunking:\n{0}".format(prueba(exp, field, listTags)))
 
 #print(nltk.corpus.cess_esp.readme())
+
+#########################################################
