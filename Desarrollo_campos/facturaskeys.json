@@ -3,9 +3,11 @@
 	"NoDocumento": ["documento", "documentos", "nota", "notas", "credito",
 					"creditos", "facturas", "factura", "numero"],
 	"Folio": ["folio", "folios"],
-	"Inicio": ["inicial", "inicio", "comienza", "empieza", "principio",
-				"arranque", "inicia", "inicien", "inician"],
+	"Inicio": ["inicial", "inicio", "comienza","comienzo", "empieza", "principio","principian",
+				"arranque", "inicia", "inicien", "inician", "inicializacion"],
 	"Fin": ["final", "fin", "finaliza", "termina", "concluye", "terminal",
-			"finalicen", "finalizan", "finalizado", "finalice"],
-	"Es": ["es", "ser", "son", "igual"]
+			"finalicen", "finalizan", "finalizado", "finalice", "finalizacion", "cierre"],
+	"Es": ["es", "ser", "son", "igual"],
+	"De": ["de"],
+	"Estado"   : ["estado","estatus"]
 }
