@@ -8,25 +8,19 @@ from cucco import Cucco
 normEsp = Cucco(language='es')
 norms = ['remove_accent_marks']
 
-
 def regexextractor(expression, field):
     pattern = patterns[field]
     result = re.search(pattern=pattern, string=expression)
     if result:
-        retorno = result.group()
-        if( retorno.startswith('cerrad')) : retorno = 'cerrado'
-        elif( retorno.startswith('firmad')) : retorno = 'firmado'
-        elif( retorno.startswith('enviad')) : retorno = 'enviado'
-        elif( retorno.startswith('cancela')) : retorno = 'cancelado'
-        elif( retorno.startswith('acepta')) : retorno = 'aceptado'
-        elif( retorno.startswith('erro')) : retorno = 'error'
-        return retorno
+        return result.group()
     else:
         return None
 
 def do_tagging(exp, field, listTags):
-    tokens = nltk.word_tokenize( [normEsp.normalize(exp),norms][0])
+    #tokens = nltk.word_tokenize( [normEsp.normalize(exp),norms][0])
+    tokens = nltk.word_tokenize( exp)
     tagged = sgt.pos_tag(tokens)
+    #print("tagged:",tagged)
     tagged = np.array([list(tup) for tup in tagged]).astype(str)
 
     # Inicializamos el diccionario de las etiquetas
@@ -63,7 +57,7 @@ def do_chunking(grammar, tagged, field, code , posibles):
 
     cp = nltk.RegexpParser(grammar)
     chunked = cp.parse(tagged)
-    #print('chunked:',chunked)
+    print('chunked:',chunked)
     continuous_chunk = []
     entity = []
     unknowns = []
@@ -245,39 +239,20 @@ def gabriel():
                     "en el cierre de folio ponemos el 68808080808",
                 ]
 
-    grammar_11_FolioInicio = r"""
-                  NP: {<Folio> <Inicio> <dato>}
+    grammar_11_12_Folio = r"""
                   NP: {<Folio> <Inicio> <Es> <dato>}
                   NP: {<Folio> <Inicio> <aq0cs0> <dato>}
-                  NP: {<Folio> <Inicio> <dato>}
-                  NP: {<dato> <Folio> <Inicio>}
-                  NP: {<Folio> <Inicio> <unknown> <dato>}
-                  NP: {<Folio> <Inicio> <ncms000> <dato>}
-                  NP: {<Folio> <Inicio> <vmp00sm> <dato>}
+                  NP: {<dato> <unknown|ncms000|aq0cs0|vmp00sm>* <Folio> <Inicio>}
+                  NP: {<Folio> <Inicio>+ <unknown|ncms000|aq0cs0|vmp00sm>* <dato>}
                   NP: {<Folio> <unknown> <aq0cs0> <Inicio> <dato>}
                   NP: {<dato> <unknown> <Folio> <Inicio>}
-                  NP: {<Inicio> <Folio> <dato>}
+                  NP: {<Inicio> <Folio> <unknown|ncms000|aq0cs0|vmp00sm>? <dato>}
                   NP: {<Folio> <Inicio> <ncfs000> <dato>}
-                  NP: {<Folio> <Inicio> <Inicio> <dato>}
                   NP: {<Folio> <Inicio> <Inicio> <vmp00sm><dato>}
                   NP: {<Folio> <dato> <Inicio> }
                   NP: {<vmip3p0> <Folio> <dato> }
                 """
-    grammar_12_FolioFin = r"""
-                  NP: {<Folio> <Fin> <aq0cs0> <dato>}
-                  NP: {<Folio> <Fin> <dato>}
-                  NP: {<Folio> <Fin> <unknown> <dato>}
-                  NP: {<dato> <Folio> <Fin> }
-                  NP: {<Folio> <Fin> <vmp00sm> <dato>}
-                  NP: {<Folio> <Fin> <Fin> <dato>}
-                  NP: {<Folio> <Fin> <Fin> <unknown> <dato>}
-                  NP: {<dato> <unknown> <Folio> <Fin>}
-                  NP: {<Folio> <dato> <Fin>}
-                  NP: {<Fin> <Folio> <unknown> <dato>}
-                  NP: {<Fin> <Folio> <dato> }
-                  NP: {<Folio> <Fin> <unknown> <ncms000> <dato>}
-                  NP: {<dato> <ncms000> <Folio> <Fin> }
-                """
+
     grammar_05_Estatus = r"""
                   NP: {<Folio> <Fin> <aq0cs0> <dato>}
                 """
@@ -286,8 +261,9 @@ def gabriel():
     for exp in expsBuenas_11_FolioInicio:
     #for exp in expsBuenas_12_FolioFin:
         #print(' 05. evalua Estatus :',prueba(grammar_05_Estatus, exp, "Estados_valores", ["Estado"]),'\n')
-        print('11. evalua Folio Inicio :',prueba(grammar_11_FolioInicio, exp, "Folio", ["Inicio"]),'\n')
+        print('11. evalua Folio Inicio :',prueba(grammar_11_12_Folio, exp, "Folio", ["Inicio"]),'\n')
         #print('12. evalua Folio Fin :',prueba(grammar_12_FolioFin, exp, "Folio", ["Fin"]),'\n')
+        #print('12. evalua Folio Fin :',prueba(grammar_11_FolioInicio.replace("Inicio","Fin"), exp, "Folio", ["Fin"]),'\n')
 
 
     # print("chunking:\n{0}".format(prueba(grammar, exp, field, listTags)))
