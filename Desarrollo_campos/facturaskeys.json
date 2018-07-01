@@ -1,11 +1,14 @@
 {
 	"Prefijo": ["prefijo","serie"],
-	"NoDocumento": ["documento", "documentos", "nota", "notas", "credito",
-					"creditos", "facturas", "factura", "numero"],
+	"NoDocumento": ["documento", "documentos", "nota", "notas", "crédito",
+		              "créditos", "credito", "creditos", "facturas", "factura",
+									"numero", "número"],
 	"Folio": ["folio", "folios"],
 	"Inicio": ["inicial", "inicio", "comienza", "empieza", "principio",
 				"arranque", "inicia", "inicien", "inician"],
 	"Fin": ["final", "fin", "finaliza", "termina", "concluye", "terminal",
 			"finalicen", "finalizan", "finalizado", "finalice"],
-	"Es": ["es", "ser", "son", "igual"]
+	"Es": ["es", "ser", "son", "igual"],
+	"Singlel": ["b","c","d","f","g","h","i","j","k","l","m",
+		          "n","ñ","p","q","r","s","t","v","w","x","z"]
 }
