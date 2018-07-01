@@ -52,7 +52,7 @@ def do_chunking(grammar, tagged, field, code , posibles):
 
     cp = nltk.RegexpParser(grammar)
     chunked = cp.parse(tagged)
-    print('chunked:',chunked)
+    #print('chunked:',chunked)
     continuous_chunk = []
     entity = []
     unknowns = []
@@ -91,7 +91,7 @@ def do_chunking(grammar, tagged, field, code , posibles):
             code = 1
         else:
             code = 0
-    return entity, code, #subt, "___________", tagged
+    return entity, code, chunked#subt, tagged
 
 
 
@@ -109,22 +109,19 @@ def folios(phrase, tipoFolio):
     # Tipo Folio puede ser Inicio o Fin
 
     # Gramática
+    Q = "Es|sps00|da0ms0|unknown|Valor|cs|cc|Reciente|p0300000|dp1msp|spcms|dp1css"
+
     grammarFolio = r"""
-                  NP: {<Folio> <tipoFolio> <Es> <dato>}
-                  NP: {<Folio> <tipoFolio> <aq0cs0> <dato>}
-                  NP: {<dato> <unknown|ncms000|aq0cs0|vmp00sm>* <Folio> <tipoFolio>}
-                  NP: {<Folio> <tipoFolio>+ <unknown|ncms000|aq0cs0|vmp00sm>* <dato>}
-                  NP: {<Folio> <unknown> <aq0cs0> <tipoFolio> <dato>}
-                  NP: {<dato> <unknown> <Folio> <tipoFolio>}
-                  NP: {<tipoFolio> <Folio> <unknown|ncms000|aq0cs0|vmp00sm>? <dato>}
-                  NP: {<Folio> <tipoFolio> <ncfs000> <dato>}
-                  NP: {<Folio> <tipoFolio> <tipoFolio> <vmp00sm><dato>}
-                  NP: {<Folio> <dato> <tipoFolio> }
-                  NP: {<vmip3p0> <Folio> <dato> }
+                  NP: {<Folio> <Q>* (<tipoFolio> <Q|Prefijo>*){1,2} <dato>}
+                  NP: {<Folio> <Q>* (<dato> <Q|Prefijo>*){1,2} <tipoFolio>}
+                  NP: {<dato> <Q>* <Folio> <Q>* <tipoFolio>}
+                  NP: {<tipoFolio> <Q>* <Folio> <Q>* <dato>}
                 """
 
+    # Remplazos
+    grammarFolio = grammarFolio.replace("Q", Q)
     grammarFolio = grammarFolio.replace("tipoFolio", tipoFolio)
-    listTags = ["Inicio", "Fin", "Es"]
+    listTags = ["Inicio", "Fin", "Es", "Valor", "Prefijo", "Reciente"]
 
     return prueba(grammarFolio, phrase, "Folio", listTags)
 
@@ -255,10 +252,18 @@ def pruebasFolios():
 
 
     # for phrase in expsBuenas_FolioInicio:
-    #     print("Resulado: {0}\n".format(str(folios(phrase, "Inicio"))))
+    #     resultado = folios(phrase, "Inicio")
+    #     if resultado[1] == 0:
+    #         print("Resulado: {1}\n{0}\n\n".format(str(resultado[0:2]), resultado[2]))
 
     for phrase in expsBuenas_FolioFin:
-        print("Resulado: {0}\n".format(str(folios(phrase, "Fin"))))
+        resultado = folios(phrase, "Fin")
+        # if resultado[1] == 0:
+        print("Resulado: {1}\n{0}\n\n".format(str(resultado[0:2]), resultado[2]))
+
+
+    # for phrase in expsBuenas_FolioFin:
+    #     print("Resulado: {0}\n".format(str(folios(phrase, "Fin"))))
 
 
 
