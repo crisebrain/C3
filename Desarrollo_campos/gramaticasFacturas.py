@@ -4,11 +4,6 @@ import nltk
 import numpy as np
 import json
 
-# pip install cucco==1.0.0
-from cucco import Cucco
-normEsp = Cucco(language='es')
-norms = ['remove_accent_marks']
-
 def regexextractor(expression, field):
     pattern = patterns[field]
     result = re.search(pattern=pattern, string=expression)
@@ -18,8 +13,7 @@ def regexextractor(expression, field):
         return None
 
 def do_tagging(exp, field, listTags):
-    tokens = nltk.word_tokenize( [normEsp.normalize(exp),norms][0])
-    # tokens = nltk.word_tokenize(exp)
+    tokens = nltk.word_tokenize(exp)
     tagged = sgt.pos_tag(tokens)
     #print("tagged:",tagged)
     tagged = np.array([list(tup) for tup in tagged]).astype(str)
