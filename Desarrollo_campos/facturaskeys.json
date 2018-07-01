@@ -4,11 +4,14 @@
 		              "créditos", "credito", "creditos", "facturas", "factura",
 									"numero", "número"],
 	"Folio": ["folio", "folios"],
-	"Inicio": ["inicial", "inicio", "comienza", "empieza", "principio",
-				"arranque", "inicia", "inicien", "inician"],
+	"Inicio": ["inicial", "inicio", "comienza","comienzo", "empieza", "principio","principian",
+				"arranque", "inicia", "inicien", "inician", "inicializacion"],
 	"Fin": ["final", "fin", "finaliza", "termina", "concluye", "terminal",
-			"finalicen", "finalizan", "finalizado", "finalice"],
-	"Es": ["es", "ser", "son", "igual"],
+		      "finalicen", "finalizan", "finalizado", "finalice", "finalizacion",
+					"cierre"],
 	"Singlel": ["b","c","d","f","g","h","i","j","k","l","m",
-		          "n","ñ","p","q","r","s","t","v","w","x","z"]
+		          "n","ñ","p","q","r","s","t","v","w","x","z"],
+	"Es": ["es", "ser", "son", "igual"],
+	"De": ["de"],
+	"Estado"   : ["estado","estatus"]
 }
