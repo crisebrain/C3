@@ -57,14 +57,21 @@ def do_chunking(grammar, tagged, field, code , posibles):
     unknowns = []
     subt = []
     for i, subtree in enumerate(chunked):
-        if isinstance(subtree, nltk.Tree) and subtree.label() == "NP":
-            # añadir las condiciones que sean necesarias para contemplar los posibles valores
-            entity += [token for token, pos in subtree.leaves()
-                       if pos in posibles]
-            unknowns += [token for token, pos in subtree.leaves()
-                         if pos == "unknown"]
-            subt.append(subtree)
-
+        if isinstance(subtree, Tree) and subtree.label() == "NP":
+            if field in ["Prefijo", "NoDocumento"]:
+                #print(subtree)
+                for subsubtree in subtree.subtrees(filter=lambda t: t.label() == "Q"):
+                    entity += [token for token, pos in subsubtree.leaves()]
+                    subt.append(subsubtree)
+                unknowns += [token for token, pos in subtree.leaves()
+                             if pos in posibles]
+            else:
+                # añadir las condiciones que sean necesarias para contemplar los posibles valores
+                entity += [token for token, pos in subtree.leaves()
+                           if pos in posibles]
+                unknowns += [token for token, pos in subtree.leaves()
+                             if pos == "unknown"]
+                subt.append(subtree)
     # Evalúa código de retorno
     if entity == []:
         code = 0
