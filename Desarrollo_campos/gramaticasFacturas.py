@@ -52,7 +52,8 @@ def do_chunking(grammar, tagged, field, code , posibles):
 
     cp = nltk.RegexpParser(grammar)
     chunked = cp.parse(tagged)
-    #print('chunked:',chunked)
+    # print('chunked:',chunked)
+    # chunked.draw()
     continuous_chunk = []
     entity = []
     unknowns = []
@@ -109,9 +110,10 @@ def folios(phrase, tipoFolio):
     # Tipo Folio puede ser Inicio o Fin
 
     # Gramática
-    Q = "Es|sps00|da0ms0|unknown|Valor|cs|cc|Reciente|p0300000|dp1msp|spcms|dp1css"
+    # Q = "Es|sps00|da0ms0|unknown|Valor|cs|cc|Reciente|p0300000|dp1msp|spcms|dp1css"
 
     grammarFolio = r"""
+                  Q: {<Es|sps00|da0ms0|unknown|Valor|cs|cc|Reciente|p0300000|dp1msp|spcms|dp1css>}
                   NP: {<Folio> <Q>* (<tipoFolio> <Q|Prefijo>*){1,2} <dato>}
                   NP: {<Folio> <Q>* (<dato> <Q|Prefijo>*){1,2} <tipoFolio>}
                   NP: {<dato> <Q>* <Folio> <Q>* <tipoFolio>}
@@ -119,7 +121,7 @@ def folios(phrase, tipoFolio):
                 """
 
     # Remplazos
-    grammarFolio = grammarFolio.replace("Q", Q)
+    #grammarFolio = grammarFolio.replace("Q", Q)
     grammarFolio = grammarFolio.replace("tipoFolio", tipoFolio)
     listTags = ["Inicio", "Fin", "Es", "Valor", "Prefijo", "Reciente"]
 
@@ -131,7 +133,7 @@ def folios(phrase, tipoFolio):
 def pruebasFolios():
     expsMalas = [
         "y con folio de inicio igual a XXX",
-        "con rango de folio  entre el inical de AAAAA",
+        "con rango de folio  entre el inicial de AAAAA",
         "REWEWETW  es el folio de inicio",
         "El folio de inicio es el ERWERWREWT",
         "En folio de inicio asignamos el QWEERE",
@@ -139,17 +141,6 @@ def pruebasFolios():
         "cuyo folio de inicio es el WQERRTW",
         "folio de inicio igual a QWERRT",
         "El folio de inicio definido en QWERTTW",
-    ]
-
-    expsBuenas = [
-        "con estatus igual a Cerrado",
-        "Cerrado",
-        "Que han sido canceladas",
-        "Que fueron recibidas",
-        "Que ya han sido canceladas",
-        "Que tienen el estatus de aceptado",
-        "y cerrado como estatus",
-
     ]
 
     expsBuenas_FolioInicio = [
@@ -251,21 +242,24 @@ def pruebasFolios():
     ]
 
 
-    # for phrase in expsBuenas_FolioInicio:
-    #     resultado = folios(phrase, "Inicio")
-    #     if resultado[1] == 0:
-    #         print("Resulado: {1}\n{0}\n\n".format(str(resultado[0:2]), resultado[2]))
+    for phrase in expsBuenas_FolioInicio:
+        resultado = folios(phrase, "Inicio")
+        if resultado[1] == 0:
+            print("Resulado: {1}\n{0}\n\n".format(str(resultado[0:2]), resultado[2]))
 
     for phrase in expsBuenas_FolioFin:
         resultado = folios(phrase, "Fin")
-        # if resultado[1] == 0:
-        print("Resulado: {1}\n{0}\n\n".format(str(resultado[0:2]), resultado[2]))
-
+        if resultado[1] == 0:
+            print("Resulado: {1}\n{0}\n\n".format(str(resultado[0:2]), resultado[2]))
 
     # for phrase in expsBuenas_FolioFin:
     #     print("Resulado: {0}\n".format(str(folios(phrase, "Fin"))))
 
 
+    # for phrase in expsMalas:
+    #     resultado = folios(phrase, "Fin")
+    #     # if resultado[1] == 0:
+    #     print("Resulado: {1}\n{0}\n\n".format(str(resultado[0:2]), resultado[2]))
 
 
 ########################## Programa  #############################
