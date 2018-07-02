@@ -42,9 +42,9 @@ def factura(req):
 
     peticionStr = ""
     for element in dicReady:
-        #if dicReady[element].get("value") is not None:
-        peticionStr += "{0}: {1}, {2} \n".format(
-            element, dicReady[element]["value"], dicReady[element]["status"])
+        if dicReady[element].get("value") is not None:# and dicReady[element]["status"] != 0:
+            peticionStr += "{0}: {1}, {2} \n".format(
+                element, dicReady[element]["value"], dicReady[element]["status"])
 
     respuesta =  {
                     "fulfillmentText" : peticionStr,
@@ -118,13 +118,21 @@ def preparaParametros(dic, queryOriginal):
     addEntryToDic(dicReady, "Acuse", acuse, 1)
 
 
-    # Folio
+    # Folio Inicio
     if dic.get("folioinicial"):
         folioInicio = int(dic.get("folioinicial").get("value"))
         addEntryToDic(dicReady, "FolioInicio", folioInicio, 1)
+    else:
+        folioInicio = seaker.seakexpresion(queryOriginal, "FolioInicio")
+        addEntryToDic(dicReady, "FolioInicio", folioInicio[0], folioInicio[1])
+
+    # Folio Final
     if dic.get("foliofinal"):
         folioFinal = int(dic.get("foliofinal").get("value"))
         addEntryToDic(dicReady, "FolioFinal", folioFinal, 1)
+    else:
+        folioFinal = seaker.seakexpresion(queryOriginal, "FolioFinal")
+        addEntryToDic(dicReady, "FolioFinal", folioFinal[0], folioInicio[1])
 
 
     # NIT
@@ -133,12 +141,12 @@ def preparaParametros(dic, queryOriginal):
         addEntryToDic(dicReady, "NITAdquiriente", nit, 1)
     else:
         nit = seaker.seakexpresion(queryOriginal, "NitAdquirienteMex")
-        addEntryToDic(dicReady, "NITAdquiriente", nit, 1)
+        addEntryToDic(dicReady, "NITAdquiriente", nit[0], nit[1])
 
 
     # Cuenta
     cuenta = seaker.seakexpresion(queryOriginal, "Cuenta")
-    addEntryToDic(dicReady, "Cuenta", cuenta, 1)
+    addEntryToDic(dicReady, "Cuenta", cuenta[0], cuenta[1])
 
     # Fechas
     fechaInicio, fechaFin = calcDates(dic.get("date"), dic.get("date-period"))
@@ -197,9 +205,9 @@ def calcDates(listDate, listDatePeriod):
 
     # Evalúamos fechas posteriores a este año
     hoy = date.today()
-    if dateStart > hoy:
+    if dateStart is not None and dateStart > hoy:
         dateStart = dateStart.replace(year=hoy.year)
-    if dateEnd > hoy:
+    if dateEnd is not None and dateEnd > hoy:
         dateEnd = dateEnd.replace(year=hoy.year)
 
     return dateStart, dateEnd
