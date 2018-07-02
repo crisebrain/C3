@@ -42,9 +42,9 @@ def factura(req):
 
     peticionStr = ""
     for element in dicReady:
-        #if dicReady[element].get("value") is not None:
-        peticionStr += "{0}: {1}, {2} \n".format(
-            element, dicReady[element]["value"], dicReady[element]["status"])
+        if dicReady[element].get("value") is not None:# and dicReady[element]["status"] != 0:
+            peticionStr += "{0}: {1}, {2} \n".format(
+                element, dicReady[element]["value"], dicReady[element]["status"])
 
     respuesta =  {
                     "fulfillmentText" : peticionStr,
@@ -141,12 +141,12 @@ def preparaParametros(dic, queryOriginal):
         addEntryToDic(dicReady, "NITAdquiriente", nit, 1)
     else:
         nit = seaker.seakexpresion(queryOriginal, "NitAdquirienteMex")
-        addEntryToDic(dicReady, "NITAdquiriente", nit, 1)
+        addEntryToDic(dicReady, "NITAdquiriente", nit[0], nit[1])
 
 
     # Cuenta
     cuenta = seaker.seakexpresion(queryOriginal, "Cuenta")
-    addEntryToDic(dicReady, "Cuenta", cuenta, 1)
+    addEntryToDic(dicReady, "Cuenta", cuenta[0], cuenta[1])
 
     # Fechas
     fechaInicio, fechaFin = calcDates(dic.get("date"), dic.get("date-period"))

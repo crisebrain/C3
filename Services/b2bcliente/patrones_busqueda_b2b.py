@@ -164,9 +164,7 @@ class Regexseaker:
     def seakexpresion(self, expression, field="Cuenta", nl=3, lowerc=True):
         if lowerc:
             expression = expression.lower()
-        if field in ["Cuenta", "NitAdquirienteMex"]:
-            return self.regexextractor(expression, field)
-        elif field in ["Prefijo", "NoDocumento"]:
+        if field in ["Prefijo", "NoDocumento", "Cuenta", "NitAdquirienteMex"]:
             words = self.dictfacturas[field]
             tokens = word_tokenize(expression)
             arrs = []
