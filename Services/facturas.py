@@ -118,13 +118,21 @@ def preparaParametros(dic, queryOriginal):
     addEntryToDic(dicReady, "Acuse", acuse, 1)
 
 
-    # Folio
+    # Folio Inicio
     if dic.get("folioinicial"):
         folioInicio = int(dic.get("folioinicial").get("value"))
         addEntryToDic(dicReady, "FolioInicio", folioInicio, 1)
+    else:
+        folioInicio = seaker.seakexpresion(queryOriginal, "FolioInicio")
+        addEntryToDic(dicReady, "FolioInicio", folioInicio[0], folioInicio[1])
+
+    # Folio Final
     if dic.get("foliofinal"):
         folioFinal = int(dic.get("foliofinal").get("value"))
         addEntryToDic(dicReady, "FolioFinal", folioFinal, 1)
+    else:
+        folioFinal = seaker.seakexpresion(queryOriginal, "FolioFinal")
+        addEntryToDic(dicReady, "FolioFinal", folioFinal[0], folioInicio[1])
 
 
     # NIT

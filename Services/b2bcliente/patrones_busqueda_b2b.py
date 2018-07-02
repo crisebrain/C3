@@ -15,7 +15,8 @@ class Regexseaker:
         self.patterns = dict(Cuenta=r"\b[A-Za-z]{3}\d{3}\b",
                              Prefijo=r"\b[1-9a-zA-Z]\w{0,3}\b",  # wvect
                              NoDocumento=r"\b[0-9a-zA-Z\-]{1,40}\b",  # w2vect
-                             NitAdquirienteMex=r"\b[A-Za-z]{4}\d{6}[A-Za-z0-9]{3}\b")
+                             NitAdquirienteMex=r"\b[A-Za-z]{4}\d{6}[A-Za-z0-9]{3}\b",
+                             Folio=r"\d{1,16}")
         self.dictfacturas = json.load(open("Services/b2bcliente/facturaskeys.json"))
         # Services/b2bcliente/facturaskeys.json"))
 
@@ -99,6 +100,8 @@ class Regexseaker:
         if field in ["Prefijo", "NoDocumento", "NitAdquirienteMex", "Cuenta"]:
             return ['Fz', 'Y', 'Z', 'cc', 'dato', 'nccn000', "ncms000"
                     'ncfs000', 'sps00', 'Singlel', 'unknown']
+        elif field == "Folio":
+            return ["dato"]
 
     def get_tags(self, field):
         if field == "Prefijo":
@@ -109,9 +112,12 @@ class Regexseaker:
             return ["Singlel", "Sust"]
         elif field == "Cuenta":
             return ["Singlel", "Sust"]
+        elif field == "Folio":
+            return ["Inicio", "Fin", "Es", "Valor", "Prefijo", "Reciente"]
 
-    def do_chunking(self, tagged, field, code, posibles):
-        grammar = self.choice_grammar(field)
+    def do_chunking(self, tagged, field, code, posibles, grammar=None):
+        if grammar is None:
+            grammar = self.choice_grammar(field)
         cp = RegexpParser(grammar)
         chunked = cp.parse(tagged)
         continuous_chunk = []
@@ -198,6 +204,33 @@ class Regexseaker:
             collect()
             posibles = self.get_posibles(field)
             return self.do_chunking(tagged, field, code, posibles)
+        elif field == "FolioInicio":
+            return self.folios(expression, "Inicio")
+        elif field == "FolioFinal":
+            return  self.folios(expression, "Fin")
+
+    def folios(self, phrase, tipoFolio):
+        # Tipo Folio puede ser Inicio o Fin
+
+        # Gramática
+        grammarFolio = r"""
+                      Q: {<Es|sps00|da0ms0|unknown|Valor|cs|cc|Reciente|p0300000|dp1msp|spcms|dp1css>}
+                      NP: {<Folio> <Q>* (<tipoFolio> <Q|Prefijo>*){1,2} <dato>}
+                      NP: {<Folio> <Q>* (<dato> <Q|Prefijo>*){1,2} <tipoFolio>}
+                      NP: {<dato> <Q>* <Folio> <Q>* <tipoFolio>}
+                      NP: {<tipoFolio> <Q>* <Folio> <Q>* <dato>}
+                    """
+
+        # Remplazos
+        grammarFolio = grammarFolio.replace("tipoFolio", tipoFolio)
+
+        field = "Folio"
+        listTags = self.get_tags(field)
+        posibles = self.get_posibles(field)
+
+        tagged = self.do_tagging(phrase.lower(), field, listTags)
+        return self.do_chunking(tagged, field, 1, posibles, grammarFolio)
+
 
 if __name__ == "__main__":
     reg = Regexseaker()
