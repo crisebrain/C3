@@ -13,5 +13,9 @@
 		          "n","ñ","p","q","r","s","t","v","w","x","z"],
 	"Es": ["es", "ser", "son", "igual"],
 	"De": ["de"],
-	"Estado"   : ["estado","estatus"]
+	"Estado": ["estado","estatus"],
+	"NitAdquirienteMex": ["nit", "adquiriente", "rfc"],
+	"Sust": ["número", "numero", "clave", "matrícula", "matricula",
+		       "numeración"],
+	"Cuenta": ["cuenta"]
 }

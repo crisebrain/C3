@@ -18,10 +18,10 @@ def regexextractor(expression, field):
 
 def do_tagging(exp, field, listTags):
     #tokens = nltk.word_tokenize( [normEsp.normalize(exp),norms][0])
-    tokens = nltk.word_tokenize( exp)
+    tokens = nltk.word_tokenize(exp)
     tagged = sgt.pos_tag(tokens)
     #print("tagged:",tagged)
-    tagged = np.array([list(tup) for tup in tagged]).astype(str)
+    tagged = np.array([list(tup) for tup in tagged]).astype('|U16')
 
     # Inicializamos el diccionario de las etiquetas
     dicTags = {}
@@ -63,8 +63,8 @@ def do_chunking(grammar, tagged, field, code , posibles):
     unknowns = []
     subt = []
     for i, subtree in enumerate(chunked):
-        if isinstance(subtree, Tree) and subtree.label() == "NP":
-            if field in ["Prefijo", "NoDocumento"]:
+        if isinstance(subtree, nltk.Tree) and subtree.label() == "NP":
+            if field in ["Prefijo", "NoDocumento", "NitAdquirienteMex", "Cuenta"]:
                 #print(subtree)
                 for subsubtree in subtree.subtrees(filter=lambda t: t.label() == "Q"):
                     entity += [token for token, pos in subsubtree.leaves()]
