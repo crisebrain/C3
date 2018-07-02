@@ -197,9 +197,9 @@ def calcDates(listDate, listDatePeriod):
 
     # Evalúamos fechas posteriores a este año
     hoy = date.today()
-    if dateStart > hoy:
+    if dateStart is not None and dateStart > hoy:
         dateStart = dateStart.replace(year=hoy.year)
-    if dateEnd > hoy:
+    if dateEnd is not None and dateEnd > hoy:
         dateEnd = dateEnd.replace(year=hoy.year)
 
     return dateStart, dateEnd
