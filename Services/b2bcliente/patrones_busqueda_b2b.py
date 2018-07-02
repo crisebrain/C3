@@ -27,23 +27,33 @@ class Regexseaker:
         else:
             return None
 
-    def do_tagging(self, exp, field):
+    def do_tagging(self, exp, field, listTags):
         tokens = word_tokenize(exp)
         tagged = pos_tag(tokens)
-        tagged = np.array([list(tup) for tup in tagged]).astype(str)
-        mask = tagged[:, 1] == 'None'
+        tagged = np.array([list(tup) for tup in tagged]).astype('|U16')
+
+        # Inicializamos el diccionario de las etiquetas
+        dicTags = {}
+        for tag in listTags:
+            dicTags.setdefault(tag, self.dictfacturas[tag])
+
+        # Establecemos las etiquetas de cada palabra
         for i, token in enumerate(tokens):
             if token in self.dictfacturas[field]:
                 tagged[i, 1] = str(field)
+            for tag in dicTags:
+                if token in dicTags[tag]:
+                    tagged[i, 1] = tag
+
+        # Convertimos a tuplas y evalúamos si el dato potencialmente nos
+        # interesa o no.
+        mask = tagged[:, 1] == 'None'
         unknowns, = np.where(mask)
         for unknown in unknowns:
-            if tagged[unknown, 0] in self.dictfacturas[field]:
-                tagged[unknown, 1] = field
+            if self.regexextractor(tokens[unknown], field) is not None:
+                tagged[unknown, 1] = "dato"
             else:
-                if self.regexextractor(tokens[unknown], field) is not None:
-                    tagged[unknown, 1] = "dato"
-                else:
-                    tagged[unknown, 1] = "unknown"
+                tagged[unknown, 1] = "unknown"
         return [tuple(wordtagged) for wordtagged in tagged]
 
     def choice_grammar(self, field):
@@ -51,57 +61,90 @@ class Regexseaker:
             # directas
             # inversas
             # añadir que se hace con sustantivos y nodos terminales
-            grammar = r"""Q: {<dato|Z|Fz|unknown|ncfs000>}
-                          T: {<dato|Fz|unknown|sps00>}
+            grammar = r"""Q: {<dato|Z|Fz|unknown|ncfs000|Singlel>}
                           NP: {<Prefijo> <(vs\w+)|(nc\w+)|(wmi\w+)|(spc\w+)>* <Q>}
-                          NP: {<Prefijo> <T>}
+                          NP: {<Prefijo> <dato|Fz|unknown|sps00>}
                           NP: {<Prefijo> <(vmi\w+)|(aq\w+)|unknown>? <sp\w+>? <Q>}
                           NP: {<Prefijo> <dd0fs0> <vmp00sm> <sps00> <Q>}
-                          NP: {<Q> <(vs\w+)> <(da\w+)> <Prefijo>}
-                          NP: {<Q> <(p030\w+)>? <vmip3s0>? <cs> <Prefijo>}
-                        """
-                      # r"""NP: {<Prefijo> <(vs\w+)|dato>*}"""
-                              #{<dato> <nc\w+>* <Prefijo>} """
-        elif field == "NoDocumento":
-            grammar = r"""NP: {<NoDocu\w+> <(nc\w+)|(sp\w+)|(vs)\w+>* <dato|Z>}
-                          NP: {<NoDocumento|(ncm\w+)> <(vm\w+)|(vs\w+)|(aq\w+)>* <cs|(sps\w+)|(spc\w+)>? <dato|Z>}
-                          NP: {<NoDocumento> <(vm\w+)|(vs\w+)>* <cs|spcms>? <dato|Z>}
-                          NP: {<dato|Z> <vsip3s0|cs> <ncms000>? <da0ms0|(sps\w+)>? <NoDocumento|ncms000>}
-                          NP: {<dato|Z> <(p0\w+)> <vm\w+> <cs> <NoDocumento>}
+                          NP: {<Q|sps00> <(vs\w+)> <(da\w+)> <Prefijo>}
+                          NP: {<Q|sps00> <(p030\w+)>? <vmip3s0>? <cs> <Prefijo>}
                        """
-                       #NP: {<dato> <vsip3s0|cs> <NoDocumento>}
+        elif field == "NoDocumento":
+            grammar = r""" Q: {<cc|dato|Z|Singlel|unknown>}
+                           NP: {<(NoDocu\w+)> <sps00> <(NoDocu\w+)|ncms000> <Q|ncms000|sps00>}
+                           NP: {<(NoDocu\w+)> <sps00> <da0fs0>? <(NoDocu\w+)|ncms000> <aq0cs0>? <sps00|vsip3s0>? <Q|ncms000>}
+                           NP: {<sps00> <(NoDocu\w+)|ncms000> <aq0cs0>? <sps00|vsip3s0>? <Q|ncms000>}
+                           NP: {<(NoDocu\w+)> <sps00> <Q|ncms000> <cs> <(NoDocu\w+)|ncms000>}
+                           NP: {<Q|ncms000> <vsip3s0> <da0ms0> <(NoDocu\w+)|ncms000> <sps00> <da0fs0>? <NoDocu\w+>}
+                       """
+        elif field == "NitAdquirienteMex":
+            grammar = r""" Q: {<unknown|dato|Z|Singlel>}
+                           NP: {<(NitA\w+)> <(NitA\w+)>? <sps00> <Sust> <aq0cs0>? <sps00>? <Q>}
+                           NP: {<(NitA\w+)> <(NitA\w+)>? <sps00> <Q> <cs> <Sust>}
+                           NP: {<(NitA\w+)> <(NitA\w+)>? <Sust|(vs\w+)>? <Q|cc>}
+                           NP: {<(NitA\w+)> <(NitA\w+)>? <aq0cs0> <sps00> <Q>}
+                       """
+        elif field == "Cuenta":
+            grammar = r""" Q: {<unknown|dato|Z|Singlel>}
+                           NP: {<Cuenta> <sps00> <Sust> <Q>}
+                           NP: {<Cuenta> <sps00> <Sust> <aq0cs0> <sps00>? <Q>}
+                           NP: {<(da0\w+)>? <Sust>? <sps00|da0fs0>? <Cuenta> <(vs\w+)>? <Q>}
+                           NP: {<Sust> <sps00> <Cuenta> <sps00> <Sust> <aq0cs0> <sps00> <Q>}
+                           NP: {<Sust> <sps00> <Cuenta> <sps00> <Q> <cs> <Sust>}
+                           NP: {<sps00> <Cuenta> <aq0cs0> <sps00> <Q>}
+                       """
         return grammar
 
+    def get_posibles(self, field):
+        if field in ["Prefijo", "NoDocumento", "NitAdquirienteMex", "Cuenta"]:
+            return ['Fz', 'Y', 'Z', 'cc', 'dato', 'nccn000', "ncms000"
+                    'ncfs000', 'sps00', 'Singlel', 'unknown']
 
-    def do_chunking(self, tagged, field, code):
+    def get_tags(self, field):
+        if field == "Prefijo":
+            return ["Singlel"]
+        elif field == "NoDocumento":
+            return ["Singlel"]
+        elif field == "NitAdquirienteMex":
+            return ["Singlel", "Sust"]
+        elif field == "Cuenta":
+            return ["Singlel", "Sust"]
+
+    def do_chunking(self, tagged, field, code, posibles):
         grammar = self.choice_grammar(field)
         cp = RegexpParser(grammar)
         chunked = cp.parse(tagged)
-        # añadir las condiciones que sean necesarias para contemplar
-        # los posibles valores
-        posibles = ["dato", "Z", "ncfs000", "ncms000", "Fz",
-                    "sps00"]
-        # posibles son los tipos de palabras que pueden representar al dato
         continuous_chunk = []
         entity = []
         unknowns = []
         subt = []
         for i, subtree in enumerate(chunked):
             if isinstance(subtree, Tree) and subtree.label() == "NP":
-                # print(subtree)
-                entity += [token for token, pos in subtree.leaves()
-                           if pos in posibles]
-                unknowns += [token for token, pos in subtree.leaves()
-                             if pos == "unknown"]
-                subt.append(subtree)
+                if field in ["Prefijo", "NoDocumento",
+                             "NitAdquirienteMex", "Cuenta"]:
+                    #print(subtree)
+                    for subsubtree in subtree.subtrees(filter=lambda t: t.label() == "Q"):
+                        entity += [token for token, pos in subsubtree.leaves()]
+                        subt.append(subsubtree)
+                    unknowns += [token for token, pos in subtree.leaves()
+                                 if pos in posibles]
+                else:
+                    # añadir las condiciones que sean necesarias para contemplar
+                    # los posibles valores
+                    entity += [token for token, pos in subtree.leaves()
+                               if pos in posibles]
+                    unknowns += [token for token, pos in subtree.leaves()
+                                 if pos == "unknown"]
+                    subt.append(subtree)
         if entity == []:
             code = 0
-            if unknowns != []:
+            if len(unknowns) > 1:
                 entity = unknowns[-1].upper()
+            elif unknowns != []:
+                entity = unknowns[0].upper()
             else:
                 entity = None
         elif len(entity) > 1:
-            print(entity)
             code = 0
             entity = entity[-1].upper()
         else:
@@ -149,10 +192,12 @@ class Regexseaker:
                 code = 1
             # codigo 1 es para busqueda de campo exitosa
             # inocente hasta que se demuestre lo contrario
-            tagged = self.do_tagging(posible, field)
+            taglist = self.get_tags(field)
+            tagged = self.do_tagging(posible, field, taglist)
             # print(tagged)
             collect()
-            return self.do_chunking(tagged, field, code)
+            posibles = self.get_posibles(field)
+            return self.do_chunking(tagged, field, code, posibles)
 
 if __name__ == "__main__":
     reg = Regexseaker()
