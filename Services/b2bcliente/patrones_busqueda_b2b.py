@@ -76,6 +76,8 @@ class Regexseaker:
                            NP: {<sps00> <(NoDocu\w+)|ncms000> <aq0cs0>? <sps00|vsip3s0>? <Q|ncms000>}
                            NP: {<(NoDocu\w+)> <sps00> <Q|ncms000> <cs> <(NoDocu\w+)|ncms000>}
                            NP: {<Q|ncms000> <vsip3s0> <da0ms0> <(NoDocu\w+)|ncms000> <sps00> <da0fs0>? <NoDocu\w+>}
+                           NP: {<Q> <p0300000> <vmip3s0> <cs> <NoDocumento>}
+                           NP: {<NoDocumento> <Q>}
                        """
         elif field == "NitAdquirienteMex":
             grammar = r""" Q: {<unknown|dato|Z|Singlel>}
@@ -158,9 +160,9 @@ class Regexseaker:
     def seakexpresion(self, expression, field="Cuenta", nl=3, lowerc=True):
         if lowerc:
             expression = expression.lower()
-        if field in ["Cuenta", "NitAdquirienteMex"]:
-            return self.regexextractor(expression, field)
-        elif field in ["Prefijo", "NoDocumento"]:
+        # if field in []:
+        #     return self.regexextractor(expression, field)
+        if field in ["Prefijo", "NoDocumento", "Cuenta", "NitAdquirienteMex"]:
             words = self.dictfacturas[field]
             tokens = word_tokenize(expression)
             arrs = []
