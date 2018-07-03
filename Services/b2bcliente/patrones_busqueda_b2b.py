@@ -74,7 +74,7 @@ class Regexseaker:
                       NoDocumento=r""" Q: {<cc|dato|Z|Singlel|unknown>}
                                        NP: {<(NoDocu\w+)> <sps00> <(NoDocu\w+)|ncms000> <Q|ncms000|sps00>}
                                        NP: {<(NoDocu\w+)> <sps00> <da0fs0>? <(NoDocu\w+)|ncms000> <aq0cs0>? <sps00|vsip3s0>? <Q|ncms000>}
-                                       NP: {<sps00> <(NoDocu\w+)|ncms000> <aq0cs0>? <sps00|vsip3s0>? <Q|ncms000>}
+                                       NP: {<sps00>? <(NoDocu\w+)|ncms000> <aq0cs0>? <sps00|vsip3s0>? <Q|ncms000>}
                                        NP: {<(NoDocu\w+)> <sps00> <Q|ncms000> <cs> <(NoDocu\w+)|ncms000>}
                                        NP: {<Q|ncms000> <vsip3s0> <da0ms0> <(NoDocu\w+)|ncms000> <sps00> <da0fs0>? <NoDocu\w+>}
                                        NP: {<Q> <p0300000> <vmip3s0> <cs> <NoDocumento>}
