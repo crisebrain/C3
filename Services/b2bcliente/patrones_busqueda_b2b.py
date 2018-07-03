@@ -16,7 +16,9 @@ class Regexseaker:
                              Prefijo=r"\b[1-9a-zA-Z]\w{0,3}\b",  # wvect
                              NoDocumento=r"\b[0-9a-zA-Z\-]{1,40}\b",  # w2vect
                              NitAdquirienteMex=r"\b[A-Za-z]{4}\d{6}[A-Za-z0-9]{3}\b",
-                             Folio=r"\d{1,16}")
+                             Folio=r"\d{1,16}",
+                             Estado=r"[A-Za-z]",   #[a-z]{1,16}"
+                             Acuse=r"[A-Za-z]")
         self.dictfacturas = json.load(open("Services/b2bcliente/facturaskeys.json"))
         # Services/b2bcliente/facturaskeys.json"))
 
@@ -57,46 +59,58 @@ class Regexseaker:
                 tagged[unknown, 1] = "unknown"
         return [tuple(wordtagged) for wordtagged in tagged]
 
-    def choice_grammar(self, field):
-        if field == "Prefijo":
-            # directas
-            # inversas
-            # añadir que se hace con sustantivos y nodos terminales
-            grammar = r"""Q: {<dato|Z|Fz|unknown|ncfs000|Singlel>}
-                          NP: {<Prefijo> <(vs\w+)|(nc\w+)|(wmi\w+)|(spc\w+)>* <Q>}
-                          NP: {<Prefijo> <dato|Fz|unknown|sps00>}
-                          NP: {<Prefijo> <(vmi\w+)|(aq\w+)|unknown>? <sp\w+>? <Q>}
-                          NP: {<Prefijo> <dd0fs0> <vmp00sm> <sps00> <Q>}
-                          NP: {<Q|sps00> <(vs\w+)> <(da\w+)> <Prefijo>}
-                          NP: {<Q|sps00> <(p030\w+)>? <vmip3s0>? <cs> <Prefijo>}
-                       """
-        elif field == "NoDocumento":
-            grammar = r""" Q: {<cc|dato|Z|Singlel|unknown>}
-                           NP: {<(NoDocu\w+)> <sps00> <(NoDocu\w+)|ncms000> <Q|ncms000|sps00>}
-                           NP: {<(NoDocu\w+)> <sps00> <da0fs0>? <(NoDocu\w+)|ncms000> <aq0cs0>? <sps00|vsip3s0>? <Q|ncms000>}
-                           NP: {<sps00> <(NoDocu\w+)|ncms000> <aq0cs0>? <sps00|vsip3s0>? <Q|ncms000>}
-                           NP: {<(NoDocu\w+)> <sps00> <Q|ncms000> <cs> <(NoDocu\w+)|ncms000>}
-                           NP: {<Q|ncms000> <vsip3s0> <da0ms0> <(NoDocu\w+)|ncms000> <sps00> <da0fs0>? <NoDocu\w+>}
-                           NP: {<Q> <p0300000> <vmip3s0> <cs> <NoDocumento>}
-                           NP: {<NoDocumento> <Q>}
-                       """
-        elif field == "NitAdquirienteMex":
-            grammar = r""" Q: {<unknown|dato|Z|Singlel>}
-                           NP: {<(NitA\w+)> <(NitA\w+)>? <sps00> <Sust> <aq0cs0>? <sps00>? <Q>}
-                           NP: {<(NitA\w+)> <(NitA\w+)>? <sps00> <Q> <cs> <Sust>}
-                           NP: {<(NitA\w+)> <(NitA\w+)>? <Sust|(vs\w+)>? <Q|cc>}
-                           NP: {<(NitA\w+)> <(NitA\w+)>? <aq0cs0> <sps00> <Q>}
-                       """
-        elif field == "Cuenta":
-            grammar = r""" Q: {<unknown|dato|Z|Singlel>}
-                           NP: {<Cuenta> <sps00> <Sust> <Q>}
-                           NP: {<Cuenta> <sps00> <Sust> <aq0cs0> <sps00>? <Q>}
-                           NP: {<(da0\w+)>? <Sust>? <sps00|da0fs0>? <Cuenta> <(vs\w+)>? <Q>}
-                           NP: {<Sust> <sps00> <Cuenta> <sps00> <Sust> <aq0cs0> <sps00> <Q>}
-                           NP: {<Sust> <sps00> <Cuenta> <sps00> <Q> <cs> <Sust>}
-                           NP: {<sps00> <Cuenta> <aq0cs0> <sps00> <Q>}
-                       """
-        return grammar
+    def choose_grammar(self, field):
+        dgramm = dict(Prefijo=r"""Q: {<dato|Z|Fz|unknown|ncfs000|Singlel>}
+                                  NP: {<Prefijo> <(vs\w+)|(nc\w+)|(wmi\w+)|(spc\w+)>* <Q>}
+                                  NP: {<Prefijo> <dato|Fz|unknown|sps00>}
+                                  NP: {<Prefijo> <(vmi\w+)|(aq\w+)|unknown>? <sp\w+>? <Q>}
+                                  NP: {<Prefijo> <dd0fs0> <vmp00sm> <sps00> <Q>}
+                                  NP: {<Q|sps00> <(vs\w+)> <(da\w+)> <Prefijo>}
+                                  NP: {<Q|sps00> <(p030\w+)>? <vmip3s0>? <cs> <Prefijo>}
+                               """,
+                               # directas
+                               # inversas
+                               # añadir que se hace con sustantivos y nodos terminales
+                      NoDocumento=r""" Q: {<cc|dato|Z|Singlel|unknown>}
+                                       NP: {<(NoDocu\w+)> <sps00> <(NoDocu\w+)|ncms000> <Q|ncms000|sps00>}
+                                       NP: {<(NoDocu\w+)> <sps00> <da0fs0>? <(NoDocu\w+)|ncms000> <aq0cs0>? <sps00|vsip3s0>? <Q|ncms000>}
+                                       NP: {<sps00> <(NoDocu\w+)|ncms000> <aq0cs0>? <sps00|vsip3s0>? <Q|ncms000>}
+                                       NP: {<(NoDocu\w+)> <sps00> <Q|ncms000> <cs> <(NoDocu\w+)|ncms000>}
+                                       NP: {<Q|ncms000> <vsip3s0> <da0ms0> <(NoDocu\w+)|ncms000> <sps00> <da0fs0>? <NoDocu\w+>}
+                                       NP: {<Q> <p0300000> <vmip3s0> <cs> <NoDocumento>}
+                                       NP: {<NoDocumento> <Q>}
+                                   """,
+                      NitAdquirienteMex=r""" Q: {<unknown|dato|Z|Singlel>}
+                                             NP: {<(NitA\w+)> <(NitA\w+)>? <sps00> <Sust> <aq0cs0>? <sps00>? <Q>}
+                                             NP: {<(NitA\w+)> <(NitA\w+)>? <sps00> <Q> <cs> <Sust>}
+                                             NP: {<(NitA\w+)> <(NitA\w+)>? <Sust|(vs\w+)>? <Q|cc>}
+                                             NP: {<(NitA\w+)> <(NitA\w+)>? <aq0cs0> <sps00> <Q>}
+                                         """,
+                      Cuenta=r""" Q: {<unknown|dato|Z|Singlel>}
+                                  NP: {<Cuenta> <sps00> <Sust> <Q>}
+                                  NP: {<Cuenta> <sps00> <Sust> <aq0cs0> <sps00>? <Q>}
+                                  NP: {<(da0\w+)>? <Sust>? <sps00|da0fs0>? <Cuenta> <(vs\w+)>? <Q>}
+                                  NP: {<Sust> <sps00> <Cuenta> <sps00> <Sust> <aq0cs0> <sps00> <Q>}
+                                  NP: {<Sust> <sps00> <Cuenta> <sps00> <Q> <cs> <Sust>}
+                                  NP: {<sps00> <Cuenta> <aq0cs0> <sps00> <Q>}
+                              """,
+                      Estado=r""" Q: {<Recibido|Error|Firmado|Rechazado|Aceptado|Enviado>}
+                                   NP: {<Estado> <vssp3s0|unknown|vssp3s0|sps00>* <Q>}
+                                   NP: {<Estado> <vsis3s0|vmp00sm|sps00|Es|Valor>* <Q>}
+                                   NP: {<Q> <sps00|ncms000|Es|da0ms0>* <Estado>}
+                               """,
+                      Acuse=r"""Q: {<Rechazado|Aceptado|Pendiente>}
+                                NP: {<Acuse> <vssp3s0|unknown|vssp3s0|sps00>* <Q>}
+                                NP: {<Acuse> <vsis3s0|vmp00sm|sps00|Es|Valor>* <Q>}
+                                NP: {<Q> <sps00|ncms000|Es|da0ms0>* <Acuse>}
+                             """,
+                      Folio=r""" Q: {<Es|sps00|da0ms0|unknown|Valor|cs|cc|Reciente|p0300000|dp1msp|spcms|dp1css>}
+                                 NP: {<Folio> <Q>* (<tipoFolio> <Q|Prefijo>*){1,2} <dato>}
+                                 NP: {<Folio> <Q>* (<dato> <Q|Prefijo>*){1,2} <tipoFolio>}
+                                 NP: {<dato> <Q>* <Folio> <Q>* <tipoFolio>}
+                                 NP: {<tipoFolio> <Q>* <Folio> <Q>* <dato>}
+                             """)
+        return dgramm[field]
 
     def get_posibles(self, field):
         if field in ["Prefijo", "NoDocumento", "NitAdquirienteMex", "Cuenta"]:
@@ -104,6 +118,9 @@ class Regexseaker:
                     'ncfs000', 'sps00', 'Singlel', 'unknown']
         elif field == "Folio":
             return ["dato"]
+        elif field == "Estado" or field == "Acuse":
+            return ["dato","Recibido","Error","Firmado","Rechazado",
+                    "Aceptado","Enviado","Pendiente"]
 
     def get_tags(self, field):
         if field == "Prefijo":
@@ -116,10 +133,16 @@ class Regexseaker:
             return ["Singlel", "Sust"]
         elif field == "Folio":
             return ["Inicio", "Fin", "Es", "Valor", "Prefijo", "Reciente"]
+        elif field == "Estado":
+            return ["Recibido","Error","Firmado","Rechazado",
+                    "Aceptado","Enviado","Pendiente"]
+        elif field == "Acuse":
+            return ["Recibido","Error","Firmado","Rechazado",
+                    "Aceptado","Enviado","Pendiente"]
 
     def do_chunking(self, tagged, field, code, posibles, grammar=None):
         if grammar is None:
-            grammar = self.choice_grammar(field)
+            grammar = self.choose_grammar(field)
         cp = RegexpParser(grammar)
         chunked = cp.parse(tagged)
         continuous_chunk = []
@@ -129,7 +152,8 @@ class Regexseaker:
         for i, subtree in enumerate(chunked):
             if isinstance(subtree, Tree) and subtree.label() == "NP":
                 if field in ["Prefijo", "NoDocumento",
-                             "NitAdquirienteMex", "Cuenta"]:
+                             "NitAdquirienteMex", "Cuenta",
+                             "Estado", "Acuse"]:
                     #print(subtree)
                     for subsubtree in subtree.subtrees(filter=lambda t: t.label() == "Q"):
                         entity += [token for token, pos in subsubtree.leaves()]
@@ -166,7 +190,8 @@ class Regexseaker:
     def seakexpresion(self, expression, field="Cuenta", nl=3, lowerc=True):
         if lowerc:
             expression = expression.lower()
-        if field in ["Prefijo", "NoDocumento", "Cuenta", "NitAdquirienteMex"]:
+        if field in ["Prefijo", "NoDocumento", "Cuenta", "NitAdquirienteMex",
+                     "Acuse", "Estado"]:
             words = self.dictfacturas[field]
             tokens = word_tokenize(expression)
             arrs = []
@@ -211,20 +236,12 @@ class Regexseaker:
 
     def folios(self, phrase, tipoFolio):
         # Tipo Folio puede ser Inicio o Fin
-
+        field = "Folio"
         # Gramática
-        grammarFolio = r"""
-                      Q: {<Es|sps00|da0ms0|unknown|Valor|cs|cc|Reciente|p0300000|dp1msp|spcms|dp1css>}
-                      NP: {<Folio> <Q>* (<tipoFolio> <Q|Prefijo>*){1,2} <dato>}
-                      NP: {<Folio> <Q>* (<dato> <Q|Prefijo>*){1,2} <tipoFolio>}
-                      NP: {<dato> <Q>* <Folio> <Q>* <tipoFolio>}
-                      NP: {<tipoFolio> <Q>* <Folio> <Q>* <dato>}
-                    """
-
+        grammarFolio = self.choose_grammar(field)
         # Remplazos
         grammarFolio = grammarFolio.replace("tipoFolio", tipoFolio)
 
-        field = "Folio"
         listTags = self.get_tags(field)
         posibles = self.get_posibles(field)
 

@@ -20,5 +20,19 @@
 	"NitAdquirienteMex": ["nit", "adquiriente", "rfc"],
 	"Sust": ["número", "numero", "clave", "matrícula", "matricula",
 		       "numeración"],
-	"Cuenta": ["cuenta"]
+	"Cuenta": ["cuenta"],
+	"Periodo": ["este", "esta", "pasada", "pasado", "anterior",
+		          "anteriores", "actual", "actuales", "corriente"],
+	"semana": ["semana", "semanal", "semanalmente"],
+	"dia": ["hoy", "ayer", "mañana"],
+	"mes": ["mensual", "mes", "mensualmente"],
+	"año": ["anual", "año", "anualmente"],
+	"Recibido": ["recibido","recibidos"],
+	"Error": ["error"],
+	"Firmado": ["firmado","firmada","firmados","firmadas"],
+	"Rechazado": ["rechazado","rechazada","rechazados","rechazadas"],
+	"Aceptado": ["aceptado","aceptada","aceptados","aceptadas"],
+	"Enviado": ["enviado","enviada","enviados","enviadas"],
+	"Pendiente": ["pendiente","pendientes"],
+	"Acuse": ["acuse"]
 }
