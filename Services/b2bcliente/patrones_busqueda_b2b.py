@@ -186,7 +186,7 @@ class Regexseaker:
                 code = 0
         return entity, code, subt, tagged
 
-    def seakexpresion(self, expression, field="Cuenta", nl=4, lowerc=True):
+    def seakexpresion(self, expression, field="Cuenta", nl=5, lowerc=True):
         if lowerc:
             expression = expression.lower()
         if field in ["Prefijo", "NoDocumento", "Cuenta", "NitAdquirienteMex",
