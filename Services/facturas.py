@@ -89,6 +89,11 @@ def preparaParametros(dic, queryOriginal):
     if dic.get("status"):
         status = switcherStatus.get(dic.get("status").get("value"))
         addEntryToDic(dicReady, "Status", status, 1)
+    else:
+        statusT = seaker.seakexpresion(queryOriginal, "Estado")
+        if statusT[0] is not None:
+            status = switcherStatus.get(statusT[0].capitalize())
+            addEntryToDic(dicReady, "Status", status, statusT[1])
 
     # Prefijo
     if dic.get("prefijo"):
@@ -110,12 +115,17 @@ def preparaParametros(dic, queryOriginal):
         "Rechazado": 2,
         "Pendiente": 3
     }
-    acuse = ""
+    acuse = []
     if dic.get("acuse"):
-        acuse = dic.get("acuse").get("value")
+        acuse.append(dic.get("acuse").get("value"))
+        acuse.append(1)
+    else:
+        acuseT = seaker.seakexpresion(queryOriginal, "Acuse")
+        acuse.append(acuseT[0].capitalize())
+        acuse.append(acuseT[1])
     # Valor por default 0
-    acuse = switcherAcuse.get(acuse, 0)
-    addEntryToDic(dicReady, "Acuse", acuse, 1)
+    acuse[0] = switcherAcuse.get(acuse[0], 0)
+    addEntryToDic(dicReady, "Acuse", acuse[0], acuse[1])
 
 
     # Folio Inicio
