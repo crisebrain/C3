@@ -83,7 +83,7 @@ class Regexseaker:
                       NitAdquirienteMex=r""" Q: {<unknown|dato|Z|Singlel>}
                                              NP: {<(NitA\w+)> <(NitA\w+)>? <sps00> <Sust> <aq0cs0>? <sps00>? <Q>}
                                              NP: {<(NitA\w+)> <(NitA\w+)>? <sps00> <Q> <cs> <Sust>}
-                                             NP: {<(NitA\w+)> <(NitA\w+)>? <Sust|(vs\w+)>? <Q|cc>}
+                                             NP: {<(NitA\w+)> <(NitA\w+)>? <Sust|(vs\w+)>? <da0ms0>? <Q|cc>}
                                              NP: {<(NitA\w+)> <(NitA\w+)>? <aq0cs0> <sps00> <Q>}
                                          """,
                       Cuenta=r""" Q: {<unknown|dato|Z|Singlel>}
@@ -107,7 +107,7 @@ class Regexseaker:
                       Folio=r""" Q: {<Es|sps00|da0ms0|unknown|Valor|cs|cc|Reciente|p0300000|dp1msp|spcms|dp1css>}
                                  NP: {<Folio> <Q>* (<tipoFolio> <Q|Prefijo>*){1,2} <dato>}
                                  NP: {<Folio> <Q>* (<dato> <Q|Prefijo>*){1,2} <tipoFolio>}
-                                 NP: {<dato> <Q>* <Folio> <Q>* <tipoFolio>}
+                                 NP: {<dato> <Q>+ <Folio> <Q>* <tipoFolio>}
                                  NP: {<tipoFolio> <Q>* <Folio> <Q>* <dato>}
                              """)
         return dgramm[field]
@@ -134,11 +134,10 @@ class Regexseaker:
         elif field == "Folio":
             return ["Inicio", "Fin", "Es", "Valor", "Prefijo", "Reciente"]
         elif field == "Estado":
-            return ["Recibido","Error","Firmado","Rechazado",
-                    "Aceptado","Enviado","Pendiente"]
+            return ["Es","Valor","Recibido","Error","Firmado","Rechazado",
+                    "Aceptado","Enviado"]
         elif field == "Acuse":
-            return ["Recibido","Error","Firmado","Rechazado",
-                    "Aceptado","Enviado","Pendiente"]
+            return ["Es","Valor","Rechazado","Aceptado","Pendiente"]
 
     def do_chunking(self, tagged, field, code, posibles, grammar=None):
         if grammar is None:
@@ -187,7 +186,7 @@ class Regexseaker:
                 code = 0
         return entity, code, subt, tagged
 
-    def seakexpresion(self, expression, field="Cuenta", nl=3, lowerc=True):
+    def seakexpresion(self, expression, field="Cuenta", nl=4, lowerc=True):
         if lowerc:
             expression = expression.lower()
         if field in ["Prefijo", "NoDocumento", "Cuenta", "NitAdquirienteMex",
