@@ -121,7 +121,7 @@ def preparaParametros(dic, queryOriginal):
         acuse.append(1)
     else:
         acuseT = seaker.seakexpresion(queryOriginal, "Acuse")
-        acuse.append(acuseT[0].capitalize())
+        acuse.append(acuseT[0].capitalize() if acuseT[0] is not None else acuseT[0])
         acuse.append(acuseT[1])
     # Valor por default 0
     acuse[0] = switcherAcuse.get(acuse[0], 0)
@@ -160,11 +160,17 @@ def preparaParametros(dic, queryOriginal):
 
     # Fechas
     fechaInicio, fechaFin = calcDates(dic.get("date"), dic.get("date-period"))
-    # Si la existe la fecha, le pone formato ISO, sino, la deja en None
+    fechaStatus = 1
+    if fechaInicio is None or fechaFin is None:
+        fechaTemp = seaker.seakexpresion(queryOriginal, "Periodo")
+        fechaInicio = fechaTemp[0].get("fechaInicio")
+        fechaFin = fechaTemp[0].get("fechaFin")
+        fechaStatus = fechaTemp[1]
+    # Si existe la fecha, le pone formato ISO, sino, la deja en None
     fechaInicioStr = fechaInicio.isoformat() if fechaInicio is not None else None
     fechaFinStr = fechaFin.isoformat() if fechaInicio is not None else None
-    addEntryToDic(dicReady, "FechaEmisionInicio", fechaInicioStr, 1)
-    addEntryToDic(dicReady, "FechaEmisionFin", fechaFinStr, 1)
+    addEntryToDic(dicReady, "FechaEmisionInicio", fechaInicioStr, fechaStatus)
+    addEntryToDic(dicReady, "FechaEmisionFin", fechaFinStr, fechaStatus)
 
 
     # NumeroFactura (Num. Documento)
