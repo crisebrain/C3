@@ -2,6 +2,8 @@
 from .spaghetti import pos_tag
 import re
 from nltk import word_tokenize, RegexpParser, Tree
+from datetime import datetime, timedelta
+from dateutil.relativedelta import relativedelta
 # from gc import collect
 import numpy as np
 import json
@@ -18,7 +20,8 @@ class Regexseaker:
                              NitAdquirienteMex=r"\b[A-Za-z]{4}\d{6}[A-Za-z0-9]{3}\b",
                              Folio=r"\d{1,16}",
                              Estado=r"[A-Za-z]",   #[a-z]{1,16}"
-                             Acuse=r"[A-Za-z]")
+                             Acuse=r"[A-Za-z]",
+                             Periodo=r"\b[a-zA-Z]{1,12}\b")
         self.dictfacturas = json.load(open("Services/b2bcliente/facturaskeys.json"))
         # Services/b2bcliente/facturaskeys.json"))
 
@@ -113,7 +116,13 @@ class Regexseaker:
                                  NP: {<Folio> <Q>* (<dato> <Q|Prefijo>*){1,2} <tipoFolio>}
                                  NP: {<dato> <Q>+ <Folio> <Q>* <tipoFolio>}
                                  NP: {<tipoFolio> <Q>* <Folio> <Q>* <dato>}
-                             """)
+                             """,
+                      Periodo=r""" DP: {<semana|dia|mes|año>}
+                                   NP1: {<presente|pasado> <DP>}
+                                   NP2: {<DP> <sps00>? <presente|pasado>}
+                                   NP3: {<sps00> <presente|pasado>}
+                                   NP4: {<spcms|da0fs0|Periodo> <DP>}
+                               """)
         return dgramm[field]
 
     def get_posibles(self, field):
@@ -142,6 +151,8 @@ class Regexseaker:
                     "Aceptado","Enviado"]
         elif field == "Acuse":
             return ["Es","Valor","Rechazado","Aceptado","Pendiente"]
+        elif field == "Periodo":
+            return ["pasado", "presente", "semana", "dia", "mes", "año"]
 
     def do_chunking(self, tagged, field, code, posibles, grammar=None):
         if grammar is None:
@@ -236,6 +247,8 @@ class Regexseaker:
             return self.folios(expression, "Inicio")
         elif field == "FolioFinal":
             return self.folios(expression, "Fin")
+        elif field == "Periodo":
+            return self.chunks_period(expression, "Periodo")
 
     def folios(self, phrase, tipoFolio):
         # Tipo Folio puede ser Inicio o Fin
@@ -250,6 +263,79 @@ class Regexseaker:
 
         tagged = self.do_tagging(phrase.lower(), field, listTags)
         return self.do_chunking(tagged, field, 1, posibles, grammarFolio)
+
+    def chunks_period(self, exp, field):
+        listTags = self.get_tags("Periodo")
+        tagged = self.do_tagging(exp.lower(), "Periodo", listTags)
+        grammar = self.choose_grammar("Periodo")
+        cp = RegexpParser(grammar)
+        chunked = cp.parse(tagged)
+        dictime = {"pasado": 1, "presente": 0}
+        dicinterval = {"dia": 1, "semana": 2, "mes": 3, "año": 4}
+        period = dict(interval=None, time=None)
+        subt = []
+        for tree in chunked:
+            if isinstance(tree, Tree):
+                if tree.label() in ["NP1", "NP2"]:
+                    for subtree in tree.subtrees(filter=lambda t: t.label() == "DP"):
+                        period["interval"] = dicinterval[subtree.leaves()[0][1]]
+                    for leave in tree.leaves():
+                        if leave[1] in dictime.keys():
+                            period["time"] = dictime[leave[1]]
+                    subt.append(tree)
+                elif tree.label() == "NP3":
+                    for leave in tree.leaves():
+                        if leave[1] in ["presente", "pasado"]:
+                            period["time"] = dictime[leave[1]]
+                            period["interval"] = dicinterval["dia"]
+                    subt.append(tree)
+                elif tree.label() == "NP4":
+                    for subtree in tree.subtrees(filter=lambda t: t.label() == "DP"):
+                        period["interval"] = dicinterval[subtree.leaves()[0][1]]
+                        period["time"] = dictime["presente"]
+                    subt.append(tree)
+        conds = [[True] if item is not None else [False]
+                 for item in period.values()]
+        code, = np.logical_xor(*conds)
+        code = not code
+        cond = not(len(subt) > 1)
+        code = code and cond
+        return self.time_period(period), code
+
+    def time_period(self, period):
+        result = dict(fechaInicio=None, fechaFin=None)
+        if period["interval"] == 1 and period["time"] == 0:
+            result["fechaInicio"] = datetime.now().date()
+            result["fechaFin"] = datetime.now().date()
+        if period["interval"] == 1 and period["time"] == 1:
+            result["fechaInicio"] = (datetime.now() - timedelta(days=1)).date()
+            result["fechaFin"] = datetime.now().date()
+        if period["interval"] == 2 and period["time"] == 0:
+            diacorriente = datetime.isoweekday(datetime.now())
+            result["fechaInicio"] = (datetime.now() - timedelta(days=diacorriente)).date()
+            result["fechaFin"] = datetime.now().date()
+        if period["interval"] == 2 and period["time"] == 1:
+            diacorriente = datetime.isoweekday(datetime.now())
+            result["fechaInicio"] = (datetime.now() - timedelta(days=diacorriente+7)).date()
+            result["fechaFin"] = result["fechaInicio"] + timedelta(days=6)
+        if period["interval"] == 3 and period["time"] == 0:
+            diames = datetime.now().day - 1
+            result["fechaInicio"] = (datetime.now() - timedelta(days=diames)).date()
+            result["fechaFin"] = datetime.now().date()
+        if period["interval"] == 3 and period["time"] == 1:
+            diames = datetime.now().day - 1
+            primero = datetime.now() - timedelta(days=diames) - relativedelta(months=1)
+            result["fechaInicio"] = primero.date()
+            result["fechaFin"] = (datetime.now() - timedelta(days=diames + 1)).date()
+        if period["interval"] == 4 and period["time"] == 0:
+            year, weeks, weekday = datetime.isocalendar(datetime.now())
+            result["fechaInicio"] = (datetime.now() - timedelta(weeks=weeks-1, days=weekday - 1)).date()
+            result["fechaFin"] = datetime.now().date()
+        if period["interval"] == 4 and period["time"] == 1:
+            year, weeks, weekday = datetime.isocalendar(datetime.now())
+            result["fechaInicio"] = (datetime.now() - relativedelta(weeks=weeks-1, days=weekday - 1, years=1)).date()
+            result["fechaFin"] = result["fechaInicio"] + relativedelta(days=364)
+        return result
 
 
 if __name__ == "__main__":
