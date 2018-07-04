@@ -30,7 +30,7 @@ class Regexseaker:
         else:
             return None
 
-    def do_tagging(self, exp, field, listTags):
+    def do_tagging(self, exp, field, listTags, listRegExps=None):
         tokens = word_tokenize(exp)
         tagged = pos_tag(tokens)
         tagged = np.array([list(tup) for tup in tagged]).astype('|U16')
@@ -47,6 +47,10 @@ class Regexseaker:
             for tag in dicTags:
                 if token in dicTags[tag]:
                     tagged[i, 1] = tag
+            if listRegExps is not None:
+                for regExp in listRegExps:
+                    if self.regexextractor(token, regExp):
+                        tagged[i, 1] = regExp
 
         # Convertimos a tuplas y evalúamos si el dato potencialmente nos
         # interesa o no.
