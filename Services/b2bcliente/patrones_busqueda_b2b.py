@@ -2,7 +2,7 @@
 from .spaghetti import pos_tag
 import re
 from nltk import word_tokenize, RegexpParser, Tree
-from gc import collect
+# from gc import collect
 import numpy as np
 import json
 
@@ -229,7 +229,7 @@ class Regexseaker:
             taglist = self.get_tags(field)
             tagged = self.do_tagging(posible, field, taglist)
             # print(tagged)
-            collect()
+            # collect()
             posibles = self.get_posibles(field)
             return self.do_chunking(tagged, field, code, posibles)
         elif field == "FolioInicio":
