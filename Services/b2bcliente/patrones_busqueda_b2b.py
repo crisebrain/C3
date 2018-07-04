@@ -18,6 +18,7 @@ class Regexseaker:
                              Prefijo=r"\b[1-9a-zA-Z]\w{0,3}\b",  # wvect
                              NoDocumento=r"\b[0-9a-zA-Z\-]{1,40}\b",  # w2vect
                              NitAdquirienteMex=r"\b[A-Za-z]{4}\d{6}[A-Za-z0-9]{3}\b",
+                             datoNitCol=r"\b\d{1,32}\b",
                              Folio=r"\d{1,16}",
                              Estado=r"[A-Za-z]",   #[a-z]{1,16}"
                              Acuse=r"[A-Za-z]",
@@ -87,7 +88,7 @@ class Regexseaker:
                                        NP: {<Q> <p0300000> <vmip3s0> <cs> <NoDocumento>}
                                        NP: {<NoDocumento> <Q>}
                                    """,
-                      NitAdquirienteMex=r""" Q: {<unknown|dato|Z|Singlel>}
+                      NitAdquirienteMex=r""" Q: {<unknown|dato|Z|Singlel|datoNitCol>}
                                              NP: {<(NitA\w+)> <(NitA\w+)>? <sps00> <Sust> <aq0cs0>? <sps00>? <Q>}
                                              NP: {<(NitA\w+)> <(NitA\w+)>? <sps00> <Q> <cs> <Sust>}
                                              NP: {<(NitA\w+)> <(NitA\w+)>? <Sust|(vs\w+)>? <da0ms0>? <Q|cc>}
@@ -238,7 +239,11 @@ class Regexseaker:
             # codigo 1 es para busqueda de campo exitosa
             # inocente hasta que se demuestre lo contrario
             taglist = self.get_tags(field)
-            tagged = self.do_tagging(posible, field, taglist)
+            if field == "NitAdquirienteMex":
+                tagged = self.do_tagging(posible, field, taglist,
+                                         ["datoNitCol"])
+            else:
+                tagged = self.do_tagging(posible, field, taglist)
             # print(tagged)
             # collect()
             posibles = self.get_posibles(field)
