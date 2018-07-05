@@ -22,7 +22,8 @@ class Regexseaker:
                              Folio=r"\d{1,16}",
                              Estado=r"[A-Za-z]",   #[a-z]{1,16}"
                              Acuse=r"[A-Za-z]",
-                             Periodo=r"\b[a-zA-Z]{1,12}\b")
+                             Periodo=r"\b[a-zA-Z]{1,12}\b",
+                             Nums=r"\b\d+\b")
         self.dictfacturas = json.load(open("Services/b2bcliente/facturaskeys.json"))
         # Services/b2bcliente/facturaskeys.json"))
 
@@ -79,27 +80,25 @@ class Regexseaker:
                                # directas
                                # inversas
                                # añadir que se hace con sustantivos y nodos terminales
-                      NoDocumento=r""" Q: {<cc|dato|Z|Singlel|unknown>}
-                                       NP: {<(NoDocu\w+)> <sps00> <(NoDocu\w+)|ncms000> <Q|ncms000|sps00>}
-                                       NP: {<(NoDocu\w+)> <sps00> <da0fs0>? <(NoDocu\w+)|ncms000> <aq0cs0>? <sps00|vsip3s0>? <Q|ncms000>}
-                                       NP: {<sps00>? <(NoDocu\w+)|ncms000> <aq0cs0>? <sps00|vsip3s0>? <Q|ncms000>}
-                                       NP: {<(NoDocu\w+)> <sps00> <Q|ncms000> <cs> <(NoDocu\w+)|ncms000>}
-                                       NP: {<Q|ncms000> <vsip3s0> <da0ms0> <(NoDocu\w+)|ncms000> <sps00> <da0fs0>? <NoDocu\w+>}
-                                       NP: {<Q> <p0300000> <vmip3s0> <cs> <NoDocumento>}
-                                       NP: {<NoDocumento> <Q>}
+                      NoDocumento=r""" Q: {<Singlel|cc|dato|Nums>}
+                                       AUX : {(<vmip1p0> <spcms>) | (<spcms> <Calce> <sps00>) | (<aq0cs0> <sps00>) | (<vsip3s0> <da0ms0>) | (<p0300000> <vmip3s0> <cs>)}
+                                       NP: {<(NoDocumen\w+)> <sps00|Pronrelativo> <Sustnum> <vsip3s0|AUX>? <Q|ncms000|ncms000|ncfs000|sps00>}
+                                       NP: {<(NoDocumen\w+)> <sps00> <Q|sps00|ncms000|ncfs000> <cs> <Sustnum>}
+                                       NP: {<Sustnum> <sps00> <da0fs0>? <(NoDocumen\w+)> <AUX|vsip3s0|Sustnum>? <Q|sps00|ncms000|ncfs000>}
+                                       NP: {<Q|ncms000|ncfs000> <cs|AUX> <Sustnum> <sps00> <da0fs0>? <(NoDocumen\w+)>}
                                    """,
                       NitAdquirienteMex=r""" Q: {<unknown|dato|Z|Singlel|datoNitCol>}
-                                             NP: {<(NitA\w+)> <(NitA\w+)>? <sps00> <Sust> <aq0cs0>? <sps00>? <Q>}
-                                             NP: {<(NitA\w+)> <(NitA\w+)>? <sps00> <Q> <cs> <Sust>}
-                                             NP: {<(NitA\w+)> <(NitA\w+)>? <Sust|(vs\w+)>? <da0ms0>? <Q|cc>}
+                                             NP: {<(NitA\w+)> <(NitA\w+)>? <sps00> <Sustnum> <aq0cs0>? <sps00>? <Q>}
+                                             NP: {<(NitA\w+)> <(NitA\w+)>? <sps00> <Q> <cs> <Sustnum>}
+                                             NP: {<(NitA\w+)> <(NitA\w+)>? <Sustnum|(vs\w+)>? <da0ms0>? <Q|cc>}
                                              NP: {<(NitA\w+)> <(NitA\w+)>? <aq0cs0> <sps00> <Q>}
                                          """,
                       Cuenta=r""" Q: {<unknown|dato|Z|Singlel>}
-                                  NP: {<Cuenta> <sps00> <Sust> <Q>}
-                                  NP: {<Cuenta> <sps00> <Sust> <aq0cs0> <sps00>? <Q>}
-                                  NP: {<(da0\w+)>? <Sust>? <sps00|da0fs0>? <Cuenta> <(vs\w+)>? <Q>}
-                                  NP: {<Sust> <sps00> <Cuenta> <sps00> <Sust> <aq0cs0> <sps00> <Q>}
-                                  NP: {<Sust> <sps00> <Cuenta> <sps00> <Q> <cs> <Sust>}
+                                  NP: {<Cuenta> <sps00> <Sustnum> <Q>}
+                                  NP: {<Cuenta> <sps00> <Sustnum> <aq0cs0> <sps00>? <Q>}
+                                  NP: {<(da0\w+)>? <Sustnum>? <sps00|da0fs0>? <Cuenta> <(vs\w+)>? <Q>}
+                                  NP: {<Sustnum> <sps00> <Cuenta> <sps00> <Sustnum> <aq0cs0> <sps00> <Q>}
+                                  NP: {<Sustnum> <sps00> <Cuenta> <sps00> <Q> <cs> <Sustnum>}
                                   NP: {<sps00> <Cuenta> <aq0cs0> <sps00> <Q>}
                               """,
                       Estado=r""" Q: {<Recibido|Error|Firmado|Rechazado|Aceptado|Enviado>}
@@ -128,8 +127,8 @@ class Regexseaker:
 
     def get_posibles(self, field):
         if field in ["Prefijo", "NoDocumento", "NitAdquirienteMex", "Cuenta"]:
-            return ['Fz', 'Y', 'Z', 'cc', 'dato', 'nccn000', "ncms000"
-                    'ncfs000', 'sps00', 'Singlel', 'unknown']
+            return ['Fz', 'Y', 'Z', 'cc', 'dato', 'nccn000', "ncms000",
+                    'ncfs000', 'sps00', 'Singlel', 'unknown', "Nums"]
         elif field == "Folio":
             return ["dato"]
         elif field == "Estado" or field == "Acuse":
@@ -140,11 +139,14 @@ class Regexseaker:
         if field == "Prefijo":
             return ["Singlel"]
         elif field == "NoDocumento":
-            return ["Singlel"]
+            return ["Singlel", "Inicio", "Sustnum", 'Prefijo', 'Folio', "Fin",
+                    'Valor', 'Reciente', 'Estado', 'Recibido', 'Error', 'Firmado',
+                    'Rechazado', 'Aceptado', 'Enviado', 'Pendiente', 'Acuse',
+                    "Pronrelativo", "Calce"]
         elif field == "NitAdquirienteMex":
-            return ["Singlel", "Sust"]
+            return ["Singlel", "Sustnum"]
         elif field == "Cuenta":
-            return ["Singlel", "Sust"]
+            return ["Singlel", "Sustnum"]
         elif field == "Folio":
             return ["Inicio", "Fin", "Es", "Valor", "Prefijo", "Reciente"]
         elif field == "Estado":
@@ -158,6 +160,8 @@ class Regexseaker:
     def regex_taglist(self, field):
         if field == "NitAdquirienteMex":
             return ["datoNitCol"]
+        elif field == "NoDocumento":
+            return ["Nums"]
         else:
             return []
 
@@ -248,11 +252,8 @@ class Regexseaker:
             if posible is None:
                 return (None, 1)
             taglist = self.get_tags(field)
-            if field == "NitAdquirienteMex":
-                tagged = self.do_tagging(posible, field, taglist,
-                                         ["datoNitCol"])
-            else:
-                tagged = self.do_tagging(posible, field, taglist)
+            reglist = self.regex_taglist(field)
+            tagged = self.do_tagging(posible, field, taglist, reglist)
             # print(tagged)
             # collect()
             posibles = self.get_posibles(field)
