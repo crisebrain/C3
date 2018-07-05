@@ -94,7 +94,7 @@ class Regexseaker:
                                              NP: {<(NitA\w+)> <(NitA\w+)>? <aq0cs0> <sps00> <Q>}
                                          """,
                       Cuenta=r""" Q: {<unknown|dato|Z|Singlel>}
-                                  NP: {<Cuenta> <sps00> <Sustnum> (<aq0cs0|sps00|Es>{0,2} <Q>}
+                                  NP: {<Cuenta> <sps00> <Sustnum> (<aq0cs0|sps00|Es>){0,2} <Q>}
                                   NP: {<(da0\w+)>? <Sustnum>? <sps00|da0fs0>? <Cuenta> <(vs\w+)>? <Q>}
                                   NP: {<Sustnum> <sps00> <Cuenta> <sps00> <Sustnum> <aq0cs0> <sps00> <Q>}
                                   NP: {<Sustnum> <sps00> <Cuenta> <sps00> <Q> <cs> <Sustnum>}
