@@ -316,7 +316,7 @@ class Regexseaker:
         code = not code
         cond = not(len(subt) > 1)
         code = code and cond
-        return self.time_period(period), code
+        return self.time_period(period), int(code)
 
     def time_period(self, period):
         result = dict(fechaInicio=None, fechaFin=None)
