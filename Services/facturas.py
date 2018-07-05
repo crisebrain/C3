@@ -142,7 +142,7 @@ def preparaParametros(dic, queryOriginal):
         addEntryToDic(dicReady, "FolioFinal", folioFinal, 1)
     else:
         folioFinal = seaker.seakexpresion(queryOriginal, "FolioFinal")
-        addEntryToDic(dicReady, "FolioFinal", folioFinal[0], folioInicio[1])
+        addEntryToDic(dicReady, "FolioFinal", folioFinal[0], folioFinal[1])
 
 
     # NIT
