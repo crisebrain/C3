@@ -70,7 +70,7 @@ class Regexseaker:
 
     def choose_grammar(self, field):
         dgramm = dict(Prefijo=r"""Q: {<dato|Z|Fz|unknown|ncfs000|Singlel>}
-                                  NP: {<Prefijo> <(vs\w+)|(nc\w+)|(wmi\w+)|(spc\w+)>* <Q>}
+                                  NP: {<Prefijo> (<(vs\w+)|(nc\w+)|(wmi\w+)|(spc\w+)>)? <Q>}
                                   NP: {<Prefijo> <dato|Fz|unknown|sps00>}
                                   NP: {<Prefijo> <(vmi\w+)|(aq\w+)|unknown>? <sp\w+>? <Q>}
                                   NP: {<Prefijo> <dd0fs0> <vmp00sm> <sps00> <Q>}
@@ -94,8 +94,7 @@ class Regexseaker:
                                              NP: {<(NitA\w+)> <(NitA\w+)>? <aq0cs0> <sps00> <Q>}
                                          """,
                       Cuenta=r""" Q: {<unknown|dato|Z|Singlel>}
-                                  NP: {<Cuenta> <sps00> <Sustnum> <Q>}
-                                  NP: {<Cuenta> <sps00> <Sustnum> <aq0cs0> <sps00>? <Q>}
+                                  NP: {<Cuenta> <sps00> <Sustnum> (<aq0cs0|sps00|Es>{0,2} <Q>}
                                   NP: {<(da0\w+)>? <Sustnum>? <sps00|da0fs0>? <Cuenta> <(vs\w+)>? <Q>}
                                   NP: {<Sustnum> <sps00> <Cuenta> <sps00> <Sustnum> <aq0cs0> <sps00> <Q>}
                                   NP: {<Sustnum> <sps00> <Cuenta> <sps00> <Q> <cs> <Sustnum>}
@@ -128,7 +127,7 @@ class Regexseaker:
     def get_posibles(self, field):
         if field in ["Prefijo", "NoDocumento", "NitAdquirienteMex", "Cuenta"]:
             return ['Fz', 'Y', 'Z', 'cc', 'dato', 'nccn000', "ncms000",
-                    'ncfs000', 'sps00', 'Singlel', 'unknown', "Nums"]
+                    'ncfs000', 'sps00', 'Singlel', 'unknown', "Nums", "Es"]
         elif field == "Folio":
             return ["dato"]
         elif field == "Estado" or field == "Acuse":
