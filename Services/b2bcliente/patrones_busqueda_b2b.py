@@ -149,13 +149,19 @@ class Regexseaker:
             return ["Inicio", "Fin", "Es", "Valor", "Prefijo", "Reciente"]
         elif field == "Estado":
             return ["Es","Valor","Recibido","Error","Firmado","Rechazado",
-                    "Aceptado","Enviado"]
+                    "Aceptado","Enviado", "Factura"]
         elif field == "Acuse":
             return ["Es","Valor","Rechazado","Aceptado","Pendiente"]
         elif field == "Periodo":
             return ["pasado", "presente", "semana", "dia", "mes", "año"]
 
-    def do_chunking(self, tagged, field, code, posibles, grammar=None):
+    def regex_taglist(self, field):
+        if field == "NitAdquirienteMex":
+            return ["datoNitCol"]
+        else:
+            return []
+
+    def do_chunking(self, tagged, field, posibles, grammar=None):
         if grammar is None:
             grammar = self.choose_grammar(field)
         cp = RegexpParser(grammar)
@@ -183,6 +189,11 @@ class Regexseaker:
                     unknowns += [token for token, pos in subtree.leaves()
                                  if pos == "unknown"]
                     subt.append(subtree)
+        entity, code = self.code_validate(field, entity, unknowns,
+                                          self.regex_taglist(field))
+        return entity, code, subt, tagged
+
+    def code_validate(self, field, entity, unknowns, taglist):
         if entity == []:
             code = 0
             if len(unknowns) > 1:
@@ -196,11 +207,13 @@ class Regexseaker:
             entity = entity[-1].upper()
         else:
             entity = entity[0].upper()
-            if self.regexextractor(entity, field) is not None:
+            cond = any([True if self.regexextractor(entity, tag) is not None
+                        else False for tag in [field] + taglist])
+            if cond:
                 code = 1
             else:
                 code = 0
-        return entity, code, subt, tagged
+        return entity, code
 
     def seakexpresion(self, expression, field="Cuenta", nl=5, lowerc=True):
         if lowerc:
@@ -234,10 +247,6 @@ class Regexseaker:
             # print(posible)
             if posible is None:
                 return (None, 1)
-            else:
-                code = 1
-            # codigo 1 es para busqueda de campo exitosa
-            # inocente hasta que se demuestre lo contrario
             taglist = self.get_tags(field)
             if field == "NitAdquirienteMex":
                 tagged = self.do_tagging(posible, field, taglist,
@@ -247,7 +256,7 @@ class Regexseaker:
             # print(tagged)
             # collect()
             posibles = self.get_posibles(field)
-            return self.do_chunking(tagged, field, code, posibles)
+            return self.do_chunking(tagged, field, posibles)
         elif field == "FolioInicio":
             return self.folios(expression, "Inicio")
         elif field == "FolioFinal":
@@ -299,6 +308,7 @@ class Regexseaker:
                         period["interval"] = dicinterval[subtree.leaves()[0][1]]
                         period["time"] = dictime["presente"]
                     subt.append(tree)
+        # validacion para periodo, es diferente que para los otros campos
         conds = [[True] if item is not None else [False]
                  for item in period.values()]
         code, = np.logical_xor(*conds)

@@ -21,6 +21,7 @@
 	"NitAdquirienteMex": ["nit", "adquiriente", "rfc"],
 	"Sust": ["número", "numero", "clave", "matrícula", "matricula",
 		       "numeración"],
+  "Factura": ["factura", "facturas", "nota", "notas"],
 	"Cuenta": ["cuenta"],
 	"presente": ["este", "esta", "actual", "actuales", "corriente", "hoy",
 	             "presente"],
