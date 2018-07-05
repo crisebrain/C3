@@ -276,7 +276,7 @@ class Regexseaker:
         posibles = self.get_posibles(field)
 
         tagged = self.do_tagging(phrase.lower(), field, listTags)
-        return self.do_chunking(tagged, field, 1, posibles, grammarFolio)
+        return self.do_chunking(tagged, field, posibles, grammarFolio)
 
     def chunks_period(self, exp, field):
         listTags = self.get_tags("Periodo")
