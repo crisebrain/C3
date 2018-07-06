@@ -4,7 +4,6 @@ import re
 from nltk import word_tokenize, RegexpParser, Tree
 from datetime import datetime, timedelta
 from dateutil.relativedelta import relativedelta
-# from gc import collect
 import numpy as np
 import json
 
@@ -254,7 +253,6 @@ class Regexseaker:
             reglist = self.regex_taglist(field)
             tagged = self.do_tagging(posible, field, taglist, reglist)
             # print(tagged)
-            # collect()
             posibles = self.get_posibles(field)
             return self.do_chunking(tagged, field, posibles)
         elif field == "NoDocumento":

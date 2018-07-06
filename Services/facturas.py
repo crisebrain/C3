@@ -1,5 +1,6 @@
 from .b2bcliente import sendReq, getResponseValues, HumanResult
 from .b2bcliente import Regexseaker
+from gc import collect
 import json
 import datetime
 from datetime import date
@@ -50,7 +51,8 @@ def factura(req):
                     "fulfillmentText" : peticionStr,
                     "payload": dicReady
     }
-
+    collect()
+    # garbage collector
     return respuesta
 
 
