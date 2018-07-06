@@ -94,7 +94,7 @@ class Regexseaker:
                                              NP: {<(NitA\w+)> <(NitA\w+)>? <aq0cs0> <sps00> <Q>}
                                          """,
                       Cuenta=r""" Q: {<unknown|dato|Z|Singlel>}
-                                  NP: {<Cuenta> <sps00>? <Sustnum>? (<aq0cs0|sps00|Es>){0,2} <Q>}
+                                  NP: {<Cuenta> <sps00> <Sustnum> (<aq0cs0|sps00|Es>){0,2} <Q>}
                                   NP: {<(da0\w+)>? <Sustnum>? <sps00|da0fs0>? <Cuenta> <(vs\w+)>? <Q>}
                                   NP: {<Sustnum> <sps00> <Cuenta> <sps00> <Sustnum> <aq0cs0> <sps00> <Q>}
                                   NP: {<Sustnum> <sps00> <Cuenta> <sps00> <Q> <cs> <Sustnum>}
@@ -218,10 +218,10 @@ class Regexseaker:
                 code = 0
         return entity, code
 
-    def seakexpresion(self, expression, field="Cuenta", nl=7, lowerc=True):
+    def seakexpresion(self, expression, field="Cuenta", nl=5, lowerc=True):
         if lowerc:
             expression = expression.lower()
-        if field in ["Prefijo", "NoDocumento", "Cuenta", "NitAdquirienteMex",
+        if field in ["Prefijo", "Cuenta", "NitAdquirienteMex",
                      "Acuse", "Estado"]:
             words = self.dictfacturas[field]
             tokens = word_tokenize(expression)
@@ -255,6 +255,12 @@ class Regexseaker:
             tagged = self.do_tagging(posible, field, taglist, reglist)
             # print(tagged)
             # collect()
+            posibles = self.get_posibles(field)
+            return self.do_chunking(tagged, field, posibles)
+        elif field == "NoDocumento":
+            taglist = self.get_tags(field)
+            reglist = self.regex_taglist(field)
+            tagged = self.do_tagging(expression, field, taglist, reglist)
             posibles = self.get_posibles(field)
             return self.do_chunking(tagged, field, posibles)
         elif field == "FolioInicio":
