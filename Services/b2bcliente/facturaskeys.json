@@ -23,7 +23,7 @@
 	"Sustnum": ["número", "numero", "clave", "matrícula", "matricula",
 		       "numeración"],
   "Factura": ["factura", "facturas", "nota", "notas"],
-	"asignar": ["asignación", "asignado", "asignada"],
+	"Asignar": ["asignación", "asignado", "asignada"],
 	"Calce": ["calce"],
 	"Cuenta": ["cuenta"],
 	"presente": ["este", "esta", "actual", "actuales", "corriente", "hoy",

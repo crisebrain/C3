@@ -68,23 +68,32 @@ class Regexseaker:
         return [tuple(wordtagged) for wordtagged in tagged]
 
     def choose_grammar(self, field):
-        dgramm = dict(Prefijo=r"""Q: {<dato|Z|Fz|unknown|ncfs000|Singlel>}
-                                  NP: {<Prefijo> (<(vs\w+)|(nc\w+)|(wmi\w+)|(spc\w+)>)? <Q>}
-                                  NP: {<Prefijo> <dato|Fz|unknown|sps00>}
-                                  NP: {<Prefijo> <(vmi\w+)|(aq\w+)|unknown>? <sp\w+>? <Q>}
-                                  NP: {<Prefijo> <dd0fs0> <vmp00sm> <sps00> <Q>}
-                                  NP: {<Q|sps00> <(vs\w+)> <(da\w+)> <Prefijo>}
-                                  NP: {<Q|sps00> <(p030\w+)>? <vmip3s0>? <cs> <Prefijo>}
-                               """,
+        dgramm = dict(Prefijo=""" Q: {<dato|Nums|unknown|ncfs000|Singlel|ncms000>}
+                                  AUX1 : {<vmip1p0> <spcms|cs>}
+                                  AUX2 : {<spcms> <Calce> <sps00>}
+                                  AUX3 : {<aq0cs0> <sps00|spcms>}
+                                  AUX4 : {<p0300000> <vmip3s0> <cs>}
+                                  AUX5 : {<vmip3s0>? <Asignar> <sps00|cs>}
+                                  AUX6 : {<vsip3s0|cs> <da0ms0>?}
+                                  AUX : {<AUX1|AUX2|AUX3|AUX4|AUX5|AUX6>}
+                                  NP: {<Prefijo> <AUX|sps00>? <Sustnum>? <Q|sps00>}
+                                  NP: {<Q|sps00|vsip3s0> <AUX> <Prefijo>}
+                              """,
                                # directas
                                # inversas
                                # añadir que se hace con sustantivos y nodos terminales
                       NoDocumento=r""" Q: {<Singlel|cc|dato|Nums>}
-                                       AUX : {(<vmip1p0> <spcms>) | (<spcms> <Calce> <sps00>) | (<aq0cs0> <sps00>) | (<vsip3s0> <da0ms0>) | (<p0300000> <vmip3s0> <cs>)}
-                                       NP: {<(NoDocumen\w+)> <sps00|Pronrelativo> <Sustnum> <vsip3s0|AUX>? <Q|ncms000|ncms000|ncfs000|sps00>}
-                                       NP: {<(NoDocumen\w+)> <sps00> <Q|sps00|ncms000|ncfs000> <cs> <Sustnum>}
-                                       NP: {<Sustnum> <sps00> <da0fs0>? <(NoDocumen\w+)> <AUX|vsip3s0|Sustnum>? <Q|sps00|ncms000|ncfs000>}
-                                       NP: {<Q|ncms000|ncfs000> <cs|AUX> <Sustnum> <sps00> <da0fs0>? <(NoDocumen\w+)>}
+                                       AUX1 : {<vmip1p0> <spcms|cs>}
+                                       AUX2 : {<spcms> <Calce> <sps00>}
+                                       AUX3 : {<aq0cs0> <sps00|spcms>}
+                                       AUX4 : {<p0300000> <vmip3s0> <cs>}
+                                       AUX5 : {<vmip3s0>? <Asignar> <sps00|cs>}
+                                       AUX6 : {<vsip3s0|cs> <da0ms0>?}
+                                       AUX : {<AUX1|AUX2|AUX3|AUX4|AUX5|AUX6>}
+                                       NP: {<(NoDocumen\w+)> <sps00|Pronrelativo> <Sustnum> <AUX>? <Q|ncms000|ncfs000|sps00>}
+                                       NP: {<(NoDocumen\w+)> <sps00> <Q|sps00|ncms000|ncfs000> <AUX> <Sustnum>}
+                                       NP: {<Sustnum> <sps00> <da0fs0>? <(NoDocumen\w+)> <AUX|Sustnum>? <Q|sps00|ncms000|ncfs000>}
+                                       NP: {<Q|ncms000|ncfs000> <AUX> <Sustnum> <sps00> <da0fs0>? <(NoDocumen\w+)>}
                                    """,
                       NitAdquirienteMex=r""" Q: {<unknown|dato|Z|Singlel|datoNitCol>}
                                              NP: {<(NitA\w+)> <(NitA\w+)>? <sps00> <Sustnum> <aq0cs0>? <sps00>? <Q>}
@@ -135,12 +144,12 @@ class Regexseaker:
 
     def get_tags(self, field):
         if field == "Prefijo":
-            return ["Singlel"]
+            return ["Singlel", "Calce", "Asignar", "Sustnum"]
         elif field == "NoDocumento":
             return ["Singlel", "Inicio", "Sustnum", 'Prefijo', 'Folio', "Fin",
                     'Valor', 'Reciente', 'Estado', 'Recibido', 'Error', 'Firmado',
                     'Rechazado', 'Aceptado', 'Enviado', 'Pendiente', 'Acuse',
-                    "Pronrelativo", "Calce"]
+                    "Pronrelativo", "Calce", "Asignar"]
         elif field == "NitAdquirienteMex":
             return ["Singlel", "Sustnum"]
         elif field == "Cuenta":
@@ -159,6 +168,8 @@ class Regexseaker:
         if field == "NitAdquirienteMex":
             return ["datoNitCol"]
         elif field == "NoDocumento":
+            return ["Nums"]
+        elif field == "Prefijo":
             return ["Nums"]
         else:
             return []
