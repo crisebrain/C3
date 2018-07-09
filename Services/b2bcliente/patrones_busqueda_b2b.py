@@ -96,10 +96,15 @@ class Regexseaker:
                                        NP: {<Q|ncms000|ncfs000> <AUX> <Sustnum> <sps00> <da0fs0>? <(NoDocumen\w+)>}
                                    """,
                       NitAdquirienteMex=r""" Q: {<unknown|dato|Z|Singlel|datoNitCol>}
-                                             NP: {<(NitA\w+)> <(NitA\w+)>? <sps00> <Sustnum> <aq0cs0>? <sps00>? <Q>}
-                                             NP: {<(NitA\w+)> <(NitA\w+)>? <sps00> <Q> <cs> <Sustnum>}
+                                             AUX1 : {<vmip1p0> <spcms|cs>}
+                                             AUX2 : {<aq0cs0> <sps00|spcms>}
+                                             AUX3 : {<vmip3s0>? <Asignar> <sps00|cs>}
+                                             AUX4 : {<vsip3s0|cs> <da0ms0>?}
+                                             AUX: {<AUX1|AUX2|AUX3|AUX4>}
+                                             NP: {<(NitA\w+)> <(NitA\w+)>? <sps00> <Sustnum> <AUX>? <Q>}
+                                             NP: {<(NitA\w+)> <(NitA\w+)>? <sps00> <Q> <AUX> <Sustnum>}
                                              NP: {<(NitA\w+)> <(NitA\w+)>? <Sustnum|(vs\w+)>? <da0ms0>? <Q|cc>}
-                                             NP: {<(NitA\w+)> <(NitA\w+)>? <aq0cs0> <sps00> <Q>}
+                                             NP: {<(NitA\w+)> <(NitA\w+)>? <AUX> <Q>}
                                          """,
                       Cuenta=r""" Q: {<unknown|dato|Z|Singlel>}
                                   NP: {<Cuenta> <sps00>? <Sustnum>? (<aq0cs0|sps00|Es>){0,2} <Q>}
@@ -109,10 +114,10 @@ class Regexseaker:
                                   NP: {<sps00> <Cuenta> <aq0cs0> <sps00> <Q>}
                               """,
                       Estado=r""" Q: {<Recibido|Error|Firmado|Rechazado|Aceptado|Enviado>}
-                                   NP: {<Estado> <vssp3s0|unknown|vssp3s0|sps00>* <Q>}
-                                   NP: {<Estado> <vsis3s0|vmp00sm|sps00|Es|Valor>* <Q>}
-                                   NP: {<Q> <sps00|ncms000|Es|da0ms0>* <Estado>}
-                               """,
+                                  NP: {<Estado> <vssp3s0|unknown|vssp3s0|sps00>* <Q>}
+                                  NP: {<Estado> <vsis3s0|vmp00sm|sps00|Es|Valor>* <Q>}
+                                  NP: {<Q> <sps00|ncms000|Es|da0ms0>* <Estado>}
+                              """,
                       Acuse=r"""Q: {<Rechazado|Aceptado|Pendiente>}
                                 NP: {<Acuse> <vssp3s0|unknown|vssp3s0|sps00>* <Q>}
                                 NP: {<Acuse> <vsis3s0|vmp00sm|sps00|Es|Valor>* <Q>}
@@ -151,7 +156,7 @@ class Regexseaker:
                     'Rechazado', 'Aceptado', 'Enviado', 'Pendiente', 'Acuse',
                     "Pronrelativo", "Calce", "Asignar"]
         elif field == "NitAdquirienteMex":
-            return ["Singlel", "Sustnum"]
+            return ["Singlel", "Sustnum", "Asignar", "Calce"]
         elif field == "Cuenta":
             return ["Singlel", "Sustnum"]
         elif field == "Folio":
