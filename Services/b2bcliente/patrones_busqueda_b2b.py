@@ -101,10 +101,10 @@ class Regexseaker:
                                              AUX3 : {<vmip3s0>? <Asignar> <sps00|cs>}
                                              AUX4 : {<vsip3s0|cs> <da0ms0>?}
                                              AUX: {<AUX1|AUX2|AUX3|AUX4>}
-                                             NP: {<(NitA\w+)> <(NitA\w+)>? <sps00> <Sustnum> <AUX>? <Q>}
+                                             NP: {<(NitA\w+)> <(NitA\w+)>? <sps00> <Sustnum> <AUX>? <Q|cc>}
                                              NP: {<(NitA\w+)> <(NitA\w+)>? <sps00> <Q> <AUX> <Sustnum>}
+                                             NP: {<(NitA\w+)> <(NitA\w+)>? <AUX> <Q|cc>}
                                              NP: {<(NitA\w+)> <(NitA\w+)>? <Sustnum|(vs\w+)>? <da0ms0>? <Q|cc>}
-                                             NP: {<(NitA\w+)> <(NitA\w+)>? <AUX> <Q>}
                                          """,
                       Cuenta=r""" Q: {<unknown|dato|Z|Singlel>}
                                   NP: {<Cuenta> <sps00>? <Sustnum>? (<aq0cs0|sps00|Es>){0,2} <Q>}
