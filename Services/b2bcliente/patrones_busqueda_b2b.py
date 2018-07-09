@@ -74,7 +74,7 @@ class Regexseaker:
                                   AUX3 : {<aq0cs0> <sps00|spcms>}
                                   AUX4 : {<p0300000> <vmip3s0> <cs>}
                                   AUX5 : {<vmip3s0>? <Asignar> <sps00|cs>}
-                                  AUX6 : {<vsip3s0|cs> <da0ms0>?}
+                                  AUX6 : {<vsip3s0|vssp3s0|cs> <da0ms0>?}
                                   AUX : {<AUX1|AUX2|AUX3|AUX4|AUX5|AUX6>}
                                   NP: {<Prefijo> <AUX|sps00>? <Sustnum>? <Q|sps00>}
                                   NP: {<Q|sps00|vsip3s0> <AUX> <Prefijo>}
@@ -88,7 +88,7 @@ class Regexseaker:
                                        AUX3 : {<aq0cs0> <sps00|spcms>}
                                        AUX4 : {<p0300000> <vmip3s0> <cs>}
                                        AUX5 : {<vmip3s0>? <Asignar> <sps00|cs>}
-                                       AUX6 : {<vsip3s0|cs> <da0ms0>?}
+                                       AUX6 : {<vsip3s0|vssp3s0|cs> <da0ms0>?}
                                        AUX : {<AUX1|AUX2|AUX3|AUX4|AUX5|AUX6>}
                                        NP: {<(NoDocumen\w+)> <sps00|Pronrelativo> <Sustnum> <AUX>? <Q|ncms000|ncfs000|sps00>}
                                        NP: {<(NoDocumen\w+)> <sps00> <Q|sps00|ncms000|ncfs000> <AUX> <Sustnum>}
@@ -99,7 +99,7 @@ class Regexseaker:
                                              AUX1 : {<vmip1p0> <spcms|cs>}
                                              AUX2 : {<aq0cs0> <sps00|spcms>}
                                              AUX3 : {<vmip3s0>? <Asignar> <sps00|cs>}
-                                             AUX4 : {<vsip3s0|cs> <da0ms0>?}
+                                             AUX4 : {<vsip3s0|vssp3s0|cs> <da0ms0>?}
                                              AUX: {<AUX1|AUX2|AUX3|AUX4>}
                                              NP: {<(NitA\w+)> <(NitA\w+)>? <sps00> <Sustnum> <AUX>? <Q|cc>}
                                              NP: {<(NitA\w+)> <(NitA\w+)>? <sps00> <Q> <AUX> <Sustnum>}
