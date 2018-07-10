@@ -8,7 +8,7 @@ from flask import Flask, make_response, request
 import pandas as pd
 from Services.bd_busqueda import normaliza
 
-CLIENT_ACCESS_TOKEN = '28165eab709744ca9efbcf21e9519df5'
+CLIENT_ACCESS_TOKEN = '90b46569bd6d496897402a54e4d67459'
 
 def superPandasRespuesta(lista_dicc):
     columns = ['NumeroDocumento', 'FechaEmision', 'Monto', 'NITAdquiriente',
