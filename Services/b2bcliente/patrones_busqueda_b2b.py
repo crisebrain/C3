@@ -353,7 +353,6 @@ class Regexseaker:
             missingDate()
             orderDate()
 
-
             # Evalúa código final
             statusCode = 0
             if fechaInicio[1] and fechaFin[1]:
