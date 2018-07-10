@@ -18,6 +18,7 @@ class Regexseaker:
                              NoDocumento=r"\b[0-9a-zA-Z\-]{1,40}\b",  # w2vect
                              NitAdquirienteMex=r"\b[A-Za-z]{4}\d{6}[A-Za-z0-9]{3}\b",
                              datoNitCol=r"\b\d{1,32}\b",
+                             Tipo=r"\b[a-zA-Z]{1,10}\b",
                              Folio=r"\d{1,16}",
                              Estado=r"[A-Za-z]",   #[a-z]{1,16}"
                              Acuse=r"[A-Za-z]",
@@ -68,7 +69,7 @@ class Regexseaker:
         return [tuple(wordtagged) for wordtagged in tagged]
 
     def choose_grammar(self, field):
-        dgramm = dict(Prefijo=""" Q: {<dato|Nums|unknown|ncfs000|Singlel|ncms000>}
+        dgramm = dict(Prefijo=""" Q: {<dato|Nums|unknown|(nc[fm][sp]000)|Singlel>}
                                   AUX1 : {<vmip1p0> <spcms|cs>}
                                   AUX2 : {<spcms> <Calce> <sps00>}
                                   AUX3 : {<aq0cs0> <sps00|spcms>}
@@ -134,7 +135,13 @@ class Regexseaker:
                                    NP2: {<DP> <sps00>? <presente|pasado>}
                                    NP3: {<sps00> <presente|pasado>}
                                    NP4: {<spcms|da0fs0|Periodo> <DP>}
-                               """)
+                               """,
+                      Tipo=r""" Q: {<TFactura|TNota>}
+                                NP: {<Tipo> <sps00> <TDocumento> <Q>}
+                                NP: {<TDocumento>? <sps00>? <Tipo> <Q>}
+                                NP: {<Imperativo|vmip1s0> <(da0\w+)>? <Q> <sps00>? <TCredito>?}
+                                NP: {<(da0\w+)> <TDocumento>? <Q>}
+                            """)
         return dgramm[field]
 
     def get_posibles(self, field):
@@ -146,6 +153,8 @@ class Regexseaker:
         elif field == "Estado" or field == "Acuse":
             return ["dato","Recibido","Error","Firmado","Rechazado",
                     "Aceptado","Enviado","Pendiente"]
+        elif field == "Tipo":
+            return ["TFactura", "TNota"]
 
     def get_tags(self, field):
         if field == "Prefijo":
@@ -168,6 +177,9 @@ class Regexseaker:
             return ["Es","Valor","Rechazado","Aceptado","Pendiente"]
         elif field == "Periodo":
             return ["pasado", "presente", "semana", "dia", "mes", "año"]
+        elif field == "Tipo":
+            return ["Prefijo", "NoDocumento", "Sustnum", "Imperativo",
+                    "TDocumento", "TFactura", "TNota", "TCredito"]
 
     def regex_taglist(self, field):
         if field == "NitAdquirienteMex":
@@ -192,7 +204,7 @@ class Regexseaker:
             if isinstance(subtree, Tree) and subtree.label() == "NP":
                 if field in ["Prefijo", "NoDocumento",
                              "NitAdquirienteMex", "Cuenta",
-                             "Estado", "Acuse"]:
+                             "Estado", "Acuse", "Tipo"]:
                     #print(subtree)
                     for subsubtree in subtree.subtrees(filter=lambda t: t.label() == "Q"):
                         entity += [token for token, pos in subsubtree.leaves()]
@@ -212,25 +224,45 @@ class Regexseaker:
         return entity, code, subt, tagged
 
     def code_validate(self, field, entity, unknowns, taglist):
+        # Calculo de código
+        # -------------------------------------------------------------------
         if entity == []:
             code = 0
             if len(unknowns) > 1:
-                entity = unknowns[-1].upper()
+                entity = unknowns[-1]
             elif unknowns != []:
-                entity = unknowns[0].upper()
+                entity = unknowns[0]
             else:
                 entity = None
         elif len(entity) > 1:
             code = 0
-            entity = entity[-1].upper()
+            entity = entity[-1]
         else:
-            entity = entity[0].upper()
+            entity = entity[0]
             cond = any([True if self.regexextractor(entity, tag) is not None
                         else False for tag in [field] + taglist])
             if cond:
                 code = 1
             else:
                 code = 0
+        # -------------------------------------------------------------------
+        # formato de resultado
+        # -------------------------------------------------------------------
+        if entity is not None:
+            # Capitalizar los campos
+            if field in ["Acuse", "Tipo", "Estado"]:
+                # para pasar tipo de documento y no la palabra original
+                if field == "Tipo":
+                    if entity in self.dictfacturas["TNota"]:
+                        entity = "Nota"
+                    elif entity in self.dictfacturas["TFactura"]:
+                        entity = "Factura"
+                entity = entity.capitalize()
+            # en mayusculas
+            elif field in ["Prefijo", "NitAdquirienteMex",
+                           "Cuenta", "NoDocumento"]:
+                entity = entity.upper()
+        # -------------------------------------------------------------------
         return entity, code
 
     def seakexpresion(self, expression, field="Cuenta", nl=7, lowerc=True):
@@ -271,7 +303,7 @@ class Regexseaker:
             # print(tagged)
             posibles = self.get_posibles(field)
             return self.do_chunking(tagged, field, posibles)
-        elif field == "NoDocumento":
+        elif field in ["NoDocumento", "Tipo"]:
             taglist = self.get_tags(field)
             reglist = self.regex_taglist(field)
             tagged = self.do_tagging(expression, field, taglist, reglist)
