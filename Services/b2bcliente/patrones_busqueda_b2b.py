@@ -148,10 +148,11 @@ class Regexseaker:
                                    NP4: {<spcms|da0fs0|Periodo> <DP>}
                                """,
                       Tipo=r""" Q: {<TFactura|TNota>}
-                                NP: {<Tipo> <sps00> <TDocumento> <Q>}
-                                NP: {<TDocumento>? <sps00>? <Tipo> <Q>}
+                                NP: {<Tipo> <sps00> <TDocumento> <pr0cn000>? <(vs\w+)>? <Q>}
+                                NP: {<TDocumento>? <pr0cn000>? <(vs\w+)>? <sps00>? <Tipo> <Q>}
+                                NP: {<TDocumento> <pr0cn000>? <(vs\w+)>? <Q>}
                                 NP: {<Imperativo|vmip1s0> <(da0\w+)>? <Q> <sps00>? <TCredito>?}
-                                NP: {<(da0\w+)> <TDocumento>? <Q>}
+                                NP: {<(da0\w+)> <Q>}
                             """,
                       Fecha = r"""
                                 Q: {<De|Articulos|spcms|sps00|Es>}
