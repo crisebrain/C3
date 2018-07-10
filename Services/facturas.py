@@ -77,7 +77,8 @@ def preparaParametros(dic, queryOriginal):
         "Mes": 3
     }
     # Valor por default 0
-    periodo = switcherPeriodo.get(dic.get("periodo"), 0)
+    # periodo = switcherPeriodo.get(dic.get("periodo"), 0)
+    periodo = 0
     addEntryToDic(dicReady, "Periodo", periodo, 1)
 
     # Estatus
