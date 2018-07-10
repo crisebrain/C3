@@ -95,9 +95,8 @@ def preparaParametros(dic, queryOriginal):
         addEntryToDic(dicReady, "Status", status, 1)
     else:
         statusT = seaker.seakexpresion(queryOriginal, "Estado")
-        if statusT[0] is not None:
-            status = switcherStatus.get(statusT[0].capitalize())
-            addEntryToDic(dicReady, "Status", status, statusT[1])
+        addEntryToDic(dicReady, "Status", switcherStatus.get(statusT[0]),
+                      statusT[1])
 
     # Prefijo
     if dic.get("prefijo"):
@@ -125,7 +124,7 @@ def preparaParametros(dic, queryOriginal):
         acuse.append(1)
     else:
         acuseT = seaker.seakexpresion(queryOriginal, "Acuse")
-        acuse.append(acuseT[0].capitalize() if acuseT[0] is not None else acuseT[0])
+        acuse.append(acuseT[0])
         acuse.append(acuseT[1])
     # Valor por default 0
     acuse[0] = switcherAcuse.get(acuse[0], 0)
