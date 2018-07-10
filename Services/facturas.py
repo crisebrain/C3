@@ -161,18 +161,24 @@ def preparaParametros(dic, queryOriginal):
     addEntryToDic(dicReady, "Cuenta", cuenta[0], cuenta[1])
 
     # Fechas
-    fechaInicio, fechaFin = calcDates(dic.get("date"), dic.get("date-period"))
-    fechaStatus = 1
-    if fechaInicio is None or fechaFin is None:
+    # fechaInicio, fechaFin = calcDates(dic.get("date"), dic.get("date-period"))
+    # fechaStatus = 1
+    # Ignoramos fechas de DF.
+    # Primero evalúa fecha, si no funciona, realiza periodo.
+    fechaTemp = seaker.seakexpresion(queryOriginal, "Fecha")
+    if fechaTemp[0]["fechaInicio"] is None:
         fechaTemp = seaker.seakexpresion(queryOriginal, "Periodo")
-        fechaInicio = fechaTemp[0].get("fechaInicio")
-        fechaFin = fechaTemp[0].get("fechaFin")
-        fechaStatus = fechaTemp[1]
+    fechaInicio = fechaTemp[0].get("fechaInicio")
+    fechaFin = fechaTemp[0].get("fechaFin")
+    fechaStatus = fechaTemp[1]
+
+
     # Si existe la fecha, le pone formato ISO, sino, la deja en None
     fechaInicioStr = fechaInicio.isoformat() if fechaInicio is not None else None
     fechaFinStr = fechaFin.isoformat() if fechaInicio is not None else None
     addEntryToDic(dicReady, "FechaEmisionInicio", fechaInicioStr, fechaStatus)
     addEntryToDic(dicReady, "FechaEmisionFin", fechaFinStr, fechaStatus)
+
 
 
     # NumeroFactura (Num. Documento)

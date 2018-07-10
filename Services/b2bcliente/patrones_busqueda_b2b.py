@@ -23,7 +23,11 @@ class Regexseaker:
                              Estado=r"[A-Za-z]",   #[a-z]{1,16}"
                              Acuse=r"[A-Za-z]",
                              Periodo=r"\b[a-zA-Z]{1,12}\b",
-                             Nums=r"\b\d+\b")
+                             Nums=r"\b\d+\b",
+                             DiasNum=r"^[0-9]{1,2}$",
+                             AniosNum=r"^[0-9]{4}$",
+                             Fecha=r"^$"
+                             )
         self.dictfacturas = json.load(open("Services/b2bcliente/facturaskeys.json"))
         # Services/b2bcliente/facturaskeys.json"))
 
@@ -36,6 +40,12 @@ class Regexseaker:
             return None
 
     def do_tagging(self, exp, field, listTags, listRegExps=None):
+        """
+        Para nuestras etiquetas personalizadas usamos listTags y ListRegExp.
+        listTags etiqueta con base al facturaskeys.json
+        listRegExp etiqueta con base a la expresiones regulares.
+        """
+
         tokens = word_tokenize(exp)
         tagged = pos_tag(tokens)
         tagged = np.array([list(tup) for tup in tagged]).astype('|U16')
@@ -66,6 +76,7 @@ class Regexseaker:
                 tagged[unknown, 1] = "dato"
             else:
                 tagged[unknown, 1] = "unknown"
+
         return [tuple(wordtagged) for wordtagged in tagged]
 
     def choose_grammar(self, field):
@@ -141,7 +152,17 @@ class Regexseaker:
                                 NP: {<TDocumento>? <sps00>? <Tipo> <Q>}
                                 NP: {<Imperativo|vmip1s0> <(da0\w+)>? <Q> <sps00>? <TCredito>?}
                                 NP: {<(da0\w+)> <TDocumento>? <Q>}
-                            """)
+                            """,
+                      Fecha = r"""
+                                Q: {<De|Articulos|spcms|sps00|Es>}
+                                I: {<Inicio|Fin> <Q>{0,2} <sps00>?}
+                                NP: {<I> <DiasNum|ao0ms0> <Q>{0,2} <Fecha> <Q>{0,2} <AniosNum|DiasNum>}
+                                NP: {<I> <Fecha> <Q>{0,2} <DiasNum|ao0ms0> <Q>{0,2} <AniosNum|DiasNum>}
+                                NP: {<I> <DiasNum|ao0ms0>? <Q>{0,2} <Fecha> <Q>{0,2} <AniosNum|DiasNum>?}
+                                NP: {<I> <Fecha> <Q>{0,2} <DiasNum|ao0ms0>? <Q>{0,2} <AniosNum|DiasNum>}
+                                NP: {<I> <DiasNum|ao0ms0> <Q>{0,2} <Fecha>}
+                                """
+                      )
         return dgramm[field]
 
     def get_posibles(self, field):
@@ -155,6 +176,8 @@ class Regexseaker:
                     "Aceptado","Enviado","Pendiente"]
         elif field == "Tipo":
             return ["TFactura", "TNota"]
+        elif field == "Fecha":
+            return ["Fecha", "AniosNum", "DiasNum", "Inicio", "Fin"]
 
     def get_tags(self, field):
         if field == "Prefijo":
@@ -180,6 +203,8 @@ class Regexseaker:
         elif field == "Tipo":
             return ["Prefijo", "NoDocumento", "Sustnum", "Imperativo",
                     "TDocumento", "TFactura", "TNota", "TCredito"]
+        elif field == "Fecha":
+            return  ["Inicio", "De", "Desde", "Es", "Fin", "Articulos"]
 
     def regex_taglist(self, field):
         if field == "NitAdquirienteMex":
@@ -188,6 +213,8 @@ class Regexseaker:
             return ["Nums"]
         elif field == "Prefijo":
             return ["Nums"]
+        elif field == "Fecha":
+            return ["AniosNum", "DiasNum"]
         else:
             return []
 
@@ -196,10 +223,10 @@ class Regexseaker:
             grammar = self.choose_grammar(field)
         cp = RegexpParser(grammar)
         chunked = cp.parse(tagged)
-        continuous_chunk = []
         entity = []
         unknowns = []
         subt = []
+
         for i, subtree in enumerate(chunked):
             if isinstance(subtree, Tree) and subtree.label() == "NP":
                 if field in ["Prefijo", "NoDocumento",
@@ -211,6 +238,12 @@ class Regexseaker:
                         subt.append(subsubtree)
                     unknowns += [token for token, pos in subtree.leaves()
                                  if pos in posibles]
+                elif field == "Fecha":
+                    fecha = {}
+                    for token, tag in subtree.leaves():
+                        if tag in posibles:
+                            fecha.setdefault(tag, token)
+                    entity.append(fecha)
                 else:
                     # añadir las condiciones que sean necesarias para contemplar
                     # los posibles valores
@@ -219,9 +252,114 @@ class Regexseaker:
                     unknowns += [token for token, pos in subtree.leaves()
                                  if pos == "unknown"]
                     subt.append(subtree)
+
+        # Prepara fechas
+        if field == "Fecha":
+            entity, code = self.__preparaFechas(entity)
+            return entity, code
+
         entity, code = self.code_validate(field, entity, unknowns,
                                           self.regex_taglist(field))
         return entity, code, subt, tagged
+
+    def __preparaFechas(self, entity):
+        import datetime
+        from datetime import date
+
+        def buildDate(fechaDic):
+            diasNum = {
+                "primero": 1,
+                "segundo": 2,
+                "tercero": 3,
+                "cuarto": 4,
+                "quinto": 5,
+                "sexto": 6,
+                "séptimo": 7,
+                "octavo": 8,
+                "noveno": 9
+            }
+
+            y = today.year if fechaDic.get("AniosNum") is None else int(fechaDic["AniosNum"])
+            m = today.month if fechaDic.get("Fecha") is None else fechaDic["Fecha"]
+            m = numberMonth[m]
+
+            d = fechaDic.get("DiasNum")
+            if d is None:
+                d = 1
+            elif d in diasNum:
+                d = diasNum[d]
+            else:
+                d = int(d)
+
+            # Establece la fecha al día, si no se puede la corrige.
+            try:
+                date = datetime.date(y, m, d)
+                statusCode = 1
+            except ValueError:
+                date = datetime.date(y, m, 1)
+                statusCode = 0  # Establece código
+
+            # Evalúamos años posteriores
+            if date.year > today.year:
+                date = date.replace(year=today.year)
+
+            return date, statusCode
+
+        def missingDate():
+            nonlocal fechaInicio, fechaFin
+            if fechaFin is None:
+                fechaFin = fechaInicio
+            elif fechaInicio is None:
+                fechaInicio = fechaFin
+
+        def orderDate():
+            nonlocal  fechaFin, fechaInicio
+            if fechaFin < fechaInicio:
+                dateSwap = fechaInicio
+                fechaInicio = fechaFin
+                fechaFin = dateSwap
+
+        fechaFin = None
+        fechaInicio = None
+        today = date.today()
+        numberMonth = {
+            "enero": 1,
+            "febrero": 2,
+            "marzo": 3,
+            "abril": 4,
+            "mayo": 5,
+            "junio": 6,
+            "julio": 7,
+            "agosto": 8,
+            "septiembre": 9,
+            "octubre": 10,
+            "noviembre": 11,
+            "diciembre": 12
+        }
+
+        if len(entity) == 0:
+            statusCode = 1
+            fechaInicio = [None]
+            fechaFin = [None]
+        else:
+            # Invertimos para interar desde el último elemento
+            entity.reverse()
+            for fecha in entity:
+                if "Fin" in fecha and fechaFin is None:
+                    fechaFin = buildDate(fecha)
+                elif "Inicio" in fecha and fechaInicio is None:
+                    fechaInicio = buildDate(fecha)
+
+            missingDate()
+            orderDate()
+
+
+            # Evalúa código final
+            statusCode = 0
+            if fechaInicio[1] and fechaFin[1]:
+                statusCode = 1
+
+        return {"fechaInicio": fechaInicio[0], "fechaFin": fechaFin[0]}, statusCode
 
     def code_validate(self, field, entity, unknowns, taglist):
         # Calculo de código
@@ -315,6 +453,8 @@ class Regexseaker:
             return self.folios(expression, "Fin")
         elif field == "Periodo":
             return self.chunks_period(expression, "Periodo")
+        elif field == "Fecha":
+            return self.__fechas(expression)
 
     def folios(self, phrase, tipoFolio):
         # Tipo Folio puede ser Inicio o Fin
@@ -329,6 +469,16 @@ class Regexseaker:
 
         tagged = self.do_tagging(phrase.lower(), field, listTags)
         return self.do_chunking(tagged, field, posibles, grammarFolio)
+
+    def __fechas(self, phrase):
+        field = "Fecha"
+        listRegExps = self.regex_taglist(field)
+        listTags = self.get_tags(field)
+        posibles = self.get_posibles(field)
+        grammarFechas = self.choose_grammar(field)
+
+        tagged = self.do_tagging(phrase.lower(), field, listTags, listRegExps)
+        return self.do_chunking(tagged, field, posibles, grammarFechas)
 
     def chunks_period(self, exp, field):
         listTags = self.get_tags("Periodo")
