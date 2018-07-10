@@ -117,6 +117,7 @@ class Regexseaker:
                                              NP: {<(NitA\w+)> <(NitA\w+)>? <sps00> <Q> <AUX> <Sustnum>}
                                              NP: {<(NitA\w+)> <(NitA\w+)>? <AUX> <Q|cc>}
                                              NP: {<(NitA\w+)> <(NitA\w+)>? <Sustnum|(vs\w+)>? <da0ms0>? <Q|cc>}
+                                             NP: {<Q> <AUX> <(NitA\w+)> <(NitA\w+)>?}
                                          """,
                       Cuenta=r""" Q: {<unknown|dato|Z|Singlel>}
                                   NP: {<Cuenta> <sps00>? <Sustnum>? (<aq0cs0|sps00|Es>){0,2} <Q>}
