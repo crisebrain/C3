@@ -31,7 +31,7 @@ def makeresponseAction(req, action):
     resultarray = []
     for coin in coincidencias:
         resultarray.append(dict(zip(["nombre", action],
-                                    [coin["Nombre"], coin[action]])))
+                                    [coin["Nombre"] + coin["Apellido"], coin[action]])))
     resp = {"payload": {"result": resultarray, "returnCode": returnCode},
             "fulfillmentText": textresp}
             # "followupEventInput": {"name": "salida",
@@ -110,10 +110,9 @@ def mensajson(array, code, action, valor):
 
         elif code == 1:
             elem = array[0]
-            Text = "El saldo de {0} {1} es {2} pesos".format(elem["Nombre"],
+            Text = "El saldo de {0} {1} es {2} pesos.".format(elem["Nombre"],
                                                             elem["Apellido"],
                                                             elem["saldo"])
-            Text += "\n¿Deseas algo más?"
 
         elif code == 2:
             textnames = [elem["Nombre"] + " " + elem["Apellido"] for elem in array]

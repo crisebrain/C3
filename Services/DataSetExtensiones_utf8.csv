@@ -108,7 +108,7 @@ Id,Nombre,Apellido,VDN,saldo
 107,Mario Valentin, Martinez Garcia,9907,0
 108,Marina ,Martinez Martinez,9908,0
 109,Magali ,Hernandez Hernandez,9909,0
-110,Salvador ,Guerrero Altmanm,9910,0
+110,Salvador ,Guerrero Altmanm,9905,0
 111,Rafael ,Salazar Sanchez,9911,0
 112,Linda ,Carolina Solis,9912,0
 113,Hugo ,Veloz Ventura,9913,0
@@ -145,3 +145,5 @@ Id,Nombre,Apellido,VDN,saldo
 144,Alejandro ,Olvera Tellez,9952,0
 145,Recepcion,dos,9953,0
 146,Recepcion,uno,9954,0
+147,Director,General,9905,0
+148,Director,de Desarrollo,9935,0
