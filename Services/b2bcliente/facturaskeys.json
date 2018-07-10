@@ -2,7 +2,7 @@
 	"Prefijo": ["prefijo","serie"],
 	"NoDocumento": ["documento", "documentos", "nota", "notas", "crédito",
 		              "créditos", "credito", "creditos", "facturas", "factura",
-									"numero", "número"],
+									"número", "numero"],
 	"Folio": ["folio", "folios"],
 	"Inicio": ["inicial", "inicio", "comienza", "comienzan", "comienzo",
 			       "empieza", "empiezan", "principio", "principian", "arranque",
@@ -22,7 +22,7 @@
 	"NitAdquirienteMex": ["nit", "adquiriente", "rfc"],
 	"Sustnum": ["número", "numero", "clave", "matrícula", "matricula",
 		       "numeración"],
-  "Factura": ["factura", "facturas", "nota", "notas"],
+	"Factura": ["factura", "facturas", "nota", "notas"],
 	"Asignar": ["asignación", "asignado", "asignada"],
 	"Calce": ["calce"],
 	"Cuenta": ["cuenta"],
@@ -42,5 +42,13 @@
 	"Aceptado": ["aceptado","aceptada","aceptados","aceptadas"],
 	"Enviado": ["enviado","enviada","enviados","enviadas"],
 	"Pendiente": ["pendiente","pendientes"],
-	"Acuse": ["acuse"]
+	"Acuse": ["acuse"],
+	"TFactura": ["facturas", "factura"],
+	"TNota": ["nota", "notas"],
+	"TCredito": ["crédito", "créditos", "credito", "creditos"],
+	"TDocumento": ["documento", "documentos"],
+	"Tipo": ["tipo", "tipos"],
+	"Imperativo": ["dame", "muéstrame", "entrégame", "facilítame", "pásame",
+		             "enséñame", "muestrame", "entregame", "facilitame", "pasame",
+							 	 "enseñame"]
 }
