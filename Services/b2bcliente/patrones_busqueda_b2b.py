@@ -133,7 +133,7 @@ class Regexseaker:
                               """,
                       Acuse=r""" Q: {<Rechazado|Aceptado|Pendiente>}
                                  NP: {<Acuse> <vssp3s0|sps00|vsis3s0|Es|Valor|da0ms0>{0,3} <Q|.*>}
-                                 NP: {<Q|.*> <vssp3s0|vsis3s0|Es|da0ms0>{0,3} <Acuse>}
+                                 NP: {<Q|.*> <vssp3s0|vsis3s0|Es|da0ms0>{1,3} <Acuse>}
                              """,
                       Folio=r""" Q: {<Es|sps00|da0ms0|unknown|Valor|cs|cc|Reciente|p0300000|dp1msp|spcms|dp1css>}
                                  NP: {<Folio> <Q>* (<tipoFolio> <Q|Prefijo>*){1,2} <dato>}
