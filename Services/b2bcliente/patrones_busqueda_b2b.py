@@ -205,7 +205,7 @@ class Regexseaker:
             return ["Prefijo", "NoDocumento", "Sustnum", "Imperativo",
                     "TDocumento", "TFactura", "TNota", "TCredito"]
         elif field == "Fecha":
-            return  ["Inicio", "De", "Desde", "Es", "Fin", "Articulos"]
+            return  ["Inicio", "De", "Es", "Fin", "Articulos"]
 
     def regex_taglist(self, field):
         if field == "NitAdquirienteMex":
