@@ -3,5 +3,6 @@ Sessions/Conference.pck
 metadata/temp.html
 .idea/
 .directory
-*/*.tagger
-*/.ipynb_checkpoints/
+*.tagger
+*.ipynb_checkpoints/
+*~
