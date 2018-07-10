@@ -113,6 +113,7 @@ def mensajson(array, code, action, valor):
             Text = "El saldo de {0} {1} es {2} pesos.".format(elem["Nombre"],
                                                             elem["Apellido"],
                                                             elem["saldo"])
+            #Text += "\n¿Deseas algo más?"
 
         elif code == 2:
             textnames = [elem["Nombre"] + " " + elem["Apellido"] for elem in array]
