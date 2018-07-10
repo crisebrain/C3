@@ -4,6 +4,7 @@ import nltk
 import numpy as np
 import json
 
+
 def regexextractor(expression, field):
     pattern = patterns[field]
     result = re.search(pattern=pattern, string=expression)
@@ -12,10 +13,13 @@ def regexextractor(expression, field):
     else:
         return None
 
-def do_tagging(exp, field, listTags):
+
+# Para nuestras etiquetas personalizadas usamos listTags y ListRegExp.
+# listTags etiqueta con base al facturaskeys.json
+# listRegExp etiqueta con base a la expresiones regulares.
+def do_tagging(exp, field, listTags, listRegExps=None):
     tokens = nltk.word_tokenize(exp)
     tagged = sgt.pos_tag(tokens)
-    #print("tagged:",tagged)
     tagged = np.array([list(tup) for tup in tagged]).astype('|U16')
 
     # Inicializamos el diccionario de las etiquetas
@@ -30,6 +34,10 @@ def do_tagging(exp, field, listTags):
         for tag in dicTags:
             if token in dicTags[tag]:
                 tagged[i, 1] = tag
+        if listRegExps is not None:
+            for regExp in listRegExps:
+                if regexextractor(token, regExp):
+                    tagged[i, 1] = regExp
 
     # Convertimos a tuplas y evalúamos si el dato potencialmente nos
     # interesa o no.
@@ -40,41 +48,125 @@ def do_tagging(exp, field, listTags):
             tagged[unknown, 1] = "dato"
         else:
             tagged[unknown, 1] = "unknown"
+
     return [tuple(wordtagged) for wordtagged in tagged]
 
 
-def do_chunking(grammar, tagged, field, code , posibles):
-    # añadir las condiciones que sean necesarias para contemplar
-    # los posibles valores
-    # posibles = ["dato", "Z", "ncfs000", "ncms000", "Fz",
-    #             "sps00"]
-    # posibles son los tipos de palabras que pueden representar al dato
-
+def do_chunking(tagged, field, posibles, grammar=None):
+    if grammar is None:
+        grammar = choice_grammar(field)
     cp = nltk.RegexpParser(grammar)
     chunked = cp.parse(tagged)
-    # print('chunked:',chunked)
-    # chunked.draw()
-    continuous_chunk = []
     entity = []
     unknowns = []
     subt = []
+
     for i, subtree in enumerate(chunked):
         if isinstance(subtree, nltk.Tree) and subtree.label() == "NP":
             if field in ["Prefijo", "NoDocumento", "NitAdquirienteMex", "Cuenta"]:
-                #print(subtree)
+                # print(subtree)
                 for subsubtree in subtree.subtrees(filter=lambda t: t.label() == "Q"):
                     entity += [token for token, pos in subsubtree.leaves()]
                     subt.append(subsubtree)
                 unknowns += [token for token, pos in subtree.leaves()
                              if pos in posibles]
+            elif field == "Fecha":
+                fecha = {}
+                for token, tag in subtree.leaves():
+                    if tag in posibles:
+                        fecha.setdefault(tag, token)
+                entity.append(fecha)
             else:
-                # añadir las condiciones que sean necesarias para contemplar los posibles valores
+                # añadir las condiciones que sean necesarias para contemplar
+                # los posibles valores
                 entity += [token for token, pos in subtree.leaves()
                            if pos in posibles]
                 unknowns += [token for token, pos in subtree.leaves()
                              if pos == "unknown"]
                 subt.append(subtree)
-    # Evalúa código de retorno
+
+    # Prepara fechas
+    if field == "Fecha":
+        entity, code = preparaFechas(entity)
+        return entity, code
+
+    entity, code = code_validate(field, entity, unknowns,
+                                 regex_taglist(field))
+    return entity, code, subt, tagged
+
+
+def preparaFechas(entity):
+    import datetime
+    from datetime import date
+
+    fechaFin = None
+    fechaInicio = None
+    today = date.today()
+    numberMonth = {
+        "enero": 1,
+        "febrero": 2,
+        "marzo": 3,
+        "abril": 4,
+        "mayo": 5,
+        "junio": 6,
+        "julio": 7,
+        "agosto": 8,
+        "septiembre": 9,
+        "octubre": 10,
+        "noviembre": 11,
+        "diciembre": 12
+    }
+
+    def buildDate(fechaDic):
+        diasNum = {
+            "primero": 1,
+            "segundo": 2,
+            "tercero": 3,
+            "cuarto": 4,
+            "quinto": 5,
+            "sexto": 6,
+            "séptimo": 7,
+            "octavo": 8,
+            "noveno": 9
+        }
+
+        y = today.year if fechaDic.get("AniosNum") is None else int(fechaDic["AniosNum"])
+        m = today.month if fechaDic.get("Fecha") is None else fechaDic["Fecha"]
+        m = numberMonth[m]
+
+        d = fechaDic.get("DiasNum")
+        if d is None:
+            d = 1
+        elif d in diasNum:
+            d = diasNum[d]
+        else:
+            d = int(d)
+
+        try:
+            date = datetime.date(y, m, d)
+            statusCode = 1
+        except ValueError:
+            date = datetime.date(y, m, 1)
+            statusCode = 0  # Establece código
+
+        return date, statusCode
+
+    entity.reverse()
+    for fecha in entity:
+        if "Fin" in fecha and fechaFin is None:
+            fechaFin = buildDate(fecha)
+        elif "Inicio" in fecha and fechaInicio is None:
+            fechaInicio = buildDate(fecha)
+
+    # Evalúa código final
+    statusCode = 0
+    if fechaInicio[1] and fechaFin[1]:
+        statusCode = 1
+
+    return {"fechaInicio": fechaInicio[0], "fechaFin": fechaFin[0]}, statusCode
+
+
+def code_validate(field, entity, unknowns, taglist):
     if entity == []:
         code = 0
         if len(unknowns) > 1:
@@ -88,22 +180,26 @@ def do_chunking(grammar, tagged, field, code , posibles):
         entity = entity[-1].upper()
     else:
         entity = entity[0].upper()
-        if regexextractor(entity, field) is not None:
+        cond = any([True if regexextractor(entity, tag) is not None
+                    else False for tag in [field] + taglist])
+        if cond:
             code = 1
         else:
             code = 0
-    return entity, code, chunked#subt, tagged
+    return entity, code
 
 
+def regex_taglist(field):
+    if field == "NitAdquirienteMex":
+        return ["datoNitCol"]
+    else:
+        return []
 
-def prueba(grammar, exp, field, listTags):
-    tagged = do_tagging(exp.lower(), field, listTags)
-    posibles = ["dato"]
-    return do_chunking(grammar, tagged, field, 1, posibles)
 
+def prueba(grammar, exp, field, listTags, listRegExps, posibles):
+    tagged = do_tagging(exp.lower(), field, listTags, listRegExps)
 
-#def testRegex():
-    #print(regexextractor2("El estatus es de cancelaweewwewewewewe", "estados_valores"))
+    return do_chunking(tagged, field, posibles, grammar)
 
 
 def folios(phrase, tipoFolio):
@@ -113,34 +209,34 @@ def folios(phrase, tipoFolio):
     # Q = "Es|sps00|da0ms0|unknown|Valor|cs|cc|Reciente|p0300000|dp1msp|spcms|dp1css"
 
     grammarFolio = r"""
-                  Q: {<Es|sps00|da0ms0|unknown|Valor|cs|cc|Reciente|p0300000|dp1msp|spcms|dp1css>}
-                  NP: {<Folio> <Q>* (<tipoFolio> <Q|Prefijo>*){1,2} <dato>}
+    Q: {<unknown>}
+                  R: {<Es|sps00|da0ms0|unknown|Valor|cs|cc|Reciente|p0300000|dp1msp|spcms|dp1css>}
+
+                  NP: {<Folio> <Q>* (<tipoFolio> <Q|Prefijo>*){1,2} <dato|unknown>}
                   NP: {<Folio> <Q>* (<dato> <Q|Prefijo>*){1,2} <tipoFolio>}
                   NP: {<dato> <Q>* <Folio> <Q>* <tipoFolio>}
                   NP: {<tipoFolio> <Q>* <Folio> <Q>* <dato>}
                 """
 
     # Remplazos
-    #grammarFolio = grammarFolio.replace("Q", Q)
+    # grammarFolio = grammarFolio.replace("Q", Q)
     grammarFolio = grammarFolio.replace("tipoFolio", tipoFolio)
     listTags = ["Inicio", "Fin", "Es", "Valor", "Prefijo", "Reciente"]
 
     return prueba(grammarFolio, phrase, "Folio", listTags)
 
 
-
-
 def pruebasFolios():
     expsMalas = [
-        "y con folio de inicio igual a XXX",
-        "con rango de folio  entre el inicial de AAAAA",
-        "REWEWETW  es el folio de inicio",
-        "El folio de inicio es el ERWERWREWT",
-        "En folio de inicio asignamos el QWEERE",
-        "Para folio de inicio el valor de QWERWERWER",
-        "cuyo folio de inicio es el WQERRTW",
-        "folio de inicio igual a QWERRT",
-        "El folio de inicio definido en QWERTTW",
+        "y con folio de inicio igual a xxxxx"
+        # "con rango de folio  entre el inicial de AAAAA",
+        # "REWEWETW  es el folio de inicio",
+        # "El folio de inicio es el ERWERWREWT",
+        # "En folio de inicio asignamos el QWEERE",
+        # "Para folio de inicio el valor de QWERWERWER",
+        # "cuyo folio de inicio es el WQERRTW",
+        # "folio de inicio igual a QWERRT",
+        # "El folio de inicio definido en QWERTTW",
     ]
 
     expsBuenas_FolioInicio = [
@@ -241,30 +337,146 @@ def pruebasFolios():
         "en el cierre de folio ponemos el 68808080808",
     ]
 
-
-    for phrase in expsBuenas_FolioInicio:
-        resultado = folios(phrase, "Inicio")
-        if resultado[1] == 0:
-            print("Resulado: {1}\n{0}\n\n".format(str(resultado[0:2]), resultado[2]))
-
-    for phrase in expsBuenas_FolioFin:
-        resultado = folios(phrase, "Fin")
-        if resultado[1] == 0:
-            print("Resulado: {1}\n{0}\n\n".format(str(resultado[0:2]), resultado[2]))
+    # for phrase in expsBuenas_FolioInicio:
+    #     resultado = folios(phrase, "Inicio")
+    #     if resultado[1] == 0:
+    #         print("Resulado: {1}\n{0}\n\n".format(str(resultado[0:2]), resultado[2]))
+    #
+    # for phrase in expsBuenas_FolioFin:
+    #     resultado = folios(phrase, "Fin")
+    #     if resultado[1] == 0:
+    #         print("Resulado: {1}\n{0}\n\n".format(str(resultado[0:2]), resultado[2]))
 
     # for phrase in expsBuenas_FolioFin:
     #     print("Resulado: {0}\n".format(str(folios(phrase, "Fin"))))
 
+    for phrase in expsMalas:
+        resultado = folios(phrase, "Inicio")
+        # if resultado[1] == 0:
+        print("Resulado: {1}\n{0}\n\n".format(str(resultado[0:2]), resultado[2]))
 
-    # for phrase in expsMalas:
-    #     resultado = folios(phrase, "Fin")
-    #     # if resultado[1] == 0:
-    #     print("Resulado: {1}\n{0}\n\n".format(str(resultado[0:2]), resultado[2]))
+
+def fechas(phrase):
+    # R = "<Es> <Desde> <da0ms0>"
+    grammarFolio = r"""
+                Q: {<De|Articulos|spcms|sps00|Es>}
+                I: {<Inicio|Fin> <Q>{0,2} <sps00>?}
+                NP: {<I> <DiasNum|ao0ms0> <Q>{0,2} <Fecha> <Q>{0,2} <AniosNum|DiasNum>}
+                NP: {<I> <Fecha> <Q>{0,2} <DiasNum|ao0ms0> <Q>{0,2} <AniosNum|DiasNum>}
+                NP: {<I> <DiasNum|ao0ms0>? <Q>{0,2} <Fecha> <Q>{0,2} <AniosNum|DiasNum>?}
+                NP: {<I> <Fecha> <Q>{0,2} <DiasNum|ao0ms0>? <Q>{0,2} <AniosNum|DiasNum>}
+                NP: {<I> <DiasNum|ao0ms0> <Q>{0,2} <Fecha>}
+                """
+
+    listTags = ["Inicio", "De", "Desde", "Es", "Fin", "Articulos"]
+    listRegExps = ["AniosNum", "DiasNum"]
+    posibles = ["Fecha", "AniosNum", "DiasNum", "Inicio", "Fin"]
+
+    return prueba(grammarFolio, phrase, "Fecha", listTags, listRegExps, posibles)
+
+
+def pruebasFechas():
+    exps = [
+        # "con fecha inicial del 15 de Febrero del 2017 , es todo gracias",
+        # " cuya fecha inicial es desde el 1 de febrero del 2017",
+        # "posteriores al primero de febrero del 2018",
+        # "entre el 15 de noviembre del 17",
+        # "con periodo del 1 de Marzo del 2017 ",
+        # " desde marzo del 2017",
+        # "posteriores al 24 de Septiembre",
+        # "de Marzo primero del 2017",
+        # "de noviembre ",
+        # "desde Abril del 2017 ",
+        # "a partir de la segunda semena de enero del año pasado",
+        # "comprendidas en el periodo de Enero del 2017",
+        # " generadas a partir del 6 de Noviembre del año pasado",
+        # "generados desde el 8 de Abril del presente año",
+        # " generadas desde el 5 del presente mes",
+        # "con fecha del 5 de Abril del 2017",
+        # "que oscilen entre el 4 de Junio",
+        # "comprendidos entre Abril 7",
+        # "con rango de fechas comprendido entre Abril 5",
+        # "que datan del 4 de Abril del 2018",
+        # "desde el último de marzo del 2017",
+        # "entre el 23 de Junio del 2016",
+        # "con fecha de inicio del 12 de Marzo del 2016",
+        # "pero emitidas en Noviembre 17 del año pasado",
+        # "pero cuyas fechas se encuentren entre el 1 de Diciembre",
+        # "Del 1 de marzo",
+        # "Del 3 de Mayo del año pasado ",
+        # " entre el 5 de Marzo del 2018",
+        # "que esten entre el día actual ",
+        # "pero que tambien sean anteriores al 12 de Marzo del 18, esta claro",
+        # "pero que sean anteriores al 14 de Junio",
+        # "y el 24 de Febrero del 2018",
+        # "al 5 de Noviembre",
+        # "al mes actual",
+        # "anteriores al 7 de Noviembre",
+        # "hasta el mes pasado",
+        # "anteriores a Enero del presente año",
+        # "a Marzo del mismo año",
+        # " al 6 de Noviembre del año pasado",
+        # "y Septiembre 14 del año pasado",
+        # "y Marzo 19 del presente año",
+        # "previos al 15 de Enero del 2018",
+        # "anteriores a Abril 9 de este año",
+        # "hasta el día de hoy",
+        # "y el primero de Marzo del año pasado",
+        # "y fecha de fin del 13 de Noviembre del presente año",
+        # "anteriores al 5 de Marzo del 2017",
+        # "pero que sean previas al 15 de Marzo de este año.",
+        # " y el 15 de Febrero del año pasado",
+        # " y que sean previas al 6 de Noviembre de este año",
+        # "al 9 de Noviembre del 2016",
+        # "al 19 de Enero del presente año",
+        # " previas al 5 de noviembre de este año",
+        # "y el 6 de Enero del 2017",
+        # "y posteriores al 14 de Diciembre"
+        "facturas con fecha de inicio es 21 de febrero del 2009 y de fin 15 de marzo del 2018, gracias. y fecha de fin 24 de diciembre del 2000"
+    ]
+
+    expsAcordadas = [
+        "fecha inicial del 5 de enero del 2015",
+        "fecha inicial del 9 de Diciembre del 2013",
+        "fecha de inicio al 12 de Marzo del 2013",
+        "fecha de inicio al 12 de Noviembre del 2015",
+        "fecha de comienzo del primero de enero del 2015",
+        "fecha de comienzo del 21 de Enero del 2013",
+        "fecha inicio de marzo del 2015",
+        "fecha principio en Julio del 2015",
+        "con periodo de inicio de Septiembre 23 del 2016",
+        "iniciando en Septiembre 27 del 2012",
+        "Con comienzo en Julio 23",
+        "Con comienzo en Julio 45",
+        "Iniciando el 14 de Mayo",
+        "iniciando el 12 de Febrero",
+        "inicia Del primero de enero",
+
+        "Fecha final del 3 de Noviembre del 2017",
+        "y finalizando al 4 de Marzo del 2014",
+        "finalizando el 12 de Agosto de 1980",
+        "concluyendo el 23 de Febrero de 1988",
+        "y terminando el 12 de Julio de 1990",
+        "concluyendo en Octubre 23",
+        "con fecha de finalización a Septiembre del 2016",
+        "hasta el 12 de Marzo",
+        "la fecha de fin es el 12 de Abril",
+        "terminando el 23 de diciembre del 2030",
+        "y la fecha final es el 23 de Octubre",
+        "fecha de conclusión de Noviembre 18",
+        "Terminando el 12 Marzo del 2015",
+        "y fecha de conclusión de documentos al 23 de Noviembre"
+    ]
+
+    for phrase in exps:
+        resultado = fechas(phrase)
+        # if resultado[1] == 0:
+        print("Resulado: {1}\n{0}\n\n".format(str(resultado[0:2]), resultado[2]))
 
 
 ########################## Programa  #############################
 dictfacturas = json.load(open("facturaskeys.json"))
-#print("Diccionario:\n{0}\n\n".format(str(dictfacturas)))
+# print("Diccionario:\n{0}\n\n".format(str(dictfacturas)))
 
 patterns = dict(Cuenta=r"\b[A-Za-z]{3}\d{3}\b",
                 Prefijo=r"\b[1-9a-zA-Z]\w{0,3}\b",  # wvect
@@ -272,14 +484,19 @@ patterns = dict(Cuenta=r"\b[A-Za-z]{3}\d{3}\b",
                 NitAdquirienteMex=r"\b[A-Za-z]{4}\d{6}[A-Za-z0-9]{3}\b",
                 Folio=r"\d{1,16}",
                 Estados_valores=r"\bcerrad\w{0,30}|firmad\w{0,30}|enviad\w{0,30}|cancela\w{0,30}|acepta\w{0,30}|erro\w{0,30}\b",
-                Acuse_valores=r"\bpendient\w{0,30}|rechaz\w{0,30}|acepta\w{0,30}\b")
-
+                Acuse_valores=r"\bpendient\w{0,30}|rechaz\w{0,30}|acepta\w{0,30}\b",
+                DiasNum=r"^[0-9]{1,2}$",
+                AniosNum=r"^[0-9]{4}$",
+                Fecha=r"^$"
+                )
 
 
 ###################### Pruebas Gabriel ##########################
 def gabriel():
-    pruebasFolios()
+    pruebasFechas()
+    # pruebasFolios()
 
-    #print(nltk.corpus.cess_esp.readme())
+    # print(nltk.corpus.cess_esp.readme())
+
 
 gabriel()
