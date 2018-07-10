@@ -66,7 +66,8 @@ def preparaParametros(dic, queryOriginal):
     elif dic.get("tipoDocumento") == "Nota":
         addEntryToDic(dicReady, "tipoDocumento", "N", 1)
     else:
-        addEntryToDic(dicReady, "tipoDocumento", None, 0)
+        tipoDocumento = seaker.seakexpresion(queryOriginal, "Tipo")
+        addEntryToDic(dicReady, "tipoDocumento", tipoDocumento[0], tipoDocumento[1])
 
 
     # Periodo
