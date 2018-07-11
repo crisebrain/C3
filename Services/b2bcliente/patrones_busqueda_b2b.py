@@ -131,10 +131,9 @@ class Regexseaker:
                                   NP: {<Estado> <vsis3s0|vmp00sm|sps00|Es|Valor>* <Q>}
                                   NP: {<Q> <sps00|ncms000|Es|da0ms0>* <Estado>}
                               """,
-                      Acuse=r"""Q: {<Rechazado|Aceptado|Pendiente>}
-                                NP: {<Acuse> <vssp3s0|unknown|vssp3s0|sps00>* <Q>}
-                                NP: {<Acuse> <vsis3s0|vmp00sm|sps00|Es|Valor>* <Q>}
-                                NP: {<Q> <sps00|ncms000|Es|da0ms0>* <Acuse>}
+                      Acuse=r""" Q: {<Rechazado|Aceptado|Pendiente>}
+                                 NP: {<Acuse> <vssp3s0|sps00|vsis3s0|Es|Valor|da0ms0>{0,3} <Q|.*>}
+                                 NP: {<Q|.*> <vssp3s0|vsis3s0|Es|da0ms0>{1,3} <Acuse>}
                              """,
                       Folio=r""" Q: {<Es|sps00|da0ms0|unknown|Valor|cs|cc|Reciente|p0300000|dp1msp|spcms|dp1css>}
                                  NP: {<Folio> <Q>* (<tipoFolio> <Q|Prefijo>*){1,2} <dato>}
@@ -174,8 +173,8 @@ class Regexseaker:
         elif field == "Folio":
             return ["dato"]
         elif field == "Estado" or field == "Acuse":
-            return ["dato","Recibido","Error","Firmado","Rechazado",
-                    "Aceptado","Enviado","Pendiente"]
+            return ["dato", "vmp00sm", "ncms000", "aq0msp", "unknown", "Fz", "Y"
+                    "Z", "cc"]
         elif field == "Tipo":
             return ["TFactura", "TNota"]
         elif field == "Fecha":
@@ -206,7 +205,7 @@ class Regexseaker:
             return ["Prefijo", "NoDocumento", "Sustnum", "Imperativo",
                     "TDocumento", "TFactura", "TNota", "TCredito"]
         elif field == "Fecha":
-            return  ["Inicio", "De", "Desde", "Es", "Fin", "Articulos"]
+            return  ["Inicio", "De", "Es", "Fin", "Articulos"]
 
     def regex_taglist(self, field):
         if field == "NitAdquirienteMex":
@@ -558,13 +557,25 @@ class Regexseaker:
 
 if __name__ == "__main__":
     reg = Regexseaker()
-    #expr = "Quiero facturas de acuse recibido con número de documento 33443 y el prefijo es x"
+    expr = [
+        # "Quiero facturas de acuse aceptado con número de documento 33443 y el prefijo es x",
+        # "Quiero facturas de acuse recibido con número de documento 33443 y el prefijo es x",
+        # "Quiero facturas de acuse error con número de documento 33443 y el prefijo es x",
+        # "Quiero facturas de acuse firmado con número de documento 33443 y el prefijo es x",
+        # "Quiero facturas de acuse enviado con número de documento 33443 y el prefijo es x",
+        # "Quiero facturas de acuse xsdsfds con número de documento 33443 y el prefijo es x",
+        # "Quiero facturas de acuse 12321 con número de documento 33443 y el prefijo es x",
+        # "Quiero facturas de acuse es recibido con número de documento 33443 y el prefijo es x",
+        "Quiero facturas de acuse es el que sea con número de documento 33443 y el prefijo es x",
+        ]
     #expr = "Hola, me ayudas con las facturas donde ABCD ES el valor definido para el prefijo"
     #expr = "Hola, me ayudas con las facturas donde ABCD ES el prefijo"
     # expr = "Por favor con las facturas donde ABCD ES el prefijo, perdon el prefijo es XXXX"
-    expr = "quiero facturas de hoy y ayer con número de factura escuela con prefijo aaas gracias"
+    #expr = "quiero facturas de hoy y ayer con número de factura escuela con prefijo aaas gracias"
     print("\n")
-    print(expr)
+
     print("\n")
-    print("Prefijo: ", reg.seakexpresion(expr.lower(), "Prefijo", nl=5))
+    for e in expr:
+        resultado = reg.seakexpresion(e.lower(), "Acuse", nl=5)
+        print("{0}\nAcuse: {1}\n".format(e, resultado))
     # print("NoDocumento: ", reg.seakexpresion(expr.lower(), "NoDocumento", nl=3))
