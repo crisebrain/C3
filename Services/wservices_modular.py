@@ -8,9 +8,16 @@ from logtofile import CreateLogger
 
 def makeWebhookResult(req):
     action = req.get("queryResult").get("action")
-    querys = CreateLogger("querys")
-    querys.logger.info(json.dumps(req.get("queryResult")) + "\n")
-    errors = CreateLogger("errors")
+    conlog = False
+    try:
+        querys = CreateLogger("querys")
+        errors = CreateLogger("errors")
+        querys.logger.info(json.dumps(req.get("queryResult")) + "\n")
+        conlog = True
+    except (PermissionError, FileNotFoundError):
+        print("\n************************* WARNING *************************")
+        print("No fue posible crear correctamente los loggers del proyecto")
+        print("***********************************************************\n")
     try:
         if action == "VDN" or action == "saldo":
             return makeresponseAction(req, action)
@@ -24,8 +31,9 @@ def makeWebhookResult(req):
             return {"payload": {"result": "Null", "returnCode": "0"},
                    "fulfillmentText": "Null"}
     except Exception as exception:
-        errors.logger.info(json.dumps(req.get("queryResult")) + "\n")
-        errors.logger.exception(exception)
+        if conlog:
+            errors.logger.info(json.dumps(req.get("queryResult")) + "\n")
+            errors.logger.exception(exception)
         if type(exception).__name__ == "AttributeError":
             msgerror = "El servicio de factura no ha respondido correctamente. " \
                        "Favor de reportalo con su administrador."
