@@ -102,9 +102,9 @@ class Regexseaker:
                                        AUX5 : {<vmip3s0>? <Asignar> <sps00|cs>}
                                        AUX6 : {<vsip3s0|vssp3s0|cs> <da0ms0>?}
                                        AUX : {<AUX1|AUX2|AUX3|AUX4|AUX5|AUX6>}
+                                       NP: {<Sustnum> <sps00> <da0fs0>? <(NoDocumen\w+)> <AUX|Sustnum>? <Q|sps00>}
                                        NP: {<(NoDocumen\w+)> <sps00|Pronrelativo> <Sustnum> <AUX>? <Q|sps00>}
                                        NP: {<(NoDocumen\w+)> <sps00> <Q|sps00> <AUX> <Sustnum>}
-                                       NP: {<Sustnum> <sps00> <da0fs0>? <(NoDocumen\w+)> <AUX|Sustnum>? <Q|sps00>}
                                        NP: {<Q> <AUX> <Sustnum> <sps00> <da0fs0>? <(NoDocumen\w+)>}
                                    """,
                       NitAdquirienteMex=r""" Q: {<unknown|dato|Z|Singlel|datoNitCol>}
