@@ -155,7 +155,6 @@ class Regexseaker:
                                 NP: {<(da0\w+)|(vs\w+)> <Q>}
                                     }<Prefijo> <(vs\w+)>? <Q>{
                             """,
-                            #<Q> <cs|(vs\w+)> <(da0\w+)>? <Prefijo>}
                       Fecha = r"""
                                 Q: {<De|Articulos|spcms|sps00|Es>}
                                 I: {<Inicio|Fin> <Q>{0,2} <sps00>?}
