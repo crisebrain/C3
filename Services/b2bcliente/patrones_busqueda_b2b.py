@@ -88,13 +88,13 @@ class Regexseaker:
                                   AUX5 : {<vmip3s0>? <Asignar> <sps00|cs>}
                                   AUX6 : {<vsip3s0|vssp3s0|cs> <da0ms0>?}
                                   AUX : {<AUX1|AUX2|AUX3|AUX4|AUX5|AUX6>}
-                                  NP: {<Prefijo> <AUX|sps00>? <Sustnum>? <Q|sps00>}
+                                  NP: {<Prefijo> <AUX|sps00|da0ms0>? <Sustnum>? <Q|sps00>}
                                   NP: {<Q|sps00|vsip3s0> <AUX> <Prefijo>}
                               """,
                                # directas
                                # inversas
                                # añadir que se hace con sustantivos y nodos terminales
-                      NoDocumento=r""" Q: {<Singlel|cc|dato|Nums>}
+                      NoDocumento=r""" Q: {<Singlel|cc|dato|Nums|(nc[mf][sp]000)>}
                                        AUX1 : {<vmip1p0> <spcms|cs>}
                                        AUX2 : {<spcms> <Calce> <sps00>}
                                        AUX3 : {<aq0cs0> <sps00|spcms>}
@@ -102,10 +102,10 @@ class Regexseaker:
                                        AUX5 : {<vmip3s0>? <Asignar> <sps00|cs>}
                                        AUX6 : {<vsip3s0|vssp3s0|cs> <da0ms0>?}
                                        AUX : {<AUX1|AUX2|AUX3|AUX4|AUX5|AUX6>}
-                                       NP: {<(NoDocumen\w+)> <sps00|Pronrelativo> <Sustnum> <AUX>? <Q|ncms000|ncfs000|sps00>}
-                                       NP: {<(NoDocumen\w+)> <sps00> <Q|sps00|ncms000|ncfs000> <AUX> <Sustnum>}
-                                       NP: {<Sustnum> <sps00> <da0fs0>? <(NoDocumen\w+)> <AUX|Sustnum>? <Q|sps00|ncms000|ncfs000>}
-                                       NP: {<Q|ncms000|ncfs000> <AUX> <Sustnum> <sps00> <da0fs0>? <(NoDocumen\w+)>}
+                                       NP: {<(NoDocumen\w+)> <sps00|Pronrelativo> <Sustnum> <AUX>? <Q|sps00>}
+                                       NP: {<(NoDocumen\w+)> <sps00> <Q|sps00> <AUX> <Sustnum>}
+                                       NP: {<Sustnum> <sps00> <da0fs0>? <(NoDocumen\w+)> <AUX|Sustnum>? <Q|sps00>}
+                                       NP: {<Q> <AUX> <Sustnum> <sps00> <da0fs0>? <(NoDocumen\w+)>}
                                    """,
                       NitAdquirienteMex=r""" Q: {<unknown|dato|Z|Singlel|datoNitCol>}
                                              AUX1 : {<vmip1p0> <spcms|cs>}
