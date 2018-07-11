@@ -126,7 +126,7 @@ class Regexseaker:
                                   NP: {<Sustnum> <sps00> <Cuenta> <sps00> <Q> <cs> <Sustnum>}
                                   NP: {<sps00> <Cuenta> <aq0cs0> <sps00> <Q>}
                               """,
-                      Estado=r""" Q: {<Recibido|Error|Firmado|Rechazado|Aceptado|Enviado>}                                  
+                      Estado=r""" Q: {<Recibido|Error|Firmado|Rechazado|Aceptado|Enviado>}
                                   NP: {<Estado> <vssp3s0|sps00|vsis3s0|Es|Valor|da0ms0|cs>{0,3} <Q>}
                                   NP: {<Q> <vssp3s0|vsis3s0|Es|da0ms0|cs>{1,3} <Estado>}
                                   NP: {<Estado> <vssp3s0|sps00|vsis3s0|Es|Valor|da0ms0|cs>{0,3} <.*>}
@@ -231,7 +231,6 @@ class Regexseaker:
         entity = []
         unknowns = []
         subt = []
-        print(chunked)
         for i, subtree in enumerate(chunked):
             if isinstance(subtree, Tree) and subtree.label() == "NP":
                 if field in ["Prefijo", "NoDocumento",
