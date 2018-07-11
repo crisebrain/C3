@@ -61,14 +61,17 @@ def preparaParametros(dic, queryOriginal):
     seaker = Regexseaker()
 
     # Tipo de documento
-    if dic.get("tipoDocumento") == "Factura":
-        addEntryToDic(dicReady, "tipoDocumento", "F", 1)
-    elif dic.get("tipoDocumento") == "Nota":
-        addEntryToDic(dicReady, "tipoDocumento", "N", 1)
+    switcherTipoDocumento = {
+        "Factura": "F",
+        "Nota": "N"
+    }
+    if dic.get("tipoDocumento"):
+        addEntryToDic(dicReady, "tipoDocumento",
+                      switcherTipoDocumento.get(dic.get("tipoDocumento")), 1)
     else:
         tipoDocumento = seaker.seakexpresion(queryOriginal, "Tipo")
-        addEntryToDic(dicReady, "tipoDocumento", tipoDocumento[0], tipoDocumento[1])
-
+        addEntryToDic(dicReady, "tipoDocumento",
+                      switcherTipoDocumento.get(tipoDocumento[0]), tipoDocumento[1])
 
     # Periodo
     switcherPeriodo = {
