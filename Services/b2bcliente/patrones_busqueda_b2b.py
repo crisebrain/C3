@@ -152,8 +152,10 @@ class Regexseaker:
                                 NP: {<TDocumento>? <pr0cn000>? <(vs\w+)>? <sps00>? <Tipo> <Q>}
                                 NP: {<TDocumento> <pr0cn000>? <(vs\w+)>? <Q>}
                                 NP: {<Imperativo|vmip1s0> <(da0\w+)>? <Q> <sps00>? <TCredito>?}
-                                NP: {<(da0\w+)> <Q>}
+                                NP: {<(da0\w+)|(vs\w+)> <Q>}
+                                    }<Prefijo> <(vs\w+)>? <Q>{
                             """,
+                            #<Q> <cs|(vs\w+)> <(da0\w+)>? <Prefijo>}
                       Fecha = r"""
                                 Q: {<De|Articulos|spcms|sps00|Es>}
                                 I: {<Inicio|Fin> <Q>{0,2} <sps00>?}
@@ -227,7 +229,7 @@ class Regexseaker:
         entity = []
         unknowns = []
         subt = []
-
+        print(chunked)
         for i, subtree in enumerate(chunked):
             if isinstance(subtree, Tree) and subtree.label() == "NP":
                 if field in ["Prefijo", "NoDocumento",
