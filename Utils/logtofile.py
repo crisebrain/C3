@@ -1,13 +1,19 @@
 import logging
+import os
 
 class CreateLogger(object):
-    def __init__(self, i):
-        self.create_logger(i)
+    def __init__(self, namef):
+        self.create_logger(namef)
 
-    def create_logger(self, i):
-        i = str(i)
-        pathfile = '/var/log/C3/{0}.log'.format(i)
-        logger = logging.getLogger(i)
+    def create_logger(self, namef):
+        # /home/user/.../current_proyect_name/C3
+        current_proyect_name = os.getcwd().split("/")[-2]
+        # Crea folder segun rama del proyecto
+        folder = os.path.join("/var/log/C3", current_proyect_name)
+        if not os.path.exists(folder):
+            os.mkdir(folder)
+        pathfile = os.path.join(folder, '{0}.log'.format(namef))
+        logger = logging.getLogger(namef)
         formatter = logging.Formatter('%(asctime)s %(levelname)s %(message)s')
         hdlr = logging.FileHandler(pathfile)
         hdlr.setFormatter(formatter)
