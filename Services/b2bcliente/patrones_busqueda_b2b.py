@@ -126,14 +126,17 @@ class Regexseaker:
                                   NP: {<Sustnum> <sps00> <Cuenta> <sps00> <Q> <cs> <Sustnum>}
                                   NP: {<sps00> <Cuenta> <aq0cs0> <sps00> <Q>}
                               """,
-                      Estado=r""" Q: {<Recibido|Error|Firmado|Rechazado|Aceptado|Enviado>}
-                                  NP: {<Estado> <vssp3s0|unknown|vssp3s0|sps00>* <Q>}
-                                  NP: {<Estado> <vsis3s0|vmp00sm|sps00|Es|Valor>* <Q>}
-                                  NP: {<Q> <sps00|ncms000|Es|da0ms0>* <Estado>}
+                      Estado=r""" Q: {<Recibido|Error|Firmado|Rechazado|Aceptado|Enviado>}                                  
+                                  NP: {<Estado> <vssp3s0|sps00|vsis3s0|Es|Valor|da0ms0|cs>{0,3} <Q>}
+                                  NP: {<Q> <vssp3s0|vsis3s0|Es|da0ms0|cs>{1,3} <Estado>}
+                                  NP: {<Estado> <vssp3s0|sps00|vsis3s0|Es|Valor|da0ms0|cs>{0,3} <.*>}
+                                  NP: {<.*> <vssp3s0|vsis3s0|Es|da0ms0|cs>{1,3} <Estado>}
                               """,
                       Acuse=r""" Q: {<Rechazado|Aceptado|Pendiente>}
-                                 NP: {<Acuse> <vssp3s0|sps00|vsis3s0|Es|Valor|da0ms0>{0,3} <Q|.*>}
-                                 NP: {<Q|.*> <vssp3s0|vsis3s0|Es|da0ms0>{1,3} <Acuse>}
+                                 NP: {<Acuse> <vssp3s0|sps00|vsis3s0|Es|Valor|da0ms0|cs>{0,3} <Q>}
+                                 NP: {<Q> <vssp3s0|vsis3s0|Es|da0ms0|cs>{1,3} <Acuse>}
+                                 NP: {<Acuse> <vssp3s0|sps00|vsis3s0|Es|Valor|da0ms0|cs>{0,3} <.*>}
+                                 NP: {<.*> <vssp3s0|vsis3s0|Es|da0ms0|cs>{1,3} <Acuse>}
                              """,
                       Folio=r""" Q: {<Es|sps00|da0ms0|unknown|Valor|cs|cc|Reciente|p0300000|dp1msp|spcms|dp1css>}
                                  NP: {<Folio> <Q>* (<tipoFolio> <Q|Prefijo>*){1,2} <dato>}
@@ -558,24 +561,24 @@ class Regexseaker:
 if __name__ == "__main__":
     reg = Regexseaker()
     expr = [
-        # "Quiero facturas de acuse aceptado con número de documento 33443 y el prefijo es x",
-        # "Quiero facturas de acuse recibido con número de documento 33443 y el prefijo es x",
-        # "Quiero facturas de acuse error con número de documento 33443 y el prefijo es x",
-        # "Quiero facturas de acuse firmado con número de documento 33443 y el prefijo es x",
-        # "Quiero facturas de acuse enviado con número de documento 33443 y el prefijo es x",
-        # "Quiero facturas de acuse xsdsfds con número de documento 33443 y el prefijo es x",
-        # "Quiero facturas de acuse 12321 con número de documento 33443 y el prefijo es x",
-        # "Quiero facturas de acuse es recibido con número de documento 33443 y el prefijo es x",
-        "Quiero facturas de acuse es el que sea con número de documento 33443 y el prefijo es x",
+        "Quiero facturas de estado aceptado con número de documento 33443 y el prefijo es x",
+        "Quiero facturas de estado recibido con número de documento 33443 y el prefijo es x",
+        "Quiero facturas de estado error con número de documento 33443 y el prefijo es x",
+        "Quiero facturas de estado firmado con número de documento 33443 y el prefijo es x",
+        "Quiero facturas de estado enviado con número de documento 33443 y el prefijo es x",
+        "Quiero facturas de estado xsdsfds con número de documento 33443 y el prefijo es x",
+        "Quiero facturas de estado 12321 con número de documento 33443 y el prefijo es x",
+        "Quiero facturas de estado es recibido con número de documento 33443 y el prefijo es x",
+        "Quiero facturas de estado es el que sea con número de documento 33443 y el prefijo es x",
+        "Facturas de hoy con recibido como estado y prefijo algo",
+        "Facturas de hoy con recibido es estado y prefijo algo",
+        "Facturas de hoy con recibido estado y prefijo algo",
+        "Facturas de hoy con recibido es el estado y prefijo algo"
         ]
-    #expr = "Hola, me ayudas con las facturas donde ABCD ES el valor definido para el prefijo"
-    #expr = "Hola, me ayudas con las facturas donde ABCD ES el prefijo"
-    # expr = "Por favor con las facturas donde ABCD ES el prefijo, perdon el prefijo es XXXX"
-    #expr = "quiero facturas de hoy y ayer con número de factura escuela con prefijo aaas gracias"
     print("\n")
 
     print("\n")
     for e in expr:
-        resultado = reg.seakexpresion(e.lower(), "Acuse", nl=5)
-        print("{0}\nAcuse: {1}\n".format(e, resultado))
+        resultado = reg.seakexpresion(e.lower(), "Estado", nl=5)
+        print("{0}\nEstado: {1}\n".format(e, resultado))
     # print("NoDocumento: ", reg.seakexpresion(expr.lower(), "NoDocumento", nl=3))
