@@ -155,8 +155,8 @@ class Regexseaker:
                                 NP: {<TDocumento>? <pr0cn000>? <(vs\w+)>? <sps00>? <Tipo> <Q>}
                                 NP: {<TDocumento> <pr0cn000>? <(vs\w+)>? <Q>}
                                 NP: {<Imperativo|vmip1s0> <(da0\w+)>? <Q> <sps00>? <TCredito>?}
-                                NP: {<(da0\w+)|(vs\w+)> <Q>}
-                                    }<Prefijo> <(vs\w+)>? <Q>{
+                                NP: {<(da0\w+)|(vs\w+)|sps00> <Q>}
+                                    }<Prefijo> <(vs\w+)|sps00>?{
                             """,
                       Fecha = r"""
                                 Q: {<De|Articulos|spcms|sps00|Es>}
