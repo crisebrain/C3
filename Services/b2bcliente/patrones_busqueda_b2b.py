@@ -8,7 +8,7 @@ import numpy as np
 import json
 
 class Regexseaker:
-    def __init__(self):
+    def __init__(self, pathkeys=None):
         """Inicialización de la clase de busquedas.
         1 expresiones regulares para los campos utilizados
         2 carga la lista de alias para cada campo
@@ -28,7 +28,9 @@ class Regexseaker:
                              AniosNum=r"^[0-9]{4}$",
                              Fecha=r"^$"
                              )
-        self.dictfacturas = json.load(open("Services/b2bcliente/facturaskeys.json"))
+        if pathkeys == None:
+            pathkeys = "Services/b2bcliente/facturaskeys.json"
+        self.dictfacturas = json.load(open(pathkeys))
         # Services/b2bcliente/facturaskeys.json"))
 
     def regexextractor(self, expression, field):

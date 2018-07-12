@@ -1,7 +1,7 @@
 import sys
 sys.path.append("../Services")
-from Services.b2bcliente.patrones_busqueda_b2b import Regexseaker
-reg = Regexseaker()
+from b2bcliente import Regexseaker
+reg = Regexseaker("../Services/b2bcliente/facturaskeys.json")
 
 frases = ["numero de cuenta abc345",
           "el número de cuenta es Sad345",
