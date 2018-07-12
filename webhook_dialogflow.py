@@ -3,6 +3,7 @@
 import urllib
 import json
 import os
+import sys
 from flask import Flask, request, make_response
 import requests
 
@@ -28,6 +29,7 @@ def webhook():
     return r
 
 if __name__ == "__main__":
-    port = int(os.getenv("PORT", 5000))
+    portnumber = int(sys.argv[1])
+    port = int(os.getenv("PORT", portnumber))
     print("Starting app on port %d" %port)
     app.run(debug=True, port=port, host="0.0.0.0")

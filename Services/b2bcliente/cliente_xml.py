@@ -12,11 +12,14 @@ def sendReq(fieldsdict):
     root = et.getroot()
     body = root.getchildren()[1]
     consultarfactura = body.getchildren()[0]
+
     for children in consultarfactura.getchildren():
-        children.text = fieldsdict[children.tag]
-        print("%s : %s" % (children.tag, children.text))
+        children.text = fieldsdict.get(children.tag)
+        # print("%s : %s" % (children.tag, children.text))
+
     # esta instruccion es para convertir el objeto tipo elementTree a texto
     xmlreq = xml.etree.ElementTree.tostring(et.getroot()).decode()
+    print("---------xml---------\n" + xmlreq)
     # ---------------------------------------------------------------------
     headers = {"Content-Type": "text/xml",
                "charset": "UTF-8",
