@@ -5,6 +5,7 @@ import re
 import os
 import json
 import numpy as np
+import threading
 import sys
 sys.path.append("Utils")
 from textJumping import detect_intent_texts
@@ -35,7 +36,6 @@ class InfoManager:
         self.sc = SessionContainer(pathpicklefile, idChatBot)
         self.makeWebhookResult = makeWebhookResult
         self.sc.ShowSessionTree()
-        self.imControl = False
         self.info = dict()
 
     def interceptIntent(self, jdata):  # strText, idNode
@@ -54,10 +54,8 @@ class InfoManager:
         # sessionid =
         intentid = intentid.split("/")[-1]
         node = it.find_node(intentid, to_dict=False, by_field="id")
-        if "fallback" not in node.name.lower() and self.imControl == False:
+        if "fallback" not in node.name.lower():
             response = self.intentFlow(jdata, node)
-        elif self.imControl == True:
-            self.jumpToIntent()
         else:
             self.info["complexMsg"] = jdata.get("queryResult").get("queryText")
             self.intentDecompose()
@@ -72,7 +70,7 @@ class InfoManager:
         function, then is stored into node from msgReq and msgAns taken.
         Parameters:
         jdata - query information dictionary.
-        node - detected intentNode
+        node - detected intentNode.
         """
         queryResult = jdata.get("queryResult")
         it = self.sc.extractTree()
@@ -138,7 +136,8 @@ class InfoManager:
         # -----------------------------------------------------------------
         # intents identificados, los nombres de los intents equivalen a las
         # etiquetas de clase
-        identified_list = list(intent0.name, intent1.name)  # simulando cse
+        identified_list = ["02 VDN", "VDN - no"]  # simulando cse
+        sentencias = ["Hablale a Gabriel", "ya no quiero"]
         self.info["sentencias"] = dict(zip(identified_list, sentencias))
         nodes = []
         for intentname in identified_list:
@@ -147,7 +146,10 @@ class InfoManager:
         if len(self.sequenceNodes) > 0:
             self.imControl = True
         # Para enviar la peticion de salto
-        self.jumpToIntent()
+        print(nodes)
+        while len(self.sequenceNodes) > 0:
+
+            self.jumpToIntent()
 
     def jumpToIntent(self, by="text"):
         """Send the post query to dialog flow to jump into necessary intent."""

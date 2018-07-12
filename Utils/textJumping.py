@@ -5,7 +5,7 @@ def detect_intent_texts(project_id, session_id, texts, language_code):
     """Returns the result of detect intent with texts as inputs.
     Using the same `session_id` between requests allows to continue
     into the conversaion."""
-    ruta = "../DATA/TransferenciaAutomatica2-9c525654a2fb_admin.json"
+    ruta = "/home/ramon/llaves/pruebasSaltosRamon-38f8ab1fc6c7_admin.json"
     os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = ruta
     session_client = dialogflow.SessionsClient() # Implícita
 
