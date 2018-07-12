@@ -1,0 +1,15 @@
+[
+  {
+    "value": "@prefijoAuxCompleme:prefijoAuxCompleme @prefijoAux:value",
+    "synonyms": [
+      "prefijo a",
+      "serie a"
+    ]
+  },
+  {
+    "value": "@prefijoAuxCompleme:prefijoAuxCompleme @sys.number:value",
+    "synonyms": [
+      "@prefijoAuxCompleme:prefijoAuxCompleme @sys.number:value"
+    ]
+  }
+]

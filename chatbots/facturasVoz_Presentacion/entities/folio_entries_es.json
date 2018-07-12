@@ -1,0 +1,32 @@
+[
+  {
+    "value": "@folioAuxCompleme:complemento @folioAuxTipo:tipo @sys.number:value",
+    "synonyms": [
+      "@folioAuxCompleme:complemento @folioAuxTipo:tipo @sys.number:value"
+    ]
+  },
+  {
+    "value": "@folioAuxTipo:tipo @folioAuxCompleme:complemento @sys.number:value",
+    "synonyms": [
+      "@folioAuxTipo:tipo @folioAuxCompleme:complemento @sys.number:value"
+    ]
+  },
+  {
+    "value": "@folioAuxCompleme:complemento @folioAuxTipo:tipo @conector:conector @sys.number:value",
+    "synonyms": [
+      "@folioAuxCompleme:complemento @folioAuxTipo:tipo @conector:conector @sys.number:value"
+    ]
+  },
+  {
+    "value": "@sys.number:value @conector:conector @folioAuxCompleme:complemento @folioAuxTipo:tipo",
+    "synonyms": [
+      "@sys.number:value @conector:conector @folioAuxCompleme:complemento @folioAuxTipo:tipo"
+    ]
+  },
+  {
+    "value": "@folioAuxTipo:tipo @conector:conector @folioAuxCompleme:complemento @sys.number:value",
+    "synonyms": [
+      "@folioAuxTipo:tipo @conector:conector @folioAuxCompleme:complemento @sys.number:value"
+    ]
+  }
+]

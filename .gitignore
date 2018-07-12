@@ -6,3 +6,4 @@ metadata/temp.html
 *.tagger
 *.ipynb_checkpoints/
 *~
+Sessions/Conference.pck

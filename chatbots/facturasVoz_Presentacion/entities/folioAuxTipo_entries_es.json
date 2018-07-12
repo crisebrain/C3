@@ -1,0 +1,33 @@
+[
+  {
+    "value": "inicial",
+    "synonyms": [
+      "inicial",
+      "inicio",
+      "comienza",
+      "empieza",
+      "principio",
+      "arranque",
+      "inicia",
+      "inicien",
+      "inician"
+    ]
+  },
+  {
+    "value": "final",
+    "synonyms": [
+      "final",
+      "fin",
+      "finaliza",
+      "termina",
+      "concluye",
+      "terminal",
+      "ultima",
+      "última",
+      "finalicen",
+      "finalizan",
+      "finalizado",
+      "finalice"
+    ]
+  }
+]

@@ -1,0 +1,56 @@
+[
+  {
+    "value": "@folio:folio ",
+    "synonyms": [
+      "@folio:folio "
+    ]
+  },
+  {
+    "value": "@acuse:acuse",
+    "synonyms": [
+      "@acuse:acuse"
+    ]
+  },
+  {
+    "value": "@periodo:periodo ",
+    "synonyms": [
+      "@periodo:periodo "
+    ]
+  },
+  {
+    "value": "@prefijo:prefijo",
+    "synonyms": [
+      "@prefijo:prefijo"
+    ]
+  },
+  {
+    "value": "@tipoDocumento:tipoDocumento ",
+    "synonyms": [
+      "@tipoDocumento:tipoDocumento "
+    ]
+  },
+  {
+    "value": "@status:status",
+    "synonyms": [
+      "@status:status"
+    ]
+  },
+  {
+    "value": "@nit:nit",
+    "synonyms": [
+      "@nit:nit"
+    ]
+  },
+  {
+    "value": "@sys.date:date",
+    "synonyms": [
+      "@sys.date:date"
+    ]
+  },
+  {
+    "value": "@sys.percentage:date-period",
+    "synonyms": [
+      "@sys.percentage:date-period"
+    ]
+  }
+]

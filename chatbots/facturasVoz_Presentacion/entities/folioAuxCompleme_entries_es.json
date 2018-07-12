@@ -1,0 +1,26 @@
+[
+  {
+    "value": "folio @conector:conector",
+    "synonyms": [
+      "folio @conector:conector"
+    ]
+  },
+  {
+    "value": "folios @conector:conector",
+    "synonyms": [
+      "folios @conector:conector"
+    ]
+  },
+  {
+    "value": "folio",
+    "synonyms": [
+      "folio"
+    ]
+  },
+  {
+    "value": "folios",
+    "synonyms": [
+      "folios"
+    ]
+  }
+]

@@ -1,0 +1,20 @@
+[
+  {
+    "value": "@nitAuxCompleme:complemento @sys.number:value",
+    "synonyms": [
+      "@nitAuxCompleme:complemento @sys.number:value"
+    ]
+  },
+  {
+    "value": "@nitAuxCompleme:complemento @conector:conector @sys.number:value",
+    "synonyms": [
+      "@nitAuxCompleme:complemento @conector:conector @sys.number:value"
+    ]
+  },
+  {
+    "value": "@sys.number:value @conector:conector @nitAuxCompleme:complemento",
+    "synonyms": [
+      "@sys.number:value @conector:conector @nitAuxCompleme:complemento"
+    ]
+  }
+]

@@ -1,0 +1,39 @@
+{
+  "id": "fb06c878-343e-4ca5-b678-bffebb9813c3",
+  "name": "01 Factura",
+  "auto": true,
+  "contexts": [],
+  "responses": [
+    {
+      "resetContexts": false,
+      "action": "factura",
+      "affectedContexts": [],
+      "parameters": [
+        {
+          "id": "2897317e-e1ee-49bd-b7fa-e07447deb96a",
+          "required": false,
+          "dataType": "@facturasCampos",
+          "name": "facturasCampos",
+          "value": "$facturasCampos",
+          "prompts": [],
+          "isList": true
+        }
+      ],
+      "messages": [
+        {
+          "type": 0,
+          "lang": "es",
+          "speech": "El servicio de voz está temporalmente inaccesible. Por favor inténtelo nuevamente mas tarde."
+        }
+      ],
+      "defaultResponsePlatforms": {},
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": true,
+  "webhookForSlotFilling": false,
+  "lastUpdate": 1530830023,
+  "fallbackIntent": false,
+  "events": []
+}

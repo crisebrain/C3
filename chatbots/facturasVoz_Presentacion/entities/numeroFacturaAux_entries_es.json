@@ -1,0 +1,14 @@
+[
+  {
+    "value": "@sys.number:value",
+    "synonyms": [
+      "@sys.number:value"
+    ]
+  },
+  {
+    "value": "@prefijoAux:value",
+    "synonyms": [
+      "@prefijoAux:value"
+    ]
+  }
+]
