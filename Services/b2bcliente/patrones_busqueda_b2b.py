@@ -15,7 +15,7 @@ class Regexseaker:
         """
         self.patterns = dict(Cuenta=r"\b[A-Za-z]{3}\d{3}\b",
                              Prefijo=r"\b[1-9a-zA-Z]\w{0,3}\b",  # wvect
-                             NoDocumento=r"\b[0-9a-zA-Z\-]{1,40}\b",  # w2vect
+                             NoDocumento=r"\b[0-9a-zñA-ZÑ\-]{1,40}\b",  # w2vect
                              NitAdquirienteMex=r"\b[A-Za-z]{4}\d{6}[A-Za-z0-9]{3}\b",
                              datoNitCol=r"\b\d{1,32}\b",
                              Tipo=r"\b[a-zA-Z]{1,10}\b",
@@ -159,6 +159,8 @@ class Regexseaker:
                                 NP: {<Imperativo|vmip1s0> <(da0\w+)>? <Q> <sps00>? <TCredito>?}
                                 NP: {<(da0\w+)|(vs\w+)|sps00> <Q>}
                                     }<Prefijo> <(vs\w+)|sps00>?{
+                                NP: {<Tipo> <sps00> <TDocumento> <pr0cn000>? <(vs\w+)>? <(.*)>}
+                                NP: {<TDocumento>? <pr0cn000>? <(vs\w+)>? <sps00>? <Tipo> <(.*)>}
                             """,
                       Fecha = r"""
                                 Q: {<De|Articulos|spcms|sps00|Es>}
@@ -182,7 +184,8 @@ class Regexseaker:
             return ["dato", "vmp00sm", "ncms000", "aq0msp", "unknown", "Fz", "Y"
                     "Z", "cc"]
         elif field == "Tipo":
-            return ["TFactura", "TNota"]
+            return ['Fz', 'Y', 'Z', 'cc', 'dato', 'nccn000', "ncms000",
+                    'ncfs000', 'sps00', 'Singlel', 'unknown', "Nums", "Es"]
         elif field == "Fecha":
             return ["Fecha", "AniosNum", "DiasNum", "Inicio", "Fin"]
 
@@ -238,7 +241,6 @@ class Regexseaker:
                 if field in ["Prefijo", "NoDocumento",
                              "NitAdquirienteMex", "Cuenta",
                              "Estado", "Acuse", "Tipo"]:
-                    #print(subtree)
                     for subsubtree in subtree.subtrees(filter=lambda t: t.label() == "Q"):
                         entity += [token for token, pos in subsubtree.leaves()]
                         subt.append(subsubtree)
