@@ -46,7 +46,7 @@ def factura(req):
         if dicReady[element].get("value") is not None:# and dicReady[element]["status"] != 0:
             peticionStr += "{0}: {1}, {2} \n".format(
                 element, dicReady[element]["value"], dicReady[element]["status"])
-
+    dicReady.update({"returnCode": "1"})
     respuesta =  {
                     "fulfillmentText" : peticionStr,
                     "payload": dicReady
@@ -70,6 +70,7 @@ def preparaParametros(dic, queryOriginal):
                       switcherTipoDocumento.get(dic.get("tipoDocumento")), 1)
     else:
         tipoDocumento = seaker.seakexpresion(queryOriginal, "Tipo")
+        print("Para que veas Gerardo\n", tipoDocumento[0], "\n")
         addEntryToDic(dicReady, "tipoDocumento",
                       switcherTipoDocumento.get(tipoDocumento[0]), tipoDocumento[1])
 
