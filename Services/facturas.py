@@ -169,7 +169,7 @@ def preparaParametros(dic, queryOriginal):
     # Ignoramos fechas de DF.
     # Primero evalúa fecha, si no funciona, realiza periodo.
     fechaTemp = seaker.seakexpresion(queryOriginal, "Fecha")
-    if fechaTemp[0]["fechaInicio"] is None:
+    if fechaTemp[0]["fechaInicio"] is None and fechaTemp[0]["fechaFin"] is None:
         fechaTemp = seaker.seakexpresion(queryOriginal, "Periodo")
     fechaInicio = fechaTemp[0].get("fechaInicio")
     fechaFin = fechaTemp[0].get("fechaFin")
@@ -177,7 +177,7 @@ def preparaParametros(dic, queryOriginal):
 
     # Si existe la fecha, le pone formato ISO, sino, la deja en None
     fechaInicioStr = fechaInicio.isoformat() if fechaInicio is not None else None
-    fechaFinStr = fechaFin.isoformat() if fechaInicio is not None else None
+    fechaFinStr = fechaFin.isoformat() if fechaFin is not None else None
     addEntryToDic(dicReady, "FechaEmisionInicio", fechaInicioStr, fechaStatus)
     addEntryToDic(dicReady, "FechaEmisionFin", fechaFinStr, fechaStatus)
 
