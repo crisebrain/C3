@@ -316,14 +316,25 @@ class Regexseaker:
 
         def missingDate():
             nonlocal fechaInicio, fechaFin
-            if fechaFin is None:
-                fechaFin = fechaInicio
-            elif fechaInicio is None:
-                fechaInicio = fechaFin
+
+            # Caso 1: dan fecha fin, pero no de inicio.
+            if fechaFin and fechaInicio is None:
+                fechaInicio = None, 1
+            # Caso 2: dan fecha de inicio, pero no de fin
+            elif fechaInicio and fechaFin is None:
+                fechaFin = today, 1
+
+            # if fechaFin is None:
+            #     fechaFin = fechaInicio
+            # elif fechaInicio is None:
+            #     fechaInicio = fechaFin
 
         def orderDate():
             nonlocal  fechaFin, fechaInicio
-            if fechaFin < fechaInicio:
+
+            # Validamos que existan las fechas y las ordenamos.
+            if fechaInicio[0] and fechaFin[0] and \
+                    fechaFin[0] < fechaInicio[0]:
                 dateSwap = fechaInicio
                 fechaInicio = fechaFin
                 fechaFin = dateSwap
@@ -351,6 +362,7 @@ class Regexseaker:
             fechaInicio = [None]
             fechaFin = [None]
         else:
+            # Obtenemos fechas de las Entitys
             # Invertimos para interar desde el último elemento
             entity.reverse()
             for fecha in entity:
