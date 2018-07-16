@@ -166,11 +166,11 @@ class Regexseaker:
                       Fecha = r"""
                                 Q: {<De|Articulos|spcms|sps00|Es>}
                                 I: {<Inicio|Fin> <Q>{0,2} <sps00>?}
-                                NP: {<I> <DiasNum|ao0ms0> <Q>{0,2} <Fecha> <Q>{0,2} <AniosNum|DiasNum>}
-                                NP: {<I> <Fecha> <Q>{0,2} <DiasNum|ao0ms0> <Q>{0,2} <AniosNum|DiasNum>}
-                                NP: {<I> <DiasNum|ao0ms0>? <Q>{0,2} <Fecha> <Q>{0,2} <AniosNum|DiasNum>?}
-                                NP: {<I> <Fecha> <Q>{0,2} <DiasNum|ao0ms0>? <Q>{0,2} <AniosNum|DiasNum>}
-                                NP: {<I> <DiasNum|ao0ms0> <Q>{0,2} <Fecha>}
+                                NP: {<I>? <DiasNum|ao0ms0> <Q>{0,2} <Fecha> <Q>{0,2} <AniosNum|DiasNum>}
+                                NP: {<I>? <Fecha> <Q>{0,2} <DiasNum|ao0ms0> <Q>{0,2} <AniosNum|DiasNum>}
+                                NP: {<I>? <DiasNum|ao0ms0>? <Q>{0,2} <Fecha> <Q>{0,2} <AniosNum|DiasNum>?}
+                                NP: {<I>? <Fecha> <Q>{0,2} <DiasNum|ao0ms0>? <Q>{0,2} <AniosNum|DiasNum>}
+                                NP: {<I>? <DiasNum|ao0ms0> <Q>{0,2} <Fecha>}
                                 """
                       )
         return dgramm[field]
@@ -253,6 +253,7 @@ class Regexseaker:
                         if tag in posibles:
                             fecha.setdefault(tag, token)
                     entity.append(fecha)
+                    subt.append(subtree)
                 else:
                     # añadir las condiciones que sean necesarias para contemplar
                     # los posibles valores
@@ -265,11 +266,12 @@ class Regexseaker:
         # Prepara fechas
         if field == "Fecha":
             entity, code = self.__preparaFechas(entity)
-            return entity, code
+            return entity, code, subt
 
         entity, code = self.code_validate(field, entity, unknowns,
                                           self.regex_taglist(field))
         return entity, code, subt, tagged
+
 
     def __preparaFechas(self, entity):
         import datetime
@@ -314,20 +316,22 @@ class Regexseaker:
 
             return date, statusCode
 
-        def missingDate():
-            nonlocal fechaInicio, fechaFin
+        def selectCaseDate():
+            nonlocal fechaInicio, fechaFin, fechaEspecifica, firstSpecificDate
 
-            # Caso 1: dan fecha fin, pero no de inicio.
-            if fechaFin and fechaInicio is None:
-                fechaInicio = None, 1
-            # Caso 2: dan fecha de inicio, pero no de fin
-            elif fechaInicio and fechaFin is None:
-                fechaFin = today, 1
-
-            # if fechaFin is None:
-            #     fechaFin = fechaInicio
-            # elif fechaInicio is None:
-            #     fechaInicio = fechaFin
+            if not firstSpecificDate:
+                # Caso 1: dan fecha fin, pero no de inicio.
+                if fechaFin and fechaInicio is None:
+                # if "fechaFin" in dicDates and not "fechaInicio" in dicDates:
+                    fechaInicio = None, 1
+                # Caso 2: dan fecha de inicio, pero no de fin
+                elif fechaInicio and fechaFin is None:
+                # elif "fechaInicio" in dicDates and not "fechaFin" in dicDates:
+                    fechaFin = today, 1
+            else:
+                # Caso 3: fecha específica
+                fechaInicio = fechaEspecifica
+                fechaFin = fechaEspecifica
 
         def orderDate():
             nonlocal  fechaFin, fechaInicio
@@ -341,6 +345,8 @@ class Regexseaker:
 
         fechaFin = None
         fechaInicio = None
+        fechaEspecifica = None
+        firstSpecificDate = False
         today = date.today()
         numberMonth = {
             "enero": 1,
@@ -363,15 +369,20 @@ class Regexseaker:
             fechaFin = [None]
         else:
             # Obtenemos fechas de las Entitys
-            # Invertimos para interar desde el último elemento
+            # Invertimos para interar desde el último elemento.
             entity.reverse()
             for fecha in entity:
                 if "Fin" in fecha and fechaFin is None:
                     fechaFin = buildDate(fecha)
                 elif "Inicio" in fecha and fechaInicio is None:
                     fechaInicio = buildDate(fecha)
+                elif fechaEspecifica is None:
+                    # Validamos si fecha específica fue la primera en ocurrir.
+                    if fechaInicio is None and fechaFin is None:
+                        firstSpecificDate = True
+                    fechaEspecifica = buildDate(fecha)
 
-            missingDate()
+            selectCaseDate()
             orderDate()
 
             # Evalúa código final
@@ -707,6 +718,124 @@ def pruebasFolios():
             print("Resulado: {0}\n{1}\n".format(str(resultado[:2]),resultado[3]))
 
 
+def pruebasFechas():
+    reg = Regexseaker()
+
+    exps = [
+        # "con fecha inicial del 15 de Febrero del 2017 , es todo gracias",
+        # " cuya fecha inicial es desde el 1 de febrero del 2017",
+        # "posteriores al primero de febrero del 2018",
+        # "entre el 15 de noviembre del 17",
+        # "con periodo del 1 de Marzo del 2017 ",
+        # " desde marzo del 2017",
+        # "posteriores al 24 de Septiembre",
+        # "de Marzo primero del 2017",
+        # "de noviembre ",
+        # "desde Abril del 2017 ",
+        # "a partir de la segunda semena de enero del año pasado",
+        # "comprendidas en el periodo de Enero del 2017",
+        # " generadas a partir del 6 de Noviembre del año pasado",
+        # "generados desde el 8 de Abril del presente año",
+        # " generadas desde el 5 del presente mes",
+        # "con fecha del 5 de Abril del 2017",
+        # "que oscilen entre el 4 de Junio",
+        # "comprendidos entre Abril 7",
+        # "con rango de fechas comprendido entre Abril 5",
+        # "que datan del 4 de Abril del 2018",
+        # "desde el último de marzo del 2017",
+        # "entre el 23 de Junio del 2016",
+        # "con fecha de inicio del 12 de Marzo del 2016",
+        # "pero emitidas en Noviembre 17 del año pasado",
+        # "pero cuyas fechas se encuentren entre el 1 de Diciembre",
+        # "Del 1 de marzo",
+        # "Del 3 de Mayo del año pasado ",
+        # " entre el 5 de Marzo del 2018",
+        # "que esten entre el día actual ",
+        # "pero que tambien sean anteriores al 12 de Marzo del 18, esta claro",
+        # "pero que sean anteriores al 14 de Junio",
+        # "y el 24 de Febrero del 2018",
+        # "al 5 de Noviembre",
+        # "al mes actual",
+        # "anteriores al 7 de Noviembre",
+        # "hasta el mes pasado",
+        # "anteriores a Enero del presente año",
+        # "a Marzo del mismo año",
+        # " al 6 de Noviembre del año pasado",
+        # "y Septiembre 14 del año pasado",
+        # "y Marzo 19 del presente año",
+        # "previos al 15 de Enero del 2018",
+        # "anteriores a Abril 9 de este año",
+        # "hasta el día de hoy",
+        # "y el primero de Marzo del año pasado",
+        # "y fecha de fin del 13 de Noviembre del presente año",
+        # "anteriores al 5 de Marzo del 2017",
+        # "pero que sean previas al 15 de Marzo de este año.",
+        # " y el 15 de Febrero del año pasado",
+        # " y que sean previas al 6 de Noviembre de este año",
+        # "al 9 de Noviembre del 2016",
+        # "al 19 de Enero del presente año",
+        # " previas al 5 de noviembre de este año",
+        # "y el 6 de Enero del 2017",
+        # "y posteriores al 14 de Diciembre"
+        "facturas con fecha de inicio es 21 de febrero del 2009 y de fin 15 de marzo del 2018, gracias. y fecha de fin 24 de diciembre del 2000"
+    ]
+
+    expsAcordadas = [
+        "fecha inicial del 5 de enero del 2015",
+        "fecha inicial del 9 de Diciembre del 2013",
+        "fecha de inicio al 12 de Marzo del 2013",
+        "fecha de inicio al 12 de Noviembre del 2015",
+        "fecha de comienzo del primero de enero del 2015",
+        "fecha de comienzo del 21 de Enero del 2013",
+        "fecha inicio de marzo del 2015",
+        "fecha principio en Julio del 2015",
+        "con periodo de inicio de Septiembre 23 del 2016",
+        "iniciando en Septiembre 27 del 2012",
+        "Con comienzo en Julio 23",
+        "Con comienzo en Julio 45",
+        "Iniciando el 14 de Mayo",
+        "iniciando el 12 de Febrero",
+        "inicia Del primero de enero",
+
+        "Fecha final del 3 de Noviembre del 2017",
+        "y finalizando al 4 de Marzo del 2014",
+        "finalizando el 12 de Agosto de 1980",
+        "concluyendo el 23 de Febrero de 1988",
+        "y terminando el 12 de Julio de 1990",
+        "concluyendo en Octubre 23",
+        "con fecha de finalización a Septiembre del 2016",
+        "hasta el 12 de Marzo",
+        "la fecha de fin es el 12 de Abril",
+        "terminando el 23 de diciembre del 2030",
+        "y la fecha final es el 23 de Octubre",
+        "fecha de conclusión de Noviembre 18",
+        "Terminando el 12 Marzo del 2015",
+        "y fecha de conclusión de documentos al 23 de Noviembre"
+    ]
+
+    expsCasos = [
+        "quiero mi facturas con fecha de inicio 3 de septiembre del 2017",
+        "quiero mi facturas con fecha de fin 3 de septiembre del 2017",
+        "quiero mi facturas con fecha de inicio 3 de septiembre del 2017 y fin de diciembre del 2018",
+        "quiero mi facturas con fecha de 3 de septiembre del 2017",
+        "quiero mi facturas con fecha de inicio 3 de septiembre del 2017 y fin de diciembre del 2018 además 1 de enero del 2018",
+        "quiero mi facturas con fecha de inicio 3 de septiembre del 2017 además 1 de enero del 2018 y fin de diciembre del 2018",
+        "quiero mi facturas además 1 de enero del 2018 con fecha de inicio 3 de septiembre del 2017 y fin de diciembre del 2018",
+        "quiero mi facturas además 1 de enero del 2018 con 3 de septiembre del 2017 y de diciembre del 2018",
+        "quiero mi facturas con además 1 de enero del 2018 y fin de diciembre del 2018",
+        "quiero mi facturas con y fin de diciembre del 2018 además 1 de enero del 2018",
+
+
+    ]
+
+    for i, phrase in enumerate(expsAcordadas + expsCasos):
+        resultado = reg.seakexpresion(phrase, "Fecha")
+        #if resultado[1] == 0:
+        print("{0}: {1} \nResultado:{2} \nEstado:{3}\n".format(
+            i + 1, phrase, str(resultado[0]), resultado[1]))
+
+
+
 if __name__ == "__main__":
     # reg = Regexseaker()
     # expr = [
@@ -732,4 +861,5 @@ if __name__ == "__main__":
     #     print("{0}\nEstado: {1}\n".format(e, resultado))
     # # print("NoDocumento: ", reg.seakexpresion(expr.lower(), "NoDocumento", nl=3))
 
-    pruebasFolios()
+    #pruebasFolios()
+    # pruebasFechas()
