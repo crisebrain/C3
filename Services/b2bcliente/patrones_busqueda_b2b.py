@@ -166,10 +166,10 @@ class Regexseaker:
                       Fecha = r"""
                                 Q: {<De|Articulos|spcms|sps00|Es>}
                                 I: {<Inicio|Fin> <Q>{0,2} <sps00>?}
-                                NP: {<I>? <DiasNum|ao0ms0> <Q>{0,2} <Fecha> <Q>{0,2} <AniosNum|DiasNum>}
-                                NP: {<I>? <Fecha> <Q>{0,2} <DiasNum|ao0ms0> <Q>{0,2} <AniosNum|DiasNum>}
-                                NP: {<I>? <DiasNum|ao0ms0>? <Q>{0,2} <Fecha> <Q>{0,2} <AniosNum|DiasNum>?}
-                                NP: {<I>? <Fecha> <Q>{0,2} <DiasNum|ao0ms0>? <Q>{0,2} <AniosNum|DiasNum>}
+                                NP: {<I>? <DiasNum|ao0ms0> <Q>{0,2} <Fecha> <Q>{0,2} <AniosNum>}
+                                NP: {<I>? <Fecha> <Q>{0,2} <DiasNum|ao0ms0> <Q>{0,2} <AniosNum>}
+                                NP: {<I>? <DiasNum|ao0ms0>? <Q>{0,2} <Fecha> <Q>{0,2} <AniosNum>?}
+                                NP: {<I>? <Fecha> <Q>{0,2} <DiasNum|ao0ms0>? <Q>{0,2} <AniosNum>}
                                 NP: {<I>? <DiasNum|ao0ms0> <Q>{0,2} <Fecha>}
                                 """
                       )
