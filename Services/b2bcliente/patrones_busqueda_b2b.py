@@ -169,11 +169,10 @@ class Regexseaker:
                       Fecha = r"""
                                 Q: {<De|Articulos|spcms|sps00|Es>}
                                 I: {<Inicio|Fin> <Q>{0,2} <sps00>?}
-                                NP: {<I>? <DiasNum|ao0ms0> <Q>{0,2} <Fecha> <Q>{0,2} <AniosNum>}
-                                NP: {<I>? <Fecha> <Q>{0,2} <DiasNum|ao0ms0> <Q>{0,2} <AniosNum>}
-                                NP: {<I>? <DiasNum|ao0ms0>? <Q>{0,2} <Fecha> <Q>{0,2} <AniosNum>?}
-                                NP: {<I>? <Fecha> <Q>{0,2} <DiasNum|ao0ms0>? <Q>{0,2} <AniosNum>}
-                                NP: {<I>? <DiasNum|ao0ms0> <Q>{0,2} <Fecha>}
+                                NP: {<I>? <DiasNum|ao0ms0> <Q>{0,2} <Fecha> <Q>{0,2} <AniosNum>?}
+                                NP: {<I>? <Fecha> <Q>{0,2} <DiasNum|ao0ms0> <Q>{0,2} <AniosNum>?}
+                                NP: {<I>? <Fecha> <Q>{0,2} <AniosNum>}
+                                NP: {<I>? <Fecha>}
                                 """
                       )
         return dgramm[field]
@@ -790,6 +789,7 @@ def pruebasFechas():
     ]
 
     expsAcordadas = [
+        "5 de septiembre 2 de noviembre octubre 5",
         "fecha inicial del 5 de enero del 2015",
         "fecha inicial del 9 de Diciembre del 2013",
         "fecha de inicio al 12 de Marzo del 2013",
@@ -840,8 +840,11 @@ def pruebasFechas():
     for i, phrase in enumerate(expsAcordadas + expsCasos):
         resultado = reg.seakexpresion(phrase, "Fecha")
         #if resultado[1] == 0:
-        print("{0}: {1} \nResultado:{2} \nEstado:{3}\n".format(
+        print("{0}: {1} \nResultado:{2} \nEstado:{3}".format(
             i + 1, phrase, str(resultado[0]), resultado[1]))
+        for tree in resultado[2]:
+            print(str(tree) + "\n" + "-" * 10)
+        print("\n")
 
 
 
