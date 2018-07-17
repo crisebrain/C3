@@ -145,7 +145,10 @@ class Regexseaker:
                                  NP: {<Folio> <Q>{0,3} (<dato> <Q|Prefijo>*){1,2} <tipoFolio>}
                                  NP: {<dato> <Q>{1,3} <Folio> <Q>{0,3} <tipoFolio>}
                                  NP: {<tipoFolio> <Q>{1,3} <Folio> <Q>{0,3} <dato>}
+                                 
                                  NP: {<Folio> <Q>{0,3} (<tipoFolio> <Q|Prefijo>*){1,2} <.*>}
+                                 NP: {<.*> <Q>{1,3} <Folio> <Q>{0,3} <tipoFolio>}
+                                 NP: {<tipoFolio> <Q>{1,3} <Folio> <Q>{0,3} <.*>}
                              """,
                       Periodo=r""" DP: {<semana|dia|mes|año>}
                                    NP1: {<presente|pasado> <DP>}
@@ -180,7 +183,8 @@ class Regexseaker:
             return ['Fz', 'Y', 'Z', 'cc', 'dato', 'nccn000', "ncms000",
                     'ncfs000', 'sps00', 'Singlel', 'unknown', "Nums", "Es"]
         elif field == "Folio":
-            return ["dato"]
+            return ['Fz', 'Y', 'Z', 'cc', 'dato', 'nccn000', "ncms000",
+                    'ncfs000', 'Singlel', 'unknown', "Nums", "aq0ms0"]
         elif field == "Estado" or field == "Acuse":
             return ["dato", "vmp00sm", "ncms000", "aq0msp", "unknown", "Fz", "Y"
                     "Z", "cc"]
@@ -591,9 +595,13 @@ def pruebasFolios():
     reg = Regexseaker()
 
     expsMalas = [
-        "y con folio de inicio igual a xxxxx",
-        "con rango de folio  entre el inicial de AAAAA",
-        "REWEWETW  es el folio de inicio",
+        # "y con folio de inicio igual a 1234",
+        # "y con folio de inicio igual a xxxxx",
+        # "con rango de folio  entre el inicial de AAAAA",
+        "rojo es el folio de inicio",
+        "carro es el folio de inicio",
+        "qerwet es el folio de inicio",
+        "dsfda como folio de inicio",
         "El folio de inicio es el ERWERWREWT",
         "En folio de inicio asignamos el QWEERE",
         "Para folio de inicio el valor de QWERWERWER",
@@ -714,8 +722,9 @@ def pruebasFolios():
     #     print("Resulado: {0}\n".format(str(folios(phrase, "Fin"))))
     for phrase in expsMalas: #+ expsBuenas_FolioInicio:
         resultado = reg.seakexpresion(phrase, "FolioInicio")
-        if resultado[1] == 0:
-            print("Resulado: {0}\n{1}\n".format(str(resultado[:2]),resultado[3]))
+        #if resultado[1] == 0:
+        print("{0}\nResulado: {1}\n{2}\n".format(
+            phrase, str(resultado[:2]),resultado[3]))
 
 
 def pruebasFechas():
@@ -861,6 +870,6 @@ if __name__ == "__main__":
     #     print("{0}\nEstado: {1}\n".format(e, resultado))
     # # print("NoDocumento: ", reg.seakexpresion(expr.lower(), "NoDocumento", nl=3))
 
-    #pruebasFolios()
+    # pruebasFolios()
     # pruebasFechas()
     pass
