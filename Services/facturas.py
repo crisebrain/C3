@@ -3,6 +3,7 @@ from .b2bcliente import Regexseaker
 from gc import collect
 import json
 import datetime
+import re
 from datetime import date
 
 def factura(req):
@@ -107,10 +108,13 @@ def preparaParametros(dic, queryOriginal):
         prefijo = dic.get("prefijo").get("value")
         if isinstance(prefijo, float):
             prefijo = str(int(prefijo))
-            addEntryToDic(dicReady, "Prefijo", prefijo, 1)
         elif isinstance(prefijo, str):
             prefijo = prefijo.upper().replace(" ", "")
-            addEntryToDic(dicReady, "Prefijo", prefijo, 1)
+
+        pattern = r"^[1-9a-zA-Z]\w{0,3}$"
+        statusCode = re.search(pattern, prefijo)
+        statusCode = 1 if statusCode else 0
+        addEntryToDic(dicReady, "Prefijo", prefijo, statusCode)
     else:
         prefijo = seaker.seakexpresion(queryOriginal, "Prefijo")
         addEntryToDic(dicReady, "Prefijo", prefijo[0], prefijo[1])
