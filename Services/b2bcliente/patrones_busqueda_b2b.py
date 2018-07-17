@@ -19,7 +19,7 @@ class Regexseaker:
                              NitAdquirienteMex=r"\b[A-Za-z]{4}\d{6}[A-Za-z0-9]{3}\b",
                              datoNitCol=r"\b\d{1,32}\b",
                              Tipo=r"\b[a-zA-Z]{1,10}\b",
-                             Folio=r"\d{1,16}",
+                             Folio=r"^\d{1,16}$",
                              Estado=r"[A-Za-z]",   #[a-z]{1,16}"
                              Acuse=r"[A-Za-z]",
                              Periodo=r"\b[a-zA-Z]{1,12}\b",

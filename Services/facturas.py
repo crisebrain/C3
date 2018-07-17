@@ -142,7 +142,10 @@ def preparaParametros(dic, queryOriginal):
     # Folio Inicio
     if dic.get("folioinicial"):
         folioInicio = int(dic.get("folioinicial").get("value"))
-        addEntryToDic(dicReady, "FolioInicio", folioInicio, 1)
+        pattern = r"^\d{1,16}$"
+        statusCode = re.search(pattern, str(folioInicio))
+        statusCode = 1 if statusCode else 0
+        addEntryToDic(dicReady, "FolioInicio", folioInicio, statusCode)
     else:
         folioInicio = seaker.seakexpresion(queryOriginal, "FolioInicio")
         addEntryToDic(dicReady, "FolioInicio", folioInicio[0], folioInicio[1])
