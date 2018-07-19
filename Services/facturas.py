@@ -71,13 +71,15 @@ def preparaParametros(dic, queryOriginal):
                       switcherTipoDocumento.get(tipoDocumento[0]), tipoDocumento[1])
 
     # Periodo
-    switcherPeriodo = {
-        "Hoy": 1,
-        "Semana": 2,
-        "Mes": 3
-    }
-    # Valor por default 0
-    # periodo = switcherPeriodo.get(dic.get("periodo"), 0)
+    # Se comenta este código porque siempre se resuelve con gramáticas.
+    # Esto es porque siempre se resolverán como fechas.
+    # switcherPeriodo = {
+    #     "Hoy": 1,
+    #     "Semana": 2,
+    #     "Mes": 3
+    # }
+    # # Valor por default 0
+    # # periodo = switcherPeriodo.get(dic.get("periodo"), 0)
     periodo = 0
     addEntryToDic(dicReady, "Periodo", periodo, 1)
 
