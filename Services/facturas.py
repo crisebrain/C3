@@ -24,7 +24,6 @@ def factura(req):
             if key in repitedItems:
                 # Construye su nombre con respecto al tipo.
                 diccFusionado.setdefault(key + items[0][1]["tipo"], items[0][1])
-
             elif key in itemsShouldList:
                 # Fusionamos los date y date-period en diccionarios con listas.
                 # Esto permite tener varias fechas a la vez.
@@ -32,28 +31,24 @@ def factura(req):
                     diccFusionado.setdefault(key, [element[key]])
                 else:
                     diccFusionado[key].append(element[key])
-
             else:
                 diccFusionado.update(element)
         except:
             print("WARNING: el elemento: {} , no se usó para el diccionario.".format(element))
 
-
     dicReady = preparaParametros(diccFusionado, req.get("queryResult").get("queryText"))
     print(dicReady)
 
-    peticionStr = ""
-    for element in dicReady:
-        if dicReady[element].get("value") is not None:# and dicReady[element]["status"] != 0:
-            peticionStr += "{0}: {1}, {2} \n".format(
-                element, dicReady[element]["value"], dicReady[element]["status"])
+    peticionStr = prepareHumanResult(dicReady)
+
+    # Response
     dicReady.update({"returnCode": "1"})
     respuesta =  {
                     "fulfillmentText" : peticionStr,
                     "payload": dicReady
     }
     collect()
-    # garbage collector
+
     return respuesta
 
 
@@ -249,3 +244,13 @@ def buildDate(dateString):
     day = int(dateString[8:10])
 
     return datetime.date(year, month, day)
+
+def prepareHumanResult(dicReady: dict):
+    # Print values
+    peticionStr = ""
+    for element in dicReady:
+        if dicReady[element].get("value") is not None:# and dicReady[element]["status"] != 0:
+            peticionStr += "{0}: {1}, {2} \n".format(
+                element, dicReady[element]["value"], dicReady[element]["status"])
+
+    return  peticionStr
