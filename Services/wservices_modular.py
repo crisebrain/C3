@@ -6,13 +6,23 @@ import sys
 sys.path.append("Utils")
 from logtofile import CreateLogger
 
-def makeWebhookResult(req):
-    action = req.get("queryResult").get("action")
+def makeWebhookResult(req, origin = 1):
+    if origin == 1:
+        originstr = "WhDF"
+    else:
+        originstr = "WbIM"
+    if req.get("queryResult"):
+        queryResult = req.get("queryResult")
+        action = queryResult.get("action")
+    else:
+        queryResult = None
+        action = req.get("action")
     conlog = False
     try:
-        querys = CreateLogger("querys")
-        errors = CreateLogger("errors")
-        querys.logger.info(json.dumps(req.get("queryResult")) + "\n")
+        querys = CreateLogger("querys" + originstr)
+        errors = CreateLogger("errors" + originstr)
+        if queryResult:
+            querys.logger.info(json.dumps(req.get("queryResult")) + "\n")
         conlog = True
     except (PermissionError, FileNotFoundError):
         print("\n************************* WARNING *************************")
@@ -22,15 +32,21 @@ def makeWebhookResult(req):
         if action == "VDN" or action == "saldo":
             return makeresponseAction(req, action)
         elif action == "informacion":
-            return informacion(req.get("queryResult").get("parameters").get("servicio"))
+            return informacion(queryResult.get("parameters").get("servicio"))
         elif action == "factura":
             return factura(req)
+        # elif action == "obtieneDatos":
+            # seakexpresion
         else:
-            return {"payload": {"result": "Null", "returnCode": "0"},
-                   "fulfillmentText": "Null"}
+            if origin == 1:
+                return {"payload": {"result": "Null", "returnCode": "0"},
+                        "fulfillmentText": "Null"}
+            # else:
+            #     return {"payload": {"result": "Null", "returnCode": "0"},
+            #             "fulfillmentText": "Null"}
     except Exception as exception:
-        if conlog:
-            errors.logger.info(json.dumps(req.get("queryResult")) + "\n")
+        if conlog and queryResult:
+            errors.logger.info(json.dumps(queryResult) + "\n")
             errors.logger.exception(exception)
         if type(exception).__name__ == "AttributeError":
             msgerror = "El servicio de factura no ha respondido correctamente. " \
@@ -41,6 +57,6 @@ def makeWebhookResult(req):
             msgerror = "Estimado usuario,"\
                        "Ocurrió el error: {0} en {1}".format(cause, nline)
             msgerror += "Favor de reportarlo con su administrador"
-
-        return {"payload": {"result": "Null", "returnCode": "0"},
-                "fulfillmentText": msgerror}
+        if origin == 1:
+            return {"payload": {"result": "Null", "returnCode": "0"},
+                    "fulfillmentText": msgerror}
