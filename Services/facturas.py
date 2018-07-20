@@ -47,6 +47,8 @@ def factura(req):
                     "fulfillmentText" : peticionStr,
                     "payload": dicReady
     }
+
+    # garbage collector
     collect()
 
     return respuesta
@@ -54,6 +56,7 @@ def factura(req):
 
 def preparaParametros(dic, queryOriginal):
     dicReady = {}
+    list_miss_param = []
     seaker = Regexseaker()
 
     # Tipo de documento
@@ -65,10 +68,8 @@ def preparaParametros(dic, queryOriginal):
         addEntryToDic(dicReady, "tipoDocumento",
                       switcherTipoDocumento.get(dic.get("tipoDocumento")), 1)
     else:
-        tipoDocumento = seaker.seakexpresion(queryOriginal, "Tipo")
-        print("Para que veas Gerardo\n", tipoDocumento[0], "\n")
-        addEntryToDic(dicReady, "tipoDocumento",
-                      switcherTipoDocumento.get(tipoDocumento[0]), tipoDocumento[1])
+        list_miss_param.append("Tipo")
+
 
     # Periodo
     # Se comenta este código porque siempre se resuelve con gramáticas.
@@ -96,9 +97,7 @@ def preparaParametros(dic, queryOriginal):
         status = switcherStatus.get(dic.get("status").get("value"))
         addEntryToDic(dicReady, "Status", status, 1)
     else:
-        statusT = seaker.seakexpresion(queryOriginal, "Estado")
-        addEntryToDic(dicReady, "Status", switcherStatus.get(statusT[0]),
-                      statusT[1])
+        list_miss_param.append("Estado")
 
     # Prefijo
     if dic.get("prefijo"):
@@ -113,8 +112,7 @@ def preparaParametros(dic, queryOriginal):
         statusCode = 1 if statusCode else 0
         addEntryToDic(dicReady, "Prefijo", prefijo, statusCode)
     else:
-        prefijo = seaker.seakexpresion(queryOriginal, "Prefijo")
-        addEntryToDic(dicReady, "Prefijo", prefijo[0], prefijo[1])
+        list_miss_param.append("Prefijo")
 
 
     # Acuse
@@ -128,12 +126,7 @@ def preparaParametros(dic, queryOriginal):
         acuse.append(dic.get("acuse").get("value"))
         acuse.append(1)
     else:
-        acuseT = seaker.seakexpresion(queryOriginal, "Acuse")
-        acuse.append(acuseT[0])
-        acuse.append(acuseT[1])
-    # Valor por default 0
-    acuse[0] = switcherAcuse.get(acuse[0], 0)
-    addEntryToDic(dicReady, "Acuse", acuse[0], acuse[1])
+        list_miss_param.append("Acuse")
 
 
     # Folio Inicio
@@ -144,16 +137,14 @@ def preparaParametros(dic, queryOriginal):
         statusCode = 1 if statusCode else 0
         addEntryToDic(dicReady, "FolioInicio", folioInicio, statusCode)
     else:
-        folioInicio = seaker.seakexpresion(queryOriginal, "FolioInicio")
-        addEntryToDic(dicReady, "FolioInicio", folioInicio[0], folioInicio[1])
+        list_miss_param.append("FolioInicio")
 
     # Folio Final
     if dic.get("foliofinal"):
         folioFinal = int(dic.get("foliofinal").get("value"))
         addEntryToDic(dicReady, "FolioFinal", folioFinal, 1)
     else:
-        folioFinal = seaker.seakexpresion(queryOriginal, "FolioFinal")
-        addEntryToDic(dicReady, "FolioFinal", folioFinal[0], folioFinal[1])
+        list_miss_param.append("FolioFinal")
 
 
     # NIT
@@ -161,13 +152,11 @@ def preparaParametros(dic, queryOriginal):
         nit = str(int(dic.get("nit").get("value")))
         addEntryToDic(dicReady, "NITAdquiriente", nit, 1)
     else:
-        nit = seaker.seakexpresion(queryOriginal, "NitAdquirienteMex")
-        addEntryToDic(dicReady, "NITAdquiriente", nit[0], nit[1])
+        list_miss_param.append("NitAdquirienteMex")
 
 
     # Cuenta
-    cuenta = seaker.seakexpresion(queryOriginal, "Cuenta")
-    addEntryToDic(dicReady, "Cuenta", cuenta[0], cuenta[1])
+    list_miss_param.append("Cuenta")
 
     # Fechas
     # Ignoramos fechas de DF.
@@ -187,12 +176,55 @@ def preparaParametros(dic, queryOriginal):
 
 
     # NumeroFactura (Num. Documento)
-    numDoc = seaker.seakexpresion(queryOriginal, "NoDocumento")
-    addEntryToDic(dicReady, "NumeroFactura", numDoc[0], numDoc[1])
+    list_miss_param.append("NoDocumento")
 
 
     # hardcoded:
     # dicReady.setdefault("Empresa", "RICOH")
+
+    #########################
+    tipoDocumento = seaker.seakexpresion(queryOriginal, "Tipo")
+    addEntryToDic(dicReady, "tipoDocumento",
+                  switcherTipoDocumento.get(tipoDocumento[0]), tipoDocumento[1])
+
+    statusT = seaker.seakexpresion(queryOriginal, "Estado")
+    addEntryToDic(dicReady, "Status", switcherStatus.get(statusT[0]),
+                  statusT[1])
+
+    prefijo = seaker.seakexpresion(queryOriginal, "Prefijo")
+    addEntryToDic(dicReady, "Prefijo", prefijo[0], prefijo[1])
+
+
+    if True:
+        pass
+    else:
+        acuseT = seaker.seakexpresion(queryOriginal, "Acuse")
+        acuse.append(acuseT[0])
+        acuse.append(acuseT[1])
+    # Valor por default 0
+    acuse[0] = switcherAcuse.get(acuse[0], 0)
+    addEntryToDic(dicReady, "Acuse", acuse[0], acuse[1])
+
+
+    folioInicio = seaker.seakexpresion(queryOriginal, "FolioInicio")
+    addEntryToDic(dicReady, "FolioInicio", folioInicio[0], folioInicio[1])
+
+    folioFinal = seaker.seakexpresion(queryOriginal, "FolioFinal")
+    addEntryToDic(dicReady, "FolioFinal", folioFinal[0], folioFinal[1])
+
+    nit = seaker.seakexpresion(queryOriginal, "NitAdquirienteMex")
+    addEntryToDic(dicReady, "NITAdquiriente", nit[0], nit[1])
+
+    cuenta = seaker.seakexpresion(queryOriginal, "Cuenta")
+    addEntryToDic(dicReady, "Cuenta", cuenta[0], cuenta[1])
+
+    numDoc = seaker.seakexpresion(queryOriginal, "NoDocumento")
+    addEntryToDic(dicReady, "NumeroFactura", numDoc[0], numDoc[1])
+
+
+    #########################
+
+    print(list_miss_param)
     return dicReady
 
 def addEntryToDic(dic, campo, value, status):
