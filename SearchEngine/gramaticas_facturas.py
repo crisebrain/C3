@@ -1,11 +1,14 @@
 # from __future__ import print_function
-from .spaghetti import pos_tag
+from .libs.spaghetti import pos_tag
 import re
+import sys
 from nltk import word_tokenize, RegexpParser, Tree
 from datetime import datetime, timedelta
 from dateutil.relativedelta import relativedelta
 import numpy as np
 import json
+sys.path.append("Utils")
+from Utils import constantesFacturas as cf
 
 class Regexseaker:
     def __init__(self, pathkeys=None):
@@ -13,23 +16,26 @@ class Regexseaker:
         1 expresiones regulares para los campos utilizados
         2 carga la lista de alias para cada campo
         """
-        self.patterns = dict(Cuenta=r"\b[A-Za-z]{3}\d{3}\b",
-                             Prefijo=r"\b[1-9a-zA-Z]\w{0,3}\b",  # wvect
-                             NoDocumento=r"\b[0-9a-zñA-ZÑ\-]{1,40}\b",  # w2vect
-                             NitAdquirienteMex=r"\b[A-Za-z]{4}\d{6}[A-Za-z0-9]{3}\b",
-                             datoNitCol=r"\b\d{1,32}\b",
-                             Tipo=r"\b[a-zA-Z]{1,10}\b",
-                             Folio=r"^\d{1,16}$",
-                             Estado=r"[A-Za-z]",   #[a-z]{1,16}"
-                             Acuse=r"[A-Za-z]",
-                             Periodo=r"\b[a-zA-Z]{1,12}\b",
-                             Nums=r"\b\d+\b",
-                             DiasNum=r"^[0-9]{1,2}$",
-                             AniosNum=r"^[0-9]{4}$",
-                             Fecha=r"^$"
-                             )
+        cf = constantesFacturas
+        patterns = {cf.CUENTA.value: r"\b[A-Za-z]{3}\d{3}\b",
+                    cf.PREFIJO.value: r"\b[1-9a-zA-Z]\w{0,3}\b",  # wvect
+                    cf.NO_DOCUMENTO.value: r"\b[0-9a-zñA-ZÑ\-]{1,40}\b",  # w2vect
+                    cf.NIT.value: r"\b[A-Za-z]{4}\d{6}[A-Za-z0-9]{3}\b",
+                    cf.TIPO_DOCUMENTO.value: r"\b[a-zA-Z]{1,10}\b",
+                    cf.FOLIO_INICIAL.value: r"^\d{1,16}$",
+                    cf.FOLIO_FINAL.value: r"^\d{1,16}$",
+                    cf.STATUS.value: r"[A-Za-z]",   #[a-z]{1,16}"
+                    cf.ACUSE.value: r"[A-Za-z]",
+                    cf.PERIODO: r"\b[a-zA-Z]{1,12}\b",
+                    cf.FECHA.value: r"^$"
+                    "datoNitCol": r"\b\d{1,32}\b",
+                    "Nums": r"\b\d+\b",
+                    "DiasNum": r"^[0-9]{1,2}$",
+                    "AniosNum": r"^[0-9]{4}$",
+                   }
+        self.patterns = patterns
         if pathkeys == None:
-            pathkeys = "Services/b2bcliente/facturaskeys.json"
+            pathkeys = "SearchEngine/facturaskeys.json"
         self.dictfacturas = json.load(open(pathkeys))
         # Services/b2bcliente/facturaskeys.json"))
 
@@ -145,7 +151,7 @@ class Regexseaker:
                                  NP: {<Folio> <Q>{0,3} (<dato> <Q|Prefijo>*){1,2} <tipoFolio>}
                                  NP: {<dato> <Q>{1,3} <Folio> <Q>{0,3} <tipoFolio>}
                                  NP: {<tipoFolio> <Q>{1,3} <Folio> <Q>{0,3} <dato>}
-                                 
+
                                  NP: {<Folio> <Q>{0,3} (<tipoFolio> <Q|Prefijo>*){1,2} <.*>}
                                  NP: {<.*> <Q>{1,3} <Folio> <Q>{0,3} <tipoFolio>}
                                  NP: {<tipoFolio> <Q>{1,3} <Folio> <Q>{0,3} <.*>}

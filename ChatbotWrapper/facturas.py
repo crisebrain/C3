@@ -1,10 +1,12 @@
-from .b2bcliente import sendReq, getResponseValues, HumanResult
-from .b2bcliente import Regexseaker
+# from .b2bcliente import sendReq, getResponseValues, HumanResult
+import sys
 from gc import collect
 import json
 import datetime
 import re
 from datetime import date
+sys.path.append("SearchEngine")
+from SearchEngine import Regexseaker
 
 def factura(req):
     # Ya que los elemenetos vienen en una lista deben tener un tratamiento
