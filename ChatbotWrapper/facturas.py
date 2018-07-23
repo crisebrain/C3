@@ -1,13 +1,9 @@
-# from .b2bcliente import sendReq, getResponseValues, HumanResult
-import sys
 from gc import collect
 import json
 import datetime
 import re
 import requests
 
-sys.path.append("SearchEngine")
-from SearchEngine import Regexseaker
 from datetime import date
 
 
@@ -94,10 +90,6 @@ def factura(req):
 def preparaParametros(dic, queryOriginal):
     dicReady = {}
     list_miss_param = []
-
-
-
-    seaker = Regexseaker()
 
     # Tipo de documento
     switcherTipoDocumento = {
@@ -232,7 +224,10 @@ def preparaParametros(dic, queryOriginal):
     # hardcoded:
     # dicReady.setdefault("Empresa", "RICOH")
 
-    #########################
+
+    ######################### Anterior ####################
+    seaker = Regexseaker()
+
     tipoDocumento = seaker.seakexpresion(queryOriginal, "Tipo")
     setEntryInDic(dicReady, "tipoDocumento",
                   switcherTipoDocumento.get(tipoDocumento[0]), tipoDocumento[1])
