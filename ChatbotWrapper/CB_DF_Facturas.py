@@ -20,7 +20,8 @@ def factura(req):
     itemsShouldList = ["date", "date-period"]
     diccFusionado = {}
 
-    # Fusionamos todos los diccionarios y listas, para obtener un diccionario de todo
+    # Fusionamos todos los diccionarios y listas, para obtener un diccionario
+    # de todos los parámetros de DF.
     for element in listaCampos:
         try:
             items = list(element.items())
