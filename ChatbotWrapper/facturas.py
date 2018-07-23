@@ -40,7 +40,7 @@ def post_data(jdata, link="http://localhost:5050/infomanager"):
     return r.json()
 
 def factura(req):
-    # Ya que los elemenetos vienen en una lista deben tener un tratamiento
+    # Ya que los elementos vienen en una lista deben tener un tratamiento
     # particular
     listaCampos = req.get("queryResult").get("parameters")["facturasCampos"]
     repitedItems = ["folio"]
