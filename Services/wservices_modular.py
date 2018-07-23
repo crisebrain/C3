@@ -4,7 +4,7 @@ import sys
 sys.path.append("Utils")
 sys.path.append("ChatbotWrapper")
 from logtofile import CreateLogger
-from facturas import factura
+from CB_DF_Facturas import factura
 
 def makeWebhookResult(req, origin = 1):
     if origin == 1:
