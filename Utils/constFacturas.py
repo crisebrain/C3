@@ -12,6 +12,8 @@ class constantesFacturas(Enum):
     CUENTA = "cuenta"
     FECHA = "fecha"
     NO_DOCUMENTO = "noDocumento"
+    FECHA_INICIAL = "fechaInicial"
+    FECHA_FINAL = "fechaFinal"
 
 
 if __name__ == "__main__":
