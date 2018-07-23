@@ -62,8 +62,7 @@ def factura(req):
 
 def preparaParametros(dic, queryOriginal):
     dicReady = {}
-    list_miss_param = []
-    list_miss_param = [
+    list_params = [
         CF.TIPO_DOCUMENTO.value,
         CF.PERIODO.value,
         CF.STATUS.value,
@@ -77,65 +76,12 @@ def preparaParametros(dic, queryOriginal):
         CF.NO_DOCUMENTO.value
     ]
 
-    # _tipoDocumento(dic, dicReady, list_miss_param)
-    # _periodo(dicReady)
-    # _estatus(dic, dicReady, list_miss_param)
-    # _prefijo(dic, dicReady, list_miss_param)
-    # _acuse(dic, list_miss_param)
-    # _folioInicial(dic, dicReady, list_miss_param)
-    # _folioFinal(dic, dicReady, list_miss_param)
-    # _nit(dic, dicReady, list_miss_param)
-    # _cuenta(list_miss_param)
-    # #_fechas(dicReady, queryOriginal)
-    # _numFactura(list_miss_param)
-
-
-
-    #
-    #
-    # print(dicReady)
-    # for key in dicReady:
-    #     print("{0} {1}".format(key, dicReady[key]))
-    #
-
-
-
-    # hardcoded:
-    # dicReady.setdefault("Empresa", "RICOH")
-
-
-    # ######################### Anterior ####################
-    # seaker = Regexseaker()
-    #
-    # prefijo = seaker.seakexpresion(queryOriginal, "Prefijo")
-    # setEntryInDic(dicReady, "Prefijo", prefijo[0], prefijo[1])
-    #
-
-    #
-    # folioInicio = seaker.seakexpresion(queryOriginal, "FolioInicio")
-    # setEntryInDic(dicReady, "FolioInicio", folioInicio[0], folioInicio[1])
-    #
-    # folioFinal = seaker.seakexpresion(queryOriginal, "FolioFinal")
-    # setEntryInDic(dicReady, "FolioFinal", folioFinal[0], folioFinal[1])
-    #
-    # nit = seaker.seakexpresion(queryOriginal, "NitAdquirienteMex")
-    # setEntryInDic(dicReady, "NITAdquiriente", nit[0], nit[1])
-    #
-    # cuenta = seaker.seakexpresion(queryOriginal, "Cuenta")
-    # setEntryInDic(dicReady, "Cuenta", cuenta[0], cuenta[1])
-    #
-    # numDoc = seaker.seakexpresion(queryOriginal, "NoDocumento")
-    # setEntryInDic(dicReady, "NumeroFactura", numDoc[0], numDoc[1])
-    #
-    #
-    # #########################
-
 
     req = {
         "action": "obtieneDatos",
         "datos": {
             "frase": queryOriginal,
-            "campos": list_miss_param
+            "campos": list_params
         }
     }
 
@@ -176,7 +122,7 @@ def preparaParametros(dic, queryOriginal):
         "returnCode": 1
     }
 
-    for field in list_miss_param:
+    for field in list_params:
         field_resp = resp["campos"][field]
         _setEntryInDic(dicReady, field,
                        field_resp["value"], field_resp["statusField"])
@@ -189,193 +135,10 @@ def preparaParametros(dic, queryOriginal):
     return dicReady
 
 
-def _numFactura(list_miss_param):
-    # NumeroFactura (Num. Documento)
-    list_miss_param.append(CF.NO_DOCUMENTO.value)
-
-
-def _fechas(dicReady, queryOriginal):
-    # Fechas
-    # Ignoramos fechas de DF.
-    # Primero evalúa fecha, si no funciona, realiza periodo.
-    fechaTemp = seaker.seakexpresion(queryOriginal, "Fecha")
-    if fechaTemp[0]["fechaInicio"] is None and fechaTemp[0]["fechaFin"] is None:
-        fechaTemp = seaker.seakexpresion(queryOriginal, "Periodo")
-    fechaInicio = fechaTemp[0].get("fechaInicio")
-    fechaFin = fechaTemp[0].get("fechaFin")
-    fechaStatus = fechaTemp[1]
-    # Si existe la fecha, le pone formato ISO, sino, la deja en None
-    fechaInicioStr = fechaInicio.isoformat() if fechaInicio is not None else None
-    fechaFinStr = fechaFin.isoformat() if fechaFin is not None else None
-    setEntryInDic(dicReady, "FechaEmisionInicio", fechaInicioStr, fechaStatus)
-    setEntryInDic(dicReady, "FechaEmisionFin", fechaFinStr, fechaStatus)
-
-
-def _cuenta(list_miss_param):
-    # Cuenta
-    list_miss_param.append(CF.CUENTA.value)
-
-
-def _nit(dic, dicReady, list_miss_param):
-    # NIT
-    if dic.get(CF.NIT.value):
-        nit = str(int(dic.get(CF.NIT.value).get("value")))
-        _setEntryInDic(dicReady, CF.NIT.value, nit, 1)
-    else:
-        list_miss_param.append(CF.NIT.value)
-
-
-def _folioFinal(dic, dicReady, list_miss_param):
-    # Folio Final
-    if dic.get(CF.FOLIO_FINAL.value):
-        folioFinal = int(dic.get(CF.FOLIO_FINAL.value).get("value"))
-        _setEntryInDic(dicReady, CF.FOLIO_FINAL.value, folioFinal, 1)
-    else:
-        list_miss_param.append(CF.FOLIO_FINAL.value)
-
-
-def _folioInicial(dic, dicReady, list_miss_param):
-    # Folio Inicio
-    if dic.get(CF.FOLIO_INICIAL.value):
-        folioInicio = int(dic.get(CF.FOLIO_INICIAL.value).get("value"))
-        pattern = r"^\d{1,16}$"
-        statusCode = re.search(pattern, str(folioInicio))
-        statusCode = 1 if statusCode else 0
-        _setEntryInDic(dicReady, CF.FOLIO_INICIAL.value, folioInicio, statusCode)
-    else:
-        list_miss_param.append(CF.FOLIO_INICIAL.value)
-
-
-def _acuse(dic, list_miss_param):
-    # Acuse
-    switcherAcuse = {
-        "Aceptado": 1,
-        "Rechazado": 2,
-        "Pendiente": 3
-    }
-    acuse = []
-    if dic.get(CF.ACUSE.value):
-        acuse.append(dic.get(CF.ACUSE.value).get("value"))
-        acuse.append(1)
-    else:
-        list_miss_param.append(CF.ACUSE.value)
-
-
-def _prefijo(dic, dicReady, list_miss_param):
-    # Prefijo
-    if dic.get(CF.PREFIJO.value):
-        prefijo = dic.get(CF.PREFIJO.value).get("value")
-        if isinstance(prefijo, float):
-            prefijo = str(int(prefijo))
-        elif isinstance(prefijo, str):
-            prefijo = prefijo.upper().replace(" ", "")
-
-        pattern = r"^[1-9a-zA-Z]\w{0,3}$"
-        statusCode = re.search(pattern, prefijo)
-        statusCode = 1 if statusCode else 0
-        _setEntryInDic(dicReady, CF.PREFIJO.value, prefijo, statusCode)
-    else:
-        list_miss_param.append(CF.PREFIJO.value)
-
-
-def _estatus(dic, dicReady, list_miss_param):
-    # Estatus
-    switcherStatus = {
-        "Recibido": 1,
-        "Error": 6,
-        "Firmado": 22,
-        "Rechazado": 23,
-        "Aceptado": 24,
-        "Enviado": 25
-    }
-    if dic.get(CF.STATUS.value):
-        status = switcherStatus.get(dic.get(CF.STATUS.value).get("value"))
-        _setEntryInDic(dicReady, CF.STATUS.value, status, 1)
-    else:
-        list_miss_param.append(CF.STATUS.value)
-
-
-def _periodo(dicReady):
-    # Periodo
-    # Se comenta este código porque siempre se resuelve con gramáticas.
-    # Esto es porque siempre se resolverán como fechas.
-    # switcherPeriodo = {
-    #     "Hoy": 1,
-    #     "Semana": 2,
-    #     "Mes": 3
-    # }
-    # # Valor por default 0
-    # # periodo = switcherPeriodo.get(dic.get("periodo"), 0)
-    periodo = 0
-    _setEntryInDic(dicReady, CF.PERIODO.value, periodo, 1)
-
-
-def _tipoDocumento(dic, dicReady, list_miss_param):
-    # Tipo de documento
-    switcherTipoDocumento = {
-        "Factura": "F",
-        "Nota": "N"
-    }
-    if dic.get(CF.TIPO_DOCUMENTO.value):
-        _setEntryInDic(dicReady, CF.TIPO_DOCUMENTO.value,
-                       switcherTipoDocumento.get(dic.get(CF.TIPO_DOCUMENTO.value)), 1)
-    else:
-        list_miss_param.append(CF.TIPO_DOCUMENTO.value)
-
-
 def _setEntryInDic(dic: dict, campo: str, value, status: int):
     """Status 1 correcto, status 0 incorrecto.
     """
     dic[campo] = {"value": value, "status": status}
-
-
-def calcDates(listDate, listDatePeriod):
-    dateStart = None
-    dateEnd = None
-
-    # Fechas individuales
-    if listDate is not None:
-        if len(listDate) > 0:
-            i = len(listDate) - 1
-            date1 = buildDate(listDate[i])
-
-            # Evalúamos que exista otro elemento
-            if i >= 1:
-                i -= 1
-            date2 = buildDate(listDate[i])
-
-            # Evalúa fecha mayor
-            if date1 < date2:
-                dateStart = date1
-                dateEnd = date2
-            else:
-                dateStart = date2
-                dateEnd = date1
-
-    # Periodo
-    if listDatePeriod is not None:
-        if len(listDatePeriod) > 0 \
-            and dateStart is None and dateEnd is None:
-            i = len(listDatePeriod) - 1
-            dateStart = buildDate(listDatePeriod[i].get("startDate"))
-            dateEnd = buildDate(listDatePeriod[i].get("endDate"))
-
-    # Evalúamos fechas posteriores a este año
-    hoy = date.today()
-    if dateStart is not None and dateStart > hoy:
-        dateStart = dateStart.replace(year=hoy.year)
-    if dateEnd is not None and dateEnd > hoy:
-        dateEnd = dateEnd.replace(year=hoy.year)
-
-    return dateStart, dateEnd
-
-
-def buildDate(dateString):
-    year = int(dateString[0:4])
-    month = int(dateString[5:7])
-    day = int(dateString[8:10])
-
-    return datetime.date(year, month, day)
 
 
 def _mapValues(dic: dict):
