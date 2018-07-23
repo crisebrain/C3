@@ -5,6 +5,39 @@ import json
 import datetime
 import re
 from datetime import date
+import requests
+
+class __NameParams__:
+    """
+        Esta clase mapea el nombre de los campos en DF, el Json de salida,
+        y el IM.
+    """
+    def __init__(self):
+        # La clave, es el nombre en aqui.
+        # El primer elemento del valor, es el nombre en DF.
+        # El segundo elemento del valor, es el nombre en Json.
+        # El tercer elemento del valor, es el nombre en IM.
+        dic_params = {
+            "tipoDocumento": ["tipoDocumento", "Tipo"],
+            "periodo": ["Periodo", "Periodo"],
+            "status": ["Status", "Estado"],
+            "prefijo": ["Prefijo", "Prefijo"],
+            "acuse": ["Acuse", "Acuse"],
+            "folioinicial": ["FolioInicio", "FolioInicio"],
+            "foliofinal":["FolioFinal", "FolioFinal"],
+            "nit": ["NITAdquiriente", "NitAdquirienteMex"],
+            "Cuenta": ["Cuenta", "Cuenta"],
+            "": ["fechaInicio", "Fecha"],
+            "": ["fechaFin", "Fecha"],
+            "": ["", ""],
+            "": ["", ""],
+        }
+
+
+def post_data(jdata, link="http://localhost:5050/infomanager"):
+    r = requests.post(link, data=jdata)
+    # Ajustar salida si r no es la respuesta esperada
+    return r.json()
 
 def factura(req):
     # Ya que los elemenetos vienen en una lista deben tener un tratamiento
@@ -57,6 +90,9 @@ def factura(req):
 def preparaParametros(dic, queryOriginal):
     dicReady = {}
     list_miss_param = []
+
+
+
     seaker = Regexseaker()
 
     # Tipo de documento
@@ -65,7 +101,7 @@ def preparaParametros(dic, queryOriginal):
         "Nota": "N"
     }
     if dic.get("tipoDocumento"):
-        addEntryToDic(dicReady, "tipoDocumento",
+        setEntryInDic(dicReady, "tipoDocumento",
                       switcherTipoDocumento.get(dic.get("tipoDocumento")), 1)
     else:
         list_miss_param.append("Tipo")
@@ -82,7 +118,7 @@ def preparaParametros(dic, queryOriginal):
     # # Valor por default 0
     # # periodo = switcherPeriodo.get(dic.get("periodo"), 0)
     periodo = 0
-    addEntryToDic(dicReady, "Periodo", periodo, 1)
+    setEntryInDic(dicReady, "Periodo", periodo, 1)
 
     # Estatus
     switcherStatus = {
@@ -95,7 +131,7 @@ def preparaParametros(dic, queryOriginal):
     }
     if dic.get("status"):
         status = switcherStatus.get(dic.get("status").get("value"))
-        addEntryToDic(dicReady, "Status", status, 1)
+        setEntryInDic(dicReady, "Status", status, 1)
     else:
         list_miss_param.append("Estado")
 
@@ -110,7 +146,7 @@ def preparaParametros(dic, queryOriginal):
         pattern = r"^[1-9a-zA-Z]\w{0,3}$"
         statusCode = re.search(pattern, prefijo)
         statusCode = 1 if statusCode else 0
-        addEntryToDic(dicReady, "Prefijo", prefijo, statusCode)
+        setEntryInDic(dicReady, "Prefijo", prefijo, statusCode)
     else:
         list_miss_param.append("Prefijo")
 
@@ -135,14 +171,14 @@ def preparaParametros(dic, queryOriginal):
         pattern = r"^\d{1,16}$"
         statusCode = re.search(pattern, str(folioInicio))
         statusCode = 1 if statusCode else 0
-        addEntryToDic(dicReady, "FolioInicio", folioInicio, statusCode)
+        setEntryInDic(dicReady, "FolioInicio", folioInicio, statusCode)
     else:
         list_miss_param.append("FolioInicio")
 
     # Folio Final
     if dic.get("foliofinal"):
         folioFinal = int(dic.get("foliofinal").get("value"))
-        addEntryToDic(dicReady, "FolioFinal", folioFinal, 1)
+        setEntryInDic(dicReady, "FolioFinal", folioFinal, 1)
     else:
         list_miss_param.append("FolioFinal")
 
@@ -150,7 +186,7 @@ def preparaParametros(dic, queryOriginal):
     # NIT
     if dic.get("nit"):
         nit = str(int(dic.get("nit").get("value")))
-        addEntryToDic(dicReady, "NITAdquiriente", nit, 1)
+        setEntryInDic(dicReady, "NITAdquiriente", nit, 1)
     else:
         list_miss_param.append("NitAdquirienteMex")
 
@@ -171,12 +207,22 @@ def preparaParametros(dic, queryOriginal):
     # Si existe la fecha, le pone formato ISO, sino, la deja en None
     fechaInicioStr = fechaInicio.isoformat() if fechaInicio is not None else None
     fechaFinStr = fechaFin.isoformat() if fechaFin is not None else None
-    addEntryToDic(dicReady, "FechaEmisionInicio", fechaInicioStr, fechaStatus)
-    addEntryToDic(dicReady, "FechaEmisionFin", fechaFinStr, fechaStatus)
+    setEntryInDic(dicReady, "FechaEmisionInicio", fechaInicioStr, fechaStatus)
+    setEntryInDic(dicReady, "FechaEmisionFin", fechaFinStr, fechaStatus)
 
 
     # NumeroFactura (Num. Documento)
     list_miss_param.append("NoDocumento")
+
+
+
+    #
+    #
+    # print(dicReady)
+    # for key in dicReady:
+    #     print("{0} {1}".format(key, dicReady[key]))
+    #
+
 
 
     # hardcoded:
@@ -184,15 +230,15 @@ def preparaParametros(dic, queryOriginal):
 
     #########################
     tipoDocumento = seaker.seakexpresion(queryOriginal, "Tipo")
-    addEntryToDic(dicReady, "tipoDocumento",
+    setEntryInDic(dicReady, "tipoDocumento",
                   switcherTipoDocumento.get(tipoDocumento[0]), tipoDocumento[1])
 
     statusT = seaker.seakexpresion(queryOriginal, "Estado")
-    addEntryToDic(dicReady, "Status", switcherStatus.get(statusT[0]),
+    setEntryInDic(dicReady, "Status", switcherStatus.get(statusT[0]),
                   statusT[1])
 
     prefijo = seaker.seakexpresion(queryOriginal, "Prefijo")
-    addEntryToDic(dicReady, "Prefijo", prefijo[0], prefijo[1])
+    setEntryInDic(dicReady, "Prefijo", prefijo[0], prefijo[1])
 
 
     if True:
@@ -203,23 +249,23 @@ def preparaParametros(dic, queryOriginal):
         acuse.append(acuseT[1])
     # Valor por default 0
     acuse[0] = switcherAcuse.get(acuse[0], 0)
-    addEntryToDic(dicReady, "Acuse", acuse[0], acuse[1])
+    setEntryInDic(dicReady, "Acuse", acuse[0], acuse[1])
 
 
     folioInicio = seaker.seakexpresion(queryOriginal, "FolioInicio")
-    addEntryToDic(dicReady, "FolioInicio", folioInicio[0], folioInicio[1])
+    setEntryInDic(dicReady, "FolioInicio", folioInicio[0], folioInicio[1])
 
     folioFinal = seaker.seakexpresion(queryOriginal, "FolioFinal")
-    addEntryToDic(dicReady, "FolioFinal", folioFinal[0], folioFinal[1])
+    setEntryInDic(dicReady, "FolioFinal", folioFinal[0], folioFinal[1])
 
     nit = seaker.seakexpresion(queryOriginal, "NitAdquirienteMex")
-    addEntryToDic(dicReady, "NITAdquiriente", nit[0], nit[1])
+    setEntryInDic(dicReady, "NITAdquiriente", nit[0], nit[1])
 
     cuenta = seaker.seakexpresion(queryOriginal, "Cuenta")
-    addEntryToDic(dicReady, "Cuenta", cuenta[0], cuenta[1])
+    setEntryInDic(dicReady, "Cuenta", cuenta[0], cuenta[1])
 
     numDoc = seaker.seakexpresion(queryOriginal, "NoDocumento")
-    addEntryToDic(dicReady, "NumeroFactura", numDoc[0], numDoc[1])
+    setEntryInDic(dicReady, "NumeroFactura", numDoc[0], numDoc[1])
 
 
     #########################
@@ -227,10 +273,10 @@ def preparaParametros(dic, queryOriginal):
     print(list_miss_param)
     return dicReady
 
-def addEntryToDic(dic, campo, value, status):
+def setEntryInDic(dic, campo, value, status):
     """Status 1 correcto, status 0 incorrecto.
     """
-    dic.setdefault(campo, {"value": value, "status": status})
+    dic[campo] = {"value": value, "status": status}
 
 def calcDates(listDate, listDatePeriod):
     dateStart = None
