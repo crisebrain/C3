@@ -1,22 +1,24 @@
 from .saldos_vdns import makeresponseAction, informacion
-from .facturas import factura
-
 import json
 import sys
 sys.path.append("Utils")
+sys.path.append("ChatbotWrapper")
 from logtofile import CreateLogger
+from facturas import factura
 
 def makeWebhookResult(req, origin = 1):
     if origin == 1:
         originstr = "WhDF"
     else:
         originstr = "WbIM"
+
     if req.get("queryResult"):
         queryResult = req.get("queryResult")
         action = queryResult.get("action")
     else:
         queryResult = None
         action = req.get("action")
+    
     conlog = False
     try:
         querys = CreateLogger("querys" + originstr)

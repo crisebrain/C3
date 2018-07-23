@@ -1,11 +1,15 @@
-from .b2bcliente import sendReq, getResponseValues, HumanResult
-from .b2bcliente import Regexseaker
+# from .b2bcliente import sendReq, getResponseValues, HumanResult
+import sys
 from gc import collect
 import json
 import datetime
 import re
-from datetime import date
 import requests
+
+sys.path.append("SearchEngine")
+from SearchEngine import Regexseaker
+from datetime import date
+
 
 class __NameParams__:
     """
