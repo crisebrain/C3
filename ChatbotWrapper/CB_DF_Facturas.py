@@ -21,7 +21,7 @@ def factura(req):
     dicReady = _prepareParameters(diccFusionado, req.get("queryResult").get("queryText"))
     print("\nDicReady:\n{0}".format(dicReady))
 
-    peticionStr = prepareHumanResult(dicReady)
+    peticionStr = _prepareHumanResult(dicReady)
 
     # Response
     dicReady.update({"returnCode": "1"})
@@ -237,7 +237,7 @@ def _mapValues(dic: dict):
             dic[field]["value"] = fields_to_map[field](dic[field]["value"])
 
 
-def prepareHumanResult(dicReady: dict):
+def _prepareHumanResult(dicReady: dict):
     # Print values
     peticionStr = ""
     for element in dicReady:
