@@ -21,6 +21,7 @@ def factura(req: dict):
                     "payload": dicReady
     }
 
+    # TODO: únicamente para pruebas. Borra cuando no sea necesario.
     _updateValues(req.copy(), dicReady.copy())
     # garbage collector
     collect()
