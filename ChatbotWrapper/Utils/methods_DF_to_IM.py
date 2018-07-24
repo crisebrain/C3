@@ -4,6 +4,12 @@ IM_FIELDS = "IM_fields"
 IM_LINK = "http://localhost:5050/infomanager"
 
 def post_data(jdata, link=IM_LINK):
+    """
+    Función de comunicación genérica hacia cualquier WS/WH.
+    :param jdata: datos que se pasan al WS.
+    :param link: EndPoint del WS.
+    :return: Respuesta del WS.
+    """
     try:
         r = requests.post(link, data=jdata)
         # Ajustar salida si r no es la respuesta esperada
@@ -13,8 +19,17 @@ def post_data(jdata, link=IM_LINK):
 
 
 def updateIM(req:dict, fields: dict):
+    """
+    Esta función se comunica con el IM, para que actualice los valores del
+    árbol del conference con los campos que se pasan en fields.
+
+    :param req: Petición original. Estilo DF.
+    :param fields: Diccionario de campos, con nombre y valor de cada uno de los campos que se quieren actualizar.
+    :return: Respuesta del IM.
+    """
     req.update({IM_FIELDS: fields})
-    post_data(req)
+    return post_data(req)
+
 
 
 def extractData(phrase: str, list_params: list):
