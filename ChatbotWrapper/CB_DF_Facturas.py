@@ -16,13 +16,33 @@ def post_data(jdata, link="http://localhost:5050/infomanager"):
 
 
 def factura(req):
+    diccFusionado = _prepareJsonDF(req)
+
+    dicReady = preparaParametros(diccFusionado, req.get("queryResult").get("queryText"))
+    print("\nDicReady:\n{0}".format(dicReady))
+
+    peticionStr = prepareHumanResult(dicReady)
+
+    # Response
+    dicReady.update({"returnCode": "1"})
+    respuesta =  {
+                    "fulfillmentText" : peticionStr,
+                    "payload": dicReady
+    }
+
+    # garbage collector
+    collect()
+
+    return respuesta
+
+
+def _prepareJsonDF(req):
     # Ya que los elementos vienen en una lista deben tener un tratamiento
     # particular
     listaCampos = req.get("queryResult").get("parameters")["facturasCampos"]
     repitedItems = ["folio"]
     itemsShouldList = ["date", "date-period"]
     diccFusionado = {}
-
     # Fusionamos todos los diccionarios y listas, para obtener un diccionario
     # de todos los parámetros de DF.
     for element in listaCampos:
@@ -45,23 +65,7 @@ def factura(req):
                 diccFusionado.update(element)
         except:
             print("WARNING: el elemento: {} , no se usó para el diccionario.".format(element))
-
-    dicReady = preparaParametros(diccFusionado, req.get("queryResult").get("queryText"))
-    print("\nDicReady:\n{0}".format(dicReady))
-
-    peticionStr = prepareHumanResult(dicReady)
-
-    # Response
-    dicReady.update({"returnCode": "1"})
-    respuesta =  {
-                    "fulfillmentText" : peticionStr,
-                    "payload": dicReady
-    }
-
-    # garbage collector
-    collect()
-
-    return respuesta
+    return diccFusionado
 
 
 def preparaParametros(dic, queryOriginal):
