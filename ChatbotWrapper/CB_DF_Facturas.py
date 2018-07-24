@@ -18,7 +18,7 @@ def post_data(jdata, link="http://localhost:5050/infomanager"):
 def factura(req):
     diccFusionado = _prepareJsonDF(req)
 
-    dicReady = preparaParametros(diccFusionado, req.get("queryResult").get("queryText"))
+    dicReady = _prepareParameters(diccFusionado, req.get("queryResult").get("queryText"))
     print("\nDicReady:\n{0}".format(dicReady))
 
     peticionStr = prepareHumanResult(dicReady)
@@ -68,7 +68,7 @@ def _prepareJsonDF(req):
     return diccFusionado
 
 
-def preparaParametros(dic, queryOriginal):
+def _prepareParameters(dic, queryOriginal):
     dicReady = {}
     list_params = [
         CF.TIPO_DOCUMENTO.value,
