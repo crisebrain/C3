@@ -16,18 +16,16 @@ class Regexseaker:
         1 expresiones regulares para los campos utilizados
         2 carga la lista de alias para cada campo
         """
-        cf = constantesFacturas
         patterns = {cf.CUENTA.value: r"\b[A-Za-z]{3}\d{3}\b",
                     cf.PREFIJO.value: r"\b[1-9a-zA-Z]\w{0,3}\b",  # wvect
                     cf.NO_DOCUMENTO.value: r"\b[0-9a-zñA-ZÑ\-]{1,40}\b",  # w2vect
                     cf.NIT.value: r"\b[A-Za-z]{4}\d{6}[A-Za-z0-9]{3}\b",
                     cf.TIPO_DOCUMENTO.value: r"\b[a-zA-Z]{1,10}\b",
-                    cf.FOLIO_INICIAL.value: r"^\d{1,16}$",
-                    cf.FOLIO_FINAL.value: r"^\d{1,16}$",
                     cf.STATUS.value: r"[A-Za-z]",   #[a-z]{1,16}"
                     cf.ACUSE.value: r"[A-Za-z]",
-                    cf.PERIODO: r"\b[a-zA-Z]{1,12}\b",
-                    cf.FECHA.value: r"^$"
+                    cf.PERIODO.value: r"\b[a-zA-Z]{1,12}\b",
+                    cf.FECHA.value: r"^$",
+                    "Folio": r"^\d{1,16}$",
                     "datoNitCol": r"\b\d{1,32}\b",
                     "Nums": r"\b\d+\b",
                     "DiasNum": r"^[0-9]{1,2}$",
@@ -88,152 +86,153 @@ class Regexseaker:
         return [tuple(wordtagged) for wordtagged in tagged]
 
     def choose_grammar(self, field):
-        dgramm = dict(Prefijo=""" Q: {<dato|Nums|unknown|(nc[fm][sp]000)|Singlel>}
-                                  AUX1 : {<vmip1p0> <spcms|cs>}
-                                  AUX2 : {<spcms> <Calce> <sps00>}
-                                  AUX3 : {<aq0cs0> <sps00|spcms>}
-                                  AUX4 : {<p0300000> <vmip3s0> <cs>}
-                                  AUX5 : {<vmip3s0>? <Asignar> <sps00|cs>}
-                                  AUX6 : {<vsip3s0|vssp3s0|cs> <da0ms0>?}
-                                  AUX : {<AUX1|AUX2|AUX3|AUX4|AUX5|AUX6>}
-                                  NP: {<Prefijo> <AUX|sps00|da0ms0>? <Sustnum>? <Q|sps00>}
-                                  NP: {<Q|sps00|vsip3s0> <AUX> <Prefijo>}
-                              """,
+        dgramm = {cf.PREFIJO.value: r""" Q: {<dato|Nums|unknown|(nc[fm][sp]000)|Singlel>}
+                                         AUX1 : {<vmip1p0> <spcms|cs>}
+                                         AUX2 : {<spcms> <Calce> <sps00>}
+                                         AUX3 : {<aq0cs0> <sps00|spcms>}
+                                         AUX4 : {<p0300000> <vmip3s0> <cs>}
+                                         AUX5 : {<vmip3s0>? <Asignar> <sps00|cs>}
+                                         AUX6 : {<vsip3s0|vssp3s0|cs> <da0ms0>?}
+                                         AUX : {<AUX1|AUX2|AUX3|AUX4|AUX5|AUX6>}
+                                         NP: {<%(sg)s> <AUX|sps00|da0ms0>? <Sustnum>? <Q|sps00>}
+                                         NP: {<Q|sps00|vsip3s0> <AUX> <%(sg)s>}
+                                     """  % {'sg': cf.PREFIJO.value},
                                # directas
                                # inversas
                                # añadir que se hace con sustantivos y nodos terminales
-                      NoDocumento=r""" Q: {<Singlel|cc|dato|Nums|(nc[mf][sp]000)>}
-                                       AUX1 : {<vmip1p0> <spcms|cs>}
-                                       AUX2 : {<spcms> <Calce> <sps00>}
-                                       AUX3 : {<aq0cs0> <sps00|spcms>}
-                                       AUX4 : {<p0300000> <vmip3s0> <cs>}
-                                       AUX5 : {<vmip3s0>? <Asignar> <sps00|cs>}
-                                       AUX6 : {<vsip3s0|vssp3s0|cs> <da0ms0>?}
-                                       AUX : {<AUX1|AUX2|AUX3|AUX4|AUX5|AUX6>}
-                                       NP: {<Sustnum> <sps00> <da0fs0>? <(NoDocumen\w+)> <AUX|Sustnum>? <Q|sps00>}
-                                       NP: {<(NoDocumen\w+)> <sps00|Pronrelativo> <Sustnum> <AUX>? <Q|sps00>}
-                                       NP: {<(NoDocumen\w+)> <sps00> <Q|sps00> <AUX> <Sustnum>}
-                                       NP: {<Q> <AUX> <Sustnum> <sps00> <da0fs0>? <(NoDocumen\w+)>}
-                                   """,
-                      NitAdquirienteMex=r""" Q: {<unknown|dato|Z|Singlel|datoNitCol>}
-                                             AUX1 : {<vmip1p0> <spcms|cs>}
-                                             AUX2 : {<aq0cs0> <sps00|spcms>}
-                                             AUX3 : {<vmip3s0>? <Asignar> <sps00|cs>}
-                                             AUX4 : {<vsip3s0|vssp3s0|cs> <da0ms0>?}
-                                             AUX: {<AUX1|AUX2|AUX3|AUX4>}
-                                             NP: {<(NitA\w+)> <(NitA\w+)>? <sps00> <Sustnum> <AUX>? <Q|cc>}
-                                             NP: {<(NitA\w+)> <(NitA\w+)>? <sps00> <Q> <AUX> <Sustnum>}
-                                             NP: {<(NitA\w+)> <(NitA\w+)>? <AUX> <Q|cc>}
-                                             NP: {<(NitA\w+)> <(NitA\w+)>? <Sustnum|(vs\w+)>? <da0ms0>? <Q|cc>}
-                                             NP: {<Q> <AUX> <(NitA\w+)> <(NitA\w+)>?}
-                                         """,
-                      Cuenta=r""" Q: {<unknown|dato|Z|Singlel>}
-                                  NP: {<Cuenta> <sps00>? <Sustnum>? (<aq0cs0|sps00|Es>){0,2} <Q>}
-                                  NP: {<(da0\w+)>? <Sustnum>? <sps00|da0fs0>? <Cuenta> <(vs\w+)>? <Q>}
-                                  NP: {<Sustnum> <sps00> <Cuenta> <sps00> <Sustnum> <aq0cs0> <sps00> <Q>}
-                                  NP: {<Sustnum> <sps00> <Cuenta> <sps00> <Q> <cs> <Sustnum>}
-                                  NP: {<sps00> <Cuenta> <aq0cs0> <sps00> <Q>}
-                              """,
-                      Estado=r""" Q: {<Recibido|Error|Firmado|Rechazado|Aceptado|Enviado>}
-                                  NP: {<Estado> <vssp3s0|sps00|vsis3s0|Es|Valor|da0ms0|cs>{0,3} <Q>}
-                                  NP: {<Q> <vssp3s0|vsis3s0|Es|da0ms0|cs>{1,3} <Estado>}
-                                  NP: {<Estado> <vssp3s0|sps00|vsis3s0|Es|Valor|da0ms0|cs>{0,3} <.*>}
-                                  NP: {<.*> <vssp3s0|vsis3s0|Es|da0ms0|cs>{1,3} <Estado>}
-                              """,
-                      Acuse=r""" Q: {<Rechazado|Aceptado|Pendiente>}
-                                 NP: {<Acuse> <vssp3s0|sps00|vsis3s0|Es|Valor|da0ms0|cs>{0,3} <Q>}
-                                 NP: {<Q> <vssp3s0|vsis3s0|Es|da0ms0|cs>{1,3} <Acuse>}
-                                 NP: {<Acuse> <vssp3s0|sps00|vsis3s0|Es|Valor|da0ms0|cs>{0,3} <.*>}
-                                 NP: {<.*> <vssp3s0|vsis3s0|Es|da0ms0|cs>{1,3} <Acuse>}
-                             """,
-                      Folio=r""" Q: {<Es|sps00|da0ms0|unknown|Valor|cs|cc|Reciente|p0300000|dp1msp|spcms|dp1css>}
-                                 NP: {<Folio> <Q>{0,3} (<tipoFolio> <Q|Prefijo>*){1,2} <dato>}
-                                 NP: {<Folio> <Q>{0,3} (<dato> <Q|Prefijo>*){1,2} <tipoFolio>}
-                                 NP: {<dato> <Q>{1,3} <Folio> <Q>{0,3} <tipoFolio>}
-                                 NP: {<tipoFolio> <Q>{1,3} <Folio> <Q>{0,3} <dato>}
+                  cf.NO_DOCUMENTO.value: r""" Q: {<Singlel|cc|dato|Nums|(nc[mf][sp]000)>}
+                                              AUX1 : {<vmip1p0> <spcms|cs>}
+                                              AUX2 : {<spcms> <Calce> <sps00>}
+                                              AUX3 : {<aq0cs0> <sps00|spcms>}
+                                              AUX4 : {<p0300000> <vmip3s0> <cs>}
+                                              AUX5 : {<vmip3s0>? <Asignar> <sps00|cs>}
+                                              AUX6 : {<vsip3s0|vssp3s0|cs> <da0ms0>?}
+                                              AUX : {<AUX1|AUX2|AUX3|AUX4|AUX5|AUX6>}
+                                              NP: {<Sustnum> <sps00> <da0fs0>? <%(sg)s> <AUX|Sustnum>? <Q|sps00>}
+                                              NP: {<%(sg)s> <sps00|Pronrelativo> <Sustnum> <AUX>? <Q|sps00>}
+                                              NP: {<%(sg)s> <sps00> <Q|sps00> <AUX> <Sustnum>}
+                                              NP: {<Q> <AUX> <Sustnum> <sps00> <da0fs0>? <%(sg)s>}
+                                          """ % {'sg': cf.NO_DOCUMENTO.value} ,
+                  cf.NIT.value: r""" Q: {<unknown|dato|Z|Singlel|datoNitCol>}
+                                     AUX1 : {<vmip1p0> <spcms|cs>}
+                                     AUX2 : {<aq0cs0> <sps00|spcms>}
+                                     AUX3 : {<vmip3s0>? <Asignar> <sps00|cs>}
+                                     AUX4 : {<vsip3s0|vssp3s0|cs> <da0ms0>?}
+                                     AUX: {<AUX1|AUX2|AUX3|AUX4>}
+                                     NP: {<%(sg)s> <%(sg)s>? <sps00> <Sustnum> <AUX>? <Q|cc>}
+                                     NP: {<%(sg)s> <%(sg)s>? <sps00> <Q> <AUX> <Sustnum>}
+                                     NP: {<%(sg)s> <%(sg)s>? <AUX> <Q|cc>}
+                                     NP: {<%(sg)s> <%(sg)s>? <Sustnum|(vs\w+)>? <da0ms0>? <Q|cc>}
+                                     NP: {<Q> <AUX> <%(sg)s> <%(sg)s>?}
+                                 """ % {'sg': cf.NIT.value},
+                  cf.CUENTA.value: r""" Q: {<unknown|dato|Z|Singlel>}
+                                        NP: {<%(sg)s> <sps00>? <Sustnum>? (<aq0cs0|sps00|Es>){0,2} <Q>}
+                                        NP: {<(da0\w+)>? <Sustnum>? <sps00|da0fs0>? <%(sg)s> <(vs\w+)>? <Q>}
+                                        NP: {<Sustnum> <sps00> <%(sg)s> <sps00> <Sustnum> <aq0cs0> <sps00> <Q>}
+                                        NP: {<Sustnum> <sps00> <%(sg)s> <sps00> <Q> <cs> <Sustnum>}
+                                        NP: {<sps00> <%(sg)s> <aq0cs0> <sps00> <Q>}
+                                    """ % {'sg': cf.CUENTA.value},
+                  cf.STATUS.value: r""" Q: {<Recibido|Error|Firmado|Rechazado|Aceptado|Enviado>}
+                                        NP: {<%(sg)s> <vssp3s0|sps00|vsis3s0|Es|Valor|da0ms0|cs>{0,3} <Q>}
+                                        NP: {<Q> <vssp3s0|vsis3s0|Es|da0ms0|cs>{1,3} <%(sg)s>}
+                                        NP: {<%(sg)s> <vssp3s0|sps00|vsis3s0|Es|Valor|da0ms0|cs>{0,3} <.*>}
+                                        NP: {<.*> <vssp3s0|vsis3s0|Es|da0ms0|cs>{1,3} <%(sg)s>}
+                                    """ % {'sg': cf.STATUS.value},
+                  cf.ACUSE.value: r""" Q: {<Rechazado|Aceptado|Pendiente>}
+                                       NP: {<%(sg)s> <vssp3s0|sps00|vsis3s0|Es|Valor|da0ms0|cs>{0,3} <Q>}
+                                       NP: {<Q> <vssp3s0|vsis3s0|Es|da0ms0|cs>{1,3} <%(sg)s>}
+                                       NP: {<%(sg)s> <vssp3s0|sps00|vsis3s0|Es|Valor|da0ms0|cs>{0,3} <.*>}
+                                       NP: {<.*> <vssp3s0|vsis3s0|Es|da0ms0|cs>{1,3} <%(sg)s>}
+                                   """ % {'sg': cf.ACUSE.value},
+                  "Folio": r""" Q: {<Es|sps00|da0ms0|unknown|Valor|cs|cc|Reciente|p0300000|dp1msp|spcms|dp1css>}
+                                NP: {<Folio> <Q>{0,3} (<tipoFolio> <Q|Prefijo>*){1,2} <dato>}
+                                NP: {<Folio> <Q>{0,3} (<dato> <Q|Prefijo>*){1,2} <tipoFolio>}
+                                NP: {<dato> <Q>{1,3} <Folio> <Q>{0,3} <tipoFolio>}
+                                NP: {<tipoFolio> <Q>{1,3} <Folio> <Q>{0,3} <dato>}
 
-                                 NP: {<Folio> <Q>{0,3} (<tipoFolio> <Q|Prefijo>*){1,2} <.*>}
-                                 NP: {<.*> <Q>{1,3} <Folio> <Q>{0,3} <tipoFolio>}
-                                 NP: {<tipoFolio> <Q>{1,3} <Folio> <Q>{0,3} <.*>}
-                             """,
-                      Periodo=r""" DP: {<semana|dia|mes|año>}
-                                   NP1: {<presente|pasado> <DP>}
-                                   NP2: {<DP> <sps00>? <presente|pasado>}
-                                   NP3: {<sps00> <presente|pasado>}
-                                   NP4: {<spcms|da0fs0|Periodo> <DP>}
-                               """,
-                      Tipo=r""" Q: {<TFactura|TNota>}
-                                NP: {<Tipo> <sps00> <TDocumento> <pr0cn000>? <(vs\w+)>? <Q>}
-                                NP: {<TDocumento>? <pr0cn000>? <(vs\w+)>? <sps00>? <Tipo> <Q>}
-                                NP: {<TDocumento> <pr0cn000>? <(vs\w+)>? <Q>}
-                                NP: {<Imperativo|vmip1s0> <(da0\w+)>? <Q> <sps00>? <TCredito>?}
-                                NP: {<(da0\w+)|(vs\w+)|sps00> <Q>}
-                                    }<Prefijo> <(vs\w+)|sps00>?{
-                                NP: {<Tipo> <sps00> <TDocumento> <pr0cn000>? <(vs\w+)>? <(.*)>}
-                                NP: {<TDocumento>? <pr0cn000>? <(vs\w+)>? <sps00>? <Tipo> <(.*)>}
+                                NP: {<Folio> <Q>{0,3} (<tipoFolio> <Q|Prefijo>*){1,2} <.*>}
+                                NP: {<.*> <Q>{1,3} <Folio> <Q>{0,3} <tipoFolio>}
+                                NP: {<tipoFolio> <Q>{1,3} <Folio> <Q>{0,3} <.*>}
                             """,
-                      Fecha = r"""
-                                Q: {<De|Articulos|spcms|sps00|Es>}
-                                I: {<Inicio|Fin> <Q>{0,2} <sps00>?}
-                                NP: {<I>? <DiasNum|ao0ms0> <Q>{0,2} <Fecha> <Q>{0,2} <AniosNum>?}
-                                NP: {<I>? <Fecha> <Q>{0,2} <DiasNum|ao0ms0> <Q>{0,2} <AniosNum>?}
-                                NP: {<I>? <Fecha> <Q>{0,2} <AniosNum>}
-                                NP: {<I>? <Fecha>}
-                                """
-                      )
+                  cf.PERIODO.value: r""" DP: {<semana|dia|mes|año>}
+                                         NP1: {<presente|pasado> <DP>}
+                                         NP2: {<DP> <sps00>? <presente|pasado>}
+                                         NP3: {<sps00> <presente|pasado>}
+                                         NP4: {<spcms|da0fs0|%(sg)s> <DP>}
+                                     """ % {'sg': cf.PERIODO.value},
+                  cf.TIPO_DOCUMENTO.value: r""" Q: {<TFactura|TNota>}
+                                                NP: {<%(sg)s> <sps00> <TDocumento> <pr0cn000>? <(vs\w+)>? <Q>}
+                                                NP: {<TDocumento>? <pr0cn000>? <(vs\w+)>? <sps00>? <%(sg)s> <Q>}
+                                                NP: {<TDocumento> <pr0cn000>? <(vs\w+)>? <Q>}
+                                                NP: {<Imperativo|vmip1s0> <(da0\w+)>? <Q> <sps00>? <TCredito>?}
+                                                NP: {<(da0\w+)|(vs\w+)|sps00> <Q>}
+                                                    }<Prefijo> <(vs\w+)|sps00>?{
+                                                NP: {<%(sg)s> <sps00> <TDocumento> <pr0cn000>? <(vs\w+)>? <(.*)>}
+                                                NP: {<TDocumento>? <pr0cn000>? <(vs\w+)>? <sps00>? <%(sg)s> <(.*)>}
+                                            """ % {'sg': cf.TIPO_DOCUMENTO.value},
+                  cf.FECHA.value: r""" Q: {<De|Articulos|spcms|sps00|Es>}
+                                       I: {<Inicio|Fin> <Q>{0,2} <sps00>?}
+                                       NP: {<I>? <DiasNum|ao0ms0> <Q>{0,2} <%(sg)s> <Q>{0,2} <AniosNum>?}
+                                       NP: {<I>? <%(sg)s> <Q>{0,2} <DiasNum|ao0ms0> <Q>{0,2} <AniosNum>?}
+                                       NP: {<I>? <%(sg)s> <Q>{0,2} <AniosNum>}
+                                       NP: {<I>? <%(sg)s>}
+                                   """ % {'sg': cf.FECHA.value}
+                      }
         return dgramm[field]
 
     def get_posibles(self, field):
-        if field in ["Prefijo", "NoDocumento", "NitAdquirienteMex", "Cuenta"]:
+        if field in [cf.PREFIJO.value, cf.NO_DOCUMENTO.value,
+                     cf.NIT.value, cf.CUENTA.value]:
             return ['Fz', 'Y', 'Z', 'cc', 'dato', 'nccn000', "ncms000",
                     'ncfs000', 'sps00', 'Singlel', 'unknown', "Nums", "Es"]
         elif field == "Folio":
             return ['Fz', 'Y', 'Z', 'cc', 'dato', 'nccn000', "ncms000",
                     'ncfs000', 'Singlel', 'unknown', "Nums", "aq0ms0"]
-        elif field == "Estado" or field == "Acuse":
+        elif field in [cf.STATUS.value, cf.ACUSE.value]:
             return ["dato", "vmp00sm", "ncms000", "aq0msp", "unknown", "Fz", "Y"
                     "Z", "cc"]
-        elif field == "Tipo":
+        elif field == cf.TIPO_DOCUMENTO.value:
             return ['Fz', 'Y', 'Z', 'cc', 'dato', 'nccn000', "ncms000",
                     'ncfs000', 'sps00', 'Singlel', 'unknown', "Nums", "Es"]
-        elif field == "Fecha":
-            return ["Fecha", "AniosNum", "DiasNum", "Inicio", "Fin"]
+        elif field == cf.FECHA.value:
+            return [cf.FECHA.value, "AniosNum", "DiasNum", "Inicio", "Fin"]
 
     def get_tags(self, field):
-        if field == "Prefijo":
+        if field == cf.PREFIJO.value:
             return ["Singlel", "Calce", "Asignar", "Sustnum"]
-        elif field == "NoDocumento":
-            return ["Singlel", "Inicio", "Sustnum", 'Prefijo', 'Folio', "Fin",
-                    'Valor', 'Reciente', 'Estado', 'Recibido', 'Error', 'Firmado',
-                    'Rechazado', 'Aceptado', 'Enviado', 'Pendiente', 'Acuse',
-                    "Pronrelativo", "Calce", "Asignar"]
-        elif field == "NitAdquirienteMex":
+        elif field == cf.NO_DOCUMENTO.value:
+            return ["Singlel", "Inicio", "Sustnum", cf.PREFIJO.value, 'Folio',
+                    "Fin", 'Valor', 'Reciente', cf.STATUS.value, 'Recibido',
+                    'Error', 'Firmado', 'Rechazado', 'Aceptado', 'Enviado',
+                    'Pendiente', cf.ACUSE.value, "Pronrelativo", "Calce",
+                    "Asignar"]
+        elif field == cf.NIT.value:
             return ["Singlel", "Sustnum", "Asignar", "Calce"]
-        elif field == "Cuenta":
+        elif field == cf.CUENTA.value:
             return ["Singlel", "Sustnum"]
         elif field == "Folio":
-            return ["Inicio", "Fin", "Es", "Valor", "Prefijo", "Reciente"]
-        elif field == "Estado":
+            return ["Inicio", "Fin", "Es", "Valor", cf.PREFIJO.value, "Reciente"]
+        elif field == cf.STATUS.value:
             return ["Es","Valor","Recibido","Error","Firmado","Rechazado",
                     "Aceptado","Enviado", "Factura"]
-        elif field == "Acuse":
+        elif field == cf.ACUSE.value:
             return ["Es","Valor","Rechazado","Aceptado","Pendiente"]
-        elif field == "Periodo":
+        elif field == cf.PERIODO.value:
             return ["pasado", "presente", "semana", "dia", "mes", "año"]
-        elif field == "Tipo":
-            return ["Prefijo", "NoDocumento", "Sustnum", "Imperativo",
-                    "TDocumento", "TFactura", "TNota", "TCredito"]
-        elif field == "Fecha":
+        elif field == cf.TIPO_DOCUMENTO.value:
+            return [cf.PREFIJO.value, cf.NO_DOCUMENTO.value, "Sustnum",
+                    "Imperativo", "TDocumento", "TFactura", "TNota", "TCredito"]
+        elif field == cf.FECHA.value:
             return  ["Inicio", "De", "Es", "Fin", "Articulos"]
 
     def regex_taglist(self, field):
-        if field == "NitAdquirienteMex":
+        if field == cf.NIT.value:
             return ["datoNitCol"]
-        elif field == "NoDocumento":
+        elif field == cf.NO_DOCUMENTO.value:
             return ["Nums"]
-        elif field == "Prefijo":
+        elif field == cf.PREFIJO.value:
             return ["Nums"]
-        elif field == "Fecha":
+        elif field == cf.FECHA.value:
             return ["AniosNum", "DiasNum"]
         else:
             return []
@@ -248,15 +247,15 @@ class Regexseaker:
         subt = []
         for i, subtree in enumerate(chunked):
             if isinstance(subtree, Tree) and subtree.label() == "NP":
-                if field in ["Prefijo", "NoDocumento",
-                             "NitAdquirienteMex", "Cuenta",
-                             "Estado", "Acuse", "Tipo"]:
+                if field in [cf.PREFIJO.value, cf.NO_DOCUMENTO.value,
+                             cf.NIT.value, cf.CUENTA.value, cf.STATUS.value,
+                             cf.ACUSE.value, cf.TIPO_DOCUMENTO.value]:
                     for subsubtree in subtree.subtrees(filter=lambda t: t.label() == "Q"):
                         entity += [token for token, pos in subsubtree.leaves()]
                         subt.append(subsubtree)
                     unknowns += [token for token, pos in subtree.leaves()
                                  if pos in posibles]
-                elif field == "Fecha":
+                elif field == cf.FECHA.value:
                     fecha = {}
                     for token, tag in subtree.leaves():
                         if tag in posibles:
@@ -273,7 +272,7 @@ class Regexseaker:
                     subt.append(subtree)
 
         # Prepara fechas
-        if field == "Fecha":
+        if field == cf.FECHA.value:
             entity, code = self.__preparaFechas(entity)
             return entity, code, subt
 
@@ -300,7 +299,7 @@ class Regexseaker:
             }
 
             y = today.year if fechaDic.get("AniosNum") is None else int(fechaDic["AniosNum"])
-            m = today.month if fechaDic.get("Fecha") is None else fechaDic["Fecha"]
+            m = today.month if fechaDic.get(cf.FECHA.value) is None else fechaDic[cf.FECHA.value]
             m = numberMonth[m]
 
             d = fechaDic.get("DiasNum")
@@ -399,7 +398,8 @@ class Regexseaker:
             if fechaInicio[1] and fechaFin[1]:
                 statusCode = 1
 
-        return {"fechaInicio": fechaInicio[0], "fechaFin": fechaFin[0]}, statusCode
+        return {cf.FECHA_INICIAL.value: fechaInicio[0],
+                cf.FECHA_FINAL.value: fechaFin[0]}, statusCode
 
     def code_validate(self, field, entity, unknowns, taglist):
         # Calculo de código
@@ -428,17 +428,18 @@ class Regexseaker:
         # -------------------------------------------------------------------
         if entity is not None:
             # Capitalizar los campos
-            if field in ["Acuse", "Tipo", "Estado"]:
+            if field in [cf.ACUSE.value, cf.TIPO_DOCUMENTO.value,
+                         cf.STATUS.value]:
                 # para pasar tipo de documento y no la palabra original
-                if field == "Tipo":
+                if field == cf.TIPO_DOCUMENTO.value:
                     if entity in self.dictfacturas["TNota"]:
                         entity = "Nota"
                     elif entity in self.dictfacturas["TFactura"]:
                         entity = "Factura"
                 entity = entity.capitalize()
             # en mayusculas
-            elif field in ["Prefijo", "NitAdquirienteMex",
-                           "Cuenta", "NoDocumento"]:
+            elif field in [cf.PREFIJO.value, cf.NO_DOCUMENTO.value,
+                           cf.NIT.value, cf.CUENTA.value]:
                 entity = entity.upper()
         # -------------------------------------------------------------------
         return entity, code
@@ -446,8 +447,8 @@ class Regexseaker:
     def seakexpresion(self, expression, field="Cuenta", nl=7, lowerc=True):
         if lowerc:
             expression = expression.lower()
-        if field in ["Prefijo", "Cuenta", "NitAdquirienteMex",
-                     "Acuse", "Estado"]:
+        if field in  [cf.PREFIJO.value, cf.NIT.value, cf.CUENTA.value,
+                      cf.STATUS.value, cf.ACUSE.value]:
             words = self.dictfacturas[field]
             tokens = word_tokenize(expression)
             arrs = []
@@ -481,19 +482,19 @@ class Regexseaker:
             # print(tagged)
             posibles = self.get_posibles(field)
             return self.do_chunking(tagged, field, posibles)
-        elif field in ["NoDocumento", "Tipo"]:
+        elif field in [cf.NO_DOCUMENTO.value, cf.TIPO_DOCUMENTO.value]:
             taglist = self.get_tags(field)
             reglist = self.regex_taglist(field)
             tagged = self.do_tagging(expression, field, taglist, reglist)
             posibles = self.get_posibles(field)
             return self.do_chunking(tagged, field, posibles)
-        elif field == "FolioInicio":
+        elif field == cf.FOLIO_INICIAL.value:
             return self.folios(expression, "Inicio")
-        elif field == "FolioFinal":
+        elif field == cf.FOLIO_FINAL.value:
             return self.folios(expression, "Fin")
-        elif field == "Periodo":
-            return self.chunks_period(expression, "Periodo")
-        elif field == "Fecha":
+        elif field == cf.PERIODO.value:
+            return self.chunks_period(expression, field)
+        elif field == cf.FECHA.value:
             return self.__fechas(expression)
 
     def folios(self, phrase, tipoFolio):
@@ -511,7 +512,7 @@ class Regexseaker:
         return self.do_chunking(tagged, field, posibles, grammarFolio)
 
     def __fechas(self, phrase):
-        field = "Fecha"
+        field = cf.FECHA.value
         listRegExps = self.regex_taglist(field)
         listTags = self.get_tags(field)
         posibles = self.get_posibles(field)
@@ -521,9 +522,9 @@ class Regexseaker:
         return self.do_chunking(tagged, field, posibles, grammarFechas)
 
     def chunks_period(self, exp, field):
-        listTags = self.get_tags("Periodo")
-        tagged = self.do_tagging(exp.lower(), "Periodo", listTags)
-        grammar = self.choose_grammar("Periodo")
+        listTags = self.get_tags(field)
+        tagged = self.do_tagging(exp.lower(), field, listTags)
+        grammar = self.choose_grammar(field)
         cp = RegexpParser(grammar)
         chunked = cp.parse(tagged)
         dictime = {"pasado": 1, "presente": 0}
@@ -560,325 +561,39 @@ class Regexseaker:
         return self.time_period(period), int(code)
 
     def time_period(self, period):
-        result = dict(fechaInicio=None, fechaFin=None)
+        result = {cf.FECHA_INICIAL.value: None, cf.FECHA_FINAL.value: None}
         if period["interval"] == 1 and period["time"] == 0:
-            result["fechaInicio"] = datetime.now().date()
-            result["fechaFin"] = datetime.now().date()
+            result[cf.FECHA_INICIAL.value] = datetime.now().date()
+            result[cf.FECHA_FINAL.value] = datetime.now().date()
         if period["interval"] == 1 and period["time"] == 1:
-            result["fechaInicio"] = (datetime.now() - timedelta(days=1)).date()
-            result["fechaFin"] = datetime.now().date()
+            result[cf.FECHA_INICIAL.value] = (datetime.now() - timedelta(days=1)).date()
+            result[cf.FECHA_FINAL.value] = datetime.now().date()
         if period["interval"] == 2 and period["time"] == 0:
             diacorriente = datetime.isoweekday(datetime.now())
-            result["fechaInicio"] = (datetime.now() - timedelta(days=diacorriente)).date()
-            result["fechaFin"] = datetime.now().date()
+            result[cf.FECHA_INICIAL.value] = (datetime.now() - timedelta(days=diacorriente)).date()
+            result[cf.FECHA_FINAL.value] = datetime.now().date()
         if period["interval"] == 2 and period["time"] == 1:
             diacorriente = datetime.isoweekday(datetime.now())
-            result["fechaInicio"] = (datetime.now() - timedelta(days=diacorriente+7)).date()
-            result["fechaFin"] = result["fechaInicio"] + timedelta(days=6)
+            result[cf.FECHA_INICIAL.value] = (datetime.now() - timedelta(days=diacorriente+7)).date()
+            result[cf.FECHA_FINAL.value] = result[cf.FECHA_INICIAL.value] + timedelta(days=6)
         if period["interval"] == 3 and period["time"] == 0:
             diames = datetime.now().day - 1
-            result["fechaInicio"] = (datetime.now() - timedelta(days=diames)).date()
-            result["fechaFin"] = datetime.now().date()
+            result[cf.FECHA_INICIAL.value] = (datetime.now() - timedelta(days=diames)).date()
+            result[cf.FECHA_FINAL.value] = datetime.now().date()
         if period["interval"] == 3 and period["time"] == 1:
             diames = datetime.now().day - 1
             primero = datetime.now() - timedelta(days=diames) - relativedelta(months=1)
-            result["fechaInicio"] = primero.date()
-            result["fechaFin"] = (datetime.now() - timedelta(days=diames + 1)).date()
+            result[cf.FECHA_INICIAL.value] = primero.date()
+            result[cf.FECHA_FINAL.value] = (datetime.now() - timedelta(days=diames + 1)).date()
         if period["interval"] == 4 and period["time"] == 0:
             year, weeks, weekday = datetime.isocalendar(datetime.now())
-            result["fechaInicio"] = (datetime.now() - timedelta(weeks=weeks-1, days=weekday - 1)).date()
-            result["fechaFin"] = datetime.now().date()
+            result[cf.FECHA_INICIAL.value] = (datetime.now() - timedelta(weeks=weeks-1, days=weekday - 1)).date()
+            result[cf.FECHA_FINAL.value] = datetime.now().date()
         if period["interval"] == 4 and period["time"] == 1:
             year, weeks, weekday = datetime.isocalendar(datetime.now())
-            result["fechaInicio"] = (datetime.now() - relativedelta(weeks=weeks-1, days=weekday - 1, years=1)).date()
-            result["fechaFin"] = result["fechaInicio"] + relativedelta(days=364)
+            result[cf.FECHA_INICIAL.value] = (datetime.now() - relativedelta(weeks=weeks-1, days=weekday - 1, years=1)).date()
+            result[cf.FECHA_FINAL.value] = result[cf.FECHA_INICIAL.value] + relativedelta(days=364)
         return result
 
-
-
-def pruebasFolios():
-    reg = Regexseaker()
-
-    expsMalas = [
-        # "y con folio de inicio igual a 1234",
-        # "y con folio de inicio igual a xxxxx",
-        # "con rango de folio  entre el inicial de AAAAA",
-        "rojo es el folio de inicio",
-        "carro es el folio de inicio",
-        "qerwet es el folio de inicio",
-        "dsfda como folio de inicio",
-        "El folio de inicio es el ERWERWREWT",
-        "En folio de inicio asignamos el QWEERE",
-        "Para folio de inicio el valor de QWERWERWER",
-        "cuyo folio de inicio es el WQERRTW",
-        "folio de inicio igual a QWERRT",
-        "El folio de inicio definido en QWERTTW",
-    ]
-
-    expsBuenas_FolioInicio = [
-        "facturas donde el folio de inicial es 0123",
-        "y con folio de inicio igual a 000012",
-        "con rango de folio  entre el inicial de 123456789",
-        "9037432  es el folio de inicio",
-        "El folio de inicio es el 002930200",
-        "En folio de inicio asignamos el 2373893",
-        "Para folio de inicio el valor de 11111111",
-        "cuyo folio de inicio es el 222222",
-        "folio de inicio igual a 78923430",
-        "El folio de inicio definido en 23432",
-        "con folio inicial igual a 568768",
-        "con folio inicial  de  709898798",
-        "el folio inicial es el  689778",
-        "folio inicial de 6987687",
-        "folio Inicial definido en 79876767878 ",
-        "23432 es el folio de inicio",
-        "y asignamos 56987 como folio inicial",
-        "cuyo folio mas reciente de inicio es el 5687",
-        "6987898 es el ultimo folio de inicio",
-        "el folio inicial es el 6987879",
-        "tenemos un folio de inicialización de 679876",
-        "y donde 6987867 es el folio de inicio definido",
-        "con folio inicial asignado de 569876",
-        "folio de inicialización de 69879879",
-        "folio de inicio asignado a 5986987",
-        "dame las facturas con folio de inicio igual a 6987987",
-        "con comienzo de folio en 69887",
-        "con inicialización de folio o folio de inicio de 69979",
-        "Ademas de que el folio de comienzo de serie es el 60978",
-        "el folio de comienzo es el 7098",
-        "y un folio inicial o de inicio de 709098",
-        "con folio con principio de serie de 698987",
-        "dame las facturas que principian con el folio 09900909",
-        "Quiero las facturas con inicialización de folio en 97980990",
-        "Requiero las facturas cerradas pero que inicien con el folio 6899879",
-        "por favor factoras con inicialización de folio en 89989",
-        "notas de credito cuyo folio inicial es el 9889897979",
-        "908908908 como folio de inicialización",
-        "908908908 como folio de inicio",
-        "908908908 es el folio de inicio",
-        "dame las facturas que inician con el folio 987879797897",
-        "quiero facturas con folio inicial o de inicio definido en  6999897979",
-        "necesito las facturas donde el folio de comienzo es 433554",
-        "necesito las facturas que comienzan con el folio 7998989",
-        "solicito las facturas cuo folio de inicia empieza en 7898908",
-        "quiero facturas que empiezan con el folio 68799889",
-        "el folio 79898798 es el de inicio"
-    ]
-
-    expsBuenas_FolioFin = [
-        "con folio de finalización igual a 69898",
-        "el folio de finalizado es 6980987",
-        "el folio de fin es el 698798",
-        "con folio de fin en 6987",
-        "el folio de finalizacion es 98798787",
-        "en folio de finalización asignamos 6988",
-        "con folio de finalizado igual a 232343",
-        " y el folio final de 65656",
-        "el folio de finalización es el 12342",
-        "con folio de finalización de 98573",
-        "en folio de finalización ponemos 2334",
-        "y 87664 como folio de finalización",
-        "el folio final es 42445",
-        "con folio de finalización definido en 42455",
-        "el folio de finalización es 62564",
-        "en folio de finalización asignamos el 9873",
-        "9877 es el folio de finalización",
-        "53457 es el folio de finalizado",
-        "y con folio de finalización o de fin en 69887",
-        "el folio final es igual a 2334544",
-        "el folio termina en 6798",
-        "con folio final definido a 698787",
-        "y un folio de finalización igual a 23443",
-        "asi como un folio de fin de 6797898989",
-        "56987987 es el folio de finalización",
-        "56987987 es el folio de finalización",
-        "56987987 es el folio de cierre",
-        "como folio de cierre o de fin ponemos el 698987",
-        "el folio de fin es el 798988",
-        "679897 es el ultimo folio de finalizado",
-        "el reciente folio de finalizado es el 9898787",
-        "el folio 79898798 es el de finalización",
-        "como finalización de folio ponemos el 698988",
-        "y con folio de fin definido en 69887",
-        "como folio de finalizado se tiene el 69898",
-        "en folio de finalizado asignamoe el valor 609898",
-        "para el folio de finalizado ponemos 435665",
-        "9880708 es el valor del folio de final",
-        "11111 es nuestro folio de finalización",
-        "11111 es mi folio de finalización",
-        "mi folio de finalización es el 222222",
-        "nuestro valor de finalización en folio es el 697988",
-        "folio de finalizado es 689080880",
-        "para folio de finalizado asignamos el 67879799",
-        "en el cierre de folio ponemos el 68808080808",
-    ]
-
-    # for phrase in expsBuenas_FolioInicio:
-    #     resultado = folios(phrase, "Inicio")
-    #     if resultado[1] == 0:
-    #         print("Resulado: {1}\n{0}\n\n".format(str(resultado[0:2]), resultado[2]))
-    #
-    # for phrase in expsBuenas_FolioFin:
-    #     resultado = folios(phrase, "Fin")
-    #     if resultado[1] == 0:
-    #         print("Resulado: {1}\n{0}\n\n".format(str(resultado[0:2]), resultado[2]))
-
-    # for phrase in expsBuenas_FolioFin:
-    #     print("Resulado: {0}\n".format(str(folios(phrase, "Fin"))))
-    for phrase in expsMalas: #+ expsBuenas_FolioInicio:
-        resultado = reg.seakexpresion(phrase, "FolioInicio")
-        #if resultado[1] == 0:
-        print("{0}\nResulado: {1}\n{2}\n".format(
-            phrase, str(resultado[:2]),resultado[3]))
-
-
-def pruebasFechas():
-    reg = Regexseaker()
-
-    exps = [
-        # "con fecha inicial del 15 de Febrero del 2017 , es todo gracias",
-        # " cuya fecha inicial es desde el 1 de febrero del 2017",
-        # "posteriores al primero de febrero del 2018",
-        # "entre el 15 de noviembre del 17",
-        # "con periodo del 1 de Marzo del 2017 ",
-        # " desde marzo del 2017",
-        # "posteriores al 24 de Septiembre",
-        # "de Marzo primero del 2017",
-        # "de noviembre ",
-        # "desde Abril del 2017 ",
-        # "a partir de la segunda semena de enero del año pasado",
-        # "comprendidas en el periodo de Enero del 2017",
-        # " generadas a partir del 6 de Noviembre del año pasado",
-        # "generados desde el 8 de Abril del presente año",
-        # " generadas desde el 5 del presente mes",
-        # "con fecha del 5 de Abril del 2017",
-        # "que oscilen entre el 4 de Junio",
-        # "comprendidos entre Abril 7",
-        # "con rango de fechas comprendido entre Abril 5",
-        # "que datan del 4 de Abril del 2018",
-        # "desde el último de marzo del 2017",
-        # "entre el 23 de Junio del 2016",
-        # "con fecha de inicio del 12 de Marzo del 2016",
-        # "pero emitidas en Noviembre 17 del año pasado",
-        # "pero cuyas fechas se encuentren entre el 1 de Diciembre",
-        # "Del 1 de marzo",
-        # "Del 3 de Mayo del año pasado ",
-        # " entre el 5 de Marzo del 2018",
-        # "que esten entre el día actual ",
-        # "pero que tambien sean anteriores al 12 de Marzo del 18, esta claro",
-        # "pero que sean anteriores al 14 de Junio",
-        # "y el 24 de Febrero del 2018",
-        # "al 5 de Noviembre",
-        # "al mes actual",
-        # "anteriores al 7 de Noviembre",
-        # "hasta el mes pasado",
-        # "anteriores a Enero del presente año",
-        # "a Marzo del mismo año",
-        # " al 6 de Noviembre del año pasado",
-        # "y Septiembre 14 del año pasado",
-        # "y Marzo 19 del presente año",
-        # "previos al 15 de Enero del 2018",
-        # "anteriores a Abril 9 de este año",
-        # "hasta el día de hoy",
-        # "y el primero de Marzo del año pasado",
-        # "y fecha de fin del 13 de Noviembre del presente año",
-        # "anteriores al 5 de Marzo del 2017",
-        # "pero que sean previas al 15 de Marzo de este año.",
-        # " y el 15 de Febrero del año pasado",
-        # " y que sean previas al 6 de Noviembre de este año",
-        # "al 9 de Noviembre del 2016",
-        # "al 19 de Enero del presente año",
-        # " previas al 5 de noviembre de este año",
-        # "y el 6 de Enero del 2017",
-        # "y posteriores al 14 de Diciembre"
-        "facturas con fecha de inicio es 21 de febrero del 2009 y de fin 15 de marzo del 2018, gracias. y fecha de fin 24 de diciembre del 2000"
-    ]
-
-    expsAcordadas = [
-        "5 de septiembre 2 de noviembre octubre 5",
-        "fecha inicial del 5 de enero del 2015",
-        "fecha inicial del 9 de Diciembre del 2013",
-        "fecha de inicio al 12 de Marzo del 2013",
-        "fecha de inicio al 12 de Noviembre del 2015",
-        "fecha de comienzo del primero de enero del 2015",
-        "fecha de comienzo del 21 de Enero del 2013",
-        "fecha inicio de marzo del 2015",
-        "fecha principio en Julio del 2015",
-        "con periodo de inicio de Septiembre 23 del 2016",
-        "iniciando en Septiembre 27 del 2012",
-        "Con comienzo en Julio 23",
-        "Con comienzo en Julio 45",
-        "Iniciando el 14 de Mayo",
-        "iniciando el 12 de Febrero",
-        "inicia Del primero de enero",
-
-        "Fecha final del 3 de Noviembre del 2017",
-        "y finalizando al 4 de Marzo del 2014",
-        "finalizando el 12 de Agosto de 1980",
-        "concluyendo el 23 de Febrero de 1988",
-        "y terminando el 12 de Julio de 1990",
-        "concluyendo en Octubre 23",
-        "con fecha de finalización a Septiembre del 2016",
-        "hasta el 12 de Marzo",
-        "la fecha de fin es el 12 de Abril",
-        "terminando el 23 de diciembre del 2030",
-        "y la fecha final es el 23 de Octubre",
-        "fecha de conclusión de Noviembre 18",
-        "Terminando el 12 Marzo del 2015",
-        "y fecha de conclusión de documentos al 23 de Noviembre"
-    ]
-
-    expsCasos = [
-        "quiero mi facturas con fecha de inicio 3 de septiembre del 2017",
-        "quiero mi facturas con fecha de fin 3 de septiembre del 2017",
-        "quiero mi facturas con fecha de inicio 3 de septiembre del 2017 y fin de diciembre del 2018",
-        "quiero mi facturas con fecha de 3 de septiembre del 2017",
-        "quiero mi facturas con fecha de inicio 3 de septiembre del 2017 y fin de diciembre del 2018 además 1 de enero del 2018",
-        "quiero mi facturas con fecha de inicio 3 de septiembre del 2017 además 1 de enero del 2018 y fin de diciembre del 2018",
-        "quiero mi facturas además 1 de enero del 2018 con fecha de inicio 3 de septiembre del 2017 y fin de diciembre del 2018",
-        "quiero mi facturas además 1 de enero del 2018 con 3 de septiembre del 2017 y de diciembre del 2018",
-        "quiero mi facturas con además 1 de enero del 2018 y fin de diciembre del 2018",
-        "quiero mi facturas con y fin de diciembre del 2018 además 1 de enero del 2018",
-
-
-    ]
-
-    for i, phrase in enumerate(expsAcordadas + expsCasos):
-        resultado = reg.seakexpresion(phrase, "Fecha")
-        #if resultado[1] == 0:
-        print("{0}: {1} \nResultado:{2} \nEstado:{3}".format(
-            i + 1, phrase, str(resultado[0]), resultado[1]))
-        for tree in resultado[2]:
-            print(str(tree) + "\n" + "-" * 10)
-        print("\n")
-
-
-
 if __name__ == "__main__":
-    # reg = Regexseaker()
-    # expr = [
-    #     "Quiero facturas de estado aceptado con número de documento 33443 y el prefijo es x",
-    #     "Quiero facturas de estado recibido con número de documento 33443 y el prefijo es x",
-    #     "Quiero facturas de estado error con número de documento 33443 y el prefijo es x",
-    #     "Quiero facturas de estado firmado con número de documento 33443 y el prefijo es x",
-    #     "Quiero facturas de estado enviado con número de documento 33443 y el prefijo es x",
-    #     "Quiero facturas de estado xsdsfds con número de documento 33443 y el prefijo es x",
-    #     "Quiero facturas de estado 12321 con número de documento 33443 y el prefijo es x",
-    #     "Quiero facturas de estado es recibido con número de documento 33443 y el prefijo es x",
-    #     "Quiero facturas de estado es el que sea con número de documento 33443 y el prefijo es x",
-    #     "Facturas de hoy con recibido como estado y prefijo algo",
-    #     "Facturas de hoy con recibido es estado y prefijo algo",
-    #     "Facturas de hoy con recibido estado y prefijo algo",
-    #     "Facturas de hoy con recibido es el estado y prefijo algo"
-    #     ]
-    # print("\n")
-    #
-    # print("\n")
-    # for e in expr:
-    #     resultado = reg.seakexpresion(e.lower(), "Estado", nl=5)
-    #     print("{0}\nEstado: {1}\n".format(e, resultado))
-    # # print("NoDocumento: ", reg.seakexpresion(expr.lower(), "NoDocumento", nl=3))
-
-    # pruebasFolios()
-    # pruebasFechas()
     pass
