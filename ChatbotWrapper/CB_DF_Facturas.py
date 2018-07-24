@@ -6,6 +6,9 @@ import requests
 from datetime import date
 from Utils import constantesFacturas as CF
 
+
+STATUS_FIELD = "statusField"
+
 def post_data(jdata, link="http://localhost:5050/infomanager"):
     r = requests.post(link, data=jdata)
     # Ajustar salida si r no es la respuesta esperada
@@ -44,7 +47,7 @@ def factura(req):
             print("WARNING: el elemento: {} , no se usó para el diccionario.".format(element))
 
     dicReady = preparaParametros(diccFusionado, req.get("queryResult").get("queryText"))
-    print(dicReady)
+    print("\nDicReady:\n{0}".format(dicReady))
 
     peticionStr = prepareHumanResult(dicReady)
 
@@ -73,10 +76,9 @@ def preparaParametros(dic, queryOriginal):
         CF.FOLIO_FINAL.value,
         CF.NIT.value,
         CF.CUENTA.value,
-        #CF.FECHA.value,
+        CF.FECHA.value,
         CF.NO_DOCUMENTO.value
     ]
-
 
     req = {
         "action": "obtieneDatos",
@@ -85,55 +87,94 @@ def preparaParametros(dic, queryOriginal):
             "campos": list_params
         }
     }
+    print("Req:\n{0}".format(req))
 
-    resp = {
-        "campos": {
-                    CF.TIPO_DOCUMENTO.value: {"value": "Factura",
-                           "statusField": 1
-                           },
-                    CF.PERIODO.value: {"value": CF.PERIODO.value,
-                                                "statusField": 1
-                                                },
-                    CF.STATUS.value: {"value": "Recibido",
-                                         "statusField": 1
-                                         },
-                    CF.PREFIJO.value: {"value": "ABCD",
-                                         "statusField": 1
-                                         },
-                    CF.ACUSE.value: {"value": "Pendiente",
-                                         "statusField": 1
-                                         },
-                    CF.FOLIO_INICIAL.value: {"value": 123456,
-                                         "statusField": 1
-                                         },
-                    CF.FOLIO_FINAL.value: {"value": 987654,
-                                         "statusField": 1
-                                         },
-                    CF.NIT.value: {"value": "OOMA890909AS3",
-                                         "statusField": 1
-                                         },
-                    CF.CUENTA.value: {"value": "ABC123",
-                                         "statusField": 1
-                                         },
-                    CF.NO_DOCUMENTO.value: {"value": "ABC-2343",
-                                         "statusField": 1
-                                         }
-                    },
-        "message": "Mensaje",
-        "returnCode": 1
-    }
+    try:
+        resp = post_data(req)
+    except:
+        # todo: borrar esta respuesta dummy.
+        resp = _getDummyResp()
 
-    for field in list_params:
-        field_resp = resp["campos"][field]
-        _setEntryInDic(dicReady, field,
-                       field_resp["value"], field_resp["statusField"])
-        # TODO: Caso de fechas y periodo
+    _buildFinalDic(dicReady, list_params, resp)
 
     _mapValues(dicReady)
 
-
-    print(req)
     return dicReady
+
+
+def _getDummyResp():
+    resp = {
+        "campos": {
+            CF.TIPO_DOCUMENTO.value: {"value": "Factura",
+                                      STATUS_FIELD: 1
+                                      },
+            CF.PERIODO.value: {CF.FECHA_INICIAL.value: "1900-01-01",
+                               CF.FECHA_FINAL.value: "1910-12-24",
+                               STATUS_FIELD: 1
+                               },
+            CF.STATUS.value: {"value": "Recibido",
+                              STATUS_FIELD: 1
+                              },
+            CF.PREFIJO.value: {"value": "ABCD",
+                               STATUS_FIELD: 1
+                               },
+            CF.ACUSE.value: {"value": "Pendiente",
+                             STATUS_FIELD: 1
+                             },
+            CF.FOLIO_INICIAL.value: {"value": 123456,
+                                     STATUS_FIELD: 1
+                                     },
+            CF.FOLIO_FINAL.value: {"value": 987654,
+                                   STATUS_FIELD: 1
+                                   },
+            CF.NIT.value: {"value": "OOMA890909AS3",
+                           STATUS_FIELD: 1
+                           },
+            CF.CUENTA.value: {"value": "ABC123",
+                              STATUS_FIELD: 1
+                              },
+            CF.NO_DOCUMENTO.value: {"value": "ABC-2343",
+                                    STATUS_FIELD: 1
+                                    },
+            CF.FECHA.value: {CF.FECHA_INICIAL.value: "2000-01-01",
+                             CF.FECHA_FINAL.value: "2010-12-24",
+                             STATUS_FIELD: 1
+                             }
+        },
+        "message": "Mensaje",
+        "returnCode": 1
+    }
+    return resp
+
+
+def _buildFinalDic(dicReady, list_params, resp):
+    # Construimos diccionario de salida
+    for field in list_params:
+        field_resp = resp["campos"][field]
+
+        if field == CF.FECHA.value or field == CF.PERIODO.value:
+            # Si el field es fecha, entonces sobreescribe por ser el de mayor
+            # prioridad. Si no existe el campo, cualquiera puede guardar
+            # (Sería periodo).
+            if field == CF.FECHA.value:
+                _setEntryInDic(dicReady, CF.FECHA_INICIAL.value,
+                               field_resp[CF.FECHA_INICIAL.value],
+                               field_resp[STATUS_FIELD])
+                _setEntryInDic(dicReady, CF.FECHA_FINAL.value,
+                               field_resp[CF.FECHA_FINAL.value],
+                               field_resp[STATUS_FIELD])
+            elif not dicReady.get(CF.FECHA_INICIAL):
+                _setEntryInDic(dicReady, CF.FECHA_INICIAL.value,
+                               field_resp[CF.FECHA_INICIAL.value],
+                               field_resp[STATUS_FIELD])
+                _setEntryInDic(dicReady, CF.FECHA_FINAL.value,
+                               field_resp[CF.FECHA_FINAL.value],
+                               field_resp[STATUS_FIELD])
+        else:
+            _setEntryInDic(dicReady, field,
+                           field_resp["value"], field_resp[STATUS_FIELD])
+    # Hardoced value
+    _setEntryInDic(dicReady, CF.PERIODO.value, 0, 1)
 
 
 def _setEntryInDic(dic: dict, campo: str, value, status: int):
