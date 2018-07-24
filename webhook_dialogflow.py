@@ -5,13 +5,8 @@ import json
 import os
 import sys
 from flask import Flask, request, make_response
-import requests
 from Services import makeWebhookResult
 
-def post_data(jdata, link="http://0.0.0.0:5050/infomanager"):
-    r = requests.post(link, data=jdata)
-    # Ajustar salida si r no es la respuesta esperada
-    return r.json()
 
 app = Flask(__name__)
 
@@ -24,8 +19,6 @@ def retornodummy():
 def webhook():
     req = request.get_json(silent=True, force=True)
     res = makeWebhookResult(req)
-    # res = post_data(json.dumps(req))
-
     res = json.dumps(res, indent=4)
     r = make_response(res)
     r.headers["Content-Type"] = "application/json"
