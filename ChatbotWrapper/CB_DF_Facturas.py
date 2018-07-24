@@ -23,7 +23,8 @@ def factura(req: dict):
     }
 
     # TODO: únicamente para pruebas. Borra cuando no sea necesario.
-    _updateValues(req.copy(), dicReady.copy())
+    # _updateValues(req.copy(), dicReady.copy())
+
     # garbage collector
     collect()
 
@@ -78,7 +79,7 @@ def _prepareParameters(dic, queryOriginal):
     dicReady = {}
     list_params = [
         CF.TIPO_DOCUMENTO.value,
-        CF.PERIODO.value,
+        # CF.PERIODO.value,
         CF.STATUS.value,
         CF.PREFIJO.value,
         CF.ACUSE.value,
@@ -86,13 +87,13 @@ def _prepareParameters(dic, queryOriginal):
         CF.FOLIO_FINAL.value,
         CF.NIT.value,
         CF.CUENTA.value,
-        CF.FECHA.value,
+        # CF.FECHA.value,
         CF.NO_DOCUMENTO.value
     ]
 
     resp = IM.extractData(queryOriginal, list_params)
     # TODO: borrar esta respuesta dummy.
-    resp = _getDummyResp()
+    # resp = _getDummyResp()
 
     _buildFinalDic(dicReady, list_params, resp)
 
