@@ -6,7 +6,7 @@ from Utils import constantesFacturas as CF
 STATUS_FIELD = "statusField"
 
 
-def factura(req):
+def factura(req: dict):
     diccFusionado = _prepareJsonDF(req)
 
     dicReady = _prepareParameters(diccFusionado, req.get("queryResult").get("queryText"))
