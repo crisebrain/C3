@@ -232,7 +232,7 @@ def _mapValues(dic: dict):
     }
 
     for field in dic.keys():
-        if field in fields_to_map.keys():
+        if field in fields_to_map.keys() and dic[field]["value"]:
             dic[field]["value"] = fields_to_map[field](dic[field]["value"])
 
 
