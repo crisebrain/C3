@@ -10,11 +10,21 @@ from flask import Flask, request, make_response
 
 app = Flask(__name__)
 
+@app.route("/", methods=["GET"])
+def retornodummy():
+    r = make_response("ItWorks")
+    return r
+
 @app.route("/infomanager", methods=["POST", "GET"])
 def webhook2():
     req = request.get_json(silent=True, force=True)
+    print(req)
+    action = req.get("action")
+    if action == "obtieneDatos":
+        res = im.datumCSE_Facturas(req)
+    else:
     # print(json.dumps(req, indent=4))
-    res = im.interceptIntent(req)
+        res = im.interceptIntent(req)
     res = json.dumps(res)
     r = make_response(res)
     r.headers["Content-Type"] = "application/json"

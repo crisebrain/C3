@@ -12,6 +12,8 @@ from textJumping import detect_intent_texts
 from Utils import SessionContainer
 sys.path.append("Services")
 from Services import makeWebhookResult
+sys.path.append("SearchEngine")
+from SearchEngine import Regexseaker
 
 class InfoManager:
     """InfoManager class.
@@ -203,4 +205,20 @@ class InfoManager:
             msgString = node.msgAns
             # return node.msgAns
         response["fulfillmentText"] = msgString
+        return response
+
+    def datumCSE_Facturas(self, jdata):
+        reg = Regexseaker()
+        ndata = jdata.get("datos")
+        fields = ndata.get("campos")
+        phrase = ndata.get("frase")
+        results = dict()
+        for field in fields:
+            result = reg.seakexpresion(phrase, field)
+            resdict = dict(value=result[0],
+                           statusField=result[1])
+            results.update({field:resdict})
+        response = {"campos": results,
+                    "message": "Extraccion de campos",
+                    "returnCode": 1}
         return response
