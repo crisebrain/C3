@@ -1,15 +1,9 @@
 from gc import collect
-import requests
 from ChatbotWrapper.Utils import methods_DF_to_IM as IM
 from Utils import constantesFacturas as CF
 
 
 STATUS_FIELD = "statusField"
-
-def post_data(jdata, link="http://localhost:5050/infomanager"):
-    r = requests.post(link, data=jdata)
-    # Ajustar salida si r no es la respuesta esperada
-    return r.json()
 
 
 def factura(req):
@@ -99,7 +93,7 @@ def _prepareParameters(dic, queryOriginal):
     print("Req:\n{0}".format(req))
 
     try:
-        resp = post_data(req)
+        resp = IM.post_data(req)
     except:
         # todo: borrar esta respuesta dummy.
         resp = _getDummyResp()
