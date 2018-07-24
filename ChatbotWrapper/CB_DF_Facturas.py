@@ -1,9 +1,5 @@
 from gc import collect
-import json
-import datetime
-import re
 import requests
-from datetime import date
 from Utils import constantesFacturas as CF
 
 
