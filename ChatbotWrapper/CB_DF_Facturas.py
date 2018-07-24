@@ -21,18 +21,23 @@ def factura(req):
                     "payload": dicReady
     }
 
-
-    _updateValues(req, dicReady)
-
-
+    _updateValues(req.copy(), dicReady.copy())
     # garbage collector
     collect()
 
     return respuesta
 
 
-def _updateValues(req, IM_fields: dict):
-    IM.updateIM(req, IM_fields)
+def _updateValues(req: dict, fields: dict):
+    """
+    Esta función únicamente es de prueba, para probar que el IM guarde los
+    valores que se le han pasado.
+    """
+    fields["date"] = [ fields[CF.FECHA_INICIAL.value]["value"],
+                       fields[CF.FECHA_FINAL.value]["value"]]
+    del fields[CF.FECHA_INICIAL.value]
+    del fields[CF.FECHA_FINAL.value]
+    IM.updateIM(req, fields)
 
 
 def _prepareJsonDF(req):
@@ -92,11 +97,9 @@ def _prepareParameters(dic, queryOriginal):
     }
     print("Req:\n{0}".format(req))
 
-    try:
-        resp = IM.post_data(req)
-    except:
-        # todo: borrar esta respuesta dummy.
-        resp = _getDummyResp()
+    resp = IM.post_data(req)
+    # TODO: borrar esta respuesta dummy.
+    resp = _getDummyResp()
 
     _buildFinalDic(dicReady, list_params, resp)
 
