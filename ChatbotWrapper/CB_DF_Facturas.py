@@ -90,16 +90,7 @@ def _prepareParameters(dic, queryOriginal):
         CF.NO_DOCUMENTO.value
     ]
 
-    req = {
-        "action": "obtieneDatos",
-        "datos": {
-            "frase": queryOriginal,
-            "campos": list_params
-        }
-    }
-    print("Req:\n{0}".format(req))
-
-    resp = IM.post_data(req)
+    resp = IM.extractData(queryOriginal, list_params)
     # TODO: borrar esta respuesta dummy.
     resp = _getDummyResp()
 
