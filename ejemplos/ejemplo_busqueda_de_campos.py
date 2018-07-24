@@ -1,9 +1,17 @@
 import sys
-sys.path.append("../Services")
-from b2bcliente import Regexseaker
-reg = Regexseaker("../Services/b2bcliente/facturaskeys.json")
+from SearchEngine import Regexseaker
+from Utils import constantesFacturas as cf
+reg = Regexseaker("facturaskeys.json")
+campos = [attr for attr in dir(cf) if '__' not in attr]
+campos = [(getattr(cf, campo)).value for campo in campos]
+campos.pop(3)
+campos.pop(3)
 
 frases = ["numero de cuenta abc345",
+          """Dame las facturas desde el 30 de junio del 2016 al 3 de octubre
+             del 2017 con acuse rechazado prefijo igual a x numero de documento 3232
+             folio inicial 3221 y folio final 21 estado cerrado, el numero de cuenta
+             es ssa981 y nit adquiriente AAGR860628s4""",
           "el número de cuenta es Sad345",
           "con número de cuenta 5555",
           "cuenta con número xsa243",
@@ -119,8 +127,8 @@ frases = ["numero de cuenta abc345",
           "numero de facturas 1311324",
           "documento sea inicializando",
           "Dame las facturas",
-	  "de tipo factura",
-	  "quiero las notas",
+	      "de tipo factura",
+	      "quiero las notas",
           "quiero notas de credito con tipo de documento factura",
           "dame las notas con prefijo factura",
           "las facturas con número de documento nota",
@@ -155,11 +163,8 @@ frases = ["numero de cuenta abc345",
           "para nota con prefijo es factura",
           "para nota con prefijo factura"]
 
-fields = ["NoDocumento", "Prefijo", "Cuenta", "NitAdquirienteMex",
-          "Tipo", "Estado", "Acuse"]
-
 for exp in frases:
     print(exp)
-    res = [reg.seakexpresion(exp, field)[0] for field in fields]
-    print(["{0}: {1}".format(field, resi) for field, resi in zip(fields, res)
+    res = [reg.seakexpresion(exp, field)[0] for field in campos]
+    print(["{0}: {1}".format(field, resi) for field, resi in zip(campos, res)
            if resi is not None])
