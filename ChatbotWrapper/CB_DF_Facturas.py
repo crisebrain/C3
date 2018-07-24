@@ -1,5 +1,6 @@
 from gc import collect
 import requests
+from ChatbotWrapper.Utils import methods_DF_to_IM as IM
 from Utils import constantesFacturas as CF
 
 
@@ -26,10 +27,18 @@ def factura(req):
                     "payload": dicReady
     }
 
+
+    _updateValues(req, dicReady)
+
+
     # garbage collector
     collect()
 
     return respuesta
+
+
+def _updateValues(req, IM_fields: dict):
+    IM.updateIM(req, IM_fields)
 
 
 def _prepareJsonDF(req):
