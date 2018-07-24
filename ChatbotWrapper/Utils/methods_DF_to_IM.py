@@ -12,7 +12,7 @@ def post_data(jdata, link=IM_LINK):
     :return: Respuesta del WS.
     """
     try:
-        r = requests.post(link, data=jdata)
+        r = requests.post(link, data=json.dumps(jdata))
         # Ajustar salida si r no es la respuesta esperada
         return r.json()
     except:
@@ -29,11 +29,7 @@ def updateIM(req:dict, fields: dict):
     :return: Respuesta del IM.
     """
     req.update({IM_FIELDS: fields})
-    post_data(req)
-    # Recuerda que para mandar la peticion de busquedas a im
-    # tienes que pasar el diccionario a json
-    # con json.dumps(diccionario)
-
+    return post_data(req)
 
 
 def extractData(phrase: str, list_params: list):
