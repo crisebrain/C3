@@ -108,8 +108,8 @@ def _getDummyResp():
             CF.TIPO_DOCUMENTO.value: {"value": "Factura",
                                       STATUS_FIELD: 1
                                       },
-            CF.PERIODO.value: {CF.FECHA_INICIAL.value: "1900-01-01",
-                               CF.FECHA_FINAL.value: "1910-12-24",
+            CF.PERIODO.value: {CF.FECHA_INICIAL.value: None,
+                               CF.FECHA_FINAL.value: None,
                                STATUS_FIELD: 1
                                },
             CF.STATUS.value: {"value": "Recibido",
@@ -154,16 +154,19 @@ def _buildFinalDic(dicReady, list_params, resp):
 
         if field == CF.FECHA.value or field == CF.PERIODO.value:
             # Si el field es fecha, entonces sobreescribe por ser el de mayor
-            # prioridad. Si no existe el campo, cualquiera puede guardar
+            # prioridad, siempre y cuando traiga una fecha válida.
+            # Si no existe el campo, cualquiera puede guardar
             # (Sería periodo).
-            if field == CF.FECHA.value:
+            if field == CF.FECHA.value and \
+                    ( field_resp.get(CF.FECHA_INICIAL.value) or
+                      field_resp.get(CF.FECHA_FINAL.value) ):
                 _setEntryInDic(dicReady, CF.FECHA_INICIAL.value,
                                field_resp[CF.FECHA_INICIAL.value],
                                field_resp[STATUS_FIELD])
                 _setEntryInDic(dicReady, CF.FECHA_FINAL.value,
                                field_resp[CF.FECHA_FINAL.value],
                                field_resp[STATUS_FIELD])
-            elif not dicReady.get(CF.FECHA_INICIAL):
+            elif not dicReady.get(CF.FECHA_INICIAL.value):
                 _setEntryInDic(dicReady, CF.FECHA_INICIAL.value,
                                field_resp[CF.FECHA_INICIAL.value],
                                field_resp[STATUS_FIELD])
