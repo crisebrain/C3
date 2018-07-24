@@ -7,7 +7,8 @@ STATUS_FIELD = "statusField"
 
 
 def factura(req: dict):
-    diccFusionado = _prepareJsonDF(req)
+    # diccFusionado = _prepareJsonDF(req)
+    diccFusionado = {}
 
     dicReady = _prepareParameters(diccFusionado, req.get("queryResult").get("queryText"))
     print("\nDicReady:\n{0}".format(dicReady))
