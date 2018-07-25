@@ -1,10 +1,7 @@
 from .saldos_vdns import makeresponseAction, informacion
 import json
-import sys
-sys.path.append("Utils")
-sys.path.append("ChatbotWrapper")
-from logtofile import CreateLogger
-from CB_DF_Facturas import factura
+from Utils.logtofile import CreateLogger
+from ChatbotWrapper.CB_DF_Facturas import factura
 
 def makeWebhookResult(req, origin = 1):
     if origin == 1:
