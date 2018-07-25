@@ -23,10 +23,12 @@ def factura(req: dict):
     peticionStr = _prepareHumanResult(dicReady)
 
     # Response
-    dicReady.update({"returnCode": "1"})
     respuesta =  {
                     "fulfillmentText" : peticionStr,
-                    "payload": dicReady
+                    "payload": {
+                        "data:": dicReady,
+                        "returnCode": 1
+                    }
     }
 
     # TODO: únicamente para pruebas. Borra cuando no sea necesario.
