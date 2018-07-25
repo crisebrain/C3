@@ -5,6 +5,7 @@ import sys
 IM_FIELDS = "IM_fields"
 IM_LINK = "http://localhost:5050/infomanager"
 
+
 def post_data(jdata, link=IM_LINK):
     """
     Función de comunicación genérica hacia cualquier WS/WH.
@@ -24,7 +25,7 @@ def post_data(jdata, link=IM_LINK):
         return sys.exc_info()
 
 
-def updateIM(req:dict, fields: dict):
+def updateIM(req: dict, fields: dict):
     """
     Esta función se comunica con el IM, para que actualice los valores del
     árbol del conference con los campos que se pasan en fields.

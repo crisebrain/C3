@@ -2,7 +2,6 @@ from gc import collect
 from ChatbotWrapper.Utils import methods_DF_to_IM as IM
 from Utils import constantesFacturas as CF
 
-
 STATUS_FIELD = "statusField"
 RETURN_CODE = "returnCode"
 MESSAGE = "message"
@@ -26,12 +25,12 @@ def factura(req: dict):
     peticionStr = _prepareHumanResult(dicReady)
 
     # Response
-    respuesta =  {
-                    "fulfillmentText" : peticionStr,
-                    "payload": {
-                        "data:": dicReady,
-                        RETURN_CODE: returnCode
-                    }
+    respuesta = {
+        "fulfillmentText": peticionStr,
+        "payload": {
+            "data:": dicReady,
+            RETURN_CODE: returnCode
+        }
     }
 
     # TODO: únicamente para pruebas. Borra cuando no sea necesario.
@@ -48,8 +47,8 @@ def _updateValues(req: dict, fields: dict):
     Esta función únicamente es de prueba, para probar que el IM guarde los
     valores que se le han pasado.
     """
-    fields["date"] = [ fields[CF.FECHA_INICIAL.value]["value"],
-                       fields[CF.FECHA_FINAL.value]["value"]]
+    fields["date"] = [fields[CF.FECHA_INICIAL.value]["value"],
+                      fields[CF.FECHA_FINAL.value]["value"]]
     del fields[CF.FECHA_INICIAL.value]
     del fields[CF.FECHA_FINAL.value]
     IM.updateIM(req, fields)
@@ -201,8 +200,8 @@ def _buildFinalDic(dicReady: dict, list_params: list, resp: dict):
             # Si no existe el campo, cualquiera puede guardar
             # (Sería periodo).
             if field == CF.FECHA.value and \
-                    ( field_resp.get(CF.FECHA_INICIAL.value) or
-                      field_resp.get(CF.FECHA_FINAL.value) ):
+                    (field_resp.get(CF.FECHA_INICIAL.value) or
+                     field_resp.get(CF.FECHA_FINAL.value)):
                 _setEntryInDic(dicReady, CF.FECHA_INICIAL.value,
                                field_resp[CF.FECHA_INICIAL.value],
                                field_resp[STATUS_FIELD])
@@ -242,6 +241,7 @@ def _mapValues(dic: dict):
 
     :param dic: Diccionario donde se guardarán los resultados
     """
+
     def tipoDocumento(value):
         switcherTipoDocumento = {
             "Factura": "F",
@@ -300,7 +300,7 @@ def _prepareHumanResult(dicReady: dict):
     """
     peticionStr = ""
     for element in dicReady:
-        if dicReady[element].get("value") is not None:# and dicReady[element]["status"] != 0:
+        if dicReady[element].get("value") is not None:  # and dicReady[element]["status"] != 0:
             peticionStr += "{0}: {1}, {2} \n".format(
                 element, dicReady[element]["value"], dicReady[element]["status"])
 

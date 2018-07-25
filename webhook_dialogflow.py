@@ -1,5 +1,5 @@
 #!/home/ebraintec/anaconda3/bin/python
-#-*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 import json
 import os
 import sys
@@ -10,10 +10,12 @@ from Services import makeWebhookResult
 
 app = Flask(__name__)
 
+
 @app.route("/", methods=["GET"])
 def retornodummy():
     r = make_response("ItWorks")
     return r
+
 
 @app.route("/webhook", methods=["POST", "GET"])
 def webhook():
@@ -23,6 +25,7 @@ def webhook():
     r = make_response(res)
     r.headers["Content-Type"] = "application/json"
     return r
+
 
 if __name__ == "__main__":
     if len(sys.argv) > 1:
