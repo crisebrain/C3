@@ -1,12 +1,12 @@
 #!/home/ebraintec/anaconda3/bin/python
 #-*- coding: utf-8 -*-
-import urllib
 import json
 import os
 import sys
-from flask import Flask, request, make_response
-from Services import makeWebhookResult
 
+from flask import Flask, request, make_response
+
+from Services import makeWebhookResult
 
 app = Flask(__name__)
 
