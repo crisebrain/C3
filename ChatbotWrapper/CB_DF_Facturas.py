@@ -52,7 +52,7 @@ def _updateValues(req: dict, fields: dict):
     IM.updateIM(req, fields)
 
 
-def _prepareJsonDF(req):
+def _prepareJsonDF(req: dict):
     """
     Función que procesa el json de entrada de DF y le da tratamiento para ser
     más amigable a la hora de extraer valores.
@@ -91,7 +91,7 @@ def _prepareJsonDF(req):
     return diccFusionado
 
 
-def _prepareParameters(dic, queryOriginal):
+def _prepareParameters(dic: dict, queryOriginal: str):
     """
     Función que prepara los parámetros de salida para el cliente. Esta función
     se encarga de llamar a las funciones auxiliares, para obtener datos,
@@ -175,7 +175,7 @@ def _getDummyResp():
     return resp
 
 
-def _buildFinalDic(dicReady, list_params, resp):
+def _buildFinalDic(dicReady: dict, list_params: list, resp: dict):
     """
     Función que prepara los parámetros de salida para el cliente. Esta
     función es la encarga de construir la estructura general del json para
