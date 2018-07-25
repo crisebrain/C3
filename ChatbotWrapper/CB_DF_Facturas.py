@@ -10,12 +10,12 @@ def factura(req: dict):
     """
     Función principal de esta clase. Se encarga de llevar la lógica del
     negocio.
+
     :param req: Petición de DF.
     :return: Respuesta construida hacia DF
     """
 
     # diccFusionado = _prepareJsonDF(req)
-    diccFusionado = {}
 
     dicReady = _prepareParameters(diccFusionado, req.get("queryResult").get("queryText"))
     print("\nDicReady:\n{0}".format(dicReady))
@@ -56,8 +56,9 @@ def _prepareJsonDF(req: dict):
     """
     Función que procesa el json de entrada de DF y le da tratamiento para ser
     más amigable a la hora de extraer valores.
+
     :param req: Petición de DF.
-    :return: Diccionario coonstruido con los valores de DF.
+    :return: Diccionario construido con los valores de DF.
     """
 
     # Ya que los elementos vienen en una lista deben tener un tratamiento
@@ -96,6 +97,7 @@ def _prepareParameters(dic: dict, queryOriginal: str):
     Función que prepara los parámetros de salida para el cliente. Esta función
     se encarga de llamar a las funciones auxiliares, para obtener datos,
     construir el diccionario y mapear valores.
+
     :param dic: Diccionario de los parámetros de DF.
     :param queryOriginal: Lo que el usuario ingreso a DF.
     :return: Diccionario listo para ser añadido al json final.
@@ -129,6 +131,7 @@ def _prepareParameters(dic: dict, queryOriginal: str):
 def _getDummyResp():
     """
     Retorna un json dummy estilo respuesta IM para procesar.
+
     :return: json dummy
     """
     resp = {
@@ -180,6 +183,7 @@ def _buildFinalDic(dicReady: dict, list_params: list, resp: dict):
     Función que prepara los parámetros de salida para el cliente. Esta
     función es la encarga de construir la estructura general del json para
     clientes de terceros.
+
     :param dicReady: Diccionario donde se guardarán los resultados.
     :param list_params: Parámetros que se incluirán en el diccionario
     :param resp: Respuesta del IM
@@ -219,6 +223,7 @@ def _buildFinalDic(dicReady: dict, list_params: list, resp: dict):
 def _setEntryInDic(dic: dict, campo: str, value, status: int):
     """
     Función que construye la estructura de cada campo en el json para el cliente.
+
     :param dic: Diccionario donde se guardarán los campos
     :param campo: nombre del campo
     :param value: valor del campo
@@ -231,6 +236,7 @@ def _mapValues(dic: dict):
     """
     Función que se encarga de mapear los valores ingresados por el usuario,
     a los valores requeridos por el cliente.
+
     :param dic: Diccionario donde se guardarán los resultados
     """
     def tipoDocumento(value):
@@ -285,6 +291,7 @@ def _mapValues(dic: dict):
 def _prepareHumanResult(dicReady: dict):
     """
     Función que regresa una salida amigable del json de salida al cliente.
+
     :param dicReady: Diccionario que será integrado al json final
     :return: String con la salida amigable.
     """
