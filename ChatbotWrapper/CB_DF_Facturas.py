@@ -286,9 +286,9 @@ def _mapValues(dic: dict):
         CF.ACUSE.value: acuse
     }
 
-    for field in dic.keys():
-        if field in fields_to_map.keys() and dic[field]["value"]:
-            dic[field]["value"] = fields_to_map[field](dic[field]["value"])
+    for field, values in dic.items():
+        if field in fields_to_map.keys() and values["value"]:
+            values["value"] = fields_to_map[field](values["value"])
 
 
 def _prepareHumanResult(dicReady: dict):
