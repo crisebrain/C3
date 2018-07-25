@@ -4,6 +4,9 @@ from Utils import constantesFacturas as CF
 
 
 STATUS_FIELD = "statusField"
+RETURN_CODE = "returnCode"
+MESSAGE = "message"
+CAMPOS = "campos"
 
 
 def factura(req: dict):
@@ -27,7 +30,7 @@ def factura(req: dict):
                     "fulfillmentText" : peticionStr,
                     "payload": {
                         "data:": dicReady,
-                        "returnCode": 1
+                        RETURN_CODE: returnCode
                     }
     }
 
@@ -135,7 +138,7 @@ def _getDummyResp():
     :return: json dummy
     """
     resp = {
-        "campos": {
+        CAMPOS: {
             CF.TIPO_DOCUMENTO.value: {"value": "Factura",
                                       STATUS_FIELD: 1
                                       },
@@ -172,8 +175,8 @@ def _getDummyResp():
                              STATUS_FIELD: 1
                              }
         },
-        "message": "Mensaje",
-        "returnCode": 1
+        MESSAGE: "Mensaje",
+        RETURN_CODE: 1
     }
     return resp
 
@@ -190,7 +193,7 @@ def _buildFinalDic(dicReady: dict, list_params: list, resp: dict):
     """
     # Construimos diccionario de salida
     for field in list_params:
-        field_resp = resp["campos"][field]
+        field_resp = resp[CAMPOS][field]
 
         if field == CF.FECHA.value or field == CF.PERIODO.value:
             # Si el field es fecha, entonces sobreescribe por ser el de mayor
