@@ -20,7 +20,7 @@ def factura(req: dict):
 
     # diccFusionado = _prepareJsonDF(req)
 
-    dicReady = _prepareParameters(diccFusionado, req.get("queryResult").get("queryText"))
+    dicReady, returnCode, message = _prepareParameters(req.get("queryResult").get("queryText"))
     print("\nDicReady:\n{0}".format(dicReady))
 
     peticionStr = _prepareHumanResult(dicReady)
@@ -95,7 +95,7 @@ def _prepareJsonDF(req: dict):
     return diccFusionado
 
 
-def _prepareParameters(dic: dict, queryOriginal: str):
+def _prepareParameters(queryOriginal: str):
     """
     Función que prepara los parámetros de salida para el cliente. Esta función
     se encarga de llamar a las funciones auxiliares, para obtener datos,
@@ -103,7 +103,7 @@ def _prepareParameters(dic: dict, queryOriginal: str):
 
     :param dic: Diccionario de los parámetros de DF.
     :param queryOriginal: Lo que el usuario ingreso a DF.
-    :return: Diccionario listo para ser añadido al json final.
+    :return: Diccionario listo para ser añadido al json final, código de Retorno y mensaje genérico.
     """
     dicReady = {}
     list_params = [
@@ -128,7 +128,7 @@ def _prepareParameters(dic: dict, queryOriginal: str):
 
     _mapValues(dicReady)
 
-    return dicReady
+    return dicReady, resp[RETURN_CODE], resp[MESSAGE]
 
 
 def _getDummyResp():
