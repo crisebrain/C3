@@ -7,6 +7,13 @@ STATUS_FIELD = "statusField"
 
 
 def factura(req: dict):
+    """
+    Función principal de esta clase. Se encarga de llevar la lógica del
+    negocio.
+    :param req: Petición de DF.
+    :return: Respuesta construida hacia DF
+    """
+
     # diccFusionado = _prepareJsonDF(req)
     diccFusionado = {}
 
@@ -44,6 +51,13 @@ def _updateValues(req: dict, fields: dict):
 
 
 def _prepareJsonDF(req):
+    """
+    Función que procesa el json de entrada de DF y le da tratamiento para ser
+    más amigable a la hora de extraer valores.
+    :param req: Petición de DF.
+    :return: Diccionario coonstruido con los valores de DF.
+    """
+
     # Ya que los elementos vienen en una lista deben tener un tratamiento
     # particular
     listaCampos = req.get("queryResult").get("parameters")["facturasCampos"]
@@ -76,6 +90,14 @@ def _prepareJsonDF(req):
 
 
 def _prepareParameters(dic, queryOriginal):
+    """
+    Función que prepara los parámetros de salida para el cliente. Esta función
+    se encarga de llamar a las funciones auxiliares, para obtener datos,
+    construir el diccionario y mapear valores.
+    :param dic: Diccionario de los parámetros de DF.
+    :param queryOriginal: Lo que el usuario ingreso a DF.
+    :return: Diccionario listo para ser añadido al json final.
+    """
     dicReady = {}
     list_params = [
         CF.TIPO_DOCUMENTO.value,
@@ -103,6 +125,10 @@ def _prepareParameters(dic, queryOriginal):
 
 
 def _getDummyResp():
+    """
+    Retorna un json dummy estilo respuesta IM para procesar.
+    :return: json dummy
+    """
     resp = {
         "campos": {
             CF.TIPO_DOCUMENTO.value: {"value": "Factura",
@@ -148,6 +174,14 @@ def _getDummyResp():
 
 
 def _buildFinalDic(dicReady, list_params, resp):
+    """
+    Función que prepara los parámetros de salida para el cliente. Esta
+    función es la encarga de construir la estructura general del json para
+    clientes de terceros.
+    :param dicReady: Diccionario donde se guardarán los resultados.
+    :param list_params: Parámetros que se incluirán en el diccionario
+    :param resp: Respuesta del IM
+    """
     # Construimos diccionario de salida
     for field in list_params:
         field_resp = resp["campos"][field]
@@ -181,12 +215,22 @@ def _buildFinalDic(dicReady, list_params, resp):
 
 
 def _setEntryInDic(dic: dict, campo: str, value, status: int):
-    """Status 1 correcto, status 0 incorrecto.
+    """
+    Función que construye la estructura de cada campo en el json para el cliente.
+    :param dic: Diccionario donde se guardarán los campos
+    :param campo: nombre del campo
+    :param value: valor del campo
+    :param status: código de estado del campo: 1 correcto, status 0 incorrecto.
     """
     dic[campo] = {"value": value, "status": status}
 
 
 def _mapValues(dic: dict):
+    """
+    Función que se encarga de mapear los valores ingresados por el usuario,
+    a los valores requeridos por el cliente.
+    :param dic: Diccionario donde se guardarán los resultados
+    """
     def tipoDocumento(value):
         switcherTipoDocumento = {
             "Factura": "F",
@@ -237,11 +281,15 @@ def _mapValues(dic: dict):
 
 
 def _prepareHumanResult(dicReady: dict):
-    # Print values
+    """
+    Función que regresa una salida amigable del json de salida al cliente.
+    :param dicReady: Diccionario que será integrado al json final
+    :return: String con la salida amigable.
+    """
     peticionStr = ""
     for element in dicReady:
         if dicReady[element].get("value") is not None:# and dicReady[element]["status"] != 0:
             peticionStr += "{0}: {1}, {2} \n".format(
                 element, dicReady[element]["value"], dicReady[element]["status"])
 
-    return  peticionStr
+    return peticionStr
