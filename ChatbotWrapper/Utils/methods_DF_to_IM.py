@@ -1,5 +1,6 @@
 import requests
 import json
+import sys
 
 IM_FIELDS = "IM_fields"
 IM_LINK = "http://localhost:5050/infomanager"
@@ -15,8 +16,12 @@ def post_data(jdata, link=IM_LINK):
         r = requests.post(link, data=json.dumps(jdata))
         # Ajustar salida si r no es la respuesta esperada
         return r.json()
+    except requests.exceptions.ConnectionError:
+        print("Falló la conexión a {}".format(link))
+        return sys.exc_info()
     except:
-        print("Falló la comunicación con IM.")
+        print(sys.exc_info())
+        return sys.exc_info()
 
 
 def updateIM(req:dict, fields: dict):
