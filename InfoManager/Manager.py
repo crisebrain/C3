@@ -120,6 +120,47 @@ class InfoManager:
         response = self.outputMsg(jdata, currentNode, values, forward)
         return response
 
+    def outputMsg(self, jdata, node, values, forward):
+        """formats the msgAns with the values from upper nodes."""
+        # Tiene que ver con los contextos
+        print(values)
+        queryResult = jdata.get("queryResult")
+        if forward:
+            response = self.makeWebhookResult(jdata)
+            if response["payload"]["returnCode"] == "0":
+                msgString = node.msgAns
+                pattern = r"\$\w+"
+                fields = re.findall(pattern=pattern, string=msgString)
+                if isinstance(fields, list):
+                    for field in fields:
+                        fieldw = field[1:]
+                        msgString = msgString.replace(field, values[field])
+                # return msgString
+            else:
+                msgString = response["fulfillmentText"]
+                # return msgString
+        else:
+            msgString = node.msgAns
+            # return node.msgAns
+        response["fulfillmentText"] = msgString
+        return response
+
+    def datumCSE_Facturas(self, jdata):
+        reg = Regexseaker()
+        ndata = jdata.get("datos")
+        fields = ndata.get("campos")
+        phrase = ndata.get("frase")
+        results = dict()
+        for field in fields:
+            result = reg.seakexpresion(phrase, field)
+            resdict = dict(value=result[0],
+                           statusField=result[1])
+            results.update({field:resdict})
+        response = {"campos": results,
+                    "message": "Extraccion de campos",
+                    "returnCode": 1}
+        return response
+
     def intentDecompose(self):
         """Extracts the value from msgOriginal string from jdata dict.
         Creates a sequence in a list kind object, with the intents detected
@@ -180,45 +221,3 @@ class InfoManager:
                                 self.info["sessionid"],
                                 [self.info["sentencias"][name]],
                                 "es")
-
-
-    def outputMsg(self, jdata, node, values, forward):
-        """formats the msgAns with the values from upper nodes."""
-        # Tiene que ver con los contextos
-        print(values)
-        queryResult = jdata.get("queryResult")
-        if forward:
-            response = self.makeWebhookResult(jdata)
-            if response["payload"]["returnCode"] == "0":
-                msgString = node.msgAns
-                pattern = r"\$\w+"
-                fields = re.findall(pattern=pattern, string=msgString)
-                if isinstance(fields, list):
-                    for field in fields:
-                        fieldw = field[1:]
-                        msgString = msgString.replace(field, values[field])
-                # return msgString
-            else:
-                msgString = response["fulfillmentText"]
-                # return msgString
-        else:
-            msgString = node.msgAns
-            # return node.msgAns
-        response["fulfillmentText"] = msgString
-        return response
-
-    def datumCSE_Facturas(self, jdata):
-        reg = Regexseaker()
-        ndata = jdata.get("datos")
-        fields = ndata.get("campos")
-        phrase = ndata.get("frase")
-        results = dict()
-        for field in fields:
-            result = reg.seakexpresion(phrase, field)
-            resdict = dict(value=result[0],
-                           statusField=result[1])
-            results.update({field:resdict})
-        response = {"campos": results,
-                    "message": "Extraccion de campos",
-                    "returnCode": 1}
-        return response

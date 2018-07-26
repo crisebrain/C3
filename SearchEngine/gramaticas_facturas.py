@@ -397,9 +397,11 @@ class Regexseaker:
             statusCode = 0
             if fechaInicio[1] and fechaFin[1]:
                 statusCode = 1
+        result = [value.strftime("%Y-%m-%d") if value is not None else value
+                  for value in [fechaInicio[0], fechaFin[0]]]
 
-        return {cf.FECHA_INICIAL.value: fechaInicio[0],
-                cf.FECHA_FINAL.value: fechaFin[0]}, statusCode
+        return (dict(zip([cf.FECHA_INICIAL.value, cf.FECHA_FINAL.value],
+                         result)), statusCode)
 
     def code_validate(self, field, entity, unknowns, taglist):
         # Calculo de código
@@ -593,6 +595,9 @@ class Regexseaker:
             year, weeks, weekday = datetime.isocalendar(datetime.now())
             result[cf.FECHA_INICIAL.value] = (datetime.now() - relativedelta(weeks=weeks-1, days=weekday - 1, years=1)).date()
             result[cf.FECHA_FINAL.value] = result[cf.FECHA_INICIAL.value] + relativedelta(days=364)
+        for key, value in result.items():
+            if value is not None:
+                result[key] = value.strftime("%Y-%m-%d")
         return result
 
 if __name__ == "__main__":
