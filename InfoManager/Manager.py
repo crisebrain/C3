@@ -9,7 +9,7 @@ import threading
 import sys
 sys.path.append("Utils")
 from textJumping import detect_intent_texts
-from Utils import SessionContainer
+from Utils import SessionContainer, constantesFacturas
 sys.path.append("Services")
 from Services import makeWebhookResult
 sys.path.append("SearchEngine")
@@ -153,8 +153,13 @@ class InfoManager:
         results = dict()
         for field in fields:
             result = reg.seakexpresion(phrase, field)
-            resdict = dict(value=result[0],
-                           statusField=result[1])
+            if field in [constantesFacturas.PERIODO.value,
+                         constantesFacturas.FECHA.value]:
+                resdict = dict(zip(list(result[0].keys()) + ["statusField"],
+                                   list(result[0].values()) +[result[1]]))
+            else:
+                resdict = dict(value=result[0],
+                               statusField=result[1])
             results.update({field:resdict})
         response = {"campos": results,
                     "message": "Extraccion de campos",
