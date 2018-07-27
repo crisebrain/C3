@@ -107,7 +107,7 @@ def _prepareParameters(queryOriginal: str):
     dicReady = {}
     list_params = [
         CF.TIPO_DOCUMENTO.value,
-        # CF.PERIODO.value,
+        CF.PERIODO.value,
         CF.STATUS.value,
         CF.PREFIJO.value,
         CF.ACUSE.value,
@@ -115,13 +115,11 @@ def _prepareParameters(queryOriginal: str):
         CF.FOLIO_FINAL.value,
         CF.NIT.value,
         CF.CUENTA.value,
-        # CF.FECHA.value,
+        CF.FECHA.value,
         CF.NO_DOCUMENTO.value
     ]
 
     resp = IM.extractData(queryOriginal, list_params)
-    # TODO: borrar esta respuesta dummy.
-    # resp = _getDummyResp()
 
     _buildFinalDic(dicReady, list_params, resp)
 
