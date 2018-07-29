@@ -15,7 +15,7 @@ def makeWebhookResult(req, origin = 1):
     else:
         queryResult = None
         action = req.get("action")
-    
+
     conlog = False
     try:
         querys = CreateLogger("querys" + originstr)
@@ -28,21 +28,20 @@ def makeWebhookResult(req, origin = 1):
         print("No fue posible crear correctamente los loggers del proyecto")
         print("***********************************************************\n")
     try:
-        if action == "VDN" or action == "saldo":
-            return makeresponseAction(req, action)
-        elif action == "informacion":
-            return informacion(queryResult.get("parameters").get("servicio"))
-        elif action == "factura":
-            return factura(req)
-        # elif action == "obtieneDatos":
-            # seakexpresion
-        else:
-            if origin == 1:
+        if origin ==1:
+            if action == "factura":
+                return factura(req)
+            else:
                 return {"payload": {"result": "Null", "returnCode": "0"},
                         "fulfillmentText": "Null"}
-            # else:
-            #     return {"payload": {"result": "Null", "returnCode": "0"},
-            #             "fulfillmentText": "Null"}
+        else:
+            if action == "VDN" or action == "saldo":
+                return makeresponseAction(req, action)
+            elif action == "informacion":
+                return informacion(queryResult.get("parameters").get("servicio"))
+            else:
+                return {"payload": {"result": "Null", "returnCode": "0"},
+                        "fulfillmentText": "Null"}
     except Exception as exception:
         if conlog and queryResult:
             errors.logger.info(json.dumps(queryResult) + "\n")
@@ -56,6 +55,5 @@ def makeWebhookResult(req, origin = 1):
             msgerror = "Estimado usuario,"\
                        "Ocurrió el error: {0} en {1}".format(cause, nline)
             msgerror += "Favor de reportarlo con su administrador"
-        if origin == 1:
-            return {"payload": {"result": "Null", "returnCode": "0"},
-                    "fulfillmentText": msgerror}
+        return {"payload": {"result": "Null", "returnCode": "0"},
+                "fulfillmentText": msgerror}
