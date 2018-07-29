@@ -81,15 +81,22 @@ class InfoManager:
         values = dict()
         forward = True
         currentNode = node
+        # preguntar si action es factura
+        # preguntar si hay IMFIELDS
+        # Guardar cada campo como parametros
         if all(inputcontext):
             parameters = node.parameters
             userdictinfo = queryResult.get("parameters")
             for parameter in parameters:
                 name = parameter["name"]
                 value = userdictinfo[name]
+                print(value)
                 if "$" in parameter["value"]:  # local
+                    if jdata.get("IM_fields") is not None:
+                        node.writeParameter(jdata.get("IM_fields"), name)
                     # Guarda valor local
-                    node.writeParameter(value, name)
+                    else:
+                        node.writeParameter(value, name)
                     values.update({parameter["value"]:value})
                 elif "#" in parameter["value"]:
                     aux = parameter["value"].split(".")[0]
@@ -126,7 +133,7 @@ class InfoManager:
         print(values)
         queryResult = jdata.get("queryResult")
         if forward:
-            response = self.makeWebhookResult(jdata)
+            response = self.makeWebhookResult(jdata,2)
             if response["payload"]["returnCode"] == "0":
                 msgString = node.msgAns
                 pattern = r"\$\w+"
@@ -156,7 +163,7 @@ class InfoManager:
             if field in [constantesFacturas.PERIODO.value,
                          constantesFacturas.FECHA.value]:
                 resdict = dict(zip(list(result[0].keys()) + ["statusField"],
-                                   list(result[0].values()) +[result[1]]))
+                                   list(result[0].values()) + [result[1]]))
             else:
                 resdict = dict(value=result[0],
                                statusField=result[1])
