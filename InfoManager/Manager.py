@@ -81,9 +81,6 @@ class InfoManager:
         values = dict()
         forward = True
         currentNode = node
-        # preguntar si action es factura
-        # preguntar si hay IMFIELDS
-        # Guardar cada campo como parametros
         if all(inputcontext):
             parameters = node.parameters
             userdictinfo = queryResult.get("parameters")
