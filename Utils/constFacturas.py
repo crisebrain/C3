@@ -16,6 +16,16 @@ class constantesFacturas(Enum):
     FECHA_FINAL = "fechaFinal"
 
 
+class constGenericas(Enum):
+    RECIBIDO = "Recibido"
+    ERROR =  "Error"
+    FIRMADO = "Firmado"
+    RECHAZADO = "Rechazado"
+    ACEPTADO = "Aceptado"
+    ENVIADO = "Enviado"
+    PENDIENTE = "Pendiente"
+
+
 if __name__ == "__main__":
     c = constantesFacturas
     print(c.TIPO_DOCUMENTO.value)
