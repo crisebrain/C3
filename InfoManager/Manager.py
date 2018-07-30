@@ -14,6 +14,7 @@ sys.path.append("Services")
 from Services import makeWebhookResult
 sys.path.append("SearchEngine")
 from SearchEngine import Regexseaker
+import gc
 
 class InfoManager:
     """InfoManager class.
@@ -168,6 +169,11 @@ class InfoManager:
         response = {"campos": results,
                     "message": "Extraccion de campos",
                     "returnCode": 1}
+
+        # TODO Revisar que este gc no esté ocultando otro problema más grave.
+        # se debe revisar con un dump de memoria
+        gc.collect()
+
         return response
 
     def intentDecompose(self):
