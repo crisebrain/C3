@@ -298,8 +298,8 @@ def _prepareHumanResult(dicReady: dict):
     """
     peticionStr = ""
     for element in dicReady:
-        if dicReady[element].get("value") is not None:  # and dicReady[element]["status"] != 0:
-            peticionStr += "{0}: {1}, {2} \n".format(
-                element, dicReady[element]["value"], dicReady[element]["status"])
+        # if dicReady[element].get("value") is not None or dicReady[element]["status"] != 0:
+        peticionStr += "{0}: {1}, {2} \n".format(
+            element, dicReady[element]["value"], dicReady[element]["status"])
 
     return peticionStr
