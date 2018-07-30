@@ -258,34 +258,33 @@ def pruebasFechas():
             print("\n")
 
 
-    # reg = Regexseaker()
-    # expr = [
-    #     "Quiero facturas de estado aceptado con número de documento 33443 y el prefijo es x",
-    #     "Quiero facturas de estado recibido con número de documento 33443 y el prefijo es x",
-    #     "Quiero facturas de estado error con número de documento 33443 y el prefijo es x",
-    #     "Quiero facturas de estado firmado con número de documento 33443 y el prefijo es x",
-    #     "Quiero facturas de estado enviado con número de documento 33443 y el prefijo es x",
-    #     "Quiero facturas de estado xsdsfds con número de documento 33443 y el prefijo es x",
-    #     "Quiero facturas de estado 12321 con número de documento 33443 y el prefijo es x",
-    #     "Quiero facturas de estado es recibido con número de documento 33443 y el prefijo es x",
-    #     "Quiero facturas de estado es el que sea con número de documento 33443 y el prefijo es x",
-    #     "Facturas de hoy con recibido como estado y prefijo algo",
-    #     "Facturas de hoy con recibido es estado y prefijo algo",
-    #     "Facturas de hoy con recibido estado y prefijo algo",
-    #     "Facturas de hoy con recibido es el estado y prefijo algo"
-    #     ]
-    # print("\n")
-    #
-    # print("\n")
-    # for e in expr:
-    #     resultado = reg.seakexpresion(e.lower(), "Estado", nl=5)
-    #     print("{0}\nEstado: {1}\n".format(e, resultado))
-    # # print("NoDocumento: ", reg.seakexpresion(expr.lower(), "NoDocumento", nl=3))
+def pruebasEstado():
+    expr = [
+        "Quiero facturas de estado aceptado con número de documento 33443 y el prefijo es x",
+        "Quiero facturas de estado recibido con número de documento 33443 y el prefijo es x",
+        "Quiero facturas de estado error con número de documento 33443 y el prefijo es x",
+        "Quiero facturas de estado firmado con número de documento 33443 y el prefijo es x",
+        "Quiero facturas de estado enviado con número de documento 33443 y el prefijo es x",
+        "Quiero facturas de estado xsdsfds con número de documento 33443 y el prefijo es x",
+        "Quiero facturas de estado 12321 con número de documento 33443 y el prefijo es x",
+        "Quiero facturas de estado es recibido con número de documento 33443 y el prefijo es x",
+        "Quiero facturas de estado es el que sea con número de documento 33443 y el prefijo es x",
+        "Facturas de hoy con recibido como estado y prefijo algo",
+        "Facturas de hoy con recibido es estado y prefijo algo",
+        "Facturas de hoy con recibido estado y prefijo algo",
+        "Facturas de hoy con recibido es el estado y prefijo algo",
+        "Facturas con error con valor de estatus"
+    ]
 
-    # pruebasFolios()
-    # pruebasFechas()
+    reg = Regexseaker()
 
-reg = Regexseaker("SearchEngine/facturaskeys.json")
+    for e in expr:
+        resultado = reg.seakexpresion(e.lower(), cf.STATUS.value, nl=5)
+        print("{0}\nEstado: {1}\n".format(e, resultado))
+        # print("NoDocumento: ", reg.seakexpresion(e.lower(), cf.STATUS.value, nl=3))
+
+
+reg = Regexseaker("facturaskeys.json")
 campos = [attr for attr in dir(cf) if '__' not in attr]
 campos = [(getattr(cf, campo)).value for campo in campos]
 campos.pop(3)
@@ -452,17 +451,18 @@ frases = ["numero de cuenta abc345",
           "para nota con prefijo de factura",
           "para nota con prefijo es factura",
           "para nota con prefijo factura"]
+#
+# for exp in frases:
+#     print(exp)
+#     res = [reg.seakexpresion(exp, field)[0] for field in campos]
+#     res2 = {campo:resi for (campo, resi) in zip(campos, res) if not isinstance(resi, dict) and resi is not None}
+#     res3 = {campo:resi for (campo, resi) in zip(campos, res) if (isinstance(resi, dict) and all([True if val is not None else False for val in resi.values()]))}
+#     print(res2)
+#     print(res3)
+#     # print(["{0}: {1}".format(field, resi) for field, resi in zip(campos, res)
+#         #    if resi is not None])
+#     print("\n")
 
-for exp in frases:
-    print(exp)
-    res = [reg.seakexpresion(exp, field)[0] for field in campos]
-    res2 = {campo:resi for (campo, resi) in zip(campos, res) if not isinstance(resi, dict) and resi is not None}
-    res3 = {campo:resi for (campo, resi) in zip(campos, res) if (isinstance(resi, dict) and all([True if val is not None else False for val in resi.values()]))}
-    print(res2)
-    print(res3)
-    # print(["{0}: {1}".format(field, resi) for field, resi in zip(campos, res)
-        #    if resi is not None])
-    print("\n")
-
-pruebasFolios()
-pruebasFechas()
+# pruebasFolios()
+# pruebasFechas()
+pruebasEstado()
