@@ -134,9 +134,9 @@ class Regexseaker:
                                     """ % {'sg': cf.CUENTA.value},
                   cf.STATUS.value: r""" Q: {<Recibido|Error|Firmado|Rechazado|Aceptado|Enviado>}
                                         NP: {<%(sg)s> <vssp3s0|sps00|vsis3s0|Es|Valor|da0ms0|cs>{0,3} <Q>}
-                                        NP: {<Q> <vssp3s0|vsis3s0|Es|da0ms0|cs>{1,3} <%(sg)s>}
+                                        NP: {<Q> <vssp3s0|sps00|vsis3s0|Es|Valor|da0ms0|cs>{1,3} <%(sg)s>}
                                         NP: {<%(sg)s> <vssp3s0|sps00|vsis3s0|Es|Valor|da0ms0|cs>{0,3} <.*>}
-                                        NP: {<.*> <vssp3s0|vsis3s0|Es|da0ms0|cs>{1,3} <%(sg)s>}
+                                        NP: {<.*> <vssp3s0|sps00|vsis3s0|Es|Valor|da0ms0|cs>{1,3} <%(sg)s>}
                                     """ % {'sg': cf.STATUS.value},
                   cf.ACUSE.value: r""" Q: {<Rechazado|Aceptado|Pendiente>}
                                        NP: {<%(sg)s> <vssp3s0|sps00|vsis3s0|Es|Valor|da0ms0|cs>{0,3} <Q>}
