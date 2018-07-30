@@ -9,6 +9,8 @@ import numpy as np
 import json
 sys.path.append("Utils")
 from Utils import constantesFacturas as cf
+from Utils import constGenericas as cg
+
 
 class Regexseaker:
     def __init__(self, pathkeys=None):
@@ -213,10 +215,12 @@ class Regexseaker:
         elif field == "Folio":
             return ["Inicio", "Fin", "Es", "Valor", cf.PREFIJO.value, "Reciente"]
         elif field == cf.STATUS.value:
-            return ["Es","Valor","Recibido","Error","Firmado","Rechazado",
-                    "Aceptado","Enviado", "Factura"]
+            return ["Es", "Valor", cg.RECIBIDO.value, cg.ERROR.value,
+                    cg.FIRMADO.value, cg.RECHAZADO.value, cg.ACEPTADO.value,
+                    cg.ENVIADO.value, "Factura"]
         elif field == cf.ACUSE.value:
-            return ["Es","Valor","Rechazado","Aceptado","Pendiente"]
+            return ["Es", "Valor", cg.RECHAZADO.value, cg.ACEPTADO.value,
+                    cg.PENDIENTE.value]
         elif field == cf.PERIODO.value:
             return ["pasado", "presente", "semana", "dia", "mes", "año"]
         elif field == cf.TIPO_DOCUMENTO.value:
@@ -248,13 +252,24 @@ class Regexseaker:
         for i, subtree in enumerate(chunked):
             if isinstance(subtree, Tree) and subtree.label() == "NP":
                 if field in [cf.PREFIJO.value, cf.NO_DOCUMENTO.value,
-                             cf.NIT.value, cf.CUENTA.value, cf.STATUS.value,
-                             cf.ACUSE.value, cf.TIPO_DOCUMENTO.value]:
+                             cf.NIT.value, cf.CUENTA.value, cf.TIPO_DOCUMENTO.value]:
                     for subsubtree in subtree.subtrees(filter=lambda t: t.label() == "Q"):
                         entity += [token for token, pos in subsubtree.leaves()]
                         subt.append(subsubtree)
                     unknowns += [token for token, pos in subtree.leaves()
                                  if pos in posibles]
+
+                # TODO: este parche es temporal debe quitarse y generalizar
+                # esta función
+                #################################################################
+                if field in [cf.STATUS.value, cf.ACUSE.value]:
+                    for subsubtree in subtree.subtrees(filter=lambda t: t.label() == "Q"):
+                        entity += [tag for token, tag in subsubtree.leaves()]
+                        subt.append(subsubtree)
+                    unknowns += [tag for token, tag in subtree.leaves()
+                                 if tag in posibles]
+                #################################################################
+
                 elif field == cf.FECHA.value:
                     fecha = {}
                     for token, tag in subtree.leaves():
@@ -425,13 +440,17 @@ class Regexseaker:
                 code = 1
             else:
                 code = 0
+
         # -------------------------------------------------------------------
         # formato de resultado
         # -------------------------------------------------------------------
         if entity is not None:
+            #######################################################################
+            # TODO: Esta parte también debe reescribirse para generalizarlo.
+            # Los valores que identifico que se deben hacer serían tipoDocumento,
+            # Acuse y Estado.
             # Capitalizar los campos
-            if field in [cf.ACUSE.value, cf.TIPO_DOCUMENTO.value,
-                         cf.STATUS.value]:
+            if field in [cf.TIPO_DOCUMENTO.value]:
                 # para pasar tipo de documento y no la palabra original
                 if field == cf.TIPO_DOCUMENTO.value:
                     if entity in self.dictfacturas["TNota"]:
@@ -439,6 +458,8 @@ class Regexseaker:
                     elif entity in self.dictfacturas["TFactura"]:
                         entity = "Factura"
                 entity = entity.capitalize()
+            ######################################################################
+
             # en mayusculas
             elif field in [cf.PREFIJO.value, cf.NO_DOCUMENTO.value,
                            cf.NIT.value, cf.CUENTA.value]:
