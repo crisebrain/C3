@@ -245,7 +245,7 @@ def _mapValues(dic: dict):
             "Factura": "F",
             "Nota": "N"
         }
-        return switcherTipoDocumento[value]
+        return switcherTipoDocumento.get(value, value)
 
     def periodo(value):
         switcherPeriodo = {
@@ -266,7 +266,7 @@ def _mapValues(dic: dict):
             "Aceptado": 24,
             "Enviado": 25
         }
-        return switcherStatus.get(value, 0)
+        return switcherStatus.get(value, value)
 
     def acuse(value):
         switcherAcuse = {
