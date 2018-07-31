@@ -262,7 +262,7 @@ class Regexseaker:
                 # TODO: este parche es temporal debe quitarse y generalizar
                 # esta función
                 #################################################################
-                if field in [cf.STATUS.value, cf.ACUSE.value]:
+                elif field in [cf.STATUS.value, cf.ACUSE.value]:
                     for subsubtree in subtree.subtrees(filter=lambda t: t.label() == "Q"):
                         entity += [tag for token, tag in subsubtree.leaves()]
                         subt.append(subsubtree)
