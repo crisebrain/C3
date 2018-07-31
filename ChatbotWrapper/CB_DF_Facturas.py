@@ -266,7 +266,7 @@ def _mapValues(dic: dict):
             "Aceptado": 24,
             "Enviado": 25
         }
-        return switcherStatus[value]
+        return switcherStatus.get(value, 0)
 
     def acuse(value):
         switcherAcuse = {
