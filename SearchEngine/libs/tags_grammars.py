@@ -74,7 +74,7 @@ def choose_grammar(field, cg, cf):
                                             NP: {<%(sg)s> <sps00> <TDocumento> <pr0cn000>? <(vs\w+)>? <Q>}
                                             NP: {<TDocumento>? <pr0cn000>? <(vs\w+)>? <sps00>? <%(sg)s> <Q>}
                                             NP: {<TDocumento> <pr0cn000>? <(vs\w+)>? <Q>}
-                                            NP: {<Imperativo|vmip1s0> <(da0\w+)>? <Q> <sps00>? <TCredito>?}
+                                            NP: {<Imperativo|vmip1s0> <(da0\w+)|dp1c[p|s]s>? <Q> <sps00>? <TCredito>?}
                                             NP: {<(da0\w+)|(vs\w+)|sps00> <Q>}
                                                 }<Prefijo> <(vs\w+)|sps00>?{
                                             NP: {<%(sg)s> <sps00> <TDocumento> <pr0cn000>? <(vs\w+)>? <(.*)>}
