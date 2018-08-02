@@ -71,16 +71,15 @@ def choose_grammar(field, cg, cf):
                                      NP4: {<spcms|da0fs0|%(sg)s> <DP>}
                                  """ % {'sg': cf.PERIODO.value},
               cf.TIPO_DOCUMENTO.value: r""" Q: {<TFactura|TNota>}
+                                            NP: {<Imperativo|vmip1s0|Requiero> <(da0\w+)|dp1c[p|s]s>? <Q> <sps00>? <TCredito>?}
                                             NP: {<%(sg)s> <sps00> <TDocumento> <pr0cn000>? <(vs\w+)>? <Q>}
                                             NP: {<TDocumento>? <pr0cn000>? <(vs\w+)>? <sps00>? <%(sg)s> <Q>}
                                             NP: {<TDocumento> <pr0cn000>? <(vs\w+)>? <Q>}
-                                            NP: {<Imperativo|vmip1s0|Requiero> <(da0\w+)|dp1c[p|s]s>? <Q> <sps00>? <TCredito>?}
-                                            NP: {<(da0\w+)|(vs\w+)|sps00> <Q>}
-                                                }<prefijo> <(vs\w+)|sps00>?{
+                                            NP:
+                                                {(<.*>{1,2} <Q>)|(<Q> <.*>)}
+                                                }<prefijo> <(vs\w+)|(sps00)>? <Q>{
                                             NP: {<%(sg)s> <sps00> <TDocumento> <pr0cn000>? <(vs\w+)>? <(.*)>}
                                             NP: {<TDocumento>? <pr0cn000>? <(vs\w+)>? <sps00>? <%(sg)s> <(.*)>}
-                                            NP: {<Q> <sps00>? <TCredito>?}
-                                                }(<prefijo> <Q>)|(<prefijo> <Q> <sps00>? <TCredito>?){
                                         """ % {'sg': cf.TIPO_DOCUMENTO.value},
               cf.FECHA.value: r""" Q: {<De|Articulos|spcms|sps00|Es>}
                                    I: {<Inicio|Fin> <Q>{0,2} <sps00>?}
