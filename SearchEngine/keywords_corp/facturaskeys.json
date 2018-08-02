@@ -56,6 +56,7 @@
 	"Imperativo": ["dame", "muéstrame", "entrégame", "facilítame", "pásame",
 		             "enséñame", "muestrame", "entregame", "facilitame", "pasame",
 							 	 "enseñame"],
+	"Requiero": ["requiero", "requerimos", "requerimiento"],
   "Desde": ["desde"],
 	"Articulos": ["el", "los", "la", "las"]
 }

@@ -74,11 +74,13 @@ def choose_grammar(field, cg, cf):
                                             NP: {<%(sg)s> <sps00> <TDocumento> <pr0cn000>? <(vs\w+)>? <Q>}
                                             NP: {<TDocumento>? <pr0cn000>? <(vs\w+)>? <sps00>? <%(sg)s> <Q>}
                                             NP: {<TDocumento> <pr0cn000>? <(vs\w+)>? <Q>}
-                                            NP: {<Imperativo|vmip1s0> <(da0\w+)|dp1c[p|s]s>? <Q> <sps00>? <TCredito>?}
+                                            NP: {<Imperativo|vmip1s0|Requiero> <(da0\w+)|dp1c[p|s]s>? <Q> <sps00>? <TCredito>?}
                                             NP: {<(da0\w+)|(vs\w+)|sps00> <Q>}
-                                                }<Prefijo> <(vs\w+)|sps00>?{
+                                                }<prefijo> <(vs\w+)|sps00>?{
                                             NP: {<%(sg)s> <sps00> <TDocumento> <pr0cn000>? <(vs\w+)>? <(.*)>}
                                             NP: {<TDocumento>? <pr0cn000>? <(vs\w+)>? <sps00>? <%(sg)s> <(.*)>}
+                                            NP: {<Q> <sps00>? <TCredito>?}
+                                                }(<prefijo> <Q>)|(<prefijo> <Q> <sps00>? <TCredito>?){
                                         """ % {'sg': cf.TIPO_DOCUMENTO.value},
               cf.FECHA.value: r""" Q: {<De|Articulos|spcms|sps00|Es>}
                                    I: {<Inicio|Fin> <Q>{0,2} <sps00>?}
@@ -133,7 +135,8 @@ def get_tags(field, cg, cf):
         return ["pasado", "presente", "semana", "dia", "mes", "año"]
     elif field == cf.TIPO_DOCUMENTO.value:
         return [cf.PREFIJO.value, cf.NO_DOCUMENTO.value, "Sustnum",
-                "Imperativo", "TDocumento", "TFactura", "TNota", "TCredito"]
+                "Requiero", "Imperativo", "TDocumento", "TFactura",
+                "TNota", "TCredito"]
     elif field == cf.FECHA.value:
         return  ["Inicio", "De", "Es", "Fin", "Articulos"]
 
