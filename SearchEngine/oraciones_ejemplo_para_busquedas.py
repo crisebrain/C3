@@ -284,7 +284,7 @@ def pruebasEstado():
         # print("NoDocumento: ", reg.seakexpresion(e.lower(), cf.STATUS.value, nl=3))
 
 
-reg = Regexseaker("facturaskeys.json")
+reg = Regexseaker()
 campos = [attr for attr in dir(cf) if '__' not in attr]
 campos = [(getattr(cf, campo)).value for campo in campos]
 campos.pop(3)
