@@ -75,9 +75,10 @@ def choose_grammar(field, cg, cf):
                                             NP: {<%(sg)s> <sps00> <TDocumento> <pr0cn000>? <(vs\w+)>? <Q>}
                                             NP: {<TDocumento>? <pr0cn000>? <(vs\w+)>? <sps00>? <%(sg)s> <Q>}
                                             NP: {<TDocumento> <pr0cn000>? <(vs\w+)>? <Q>}
-                                            NP:
-                                                {(<.*>{1,2} <Q>)|(<Q> <.*>)}
-                                                }<prefijo> <(vs\w+)|(sps00)>? <Q>{
+                                            NP: {<.*>{1,2} <Q>}
+                                                }(<prefijo> <(vs\w+)|(sps00)>? <Q>)|(<Q|NP> <Q|NP|(.*)> <Q>?){
+                                            NP: {<Q> <.*>}
+                                                }<Q> <cs|(vs\w+)|NP|Q>{
                                             NP: {<%(sg)s> <sps00> <TDocumento> <pr0cn000>? <(vs\w+)>? <(.*)>}
                                             NP: {<TDocumento>? <pr0cn000>? <(vs\w+)>? <sps00>? <%(sg)s> <(.*)>}
                                         """ % {'sg': cf.TIPO_DOCUMENTO.value},
