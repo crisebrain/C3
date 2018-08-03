@@ -113,7 +113,7 @@ class Regexseaker:
                     for subsubtree in subtree.subtrees(filter=lambda t: t.label() == "Q"):
                         entity += [tag for token, tag in subsubtree.leaves()]
                         subt.append(subsubtree)
-                    unknowns += [tag for token, tag in subtree.leaves()
+                    unknowns += [token for token, tag in subtree.leaves()
                                  if tag in posibles]
                 #################################################################
 
@@ -317,8 +317,7 @@ class Regexseaker:
     def seakexpresion(self, expression, field="Cuenta", nl=7, lowerc=True):
         if lowerc:
             expression = expression.lower()
-        if field in  [cf.PREFIJO.value, cf.NIT.value, cf.CUENTA.value,
-                      cf.STATUS.value, cf.ACUSE.value]:
+        if field in  [cf.PREFIJO.value, cf.NIT.value, cf.CUENTA.value, cf.ACUSE.value]:
             words = self.dictfacturas[field]
             tokens = word_tokenize(expression)
             arrs = []
@@ -347,7 +346,8 @@ class Regexseaker:
             # print(tagged)
             posibles = get_posibles(field, cg, cf)
             return self.do_chunking(tagged, field, posibles)
-        elif field in [cf.NO_DOCUMENTO.value, cf.TIPO_DOCUMENTO.value]:
+        elif field in [cf.NO_DOCUMENTO.value, cf.TIPO_DOCUMENTO.value,
+                       cf.STATUS.value]:
             taglist = get_tags(field, cg, cf)
             reglist = regex_taglist(field, cg, cf)
             tagged = self.do_tagging(expression, field, taglist, reglist)
