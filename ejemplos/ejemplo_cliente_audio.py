@@ -28,8 +28,18 @@ def getIntent(valoresAudio, token):
 
 
 # Inicialización
+file = "audios/guion_5.flac"
+languageCode = "es-419"
+letras = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m",
+		  "n", "ñ", "o", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
+phraseHints = ["acuse pendiente", "nit", "nit adquiriente", "rfc",]
+phraseHints += letras
+print(phraseHints)
+# file = "audios/shwazil_hoful.flac"
+# languageCode = "en-US"
+# phraseHints = ["shwazil hoful day"]
 token = obtenemosToken()
-audioBase64 = encode_audio64_DF("audios/saldo16.flac")
+audioBase64 = encode_audio64_DF(file)
 
 # Actualizar los valores dependiendo el audio a procesar
 # https://dialogflow.com/docs/reference/api-v2/rest/v2/projects.agent.sessions/detectIntent
@@ -40,7 +50,8 @@ valores = {
                     # FLAC: AUDIO_ENCODING_FLAC, WAV: AUDIO_ENCODING_LINEAR_16
                     "audioEncoding": "AUDIO_ENCODING_FLAC",
                     "sampleRateHertz": 16000,
-                    "languageCode": "es"
+                    "languageCode": languageCode,
+                    "phraseHints": phraseHints
                 }
             },
             "inputAudio": audioBase64
