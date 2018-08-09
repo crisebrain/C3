@@ -1,6 +1,7 @@
 #!/home/ebraintec/anaconda3/bin/python
 #-*- coding: utf-8 -*-
 import os
+import sys
 import json
 from InfoManager import InfoManager, publishIntentTree
 from flask import Flask, request, make_response
@@ -30,9 +31,15 @@ def webhook2():
 
 if __name__ == "__main__":
     # Rellena el arbol con la info del CB
+    if len(sys.argv) > 1:
+        noport = sys.argv[1]
+    else:
+        noport = 5050
+    with open("metadata/_NoPORT_IM.txt", "w") as fnoport:
+        fnoport.write(str(noport))
+
     idChatBot = publishIntentTree("chatbots", "chatfase1")  # "testing-b6df8")
-    im = InfoManager(rootdirectory=os.getcwd(),
-                     idChatBot=idChatBot)  # carga el arbol al contenedor SC
-    port = int(os.getenv("PORT", 5050))
+    im = InfoManager(rootdirectory=os.getcwd(), idChatBot=idChatBot)
+    port = int(os.getenv("PORT", noport))
     print("Starting app on port %d" %port)
     app.run(debug=True, port=port, host="0.0.0.0")

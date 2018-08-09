@@ -2,8 +2,10 @@ import requests
 import json
 import sys
 
+with open("metadata/_NoPORT_IM.txt", 'r') as fnoport:
+    noport = (fnoport.read()).strip()
 IM_FIELDS = "IM_fields"
-IM_LINK = "http://localhost:5050/infomanager"
+IM_LINK = "http://localhost:{0}/infomanager".format(noport)
 
 
 def post_data(jdata, link=IM_LINK):
