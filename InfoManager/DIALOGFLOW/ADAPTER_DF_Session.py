@@ -1,6 +1,10 @@
 import os
 import json
+import sys
+import pickle
 from time import time
+sys.path.append("Utils")
+from Utils import IntentTree
 
 def get_json_list(intent_dict, mode, pathfile):
     json_array = []
@@ -21,7 +25,7 @@ def get_files_list(chatbots_folder):
                                "intents": intents}})
     return botnames
 
-def traductor_df(chatbots_folder, IntentTree):
+def DFjson2IntentTree(chatbots_folder):
     # Json files names
     botnames = get_files_list(chatbots_folder)
     # Json files loading ...
@@ -116,6 +120,20 @@ def traductor_df(chatbots_folder, IntentTree):
         intentTree_dict.update({json_intents[botname]["idChatBot"]:[it]})
     # pick.dump(intentTree_list, open("./Sessions/Conference.pck", "wb"))
     return intentTree_dict
+
+def publishIntentTree(chatbots_folder, idChatBot=None):
+    """Consult and publish the current IntentTree using the chatbots folder.
+    Here a project id is supplied to retrieve all intents from core
+    and build the IntentTree. At the end self.current_intentTree must
+    be updated and the tree saved it into session.
+    """
+    intentTree_dict = DFjson2IntentTree(chatbots_folder)
+    # Traduce de json intents a intentTree
+    pickle.dump(intentTree_dict, open('Sessions/Conference.pck','wb'))
+    current_intentTree = intentTree_dict[idChatBot][0].idChatBot
+    print("Created intentTree for %s" %current_intentTree)
+    return current_intentTree
+
 
 if __name__ == "__main__":
     print("Uno")
