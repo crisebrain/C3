@@ -63,7 +63,6 @@ class InfoManager:
             self.info["complexMsg"] = jdata.get("queryResult").get("queryText")
             self.intentDecompose()
         print(it.currentcontextls)
-        print(response)
         self.sc.updateConferencefile()
         self.sc.ShowSessionTree()
         return response
@@ -128,7 +127,6 @@ class InfoManager:
     def outputMsg(self, jdata, node, values, forward):
         """formats the msgAns with the values from upper nodes."""
         # Tiene que ver con los contextos
-        print(values)
         queryResult = jdata.get("queryResult")
         if forward:
             response = self.makeWebhookResult(jdata,2)
