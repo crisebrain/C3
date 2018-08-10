@@ -17,7 +17,6 @@ def retornodummy():
 @app.route("/infomanager", methods=["POST", "GET"])
 def webhook2():
     req = request.get_json(silent=True, force=True)
-    print(req)
     action = req.get("action")
     if action == "obtieneDatos":
         res = im.datumCSE_Facturas(req)
@@ -29,15 +28,28 @@ def webhook2():
     r.headers["Content-Type"] = "application/json"
     return r
 
+def readnumport():
+    with open("metadata/_NoPORT_IM.temp", "r") as fnoport:
+        numport = int(fnoport.read().strip())
+    return numport
+
+def writenumport(numport):
+    with open("metadata/_NoPORT_IM.temp", "w") as fnoport:
+        fnoport.write(str(numport))
+    return 0
+
+
 if __name__ == "__main__":
-    # Rellena el arbol con la info del CB
     if len(sys.argv) > 1:
         noport = sys.argv[1]
+        _ = writenumport(noport)
     else:
-        noport = 5050
-    with open("metadata/_NoPORT_IM.txt", "w") as fnoport:
-        fnoport.write(str(noport))
-
+        try:
+            noport = readnumport()
+        except FileNotFoundError:
+            noport = 5050
+            _ = writenumport(noport)
+    # Rellena el arbol con la info del CB
     idChatBot = publishIntentTree("chatbots", "chatfase1")  # "testing-b6df8")
     im = InfoManager(rootdirectory=os.getcwd(), idChatBot=idChatBot)
     port = int(os.getenv("PORT", noport))

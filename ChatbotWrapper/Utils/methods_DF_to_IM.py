@@ -2,10 +2,19 @@ import requests
 import json
 import sys
 
-with open("metadata/_NoPORT_IM.txt", 'r') as fnoport:
-    noport = (fnoport.read()).strip()
-IM_FIELDS = "IM_fields"
-IM_LINK = "http://localhost:{0}/infomanager".format(noport)
+try:
+    with open("metadata/_NoPORT_IM.temp", 'r') as fnoport:
+        noport = (fnoport.read()).strip()
+except Exception as error:
+    noport = 5050
+    print(error.__str__())
+    print("Puerto no establecido de forma correcta, asignado a 5050, " \
+          "reinicie todos los servicios comenzando por el " \
+          "Information Manager")
+finally:
+    print("\nInformation Manager asignado al puerto: %s\n" %noport)
+    IM_FIELDS = "IM_fields"
+    IM_LINK = "http://localhost:{0}/infomanager".format(noport)
 
 
 def post_data(jdata, link=IM_LINK):
