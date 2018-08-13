@@ -136,8 +136,7 @@ def pruebasFolios():
     for phrase in expsBuenas_FolioInicio: #+ expsBuenas_FolioInicio:
         resultado = reg.seakexpresion(phrase, cf.FOLIO_INICIAL.value)
         #if resultado[1] == 0:
-        print("{0}\nResulado: {1}\n{2}\n".format(
-        phrase, str(resultado[:2]),resultado[3]))
+        print("{0}\nResulado: {1}\n{2}\n".format(phrase, resultado[:2], resultado[3]))
 
 
 def pruebasFechas():
@@ -280,7 +279,7 @@ def pruebasEstado():
 
     for e in expr:
         resultado = reg.seakexpresion(e.lower(), cf.STATUS.value, nl=5)
-        print("{0}\nEstado: {1}\n".format(e, resultado))
+        print("{0}\nEstado: {1}\n".format(e, resultado[:2]))
         # print("NoDocumento: ", reg.seakexpresion(e.lower(), cf.STATUS.value, nl=3))
 
 
@@ -451,18 +450,18 @@ frases = ["numero de cuenta abc345",
           "para nota con prefijo de factura",
           "para nota con prefijo es factura",
           "para nota con prefijo factura"]
-#
-# for exp in frases:
-#     print(exp)
-#     res = [reg.seakexpresion(exp, field)[0] for field in campos]
-#     res2 = {campo:resi for (campo, resi) in zip(campos, res) if not isinstance(resi, dict) and resi is not None}
-#     res3 = {campo:resi for (campo, resi) in zip(campos, res) if (isinstance(resi, dict) and all([True if val is not None else False for val in resi.values()]))}
-#     print(res2)
-#     print(res3)
-#     # print(["{0}: {1}".format(field, resi) for field, resi in zip(campos, res)
+
+for exp in frases:
+    print(exp)
+    res = [reg.seakexpresion(exp, field)[0] for field in campos]
+    res2 = {campo:resi for (campo, resi) in zip(campos, res) if not isinstance(resi, dict) and resi is not None}
+    res3 = {campo:resi for (campo, resi) in zip(campos, res) if (isinstance(resi, dict) and all([True if val is not None else False for val in resi.values()]))}
+    print(res2)
+    print(res3)
+    #print(["{0}: {1}".format(field, resi) for field, resi in zip(campos, res)
 #         #    if resi is not None])
 #     print("\n")
 
-# pruebasFolios()
+#pruebasFolios()
 # pruebasFechas()
-pruebasEstado()
+#pruebasEstado()

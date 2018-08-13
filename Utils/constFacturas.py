@@ -1,17 +1,17 @@
 from enum import Enum
 
 class constantesFacturas(Enum):
-    TIPO_DOCUMENTO = "tipoDocumento"
-    PERIODO = "periodo"
-    STATUS = "status"
     PREFIJO = "prefijo"
-    ACUSE = "acuse"
-    FOLIO_INICIAL = "folioInicial"
-    FOLIO_FINAL = "folioFinal"
     NIT = "nit"
     CUENTA = "cuenta"
-    FECHA = "fecha"
     NO_DOCUMENTO = "noDocumento"
+    STATUS = "status"
+    ACUSE = "acuse"
+    TIPO_DOCUMENTO = "tipoDocumento"
+    FOLIO_INICIAL = "folioInicial"
+    FOLIO_FINAL = "folioFinal"
+    PERIODO = "periodo"
+    FECHA = "fecha"
     FECHA_INICIAL = "fechaInicial"
     FECHA_FINAL = "fechaFinal"
 
