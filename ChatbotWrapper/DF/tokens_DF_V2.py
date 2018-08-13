@@ -3,10 +3,15 @@ import json
 import os
 import sys
 import subprocess
-
+from flask_cors import CORS
 from flask import Flask, request, make_response
 
+CERT_FILE = "/home/gabriel/Documentos/Certificados/misitio_crt.pem"
+KEY_FILE = "/home/gabriel/Documentos/Certificados/misitio_key.pem"
+
+
 app = Flask(__name__)
+CORS(app)
 
 
 @app.route("/", methods=["GET"])
@@ -44,5 +49,7 @@ if __name__ == "__main__":
     else:
         portnumber = 6000
     port = int(os.getenv("PORT", portnumber))
+
     print("Starting token server on port %d" %port)
-    app.run(debug=True, port=port, host="0.0.0.0")
+    app.run(debug=True, port=port, host="0.0.0.0",
+            ssl_context=(CERT_FILE, KEY_FILE))
