@@ -47,7 +47,7 @@ if __name__ == "__main__":
     if len(sys.argv) > 1:
         portnumber = int(sys.argv[1])
     else:
-        portnumber = 6000
+        portnumber = 6010
     port = int(os.getenv("PORT", portnumber))
 
     print("Starting token server on port %d" %port)
