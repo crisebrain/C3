@@ -1,7 +1,7 @@
 # from __future__ import print_function
 from .libs.spaghetti import pos_tag
 from .libs.tags_grammars import *
-from .libs.calc_fechas import time_period
+from .libs.calc_fechas import time_period, preparaFechas
 import re
 import sys
 from nltk import word_tokenize, RegexpParser, Tree
@@ -74,7 +74,6 @@ class Regexseaker:
                 for regExp in listRegExps:
                     if self.regexextractor(token, regExp):
                         tagged[i, 1] = regExp
-
         # Convertimos a tuplas y evalúamos si el dato potencialmente nos
         # interesa o no.
         mask = tagged[:, 1] == 'None'
@@ -98,25 +97,17 @@ class Regexseaker:
         subt = []
         for i, subtree in enumerate(chunked):
             if isinstance(subtree, Tree) and subtree.label() == "NP":
-                if field in [cf.PREFIJO.value, cf.NO_DOCUMENTO.value,
-                             cf.NIT.value, cf.CUENTA.value, cf.TIPO_DOCUMENTO.value]:
+                if field in [cf.PREFIJO.value, cf.NIT.value, cf.CUENTA.value,
+                             cf.NO_DOCUMENTO.value, cf.STATUS.value,
+                             cf.ACUSE.value, cf.TIPO_DOCUMENTO.value]:
                     for subsubtree in subtree.subtrees(filter=lambda t: t.label() == "Q"):
-                        entity += [token for token, pos in subsubtree.leaves()]
-                        subt.append(subsubtree)
-                    unknowns += [token for token, pos in subtree.leaves()
-                                 if pos in posibles]
-
-                # TODO: este parche es temporal debe quitarse y generalizar
-                # esta función
-                #################################################################
-                elif field in [cf.STATUS.value, cf.ACUSE.value]:
-                    for subsubtree in subtree.subtrees(filter=lambda t: t.label() == "Q"):
-                        entity += [tag for token, tag in subsubtree.leaves()]
+                        if field in [cf.STATUS.value, cf.ACUSE.value]:
+                            entity += [tag for token, tag in subsubtree.leaves()]
+                        else:
+                            entity += [token for token, tag in subsubtree.leaves()]
                         subt.append(subsubtree)
                     unknowns += [token for token, tag in subtree.leaves()
                                  if tag in posibles]
-                #################################################################
-
                 elif field == cf.FECHA.value:
                     fecha = {}
                     for token, tag in subtree.leaves():
@@ -125,145 +116,20 @@ class Regexseaker:
                     entity.append(fecha)
                     subt.append(subtree)
                 else:
-                    # añadir las condiciones que sean necesarias para contemplar
-                    # los posibles valores
                     entity += [token for token, pos in subtree.leaves()
                                if pos in posibles]
                     unknowns += [token for token, pos in subtree.leaves()
                                  if pos == "unknown"]
                     subt.append(subtree)
-
         # Prepara fechas
         if field == cf.FECHA.value:
-            entity, code = self.__preparaFechas(entity)
+            entity, code = preparaFechas(entity, cf)
             return entity, code, subt
 
         entity, code = self.code_validate(field, entity, unknowns,
                                           regex_taglist(field, cg, cf))
         return entity, code, subt, tagged
 
-
-    def __preparaFechas(self, entity):
-        import datetime
-        from datetime import date
-
-        def buildDate(fechaDic):
-            diasNum = {
-                "primero": 1,
-                "segundo": 2,
-                "tercero": 3,
-                "cuarto": 4,
-                "quinto": 5,
-                "sexto": 6,
-                "séptimo": 7,
-                "octavo": 8,
-                "noveno": 9
-            }
-
-            y = today.year if fechaDic.get("AniosNum") is None else int(fechaDic["AniosNum"])
-            m = today.month if fechaDic.get(cf.FECHA.value) is None else fechaDic[cf.FECHA.value]
-            m = numberMonth[m]
-
-            d = fechaDic.get("DiasNum")
-            if d is None:
-                d = 1
-            elif d in diasNum:
-                d = diasNum[d]
-            else:
-                d = int(d)
-
-            # Establece la fecha al día, si no se puede la corrige.
-            try:
-                date = datetime.date(y, m, d)
-                statusCode = 1
-            except ValueError:
-                date = datetime.date(y, m, 1)
-                statusCode = 0  # Establece código
-
-            # Evalúamos años posteriores
-            if date.year > today.year:
-                date = date.replace(year=today.year)
-
-            return date, statusCode
-
-        def selectCaseDate():
-            nonlocal fechaInicio, fechaFin, fechaEspecifica, firstSpecificDate
-
-            if not firstSpecificDate:
-                # Caso 1: dan fecha fin, pero no de inicio.
-                if fechaFin and fechaInicio is None:
-                # if "fechaFin" in dicDates and not "fechaInicio" in dicDates:
-                    fechaInicio = None, 1
-                # Caso 2: dan fecha de inicio, pero no de fin
-                elif fechaInicio and fechaFin is None:
-                # elif "fechaInicio" in dicDates and not "fechaFin" in dicDates:
-                    fechaFin = today, 1
-            else:
-                # Caso 3: fecha específica
-                fechaInicio = fechaEspecifica
-                fechaFin = fechaEspecifica
-
-        def orderDate():
-            nonlocal  fechaFin, fechaInicio
-
-            # Validamos que existan las fechas y las ordenamos.
-            if fechaInicio[0] and fechaFin[0] and \
-                    fechaFin[0] < fechaInicio[0]:
-                dateSwap = fechaInicio
-                fechaInicio = fechaFin
-                fechaFin = dateSwap
-
-        fechaFin = None
-        fechaInicio = None
-        fechaEspecifica = None
-        firstSpecificDate = False
-        today = date.today()
-        numberMonth = {
-            "enero": 1,
-            "febrero": 2,
-            "marzo": 3,
-            "abril": 4,
-            "mayo": 5,
-            "junio": 6,
-            "julio": 7,
-            "agosto": 8,
-            "septiembre": 9,
-            "octubre": 10,
-            "noviembre": 11,
-            "diciembre": 12
-        }
-
-        if len(entity) == 0:
-            statusCode = 1
-            fechaInicio = [None]
-            fechaFin = [None]
-        else:
-            # Obtenemos fechas de las Entitys
-            # Invertimos para interar desde el último elemento.
-            entity.reverse()
-            for fecha in entity:
-                if "Fin" in fecha and fechaFin is None:
-                    fechaFin = buildDate(fecha)
-                elif "Inicio" in fecha and fechaInicio is None:
-                    fechaInicio = buildDate(fecha)
-                elif fechaEspecifica is None:
-                    # Validamos si fecha específica fue la primera en ocurrir.
-                    if fechaInicio is None and fechaFin is None:
-                        firstSpecificDate = True
-                    fechaEspecifica = buildDate(fecha)
-
-            selectCaseDate()
-            orderDate()
-
-            # Evalúa código final
-            statusCode = 0
-            if fechaInicio[1] and fechaFin[1]:
-                statusCode = 1
-        result = [value.strftime("%Y-%m-%d") if value is not None else value
-                  for value in [fechaInicio[0], fechaFin[0]]]
-
-        return (dict(zip([cf.FECHA_INICIAL.value, cf.FECHA_FINAL.value],
-                         result)), statusCode)
 
     def code_validate(self, field, entity, unknowns, taglist):
         # Calculo de código
@@ -287,26 +153,17 @@ class Regexseaker:
                 code = 1
             else:
                 code = 0
-
-        # -------------------------------------------------------------------
         # formato de resultado
         # -------------------------------------------------------------------
         if entity is not None:
-            #######################################################################
-            # TODO: Esta parte también debe reescribirse para generalizarlo.
-            # Los valores que identifico que se deben hacer serían tipoDocumento,
-            # Acuse y Estado.
-            # Capitalizar los campos
-            if field in [cf.TIPO_DOCUMENTO.value]:
-                # para pasar tipo de documento y no la palabra original
-                if field == cf.TIPO_DOCUMENTO.value:
-                    if entity in self.dictfacturas["TNota"]:
-                        entity = "Nota"
-                    elif entity in self.dictfacturas["TFactura"]:
-                        entity = "Factura"
-                entity = entity.capitalize()
-            ######################################################################
-
+            ####################################################################
+            # Para devolver el tipo de documento y no la palabra encontrada
+            if field == cf.TIPO_DOCUMENTO.value:
+                if entity in self.dictfacturas["TNota"]:
+                    entity = "Nota"
+                elif entity in self.dictfacturas["TFactura"]:
+                    entity = "Factura"
+            ####################################################################
             # en mayusculas
             elif field in [cf.PREFIJO.value, cf.NO_DOCUMENTO.value,
                            cf.NIT.value, cf.CUENTA.value]:
