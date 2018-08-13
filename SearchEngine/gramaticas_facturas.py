@@ -157,12 +157,16 @@ class Regexseaker:
         # -------------------------------------------------------------------
         if entity is not None:
             ####################################################################
-            # Para devolver el tipo de documento y no la palabra encontrada
-            if field == cf.TIPO_DOCUMENTO.value:
-                if entity in self.dictfacturas["TNota"]:
-                    entity = "Nota"
-                elif entity in self.dictfacturas["TFactura"]:
-                    entity = "Factura"
+            # Letra para tres campos, ojo: debe de estar por los unknowns
+            if field in [cf.ACUSE.value, cf.TIPO_DOCUMENTO.value,
+                         cf.STATUS.value]:
+                # Para devolver el tipo de documento y no la palabra encontrada
+                if field == cf.TIPO_DOCUMENTO.value:
+                    if entity in self.dictfacturas["TNota"]:
+                        entity = "Nota"
+                    elif entity in self.dictfacturas["TFactura"]:
+                        entity = "Factura"
+                entity = entity.capitalize()
             ####################################################################
             # en mayusculas
             elif field in [cf.PREFIJO.value, cf.NO_DOCUMENTO.value,
