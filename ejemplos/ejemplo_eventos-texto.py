@@ -1,11 +1,14 @@
 import requests
 import json
 import subprocess
-
+import os
 
 def obtenemosToken():
+    # set json con credenciales
+    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "/home/gabriel/Documentos/Keys_DF/facturasvoz-estable-ae59624e7be6_cliente.json"
+
     # Obtenemos token de google (Ver documentación de como generar el token)
-    token = subprocess.check_output(["gcloud", "auth", "print-access-token"])
+    token = subprocess.check_output(["gcloud", "auth", "application-default", "print-access-token"])
     token = token.decode("utf-8").strip()
     return token
 
