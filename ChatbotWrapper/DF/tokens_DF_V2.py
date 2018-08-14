@@ -9,7 +9,6 @@ from flask import Flask, request, make_response
 CERT_FILE = "/home/gabriel/Documentos/Certificados/misitio_crt.pem"
 KEY_FILE = "/home/gabriel/Documentos/Certificados/misitio_key.pem"
 
-
 app = Flask(__name__)
 CORS(app)
 
@@ -20,7 +19,7 @@ def retornodummy():
     return r
 
 
-@app.route("/webhook", methods=["POST", "GET"])
+@app.route("/getToken", methods=["POST", "GET"])
 def webhook():
     req = request.get_json(silent=True, force=True)
     res = getToken(req)
@@ -33,14 +32,24 @@ def webhook():
 def getToken(req: dict):
     print("{} - {} request token for {} agent.".format(req["client"], req["session"], req["agent"]))
 
+    _setJson(req.get("agent"))
+
     # Obtenemos token de google (Ver documentación de como generar el token)
-    token = subprocess.check_output(["gcloud", "auth", "print-access-token"])
+    token = subprocess.check_output(["gcloud", "auth", "application-default", "print-access-token"])
     token = token.decode("utf-8").strip()
 
     print("{} - {} token: {}".format(req["client"], req["session"], token))
 
-
     return {"token": token, "returnCode": 1}
+
+
+def _setJson(agent: str):
+    # Path for json files
+    DIC_AGENT_JSON = {
+        "facturasvoz-estable": "/home/gabriel/Documentos/Keys_DF/facturasvoz-estable-ae59624e7be6_cliente.json"
+    }
+
+    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = DIC_AGENT_JSON.get(agent)
 
 
 if __name__ == "__main__":
