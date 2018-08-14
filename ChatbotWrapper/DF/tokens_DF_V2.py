@@ -22,11 +22,18 @@ def retornodummy():
 @app.route("/getToken", methods=["POST", "GET"])
 def webhook():
     req = request.get_json(silent=True, force=True)
-    res = getToken(req)
-    res = json.dumps(res, indent=4)
-    r = make_response(res)
-    r.headers["Content-Type"] = "application/json"
-    return r
+    try:
+        res = getToken(req)
+    except:
+        res = {
+            "token": str(sys.exc_info()),
+            "returnCode": 0
+        }
+    finally:
+        res = json.dumps(res, indent=4)
+        r = make_response(res)
+        r.headers["Content-Type"] = "application/json"
+        return r
 
 
 def getToken(req: dict):
@@ -51,7 +58,7 @@ def _setJson(agent: str, client: str):
         }
     }
 
-    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = DICT_AGENT_CLIENT.get(agent).get(client)
+    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = DICT_AGENT_CLIENT[agent][client]
 
 
 if __name__ == "__main__":
