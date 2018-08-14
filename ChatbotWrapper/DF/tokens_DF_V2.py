@@ -32,7 +32,7 @@ def webhook():
 def getToken(req: dict):
     print("{} - {} request token for {} agent.".format(req["client"], req["session"], req["agent"]))
 
-    _setJson(req.get("agent"))
+    _setJson(req["agent"], req["client"])
 
     # Obtenemos token de google (Ver documentación de como generar el token)
     token = subprocess.check_output(["gcloud", "auth", "application-default", "print-access-token"])
@@ -43,13 +43,15 @@ def getToken(req: dict):
     return {"token": token, "returnCode": 1}
 
 
-def _setJson(agent: str):
-    # Path for json files
-    DIC_AGENT_JSON = {
-        "facturasvoz-estable": "/home/gabriel/Documentos/Keys_DF/facturasvoz-estable-ae59624e7be6_cliente.json"
+def _setJson(agent: str, client: str):
+    # Paths for json files
+    DICT_AGENT_CLIENT = {
+        "facturasvoz-estable": {
+            "paginaWeb": "/home/gabriel/Documentos/Keys_DF/facturasvoz-estable-ae59624e7be6_cliente.json"
+        }
     }
 
-    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = DIC_AGENT_JSON.get(agent)
+    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = DICT_AGENT_CLIENT.get(agent).get(client)
 
 
 if __name__ == "__main__":
