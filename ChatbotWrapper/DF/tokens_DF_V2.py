@@ -1,3 +1,4 @@
+#!/home/ebraintec/anaconda3/bin/python
 # -*- coding: utf-8 -*-
 import json
 import os
@@ -12,6 +13,7 @@ import time
 
 _CERT_FILE = "/home/ebraintec/certificados/misitio_crt.pem"
 _KEY_FILE = "/home/ebraintec/certificados/misitio_key.pem"
+_GCLOUD_FILE = "/home/ebraintec/bin/google-cloud-sdk/bin/gcloud"
 
 # Paths for json files
 _DICT_AGENT_CLIENT = {
@@ -59,7 +61,7 @@ def getToken(req: dict):
     if not token:
         _setJson(req["agent"], req["client"])
         # Obtenemos token de google (Ver documentación de como generar el token)
-        token = subprocess.check_output(["gcloud", "auth", "application-default", "print-access-token"])
+        token = subprocess.check_output([_GCLOUD_FILE, "auth", "application-default", "print-access-token"])
         token = token.decode("utf-8").strip()
         _setTokenCached(req["agent"], req["client"], token)
 
