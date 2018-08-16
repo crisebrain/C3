@@ -7,3 +7,4 @@ metadata/temp.html
 *.ipynb_checkpoints/
 *~
 Sessions/Conference.pck
+*.pyc
