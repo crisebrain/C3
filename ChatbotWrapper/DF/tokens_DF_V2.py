@@ -10,13 +10,13 @@ from datetime import datetime
 
 import time
 
-_CERT_FILE = "/home/gabriel/Documentos/Certificados/misitio_crt.pem"
-_KEY_FILE = "/home/gabriel/Documentos/Certificados/misitio_key.pem"
+_CERT_FILE = "/home/ebraintec/certificados/misitio_crt.pem"
+_KEY_FILE = "/home/ebraintec/certificados/misitio_key.pem"
 
 # Paths for json files
 _DICT_AGENT_CLIENT = {
     "facturasvoz-estable": {
-        "paginaWeb": "/home/gabriel/Documentos/Keys_DF/facturasvoz-estable-ae59624e7be6_cliente.json"
+        "paginaWeb": "/home/ebraintec/Keys_DF/facturasvoz-estable-ae59624e7be6_cliente.json"
     }
 }
 
