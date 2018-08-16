@@ -9,7 +9,7 @@ const agent = "facturasvoz-estable";
 const baseUrl = "https://dialogflow.googleapis.com/v2/projects/" + agent + "/agent/sessions/" + session + ":detectIntent";
 const lang = "es-MX";
 const client = "paginaWeb";
-const urlTokens = "https://www.mipagina.com:6010/getToken";
+const urlTokens = "https://200.66.102.202:6020/getToken";
 
 var sampleRateHertz = 16000; // Framerate ideal
 var downloadLink;
