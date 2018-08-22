@@ -32,8 +32,16 @@ def makeresponseAction(req, action):
     for coin in coincidencias:
         resultarray.append(dict(zip(["nombre", action],
                                     [coin["Nombre"], coin[action]])))
-    resp = {"payload": {"result": resultarray, "returnCode": returnCode},
-            "fulfillmentText": textresp}
+    resp = {
+        "payload":
+            {
+                "result": resultarray,
+                "returnCode": returnCode
+            },
+        "fulfillmentText": textresp,
+        "outputContexts": {"name": session + "/contexts/0-2vdn-followup",
+                           "lifespanCount": 0}
+    }
             # "followupEventInput": {"name": "salida",
             #                "parameters": {"prueba": "1"},
             #                "languageCode": "es"}}
