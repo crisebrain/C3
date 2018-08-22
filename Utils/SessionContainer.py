@@ -67,6 +67,7 @@ class SessionContainer:
         """Prints the tree contained in sc object."""
         print("Id: \t%s\n" %(self.current_intentTree))
         tree = self.extractTree()
+        print("latests entries: ", [node.name for node in tree.inputlist])
         if getattr(tree, "sessionid", None) is not None:
             print("Session: \t%s\n" %(tree.sessionid))
         for i,(pre, fill, node) in enumerate(tree):
