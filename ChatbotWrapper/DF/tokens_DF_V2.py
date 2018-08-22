@@ -56,6 +56,7 @@ def webhook():
 def getToken(req: dict):
     print("{} - {} requesting token for {} agent.".format(req["client"], req["session"], req["agent"]))
 
+    # Verifica si el token existe en caché y sigue siendo válido
     token = _getCachedToken(req["agent"], req["client"])
 
     if not token:
