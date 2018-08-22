@@ -28,7 +28,7 @@ def factura(req: dict):
     respuesta = {
         "fulfillmentText": peticionStr,
         "payload": {
-            "data:": dicReady,
+            "data": dicReady,
             RETURN_CODE: returnCode
         }
     }
