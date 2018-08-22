@@ -29,7 +29,7 @@ class InfoManager:
     - Feeds the correspondat intent Node with "intentFlow".
         -- Order to SessionContainer object to fill the correspondant intent Node
         -- Fetch the intents values with the SessionContainer if adapter_DF asks.
-    - Fetches the valus from the contexts or id required with "intentDecompose".
+    - Fetches the values from the contexts or id required with "intentDecompose".
     """
     def __init__(self, rootdirectory, idChatBot=None):
         """Creates the Info Manager for the current conference session."""
@@ -120,6 +120,7 @@ class InfoManager:
                                            "name")  # node.children[0]
             forward = False
         if forward:
+            it.inputStacklist(node)
             it.updateContext(node.contextOut)
         response = self.outputMsg(jdata, currentNode, values, forward)
         return response
@@ -172,6 +173,22 @@ class InfoManager:
         # se debe revisar con un dump de memoria
         gc.collect()
 
+        return response
+
+    def fetchValues(self, jdata):
+        projectid = jdata.get("data").get("agent")
+        sessionid = jdata.get("data").get("session")
+        self.sc.reassignTree(sessionid)
+        data = jdata.get("data")
+        it = self.sc.extractTree()
+        nhistory = jdata.get("data").get("numberHistory")
+        reqObject = jdata.get("data").get("reqObject")
+        Objects = it.fromStackList(nhistory, by_field=reqObject)
+        message = ""
+        returnCode = 1
+        response = {"Objects": Objects,
+                    "message": message,
+                    "returnCode": returnCode}
         return response
 
     def intentDecompose(self):
