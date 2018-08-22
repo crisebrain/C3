@@ -66,6 +66,15 @@ class IntentNode(Node):
     def dropCurrent(self):
         delattr(self, "current")
 
+    def toDict(self, keys):
+        """keys - list kind object."""
+        node_dict = self.__dict__
+        dictionary = dict()
+        for key in keys:
+            dictionary.update({key: node_dict.get(key, "")})
+        return dictionary
+
+
 """General Tree to manipulate all intents"""
 class IntentTree(RenderTree):
     def __init__(self, json_data, loadedDate, idChatBot):
@@ -90,6 +99,7 @@ class IntentTree(RenderTree):
         self.node = IntentNode(None, **json_data)
         self.childiter = list
         self.orderlist = list()
+        self.inputlist = list()
         self.currentcontextls = list()  # self.node]
         self.loadedDate = loadedDate
         self.idChatBot = idChatBot
@@ -179,7 +189,32 @@ class IntentTree(RenderTree):
         self.index = index
         return self.orderlist[index]
 
-    def __LevelOrderlist(self):
-        """Creates the node name list from intenttree with depth and sequence.
+    def inputStacklist(self, lastnode):
+        """Creates the node list of intentnodes with the input order.
         """
-        self.orderlist = [node.name for node in PreOrderIter(self.node)]
+        idnode = lastnode.id
+        indices = [True if idnode == node.id else False
+                   for node in self.inputlist]
+        if any(indices):
+            index = indices.index(True)
+            _ = self.inputlist.pop(index)
+            self.inputlist.append(lastnode)
+        else:
+            self.inputlist.append(lastnode)
+
+    def fromStackList(self, n_objects, by_field="intent"):
+        if by_field == "intent":
+            nodes = self.inputlist[-n_objects:]
+            attributes = ["id", "name", "msgAns", "parameters",
+                          "contextIn", "contextOut", "action",
+                          "events"]
+            objects = [node.toDict(attributes) for node in nodes]
+        elif by_field == "context":
+            mask = [True if node.contextOut != [] else False
+                       for node in self.inputlist]
+            contextOutArray = []
+            for i, element in enumerate(mask):
+                if element:
+                    contextOutArray.append(self.inputlist[i].contexOut)
+            objects = contextOutArray[-n_objects:]
+        return objects
