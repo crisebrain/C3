@@ -215,6 +215,6 @@ class IntentTree(RenderTree):
             contextOutArray = []
             for i, element in enumerate(mask):
                 if element:
-                    contextOutArray.append(self.inputlist[i].contexOut)
+                    contextOutArray.append(self.inputlist[i].contextOut)
             objects = contextOutArray[-n_objects:]
         return objects
