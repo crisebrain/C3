@@ -1,5 +1,6 @@
 import json
 from Utils.logtofile import CreateLogger
+from ChatbotWrapper.DF import preguntasRespuestas
 
 
 def makeWebhookResult(req, origin = 1):
@@ -18,6 +19,7 @@ def makeWebhookResult(req, origin = 1):
         action = req.get("action")
 
     conlog = False
+
     try:
         querys = CreateLogger("querys" + originstr)
         errors = CreateLogger("errors" + originstr)
@@ -28,10 +30,13 @@ def makeWebhookResult(req, origin = 1):
         print("\n************************* WARNING *************************")
         print("No fue posible crear correctamente los loggers del proyecto")
         print("***********************************************************\n")
+
     try:
         if origin ==1:
             if action == "factura":
                 return factura(req)
+            elif action == "preguntasRespuestas":
+                return preguntasRespuestas.analizeReq(req)
             else:
                 return {"payload": {"result": "Null", "returnCode": "0"},
                         "fulfillmentText": "Null"}
@@ -43,6 +48,7 @@ def makeWebhookResult(req, origin = 1):
             else:
                 return {"payload": {"result": "Null", "returnCode": "0"},
                         "fulfillmentText": "Null"}
+
     except Exception as exception:
         if conlog and queryResult:
             errors.logger.info(json.dumps(queryResult) + "\n")
