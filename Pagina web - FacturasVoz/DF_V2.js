@@ -42,7 +42,7 @@ $(document).ready(function() {
 	$("#input").keypress(function(event) {
 		if (event.which == 13) {
 			event.preventDefault();
-			send();
+			send("text");
 		}
 	});
 	$("#rec").click(function(event) {
@@ -96,7 +96,7 @@ function blobToDF() {
 		base64 = reader.result;
 		base64 = base64.split(',')[1];
 		window.audioBase64 = base64;
-		send();
+		send("audio");
 	}
 }
 
@@ -143,9 +143,7 @@ function updateRec() {
 		$("#rec").text(recorder.recording ? "Detener" : "Hablar");
 }
 
-function send() {
-	var text = $("#input").val(); // TODO: ver que hacer con esto
-
+function send(typePetition) {
 	console.log("Asking for token")
 	// Get Token for AUTH V2
 	$.ajax({
@@ -162,7 +160,8 @@ function send() {
 		success: function(data) {
 			console.log("Token received")
 			accessToken = data.token;
-			sendToDF();
+			console.log(typePetition);
+			sendToDF(typePetition);
 		},
 		error: function() {
 			setResponse("Error al obtener el token.\n\n" + arguments[0].responseText);
@@ -175,27 +174,26 @@ function send() {
 }
 
 
-function sendToDF() {
+function sendToDF(typePetition) {
 	var phraseHints = ["acuse", "acuse pendiente", "nit", "nit adquiriente", "rfc", "rfc es", "facturar"]
 
 	console.log("Envio audio")
-	$.ajax({
-		type: "POST",
-		url: baseUrl,
-		contentType: "application/json; charset=UTF-8",
-		dataType: "json",
-		headers: {
-			"Authorization": "Bearer " + accessToken
-		},
-		data: JSON.stringify(
-			/*{
-				"queryInput": {
-					"text": {
-						"text": text,
-            			"languageCode": lang
-            		}
-            	}
-			}*/
+
+	function typeJson(typePetition) {
+		if (typePetition == "text") {
+			var text = $("#input").val();
+			return JSON.stringify(
+				{
+					"queryInput": {
+						"text": {
+							"text": text,
+	            			"languageCode": lang
+	            		}
+	            	}
+				})
+		}
+		else if (typePetition == "audio") {
+			return JSON.stringify(
 			{
 	            "queryInput":{
 	                "audioConfig": {
@@ -206,10 +204,24 @@ function sendToDF() {
 	                }
 	            },
 	            "inputAudio": audioBase64
-	        }),
+	        })
+		}
+	}
+
+	$.ajax({
+		type: "POST",
+		url: baseUrl,
+		contentType: "application/json; charset=UTF-8",
+		dataType: "json",
+		headers: {
+			"Authorization": "Bearer " + accessToken
+		},
+		data: typeJson(typePetition),
+
 		success: function(data) {
 			console.log("Recibo respuesta.")
 			setResponse(JSON.stringify(data, undefined, 2));
+			// TODO: Aquí manden a llamar su función que haga las peticiones.
 		},
 		error: function() {
 			setResponse("Internal Server Error\n\n" + arguments[0].responseText);
