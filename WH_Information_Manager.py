@@ -20,8 +20,10 @@ def webhook2():
     action = req.get("action")
     if action == "obtieneDatos":
         res = im.datumCSE_Facturas(req)
+    elif action == "recuperaValores":
+        res = im.fetchValues(req)
     else:
-    # print(json.dumps(req, indent=4))
+        # print(json.dumps(req, indent=4))
         res = im.interceptIntent(req)
     res = json.dumps(res)
     r = make_response(res)
