@@ -132,8 +132,8 @@ if __name__ == "__main__":
     conlog = False
     # Iniciar loggers
     try:
-        querys = CreateLogger("querysToken" + originstr)
-        errors = CreateLogger("errorsToken" + originstr)
+        querys = CreateLogger("querysToken")
+        errors = CreateLogger("errorsToken")
         conlog = True
     except (PermissionError, FileNotFoundError):
         print("\n************************* WARNING *************************")
