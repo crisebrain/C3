@@ -19,6 +19,9 @@ _GCLOUD_FILE = "/home/ebraintec/bin/google-cloud-sdk/bin/gcloud"
 _DICT_AGENT_CLIENT = {
     "facturasvoz-estable": {
         "paginaWeb": "/home/ebraintec/Keys_DF/facturasvoz-estable-ae59624e7be6_cliente.json"
+    },
+    "hs-preguntasrespuestas-fac0e": {
+        "paginaWeb": "/home/ebraintec/Keys_DF/hs-preguntasrespuestas-fac0e-8912fe141eca_paginaWeb_client.json"
     }
     # TODO: generar key para saltos en im y tomar en cuenta la variable de
     # ambiente con el path de gclod
