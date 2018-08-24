@@ -4,6 +4,7 @@ def analizeReq(req: dict):
     value = None
     respIntent = "No existe respuesta. Probablemente nadie lo sepa"
     intentName = req["queryResult"]["intent"]["displayName"]
+    session = req['session'].split("sessions/")[-1]
 
     dicContextHuman = {
         "cx_interfaz": "Interfaces",
@@ -11,10 +12,16 @@ def analizeReq(req: dict):
         "cx_carro": "Carros"
     }
 
+    dicEntityToContext = {
+        "imss" : "cx_imss",
+        "nomina" : "cx_nomina",
+        "catalogo" : "cx_catalogo"
+    }
+
     # IntentName y los contextos.
     dicDuplicate = {
         "general_que_son": ["cx_interfaz", "cx_objeto"],
-        "general-modulo": ["cx_nomina", "cx_imss"]
+        "general-modulo": ["cx_nomina", "cx_imss" , "cx_catalogo"]
     }
 
     # IntentName y sus respuestas.
@@ -22,28 +29,42 @@ def analizeReq(req: dict):
         "interfaz_costo": "El costo varía, según lo que quieras.",
         "objeto_tipo": "Pues el tipo de objeto...",
         "carros_marca": "es el fabricante del carro",
-        "imss-servicios": "El IMSS tiene varios servicios.",
+        "imss-servicio": "Los servicios del IMSS se refiere a los servicios que brinda la dependencia gubernamental",
         "general_que_son": {
             "interfaz": "Son las interfaces de usuario.",
             "objeto": "Son cosas que puede usar el usuario."
         },
         "general-modulo": {
             "imss": "El módulo IMSS contiene la funcionalidad general de los servicios del IMSS a los cuales se tiene acceso desde el portal.",
-            "nomina": "El módulo nómina, bla, bla, bla."
+            "nomina": "El móduo Nómina contiene el grupo de permisos para: Captura Incidencias por Concepto, Captura Incidencias por empleado, Reversar Finiquito, Cálculo de nómina, Realizar re-apertura de finiquitos",
+            #"catalogo" : "El módulo Catálogos permite la administración de los 4 tipos de catalogos de que dispone el sistema que son: Puestos, Centro de Costos, Área y Sindicato. Cada uno de ellos permite la administración de  los registros del tipo que los define."
+            "catalogo": "Respuesta de pregunta de catalogos."
         }
     }
+    #recibe respIntent y value de la entidad
+    def createResp( value):
+        resp = {
+            "outputContexts": [{"name": req["session"] + "/contexts/" + dicEntityToContext[value],
+                               "lifespanCount": 5}]
+        }
+        return resp
 
     # Set type of query "que son"
     if req['queryResult']['parameters'].keys():
         for key in req['queryResult']['parameters'].keys():
-            value = list(req['queryResult']['parameters'][key].keys())[0]
+            if isinstance(req['queryResult']['parameters'][key], dict ):
+                value = list(req['queryResult']['parameters'][key].keys())[0]
+            else:
+                value = key
 
-    # IM.updateIM(req, {"algo": 1})
+    # Actualiza el IM con la petición de DF
     IM.post_data(req)
 
     # If is a intent duplicate and hasn't value. We need context.
     duplicate = dicDuplicate.get(intentName)
 
+    # este if es para saber si la petición pertenece a un intent genérico
+    _definedContext = False
     if duplicate:
         # Pregunta implícita. Necesita contextos.
         if not value:
@@ -55,7 +76,7 @@ def analizeReq(req: dict):
                     # A veces hay contextos que no nos interesan como el followup, y debemos quitarlos.
                     # Únicamente necesitamos dos.
                     "numberHistory": 4,
-                    "session": req['session'].split("sessions/")[-1],
+                    "session": session,
                     "agent": req['session'].split("/")[1],
                 }
             }
@@ -79,18 +100,26 @@ def analizeReq(req: dict):
         # Pregunta explícita. Dan la entity en la misma pregunta.
         else:
             respIntent = dicResponse[intentName][value]
+            #return createResp(respIntent, value)
+            _definedContext = True
 
     # Caso donde primero hicieron pregunta implícita, y luego me especifican de que hablan.
     elif intentName == "general_que_son-de_que":
-        respIntent = dicResponse[intentName.split("-")[0]][value]
+        respIntent = dicResponse[intentName.split("-")[0]]
+        #return createResp(respIntent, value)
+        _definedContext = True
 
+    # Caso de intent específico con entity.
     else:
         respIntent = dicResponse.get(intentName, respIntent)
 
+    resp = []
 
     resp = {
         "fulfillmentText": respIntent
     }
+    if _definedContext:
+        resp.update(createResp(value))
 
     print(resp)
 
