@@ -8,7 +8,7 @@ import subprocess
 from flask_cors import CORS
 from flask import Flask, request, make_response
 from datetime import datetime
-
+from Utils.logtofile import CreateLogger
 import time
 
 _CERT_FILE = "/home/ebraintec/certificados/misitio_crt.pem"
@@ -19,7 +19,12 @@ _GCLOUD_FILE = "/home/ebraintec/bin/google-cloud-sdk/bin/gcloud"
 _DICT_AGENT_CLIENT = {
     "facturasvoz-estable": {
         "paginaWeb": "/home/ebraintec/Keys_DF/facturasvoz-estable-ae59624e7be6_cliente.json"
+    },
+    "hs-preguntasrespuestas-fac0e": {
+        "paginaWeb": "/home/ebraintec/Keys_DF/hs-preguntasrespuestas-fac0e-8912fe141eca_paginaWeb_client.json"
     }
+    # TODO: generar key para saltos en im y tomar en cuenta la variable de
+    # ambiente con el path de gclod
 }
 
 # Dict Tokens
@@ -38,10 +43,13 @@ def retornodummy():
 
 @app.route("/getToken", methods=["POST", "GET"])
 def webhook():
-    req = request.get_json(silent=True, force=True)
     try:
+        req = request.get_json(silent=True, force=True)
         res = getToken(req)
-    except:
+    except Exception as err:
+        if conlog:
+            errors.logger.info("\n" + str(request.headers) + "\n"+ str(request.__dict__))
+            errors.logger.exception(err)
         res = {
             "token": str(sys.exc_info()),
             "returnCode": 0
@@ -55,7 +63,8 @@ def webhook():
 
 def getToken(req: dict):
     print("{} - {} requesting token for {} agent.".format(req["client"], req["session"], req["agent"]))
-
+    if conlog:
+        querys.logger.info(json.dumps(req) + "\n")
     # Verifica si el token existe en caché y sigue siendo válido
     token = _getCachedToken(req["agent"], req["client"])
 
@@ -123,5 +132,16 @@ if __name__ == "__main__":
     port = int(os.getenv("PORT", portnumber))
 
     print("Starting token server on port %d" %port)
+    conlog = False
+    # Iniciar loggers
+    try:
+        querys = CreateLogger("querysToken")
+        errors = CreateLogger("errorsToken")
+        conlog = True
+    except (PermissionError, FileNotFoundError):
+        print("\n************************* WARNING *************************")
+        print("No fue posible crear correctamente los loggers del proyecto")
+        print("***********************************************************\n")
+    # -------------------------------------------------------------------------
     app.run(debug=True, port=port, host="0.0.0.0",
             ssl_context=(_CERT_FILE, _KEY_FILE))
