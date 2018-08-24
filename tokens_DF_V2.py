@@ -45,7 +45,7 @@ def webhook():
         res = getToken(req)
     except Exception as err:
         if conlog:
-            errors.logger.info(json.dumps(req) + "\n")
+            errors.logger.info("\n" + str(request.headers) + "\n"+ str(request.__dict__))
             errors.logger.exception(err)
         res = {
             "token": str(sys.exc_info()),
