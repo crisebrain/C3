@@ -1,0 +1,80 @@
+[
+  {
+    "value": "@imss:imss ",
+    "synonyms": [
+      "@imss:imss "
+    ]
+  },
+  {
+    "value": "@nomina:nomina ",
+    "synonyms": [
+      "@nomina:nomina "
+    ]
+  },
+  {
+    "value": "@catalogo:catalogo",
+    "synonyms": [
+      "@catalogo:catalogo"
+    ]
+  },
+  {
+    "value": "@configuracion:configuracion",
+    "synonyms": [
+      "@configuracion:configuracion"
+    ]
+  },
+  {
+    "value": "@miportal:miportal",
+    "synonyms": [
+      "@miportal:miportal"
+    ]
+  },
+  {
+    "value": "@seguridaddelperfil:seguridaddelperfil",
+    "synonyms": [
+      "@seguridaddelperfil:seguridaddelperfil"
+    ]
+  },
+  {
+    "value": "@perfil:perfil",
+    "synonyms": [
+      "@perfil:perfil"
+    ]
+  },
+  {
+    "value": "@usuario:usuario",
+    "synonyms": [
+      "@usuario:usuario"
+    ]
+  },
+  {
+    "value": "@auditoria:auditoria",
+    "synonyms": [
+      "@auditoria:auditoria"
+    ]
+  },
+  {
+    "value": "@permiso:permiso",
+    "synonyms": [
+      "@permiso:permiso"
+    ]
+  },
+  {
+    "value": "@grupoempresarial:grupoempresarial",
+    "synonyms": [
+      "@grupoempresarial:grupoempresarial"
+    ]
+  },
+  {
+    "value": "@difgrupoempyrazonsocial:difgrupoempyrazonsocial",
+    "synonyms": [
+      "@difgrupoempyrazonsocial:difgrupoempyrazonsocial"
+    ]
+  },
+  {
+    "value": "@campousuario:campousuario",
+    "synonyms": [
+      "@campousuario:campousuario"
+    ]
+  }
+]

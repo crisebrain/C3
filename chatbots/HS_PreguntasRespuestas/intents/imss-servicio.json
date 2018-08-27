@@ -1,0 +1,44 @@
+{
+  "id": "9b9e866f-97df-479f-8d74-e77af63e4e48",
+  "name": "imss-servicio",
+  "auto": true,
+  "contexts": [],
+  "responses": [
+    {
+      "resetContexts": false,
+      "action": "preguntasRespuestas",
+      "affectedContexts": [
+        {
+          "name": "cx_imss",
+          "parameters": {},
+          "lifespan": 5
+        }
+      ],
+      "parameters": [
+        {
+          "id": "734c9aab-f66d-4f81-8991-6cdae910ef4e",
+          "required": false,
+          "dataType": "@imss",
+          "name": "imss",
+          "value": "$imss",
+          "isList": false
+        }
+      ],
+      "messages": [
+        {
+          "type": 0,
+          "lang": "es",
+          "speech": "Falló el servicio."
+        }
+      ],
+      "defaultResponsePlatforms": {},
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": true,
+  "webhookForSlotFilling": false,
+  "lastUpdate": 1535069726,
+  "fallbackIntent": false,
+  "events": []
+}

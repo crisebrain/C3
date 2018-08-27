@@ -1,0 +1,1328 @@
+[
+  {
+    "id": "ef9180ee-468b-4b12-b301-824e33cd2f04",
+    "data": [
+      {
+        "text": "que ",
+        "userDefined": false
+      },
+      {
+        "text": "hay",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " que poner en el ",
+        "userDefined": false
+      },
+      {
+        "text": "campo de usuario",
+        "alias": "general-modulo",
+        "meta": "@general-modulo",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1535311483
+  },
+  {
+    "id": "3206f24b-a631-4a10-a0b7-e4f614d0d5ff",
+    "data": [
+      {
+        "text": "que debo poner donde ",
+        "userDefined": false
+      },
+      {
+        "text": "dice usuario",
+        "alias": "general-modulo",
+        "meta": "@general-modulo",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1535311483
+  },
+  {
+    "id": "d94c1d1c-a705-4175-a90d-a6227e669c9d",
+    "data": [
+      {
+        "text": "grupo empresarial",
+        "alias": "general-modulo",
+        "meta": "@general-modulo",
+        "userDefined": false
+      },
+      {
+        "text": " es lo mismo que razón social",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1535309835
+  },
+  {
+    "id": "f81d9442-a95a-4120-901f-f8081923eb7e",
+    "data": [
+      {
+        "text": "razón social es lo mismo que ",
+        "userDefined": false
+      },
+      {
+        "text": "grupo empresarial",
+        "alias": "general-modulo",
+        "meta": "@general-modulo",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1535309835
+  },
+  {
+    "id": "66a4a903-f814-4598-a2eb-1d4d77cde250",
+    "data": [
+      {
+        "text": "razón social y grupo empresarial",
+        "alias": "general-modulo",
+        "meta": "@general-modulo",
+        "userDefined": false
+      },
+      {
+        "text": " es lo mismo?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1535309835
+  },
+  {
+    "id": "a61fb906-6f92-4e3b-b223-75d637315027",
+    "data": [
+      {
+        "text": "razón social y grupo empresarial son lo mismo?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1535309835
+  },
+  {
+    "id": "e131cb90-126d-47e9-be28-512c66d9f1f0",
+    "data": [
+      {
+        "text": "cuál es la relación entre ",
+        "userDefined": false
+      },
+      {
+        "text": "grupo empresarial y razón social",
+        "alias": "general-modulo",
+        "meta": "@general-modulo",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1535309835
+  },
+  {
+    "id": "417ee07d-b3bc-468b-b55d-ab0b2e539436",
+    "data": [
+      {
+        "text": "que relación ",
+        "userDefined": false
+      },
+      {
+        "text": "hay",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " entre ",
+        "userDefined": false
+      },
+      {
+        "text": "grupo empresarial y razón social",
+        "alias": "general-modulo",
+        "meta": "@general-modulo",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1535309835
+  },
+  {
+    "id": "81a774e2-1c91-457d-b6b9-0d04023c510c",
+    "data": [
+      {
+        "text": "que diferencias existen entre ",
+        "userDefined": false
+      },
+      {
+        "text": "grupo empresarial y razón social",
+        "alias": "general-modulo",
+        "meta": "@general-modulo",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1535309835
+  },
+  {
+    "id": "4fa83780-33c6-4c6a-9c80-d71a03c57d52",
+    "data": [
+      {
+        "text": "que son los ",
+        "userDefined": false
+      },
+      {
+        "text": "permisos",
+        "alias": "general-modulo",
+        "meta": "@general-modulo",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1535260154
+  },
+  {
+    "id": "f91386f6-fb98-4430-98d7-62754bb6de8b",
+    "data": [
+      {
+        "text": "cuentame acerca de los ",
+        "userDefined": false
+      },
+      {
+        "text": "permisos",
+        "alias": "general-modulo",
+        "meta": "@general-modulo",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1535260154
+  },
+  {
+    "id": "e4ed369c-f1af-479e-8141-3aad9ffd0cfe",
+    "data": [
+      {
+        "text": "dime algo acerca de la seccion ",
+        "userDefined": false
+      },
+      {
+        "text": "IMSS",
+        "alias": "general-modulo",
+        "meta": "@general-modulo",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1535241831
+  },
+  {
+    "id": "03db4d5b-429f-4e90-95e9-2ee762ce013a",
+    "data": [
+      {
+        "text": "dime algo acerca de la sección ",
+        "userDefined": false
+      },
+      {
+        "text": "IMSS",
+        "alias": "general-modulo",
+        "meta": "@general-modulo",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 1,
+    "updated": 1535241831
+  },
+  {
+    "id": "07a4f091-d04f-4d74-80fb-6a80ea891b2b",
+    "data": [
+      {
+        "text": "dime algo acerca de la sección de ",
+        "userDefined": false
+      },
+      {
+        "text": "IMSS",
+        "alias": "general-modulo",
+        "meta": "@general-modulo",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1535241831
+  },
+  {
+    "id": "7d35281f-be47-4da1-9423-d58ef89c104b",
+    "data": [
+      {
+        "text": "cuentame acerca del módulo de ",
+        "userDefined": false
+      },
+      {
+        "text": "IMSS",
+        "alias": "general-modulo",
+        "meta": "@general-modulo",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1535241831
+  },
+  {
+    "id": "b0d25ce9-db4f-47c7-9b4a-67666e29c78e",
+    "data": [
+      {
+        "text": "que sabes acerca del módulo de ",
+        "userDefined": false
+      },
+      {
+        "text": "IMSS",
+        "alias": "general-modulo",
+        "meta": "@general-modulo",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 1,
+    "updated": 1535241831
+  },
+  {
+    "id": "8ab826fb-1462-497a-8d01-49d13b1eb2b2",
+    "data": [
+      {
+        "text": "que es eso de la sección de ",
+        "userDefined": false
+      },
+      {
+        "text": "IMSS",
+        "alias": "general-modulo",
+        "meta": "@general-modulo",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1535241831
+  },
+  {
+    "id": "f23c7e96-6797-45a8-99a3-7a80dd22e5da",
+    "data": [
+      {
+        "text": "que es eso de la sección ",
+        "userDefined": false
+      },
+      {
+        "text": "IMSS",
+        "alias": "general-modulo",
+        "meta": "@general-modulo",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1535241831
+  },
+  {
+    "id": "fd769f7a-6560-468a-9096-cda26b866735",
+    "data": [
+      {
+        "text": "y acerca del ",
+        "userDefined": false
+      },
+      {
+        "text": "IMSS",
+        "alias": "general-modulo",
+        "meta": "@general-modulo",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 1,
+    "updated": 1535241831
+  },
+  {
+    "id": "498bf2f4-84ab-4e34-8448-8c5b789f32c8",
+    "data": [
+      {
+        "text": "y acerca de ",
+        "userDefined": false
+      },
+      {
+        "text": "IMSS",
+        "alias": "general-modulo",
+        "meta": "@general-modulo",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1535241831
+  },
+  {
+    "id": "cb40d0d2-8b51-4573-b770-56263e4df552",
+    "data": [
+      {
+        "text": "hablame acerca del modulo de ",
+        "userDefined": false
+      },
+      {
+        "text": "IMSS",
+        "alias": "general-modulo",
+        "meta": "@general-modulo",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1535311483
+  },
+  {
+    "id": "8af76407-ec70-49b8-8771-640754e20e17",
+    "data": [
+      {
+        "text": "hablame acerca del módulo de ",
+        "userDefined": false
+      },
+      {
+        "text": "IMSS",
+        "alias": "general-modulo",
+        "meta": "@general-modulo",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 1,
+    "updated": 1535255016
+  },
+  {
+    "id": "0281fdf8-3748-42ff-aac4-3212f1a31663",
+    "data": [
+      {
+        "text": "y que tienes de la sección de ",
+        "userDefined": false
+      },
+      {
+        "text": "IMSS",
+        "alias": "general-modulo",
+        "meta": "@general-modulo",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1535255016
+  },
+  {
+    "id": "bdc7e2ae-f03c-4d38-9d67-271a36fe5b2d",
+    "data": [
+      {
+        "text": "que sabes de la sección de ",
+        "userDefined": false
+      },
+      {
+        "text": "IMSS",
+        "alias": "general-modulo",
+        "meta": "@general-modulo",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1535255016
+  },
+  {
+    "id": "9427b9ad-9b38-490a-841e-307d7605a7fd",
+    "data": [
+      {
+        "text": "que me ",
+        "userDefined": false
+      },
+      {
+        "text": "dices",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " de la sección ",
+        "userDefined": false
+      },
+      {
+        "text": "IMSS",
+        "alias": "general-modulo",
+        "meta": "@general-modulo",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1535255016
+  },
+  {
+    "id": "8a4e476c-1f39-4600-8b91-f1732dd59a86",
+    "data": [
+      {
+        "text": "y la seccion ",
+        "userDefined": false
+      },
+      {
+        "text": "IMSS",
+        "alias": "general-modulo",
+        "meta": "@general-modulo",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1535255016
+  },
+  {
+    "id": "0834be01-a9ba-4c86-adf4-0431e00c4840",
+    "data": [
+      {
+        "text": "y la sección ",
+        "userDefined": false
+      },
+      {
+        "text": "IMSS",
+        "alias": "general-modulo",
+        "meta": "@general-modulo",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1535255016
+  },
+  {
+    "id": "2490b911-75ce-423a-95d7-a0d8e0c20fba",
+    "data": [
+      {
+        "text": "y que es la sección de ",
+        "userDefined": false
+      },
+      {
+        "text": "IMSS",
+        "alias": "general-modulo",
+        "meta": "@general-modulo",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1535255016
+  },
+  {
+    "id": "eb170dbf-ecef-40db-b49f-e21d0b365730",
+    "data": [
+      {
+        "text": "y que es la sección ",
+        "userDefined": false
+      },
+      {
+        "text": "IMSS",
+        "alias": "general-modulo",
+        "meta": "@general-modulo",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1535255016
+  },
+  {
+    "id": "44dea7fa-a4dc-4d85-96a4-88f74a624faf",
+    "data": [
+      {
+        "text": "que es la sección de ",
+        "userDefined": false
+      },
+      {
+        "text": "IMSS",
+        "alias": "general-modulo",
+        "meta": "@general-modulo",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1535255016
+  },
+  {
+    "id": "08cb583c-d16d-4d0d-902c-fa5732418325",
+    "data": [
+      {
+        "text": "que es la seccion ",
+        "userDefined": false
+      },
+      {
+        "text": "IMSS",
+        "alias": "general-modulo",
+        "meta": "@general-modulo",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1535255016
+  },
+  {
+    "id": "d12e799c-ebaa-4440-9e60-ebfd09b1f049",
+    "data": [
+      {
+        "text": "enseñame acerca de la sección ",
+        "userDefined": false
+      },
+      {
+        "text": "IMSS",
+        "alias": "general-modulo",
+        "meta": "@general-modulo",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 1,
+    "updated": 1535255016
+  },
+  {
+    "id": "71ae5718-e6c7-4a24-944d-269e5cbbd642",
+    "data": [
+      {
+        "text": "enseñame acerca de la sección de ",
+        "userDefined": false
+      },
+      {
+        "text": "IMSS",
+        "alias": "general-modulo",
+        "meta": "@general-modulo",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 1,
+    "updated": 1535255016
+  },
+  {
+    "id": "2110fcfa-5518-4948-b0d2-737bb3bf6dc1",
+    "data": [
+      {
+        "text": "enseñame acerca de la opción del ",
+        "userDefined": false
+      },
+      {
+        "text": "IMSS",
+        "alias": "general-modulo",
+        "meta": "@general-modulo",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1535255016
+  },
+  {
+    "id": "1f097bc2-eaba-498c-9f65-b1ff14d62610",
+    "data": [
+      {
+        "text": "enseñame acerca de la sección del ",
+        "userDefined": false
+      },
+      {
+        "text": "IMSS",
+        "alias": "general-modulo",
+        "meta": "@general-modulo",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1535255016
+  },
+  {
+    "id": "5ca84015-78cd-49bb-b2ab-8abd7cbfa8d0",
+    "data": [
+      {
+        "text": "enseñame acerca del módulo ",
+        "userDefined": false
+      },
+      {
+        "text": "IMSS",
+        "alias": "general-modulo",
+        "meta": "@general-modulo",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1535255016
+  },
+  {
+    "id": "7a07b693-2d25-4e45-b354-498df315b1cd",
+    "data": [
+      {
+        "text": "enseñame acerca del módulo de ",
+        "userDefined": false
+      },
+      {
+        "text": "IMSS",
+        "alias": "general-modulo",
+        "meta": "@general-modulo",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1535255016
+  },
+  {
+    "id": "886fcedc-862f-4e9c-8ede-b18522cd856f",
+    "data": [
+      {
+        "text": "enseñame acerca del módulo del ",
+        "userDefined": false
+      },
+      {
+        "text": "IMSS",
+        "alias": "general-modulo",
+        "meta": "@general-modulo",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1535255016
+  },
+  {
+    "id": "07f2c3b0-dd83-45f2-9cfd-3991e5bbdd33",
+    "data": [
+      {
+        "text": "que me puedes enseñar acerca ",
+        "userDefined": false
+      },
+      {
+        "text": "IMSS",
+        "alias": "general-modulo",
+        "meta": "@general-modulo",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1535255016
+  },
+  {
+    "id": "4c6e6b14-cc96-4143-bf71-2f5b5ee2ec2c",
+    "data": [
+      {
+        "text": "que me puedes enseñar acerca del ",
+        "userDefined": false
+      },
+      {
+        "text": "IMSS",
+        "alias": "general-modulo",
+        "meta": "@general-modulo",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1535255016
+  },
+  {
+    "id": "6a4df49b-c482-4bf2-a46d-9b9f45bd77e4",
+    "data": [
+      {
+        "text": "que me puedes contar acerca del ",
+        "userDefined": false
+      },
+      {
+        "text": "IMSS",
+        "alias": "general-modulo",
+        "meta": "@general-modulo",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1535255016
+  },
+  {
+    "id": "6bcfc475-ba5f-4adb-abcf-5165da90ec63",
+    "data": [
+      {
+        "text": "que me puedes decir acerca del ",
+        "userDefined": false
+      },
+      {
+        "text": "IMSS",
+        "alias": "general-modulo",
+        "meta": "@general-modulo",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1535255016
+  },
+  {
+    "id": "a5d0462f-f14c-405c-aaf6-aa758fee344b",
+    "data": [
+      {
+        "text": "que es el modulo ",
+        "userDefined": false
+      },
+      {
+        "text": "nomina",
+        "alias": "general-modulo",
+        "meta": "@general-modulo",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1535255016
+  },
+  {
+    "id": "5a254026-fb96-4d12-a2c9-a9e8ea66e341",
+    "data": [
+      {
+        "text": "a que se refiere la opcion de ",
+        "userDefined": false
+      },
+      {
+        "text": "imss",
+        "alias": "general-modulo",
+        "meta": "@general-modulo",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1535255016
+  },
+  {
+    "id": "83525df1-6391-4200-a1ec-f7256daf776e",
+    "data": [
+      {
+        "text": "a que se refiere el modulo de ",
+        "userDefined": false
+      },
+      {
+        "text": "imss",
+        "alias": "general-modulo",
+        "meta": "@general-modulo",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1535255016
+  },
+  {
+    "id": "86161e54-d8ba-4a0c-a128-cb7f0a19c059",
+    "data": [
+      {
+        "text": "y el modulo de ",
+        "userDefined": false
+      },
+      {
+        "text": "catalogos",
+        "alias": "general-modulo",
+        "meta": "@general-modulo",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1535255016
+  },
+  {
+    "id": "2fbe97a9-31b5-4ffa-8f9d-afd728d61daa",
+    "data": [
+      {
+        "text": "que es el ",
+        "userDefined": false
+      },
+      {
+        "text": "catalogo",
+        "alias": "general-modulo",
+        "meta": "@general-modulo",
+        "userDefined": false
+      },
+      {
+        "text": " de sindicato",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1535255016
+  },
+  {
+    "id": "dd97d7b8-4ef8-4518-aef8-dbe14085ac35",
+    "data": [
+      {
+        "text": "que es el ",
+        "userDefined": false
+      },
+      {
+        "text": "catálogo",
+        "alias": "general-modulo",
+        "meta": "@general-modulo",
+        "userDefined": false
+      },
+      {
+        "text": " de area",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 1,
+    "updated": 1535255016
+  },
+  {
+    "id": "51876ac0-b356-41fb-9ded-2e9e4dd1c69d",
+    "data": [
+      {
+        "text": "Que es el ",
+        "userDefined": false
+      },
+      {
+        "text": "catálogo",
+        "alias": "general-modulo",
+        "meta": "@general-modulo",
+        "userDefined": false
+      },
+      {
+        "text": " de área",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1535255016
+  },
+  {
+    "id": "a8a7a288-66e6-492b-b361-363273a6032b",
+    "data": [
+      {
+        "text": "Que es el ",
+        "userDefined": false
+      },
+      {
+        "text": "catálogo",
+        "alias": "general-modulo",
+        "meta": "@general-modulo",
+        "userDefined": false
+      },
+      {
+        "text": " de ",
+        "userDefined": false
+      },
+      {
+        "text": "Centro",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " de Costos",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1535255016
+  },
+  {
+    "id": "06c727d2-3b0f-4af0-8fc8-7ad3413e5fee",
+    "data": [
+      {
+        "text": "Cuál es el ",
+        "userDefined": false
+      },
+      {
+        "text": "catálogo",
+        "alias": "general-modulo",
+        "meta": "@general-modulo",
+        "userDefined": false
+      },
+      {
+        "text": " de puesto",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1535255016
+  },
+  {
+    "id": "6e132217-3bbd-4edd-a56d-808f73a3960d",
+    "data": [
+      {
+        "text": "que significa ",
+        "userDefined": false
+      },
+      {
+        "text": "usuario",
+        "alias": "general-modulo",
+        "meta": "@general-modulo",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1535255016
+  },
+  {
+    "id": "cff0a2e0-a6ff-4fa6-af69-ecdb45230ec5",
+    "data": [
+      {
+        "text": "A que se refiere la opción de ",
+        "userDefined": false
+      },
+      {
+        "text": "Catálogos",
+        "alias": "general-modulo",
+        "meta": "@general-modulo",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1535255016
+  },
+  {
+    "id": "5732f636-a791-4511-bd3b-b0da70bee398",
+    "data": [
+      {
+        "text": "A que se refiere el módulo de ",
+        "userDefined": false
+      },
+      {
+        "text": "catalogos",
+        "alias": "general-modulo",
+        "meta": "@general-modulo",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1535255016
+  },
+  {
+    "id": "81444fd1-a4d9-477f-8e09-4188008d070e",
+    "data": [
+      {
+        "text": "a que se refiere el modulo ",
+        "userDefined": false
+      },
+      {
+        "text": "imss",
+        "alias": "general-modulo",
+        "meta": "@general-modulo",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 1,
+    "updated": 1535255016
+  },
+  {
+    "id": "31e72a47-2340-43c7-871e-aa4ca0ac8eea",
+    "data": [
+      {
+        "text": "cual es el modulo ",
+        "userDefined": false
+      },
+      {
+        "text": "imss",
+        "alias": "general-modulo",
+        "meta": "@general-modulo",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1535255016
+  },
+  {
+    "id": "c84bdb46-bc2f-4921-959c-3d9d0570a314",
+    "data": [
+      {
+        "text": "que es el modulo ",
+        "userDefined": false
+      },
+      {
+        "text": "imss",
+        "alias": "general-modulo",
+        "meta": "@general-modulo",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1535255016
+  },
+  {
+    "id": "e86d7c6b-4883-4dc8-a02f-95fdd0f46e75",
+    "data": [
+      {
+        "text": "cual es la ",
+        "userDefined": false
+      },
+      {
+        "text": "nomina",
+        "alias": "general-modulo",
+        "meta": "@general-modulo",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1535255016
+  },
+  {
+    "id": "e27a7cac-17b1-4ddf-921b-e193c4d6c796",
+    "data": [
+      {
+        "text": "Cuál es el módulo ",
+        "userDefined": false
+      },
+      {
+        "text": "IMSS",
+        "alias": "general-modulo",
+        "meta": "@general-modulo",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1535255016
+  },
+  {
+    "id": "4466517d-6fcb-4a49-9cce-3ed27cd18ecf",
+    "data": [
+      {
+        "text": "Que es el módulo ",
+        "userDefined": false
+      },
+      {
+        "text": "IMSS",
+        "alias": "general-modulo",
+        "meta": "@general-modulo",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1535255016
+  },
+  {
+    "id": "8fb5557b-70a1-4644-b6f1-f2f7560eef33",
+    "data": [
+      {
+        "text": "que ",
+        "userDefined": false
+      },
+      {
+        "text": "valor",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " le pongo en el ",
+        "userDefined": false
+      },
+      {
+        "text": "campo usuario",
+        "alias": "general-modulo",
+        "meta": "@general-modulo",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1535311483
+  },
+  {
+    "id": "37e6c7af-6277-4b24-9df7-d96c8122dd00",
+    "data": [
+      {
+        "text": "que se pone en el ",
+        "userDefined": false
+      },
+      {
+        "text": "campo usuario",
+        "alias": "general-modulo",
+        "meta": "@general-modulo",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1535311483
+  },
+  {
+    "id": "76781a19-55e2-4aa0-906b-2e2f6c1cbc5b",
+    "data": [
+      {
+        "text": "Que significa el módulo ",
+        "userDefined": false
+      },
+      {
+        "text": "IMSS",
+        "alias": "general-modulo",
+        "meta": "@general-modulo",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1535255016
+  },
+  {
+    "id": "194e0d76-823f-4791-9b81-c92e1b1d92e6",
+    "data": [
+      {
+        "text": "que representa ",
+        "userDefined": false
+      },
+      {
+        "text": "un",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "usuario",
+        "alias": "general-modulo",
+        "meta": "@general-modulo",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1535255683
+  },
+  {
+    "id": "c49f6e59-a489-4f1e-ae17-62b4bcf15c6f",
+    "data": [
+      {
+        "text": "A que se refiere la opción de ",
+        "userDefined": false
+      },
+      {
+        "text": "IMSS",
+        "alias": "general-modulo",
+        "meta": "@general-modulo",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1535255016
+  },
+  {
+    "id": "2f1ca66f-d94e-4e0a-80ac-ff0ca7756763",
+    "data": [
+      {
+        "text": "a que se refiere el tema ",
+        "userDefined": false
+      },
+      {
+        "text": "perfil",
+        "alias": "general-modulo",
+        "meta": "@general-modulo",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1535255683
+  },
+  {
+    "id": "ffd7a1df-782d-44a9-b0fc-4ef77ab8b98a",
+    "data": [
+      {
+        "text": "del modulo de ",
+        "userDefined": false
+      },
+      {
+        "text": "configuración",
+        "alias": "general-modulo",
+        "meta": "@general-modulo",
+        "userDefined": false
+      },
+      {
+        "text": " que sabes?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1535255683
+  },
+  {
+    "id": "4c025436-80d8-47c5-9be5-446a69747f5e",
+    "data": [
+      {
+        "text": "del modulo ",
+        "userDefined": false
+      },
+      {
+        "text": "imss",
+        "alias": "general-modulo",
+        "meta": "@general-modulo",
+        "userDefined": false
+      },
+      {
+        "text": " que sabes",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1535255683
+  },
+  {
+    "id": "c2ff1141-e202-4824-bc7c-c033a08d6816",
+    "data": [
+      {
+        "text": "A que se refiere el módulo de ",
+        "userDefined": false
+      },
+      {
+        "text": "IMSS",
+        "alias": "general-modulo",
+        "meta": "@general-modulo",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1535255683
+  }
+]

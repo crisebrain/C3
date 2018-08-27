@@ -1,0 +1,26 @@
+[
+  {
+    "value": "permiso",
+    "synonyms": [
+      "permiso"
+    ]
+  },
+  {
+    "value": "permisos",
+    "synonyms": [
+      "permisos"
+    ]
+  },
+  {
+    "value": "permiso?",
+    "synonyms": [
+      "permiso?"
+    ]
+  },
+  {
+    "value": "permisos?",
+    "synonyms": [
+      "permisos?"
+    ]
+  }
+]

@@ -1,0 +1,38 @@
+{
+  "id": "36d5c7e0-ba97-44e4-b444-39471a0575e7",
+  "name": "general-modulo",
+  "auto": true,
+  "contexts": [],
+  "responses": [
+    {
+      "resetContexts": false,
+      "action": "preguntasRespuestas",
+      "affectedContexts": [],
+      "parameters": [
+        {
+          "id": "cf3c3dd1-1ebc-4e64-a80f-2df3aea3e48e",
+          "required": false,
+          "dataType": "@general-modulo",
+          "name": "general-modulo",
+          "value": "$general-modulo",
+          "isList": false
+        }
+      ],
+      "messages": [
+        {
+          "type": 0,
+          "lang": "es",
+          "speech": "Por favor replantee su pregunta."
+        }
+      ],
+      "defaultResponsePlatforms": {},
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": true,
+  "webhookForSlotFilling": false,
+  "lastUpdate": 1535311483,
+  "fallbackIntent": false,
+  "events": []
+}
