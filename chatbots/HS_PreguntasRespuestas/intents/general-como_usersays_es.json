@@ -1,0 +1,855 @@
+[
+  {
+    "id": "ede119bb-dd76-447c-b43c-3451a7383714",
+    "data": [
+      {
+        "text": "Cömo ",
+        "userDefined": false
+      },
+      {
+        "text": "creo",
+        "alias": "acciongeneral",
+        "meta": "@acciongeneral",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "permiso",
+        "alias": "general-como",
+        "meta": "@general-como",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1535386929
+  },
+  {
+    "id": "8c1c281a-e08c-4327-bed0-2bb834ac1a33",
+    "data": [
+      {
+        "text": "como ",
+        "userDefined": false
+      },
+      {
+        "text": "creo",
+        "alias": "acciongeneral",
+        "meta": "@acciongeneral",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "permiso",
+        "alias": "general-como",
+        "meta": "@general-como",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1535386929
+  },
+  {
+    "id": "d35e8ed8-d618-4b73-b2b4-b2b5bc532a6a",
+    "data": [
+      {
+        "text": "como ",
+        "userDefined": false
+      },
+      {
+        "text": "creo",
+        "alias": "acciongeneral",
+        "meta": "@acciongeneral",
+        "userDefined": false
+      },
+      {
+        "text": " los ",
+        "userDefined": false
+      },
+      {
+        "text": "permisos",
+        "alias": "general-como",
+        "meta": "@general-como",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1535386929
+  },
+  {
+    "id": "b6a8fa43-db42-4c82-87cb-ea798393682a",
+    "data": [
+      {
+        "text": "cómo ",
+        "userDefined": false
+      },
+      {
+        "text": "creo",
+        "alias": "acciongeneral",
+        "meta": "@acciongeneral",
+        "userDefined": false
+      },
+      {
+        "text": " el ",
+        "userDefined": false
+      },
+      {
+        "text": "permiso",
+        "alias": "general-como",
+        "meta": "@general-como",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1535386929
+  },
+  {
+    "id": "246c1740-952f-4a9f-a495-e6c6b51ed10c",
+    "data": [
+      {
+        "text": "como ",
+        "userDefined": false
+      },
+      {
+        "text": "creo",
+        "alias": "acciongeneral",
+        "meta": "@acciongeneral",
+        "userDefined": false
+      },
+      {
+        "text": " el ",
+        "userDefined": false
+      },
+      {
+        "text": "permiso",
+        "alias": "general-como",
+        "meta": "@general-como",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1535386929
+  },
+  {
+    "id": "f6540246-2152-4e46-87e8-b7a6710e6faf",
+    "data": [
+      {
+        "text": "cómo ",
+        "userDefined": false
+      },
+      {
+        "text": "creo",
+        "alias": "acciongeneral",
+        "meta": "@acciongeneral",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "un",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "permiso",
+        "alias": "general-como",
+        "meta": "@general-como",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1535386929
+  },
+  {
+    "id": "e5134b00-e8a3-4ef0-acff-28d33bde0657",
+    "data": [
+      {
+        "text": "cómo ",
+        "userDefined": false
+      },
+      {
+        "text": "creo",
+        "alias": "acciongeneral",
+        "meta": "@acciongeneral",
+        "userDefined": true
+      },
+      {
+        "text": " un ",
+        "userDefined": false
+      },
+      {
+        "text": "permiso",
+        "alias": "general-como",
+        "meta": "@general-como",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1535386929
+  },
+  {
+    "id": "d4aeb04e-6801-4428-966f-b97660418532",
+    "data": [
+      {
+        "text": "como ",
+        "userDefined": false
+      },
+      {
+        "text": "creo",
+        "alias": "acciongeneral",
+        "meta": "@acciongeneral",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "un",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "permiso",
+        "alias": "general-como",
+        "meta": "@general-como",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1535386929
+  },
+  {
+    "id": "c7ab994d-fcc3-43e3-a6bb-defba836d5a4",
+    "data": [
+      {
+        "text": "como ver los ",
+        "userDefined": false
+      },
+      {
+        "text": "permisos",
+        "alias": "general-como",
+        "meta": "@general-como",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1535383702
+  },
+  {
+    "id": "7b1d315d-a11d-4dbd-a40e-b4b348c885fa",
+    "data": [
+      {
+        "text": "como consultar los ",
+        "userDefined": false
+      },
+      {
+        "text": "permisos",
+        "alias": "general-como",
+        "meta": "@general-como",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1535383702
+  },
+  {
+    "id": "f71c9892-9e4e-4d9a-b2ef-7af38fd87fad",
+    "data": [
+      {
+        "text": "como implementar los ",
+        "userDefined": false
+      },
+      {
+        "text": "permisos",
+        "alias": "general-como",
+        "meta": "@general-como",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1535383702
+  },
+  {
+    "id": "e1a79cf6-a135-4f9b-a602-b8feae0e31ed",
+    "data": [
+      {
+        "text": "como aplicar los ",
+        "userDefined": false
+      },
+      {
+        "text": "permisos",
+        "alias": "general-como",
+        "meta": "@general-como",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 1,
+    "updated": 1535383702
+  },
+  {
+    "id": "ee98df77-2b3e-4271-9767-a926ebcb21fe",
+    "data": [
+      {
+        "text": "como usar los ",
+        "userDefined": false
+      },
+      {
+        "text": "permisos",
+        "alias": "general-como",
+        "meta": "@general-como",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 1,
+    "updated": 1535383702
+  },
+  {
+    "id": "ade5bca4-c006-4dde-91e6-da09dc50be52",
+    "data": [
+      {
+        "text": "como utilizar los ",
+        "userDefined": false
+      },
+      {
+        "text": "permisos",
+        "alias": "general-como",
+        "meta": "@general-como",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1535383702
+  },
+  {
+    "id": "186461c1-7b5d-477d-993a-f9deec890157",
+    "data": [
+      {
+        "text": "como ver ",
+        "userDefined": false
+      },
+      {
+        "text": "permisos",
+        "alias": "general-como",
+        "meta": "@general-como",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1535383702
+  },
+  {
+    "id": "b7ad8dea-a89b-4c83-8005-c326b3c1e3d7",
+    "data": [
+      {
+        "text": "como consultar ",
+        "userDefined": false
+      },
+      {
+        "text": "permisos",
+        "alias": "general-como",
+        "meta": "@general-como",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 1,
+    "updated": 1535383702
+  },
+  {
+    "id": "3bf7e2ce-9f7b-4a08-a374-9f655ae0471c",
+    "data": [
+      {
+        "text": "como implementar ",
+        "userDefined": false
+      },
+      {
+        "text": "permisos",
+        "alias": "general-como",
+        "meta": "@general-como",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 1,
+    "updated": 1535383702
+  },
+  {
+    "id": "cd469ab3-c048-4977-a6a1-9b9210920a58",
+    "data": [
+      {
+        "text": "como aplicar ",
+        "userDefined": false
+      },
+      {
+        "text": "permisos",
+        "alias": "general-como",
+        "meta": "@general-como",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1535383702
+  },
+  {
+    "id": "cebd4e3e-97ee-4b7e-893b-fce45a4fa856",
+    "data": [
+      {
+        "text": "como usar ",
+        "userDefined": false
+      },
+      {
+        "text": "permisos",
+        "alias": "general-como",
+        "meta": "@general-como",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1535383702
+  },
+  {
+    "id": "2bb0719f-c621-45b6-8cab-cecec56d5c1b",
+    "data": [
+      {
+        "text": "como utilizar ",
+        "userDefined": false
+      },
+      {
+        "text": "permisos",
+        "alias": "general-como",
+        "meta": "@general-como",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 1,
+    "updated": 1535383702
+  },
+  {
+    "id": "8c88f128-2bac-4494-9fe9-2906dd0a6b32",
+    "data": [
+      {
+        "text": "como implemento los ",
+        "userDefined": false
+      },
+      {
+        "text": "permisos",
+        "alias": "general-como",
+        "meta": "@general-como",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1535383702
+  },
+  {
+    "id": "bf50ae72-0e01-4043-8353-a1e86df1a8b6",
+    "data": [
+      {
+        "text": "como aplico los ",
+        "userDefined": false
+      },
+      {
+        "text": "permisos",
+        "alias": "general-como",
+        "meta": "@general-como",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1535383702
+  },
+  {
+    "id": "62b657dc-6e0d-4767-b249-1db8af491e02",
+    "data": [
+      {
+        "text": "como implemento ",
+        "userDefined": false
+      },
+      {
+        "text": "permisos",
+        "alias": "general-como",
+        "meta": "@general-como",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 1,
+    "updated": 1535383702
+  },
+  {
+    "id": "b4f4d629-7b2c-42a8-9ecb-59fa3fe1485b",
+    "data": [
+      {
+        "text": "como aplico ",
+        "userDefined": false
+      },
+      {
+        "text": "permisos",
+        "alias": "general-como",
+        "meta": "@general-como",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 1,
+    "updated": 1535383702
+  },
+  {
+    "id": "561c733d-ce09-4ebe-b39d-f5c62e767e0a",
+    "data": [
+      {
+        "text": "como uso ",
+        "userDefined": false
+      },
+      {
+        "text": "permisos",
+        "alias": "general-como",
+        "meta": "@general-como",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1535383702
+  },
+  {
+    "id": "a9d5cb63-bb84-4a0b-8ea7-61cd0a9c656f",
+    "data": [
+      {
+        "text": "como utilizo el ",
+        "userDefined": false
+      },
+      {
+        "text": "permiso",
+        "alias": "general-como",
+        "meta": "@general-como",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1535383702
+  },
+  {
+    "id": "eb085e11-77da-4fdc-b335-b950f56f28eb",
+    "data": [
+      {
+        "text": "como utilizo los ",
+        "userDefined": false
+      },
+      {
+        "text": "permisos",
+        "alias": "general-como",
+        "meta": "@general-como",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1535383702
+  },
+  {
+    "id": "71c6d6a2-0b2e-42d9-b832-2157da74fad1",
+    "data": [
+      {
+        "text": "como uso el ",
+        "userDefined": false
+      },
+      {
+        "text": "permiso",
+        "alias": "general-como",
+        "meta": "@general-como",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1535383702
+  },
+  {
+    "id": "ee4f8ee6-d7af-47f7-81da-74100c019711",
+    "data": [
+      {
+        "text": "que uso le doy al ",
+        "userDefined": false
+      },
+      {
+        "text": "permiso",
+        "alias": "general-como",
+        "meta": "@general-como",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1535383702
+  },
+  {
+    "id": "4f5cd238-6a00-4354-8265-b54ac23d0c40",
+    "data": [
+      {
+        "text": "\n que uso le doy a los ",
+        "userDefined": false
+      },
+      {
+        "text": "permisos",
+        "alias": "general-como",
+        "meta": "@general-como",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1535383702
+  },
+  {
+    "id": "0f154f36-4dea-490c-9cfd-cd9b84628e3b",
+    "data": [
+      {
+        "text": "como se usa ",
+        "userDefined": false
+      },
+      {
+        "text": "un",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "permiso",
+        "alias": "general-como",
+        "meta": "@general-como",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1535383702
+  },
+  {
+    "id": "cf85dc90-0327-498f-bbe5-c34f3a52a25f",
+    "data": [
+      {
+        "text": "como uso los ",
+        "userDefined": false
+      },
+      {
+        "text": "permisos",
+        "alias": "general-como",
+        "meta": "@general-como",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1535383702
+  },
+  {
+    "id": "9edb67df-10a2-4a57-b89b-8db6576f1976",
+    "data": [
+      {
+        "text": "como veo los ",
+        "userDefined": false
+      },
+      {
+        "text": "permisos",
+        "alias": "general-como",
+        "meta": "@general-como",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1535383702
+  },
+  {
+    "id": "7376bb58-d669-45e0-8caf-20366f74d562",
+    "data": [
+      {
+        "text": "como veo mis ",
+        "userDefined": false
+      },
+      {
+        "text": "permisos",
+        "alias": "general-como",
+        "meta": "@general-como",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1535383702
+  },
+  {
+    "id": "374f8986-36ce-4e7f-9c70-d6f1b1bc5cc9",
+    "data": [
+      {
+        "text": "como reviso los ",
+        "userDefined": false
+      },
+      {
+        "text": "permisos",
+        "alias": "general-como",
+        "meta": "@general-como",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1535383702
+  },
+  {
+    "id": "a240de49-2061-4d9a-b8b2-7b450c9cafe8",
+    "data": [
+      {
+        "text": "como se ven los ",
+        "userDefined": false
+      },
+      {
+        "text": "permisos",
+        "alias": "general-como",
+        "meta": "@general-como",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1535383702
+  },
+  {
+    "id": "dd6e2f50-97c1-41e3-8580-54eb6f7ef77a",
+    "data": [
+      {
+        "text": "como consulto los ",
+        "userDefined": false
+      },
+      {
+        "text": "permisos",
+        "alias": "general-como",
+        "meta": "@general-como",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1535383702
+  },
+  {
+    "id": "4a988ad4-8f65-4de3-8b6a-dccd8a8a403d",
+    "data": [
+      {
+        "text": "como consulto mis ",
+        "userDefined": false
+      },
+      {
+        "text": "permisos",
+        "alias": "general-como",
+        "meta": "@general-como",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1535383702
+  },
+  {
+    "id": "51924742-e926-4144-a315-f3a339736e6b",
+    "data": [
+      {
+        "text": "como reviso mis ",
+        "userDefined": false
+      },
+      {
+        "text": "permisos",
+        "alias": "general-como",
+        "meta": "@general-como",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1535383702
+  },
+  {
+    "id": "e5181324-05a5-4efa-987c-a282e006b3e4",
+    "data": [
+      {
+        "text": "como puedo saber cuáles ",
+        "userDefined": false
+      },
+      {
+        "text": "permisos",
+        "alias": "general-como",
+        "meta": "@general-como",
+        "userDefined": false
+      },
+      {
+        "text": " tengo asignados",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1535383702
+  },
+  {
+    "id": "ec613972-75a5-484d-8824-abbe5cc3e287",
+    "data": [
+      {
+        "text": "como se consulta un ",
+        "userDefined": false
+      },
+      {
+        "text": "permiso",
+        "alias": "general-como",
+        "meta": "@general-como",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1535381361
+  }
+]

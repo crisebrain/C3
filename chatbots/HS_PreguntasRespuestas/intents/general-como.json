@@ -1,0 +1,45 @@
+{
+  "id": "d6e0f36e-7138-40be-954d-a6e461050ec3",
+  "name": "general-como",
+  "auto": true,
+  "contexts": [],
+  "responses": [
+    {
+      "resetContexts": false,
+      "action": "preguntasRespuestas",
+      "affectedContexts": [],
+      "parameters": [
+        {
+          "id": "f31eec44-38d4-441b-997e-5e5cecd2b66c",
+          "required": false,
+          "dataType": "@general-como",
+          "name": "general-como",
+          "value": "$general-como",
+          "isList": false
+        },
+        {
+          "id": "87f68ccc-f960-4392-8e9e-182576b5a666",
+          "dataType": "@acciongeneral",
+          "name": "acciongeneral",
+          "value": "$acciongeneral",
+          "isList": false
+        }
+      ],
+      "messages": [
+        {
+          "type": 0,
+          "lang": "es",
+          "speech": "Por favor replantee su pregunta.."
+        }
+      ],
+      "defaultResponsePlatforms": {},
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": true,
+  "webhookForSlotFilling": false,
+  "lastUpdate": 1535386929,
+  "fallbackIntent": false,
+  "events": []
+}

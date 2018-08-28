@@ -1,0 +1,38 @@
+[
+  {
+    "id": "d8bd5100-bbc4-4c09-bbd2-2d7f29f7e9e0",
+    "data": [
+      {
+        "text": "dime los servicios de ",
+        "userDefined": false
+      },
+      {
+        "text": "imss",
+        "alias": "imss",
+        "meta": "@imss",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1535053196
+  },
+  {
+    "id": "c10aad99-cb0d-479f-89a0-63e10fe50ff2",
+    "data": [
+      {
+        "text": "cuales son los servicios del ",
+        "userDefined": false
+      },
+      {
+        "text": "imss",
+        "alias": "imss",
+        "meta": "@imss",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1535053196
+  }
+]

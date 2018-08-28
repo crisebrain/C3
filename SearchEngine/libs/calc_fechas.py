@@ -1,5 +1,6 @@
 from datetime import datetime, timedelta
 from dateutil.relativedelta import relativedelta
+from calendar import monthrange
 
 def preparaFechas(entity, cf):
     import datetime
@@ -59,7 +60,8 @@ def preparaFechas(entity, cf):
         else:
             # Caso 3: fecha específica
             fechaInicio = fechaEspecifica
-            fechaFin = fechaEspecifica
+            # Se establece el último día del mes que nos dieron
+            fechaFin = fechaInicio[0].replace(day=monthrange(fechaInicio[0].year, fechaInicio[0].month)[1]), 1
 
     def orderDate():
         nonlocal  fechaFin, fechaInicio
@@ -117,6 +119,7 @@ def preparaFechas(entity, cf):
         statusCode = 0
         if fechaInicio[1] and fechaFin[1]:
             statusCode = 1
+
     result = [value.strftime("%Y-%m-%d") if value is not None else value
               for value in [fechaInicio[0], fechaFin[0]]]
 
