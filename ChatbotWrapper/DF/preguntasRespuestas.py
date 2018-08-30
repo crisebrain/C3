@@ -1,3 +1,4 @@
+
 from ChatbotWrapper.Utils import methods_DF_to_IM as IM
 
 def analizeReq(req: dict):
@@ -49,10 +50,10 @@ def analizeReq(req: dict):
         "general-modulo": {
             "imss": "El módulo IMSS contiene la funcionalidad general de los servicios del IMSS a los cuales se tiene acceso desde el portal.",
             "nomina": "El móduo Nómina contiene el grupo de permisos para: Captura Incidencias por Concepto, Captura Incidencias por empleado, Reversar Finiquito, Cálculo de nómina, Realizar re-apertura de finiquitos",
-            "catalogo" : "El módulo Catálogos permite la administración de los 4 tipos de catalogos de que dispone el sistema que son: Puestos, Centro de Costos, Área y Sindicato. Cada uno de ellos permite la administración de  los registros del tipo que los define.",
-            "configuracion": "El módulo de Configuración contiene el grupo de permisos  de Administración de Usuarios.",
-            "miportal": "Mi Portal es el modulo principal del usuario y permite la visualización de la información general de su registro, notificaciones pendientes, Administración de recibos electrónicos  y de vacaciones.",
-            "seguridaddelperfil" : "La seguridad del perfil se refiere a la definición de los permisos de ejecución de las actividades existentes por módulo. Los módulos disponibles son: Mi Portal, Configuración, Catálogos, IMSS  y Nómina. Para efectuar esta configuración es necesario ingresar a la sección de Configuración de Perfiles de Usuario.",
+            "catalogo" : "El módulo Catálogos permite la administración de los 4 tipos de catalogos de que dispone el sistema que son: Puestos, Centro de Costos, Área y Sindicato. Cada uno de ellos permite la administración de  los registros del tipo que los define.",
+            "configuracion": "El módulo de Configuración contiene el grupo de permisos  de Administración de Usuarios.",
+            "miportal": "Mi Portal es el modulo principal del usuario y permite la visualización de la información general de su registro, notificaciones pendientes, Administración de recibos electrónicos  y de vacaciones.",
+            "seguridaddelperfil" : "La seguridad del perfil se refiere a la definición de los permisos de ejecución de las actividades existentes por módulo. Los módulos disponibles son: Mi Portal, Configuración, Catálogos, IMSS  y Nómina. Para efectuar esta configuración es necesario ingresar a la sección de Configuración de Perfiles de Usuario.",
             "perfil" : "El perfil es el conjunto de permisos que indican las partes del sistema que puede visualizarse y operar.",
             "usuario" : "El Usuario es el registro del empleado que tiene facultades o permisos para realizar determinadas acciones sobre los datos del Grupo Empresarial, este registro se encuentra integrado por el identificador, nombre, perfil y rol. La descripción se refiere al nombre largo que tendrá el usuario en el sistema,  y este puede ser asociado a un empleado previamente registrado y seleccionar el tipo de perfil que más se adecúe.",
             "auditoria" : "El módulo de auditoría es el registro de bitacora de actividades en el sistema, permite efectuar consultas de los eventos mediante los filtros de: Usuario, fecha de inicio, fecha fin, tipo de operación, y tipo de componente.",
@@ -120,7 +121,7 @@ def analizeReq(req: dict):
                     respIntent = dicResponse[intentName][historyContexts[0][3:]]
                 elif len(historyContexts) == 2:
                     respIntent = "¿Te refieres a {} o a {}?".format(dicContextHuman[historyContexts[0]],
-                                                                  dicContextHuman[historyContexts[1]])
+dicContextHuman[historyContexts[1]])
         # Pregunta explícita. Dan la entity en la misma pregunta.
         else:
             respIntent = dicResponse[intentName][value]
@@ -185,7 +186,7 @@ def _testRecuperaValores(number):
         listContext = [["cx_interfaz"], ["cx_objeto"]]
 
     return {
-	    "Objects": listContext,
-	    "message": "Ok",
-	    "returnCode": 1
+        "Objects": listContext,
+        "message": "Ok",
+        "returnCode": 1
     }
