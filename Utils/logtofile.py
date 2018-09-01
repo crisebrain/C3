@@ -1,6 +1,7 @@
 import logging
 import os
 import sys
+from pathlib import Path
 
 class CreateLogger(object):
     def __init__(self, namef):
@@ -8,12 +9,13 @@ class CreateLogger(object):
 
     def create_logger(self, namef):
         # /home/user/.../current_proyect_name/C3
-        current_proyect_name = os.getcwd().split("/")[-2]
         # Crea folder segun rama del proyecto
+        folder = ""
         if sys.platform == "linux":
-            folder = os.path.join("/var/log/C3", current_proyect_name)
-        elif sys.platform.startswith == "win":
-            folder = os.path.join("'C:", current_proyect_name)
+            #folder = os.path.join("/var/log/C3", current_proyect_name)
+            folder = "/var/log/C3"/Path(os.getcwd().split("/")[-2])
+        elif sys.platform == "win32":
+            folder = "d:\\" / Path(os.getcwd().split("\\")[-1])
         if not os.path.exists(folder):
             os.mkdir(folder)
         pathfile = os.path.join(folder, '{0}.log'.format(namef))
