@@ -3,7 +3,7 @@
 import os
 import sys
 import json
-from InfoManager import InfoManager, publishIntentTree
+from InfoManager import InfoManager, publishIntentTree, update_Agents
 from flask import Flask, request, make_response
 #from SearchEngine import cognitive_req
 
@@ -42,9 +42,14 @@ def writenumport(numport):
 
 
 if __name__ == "__main__":
-    if len(sys.argv) > 1:
+    idChatBot = "hs-preguntasrespuestas"
+    if len(sys.argv) == 2:
         noport = sys.argv[1]
         _ = writenumport(noport)
+    elif len(sys.argv) > 2:
+        noport = sys.argv[1]
+        _ = writenumport(noport)
+        idChatBot = sys.argv[2]
     else:
         try:
             noport = readnumport()
@@ -52,7 +57,8 @@ if __name__ == "__main__":
             noport = 5050
             _ = writenumport(noport)
     # Rellena el arbol con la info del CB
-    idChatBot = publishIntentTree("chatbots", "chatfase1")  # "testing-b6df8")
+    update_Agents()
+    idChatBot = publishIntentTree("chatbots", idChatBot)  # "testing-b6df8")
     im = InfoManager(rootdirectory=os.getcwd(), idChatBot=idChatBot)
     port = int(os.getenv("PORT", noport))
     print("Starting app on port %d" %port)
