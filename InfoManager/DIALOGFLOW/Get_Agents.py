@@ -1,12 +1,11 @@
 import os
-import sys
-import re
 import json
 import dialogflow_v2
 import sys
 import zipfile
 import shutil
 import datetime
+import gc
 
 def GetHashofDirs(directory, verbose=0):
     """Walks on the specified directory to retrieve the cheksum of contents.
@@ -153,4 +152,5 @@ def update_Agents(key_directory_folder='metadata', key_type='admin'):
     for element in keys_directory['Agents'][key_type]:
         pathfile = os.path.join(dir_location, element["keyfile"])
         getAgent(pathfile, element["project_id"])
+    gc.collect()
     return 1
