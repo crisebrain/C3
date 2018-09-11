@@ -63,7 +63,7 @@ def modify_agent_name(folder_path, agent):
     with open(file_path, 'w') as fil:
         fil.write(json.dumps(diccionario, indent=2))
 
-def getAgent(key_path, agent):
+def getAgent(key_path, agent, chatbots_folder = "chatbots"):
     """Downloads the agent zip file and paste the folder on chatbots.
 
     Parameters:
@@ -74,9 +74,12 @@ def getAgent(key_path, agent):
     None
     """
     if os.path.exists(key_path):
-        zip_folder = "/tmp/DF_cb_zips"
-        extracted_folder = "/tmp/DF_cb_extracted"
-        chatbots_folder = "chatbots"
+        if sys.platform == 'linux':
+            zip_folder = "/tmp/DF_cb_zips"
+            extracted_folder = "/tmp/DF_cb_extracted"
+        elif sys.platform.startswith('win'):
+            zip_folder = "d:/DF_cb_zips"
+            extracted_folder = "d:/DF_cb_extracted"
         os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = key_path
         client = dialogflow_v2.AgentsClient()
         parent = client.project_path(agent)

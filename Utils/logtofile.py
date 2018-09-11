@@ -10,11 +10,10 @@ class CreateLogger(object):
     def create_logger(self, namef):
         # /home/user/.../current_proyect_name/C3
         # Crea folder segun rama del proyecto
-        folder = ""
+        current_proyect_name = os.getcwd().split("/")[-2]
         if sys.platform == "linux":
-            #folder = os.path.join("/var/log/C3", current_proyect_name)
-            folder = "/var/log/C3"/Path(os.getcwd().split("/")[-2])
-        elif sys.platform == "win32":
+            folder =  os.path.join("/var/log/C3", current_proyect_name)
+        elif sys.platform.startswith("win"):
             folder = "d:\\" / Path(os.getcwd().split("\\")[-1])
         if not os.path.exists(folder):
             os.mkdir(folder)
