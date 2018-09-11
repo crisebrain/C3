@@ -1,4 +1,5 @@
 import os
+import sys
 import re
 import json
 import dialogflow_v2
@@ -110,7 +111,8 @@ def getAgent(key_path, agent):
             hashNew = GetHashofDirs(newVercopied)
             if hashNew != hashPrevious:
                 print(hashNew, " not equal ", hashPrevious)
-                print("Check the differences between {0} and {1}".format(previousVer, newVercopied))
+                print("Check differences on {0} and {1}".format(previousVer,
+                                                                newVercopied))
                 print("Keeping both files")
                 print("********************************\n")
             else:
@@ -123,13 +125,31 @@ def getAgent(key_path, agent):
         print("file %s not founded" % key_path)
 
 
-def update_Agents():
-    _HOME = os.environ['HOME']
-    # Para elegir el nombre del agente, usar el project id presenta dialogflow en la consola
-    _DICT_AGENT_CLIENT = {
-        "facturasvoz-estable": os.path.join(_HOME, "Ebraintec/Keys_DF/facturasvoz-estable-19c1a9fdc200_admin.json"),
-        "hs-preguntasrespuestas-fac0e": os.path.join(_HOME, "Ebraintec/Keys_DF/hs-preguntasrespuestas-fac0e-8f92fd138c11_admin.json"),
-        # "preguntasrespuestas-humansite": os.path.join(_HOME, "Ebraintec/Keys_DF/preguntasrespuestas-humansite-e221cd6b345a_admin.json")
-    }
-    for key, path in _DICT_AGENT_CLIENT.items():
-        getAgent(path, key)
+def update_Agents(key_directory_folder='metadata', key_type='admin'):
+    """Iterates the AgentId to download them from DF with getAgent function.
+    Uses the keyfiles_path.json file on metadata folder to know the current
+    keyfile for each agent used in project.
+    Parameters:
+    key_directory_folder - Is the keyfiles_path.json container folder, e.g.
+                           "metada".
+    type - Is the type of keyfile used, i.e., "admin" to download the agent.
+
+    Returns:
+    None - if the key files folder doesn't enlisted on keyfiles_path.json
+           doesn't exists.
+    """
+    keydirpath = os.path.join(key_directory_folder, "keyfiles_path.json")
+    keys_directory = json.load(open(keydirpath, 'r'))
+    # Usa el directorio que haya sido asignado en keyfiles_path.json
+    # según el sistema operativo
+    dir_location = keys_directory.get("DirLocation").get(sys.platform, "")
+    if dir_location == "":
+        print("\nThere is not path assigned for {0} \
+               add the path on keyfiles_path.json\n".format(sys.platform))
+        return -1
+    elif not os.path.exists(dir_location):
+        print("\nThe directory {} doesn't exists\n".format(dir_location))
+        return -1
+    for element in keys_directory['Agents'][key_type]:
+        pathfile = os.path.join(dir_location, element["keyfile"])
+        getAgent(pathfile, element["project_id"])
