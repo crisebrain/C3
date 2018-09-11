@@ -1,0 +1,39 @@
+{
+  "linux":
+  {
+    "keys":
+    {
+      "admin":
+      {
+        "facturasvoz-estable": "Ebraintec/Keys_DF/facturasvoz-estable-19c1a9fdc200_admin.json",
+        "hs-preguntasrespuestas-fac0e": "Ebraintec/Keys_DF/hs-preguntasrespuestas-fac0e-8f92fd138c11_admin.json",
+        "preguntasrespuestas-humansite": "Ebraintec/Keys_DF/preguntasrespuestas-humansite-e221cd6b345a_admin.json",
+        "TransferenciaAutomatica2": "Ebraintec/Keys_DF/TransferenciaAutomatica2-9c525654a2fb_admin.json"
+      },
+      "client": {
+        "facturasvoz-estable": "Ebraintec/Keys_DF/facturasvoz-estable-ae59624e7be6_cliente.json",
+        "hs-preguntasrespuestas-fac0e": "Ebraintec/Keys_DF/hs-preguntasrespuestas-fac0e-8912fe141eca_paginaWeb_client.json",
+        "TransferenciaAutomatica2": "Ebraintec/Keys_DF/TransferenciaAutomatica2-4a3206ea5b05_Roman_client.json"
+      }
+    }
+  },
+  "windows":
+  {
+    "keys":
+    {
+      "admin":
+      {
+        "facturasvoz-estable": "Ebraintec/Keys_DF/facturasvoz-estable-19c1a9fdc200_admin.json",
+        "hs-preguntasrespuestas-fac0e": "Ebraintec/Keys_DF/hs-preguntasrespuestas-fac0e-8f92fd138c11_admin.json",
+        "preguntasrespuestas-humansite": "Ebraintec/Keys_DF/preguntasrespuestas-humansite-e221cd6b345a_admin.json",
+        "TransferenciaAutomatica2": "Ebraintec/Keys_DF/TransferenciaAutomatica2-9c525654a2fb_admin.json"
+      },
+      "client":
+      {
+        "facturasvoz-estable": "Ebraintec/Keys_DF/facturasvoz-estable-ae59624e7be6_cliente.json",
+        "hs-preguntasrespuestas-fac0e": "Ebraintec/Keys_DF/hs-preguntasrespuestas-fac0e-8912fe141eca_paginaWeb_client.json",
+        "TransferenciaAutomatica2": "Ebraintec/Keys_DF/TransferenciaAutomatica2-4a3206ea5b05_Roman_client.json"
+      }
+    }
+  }
+}
