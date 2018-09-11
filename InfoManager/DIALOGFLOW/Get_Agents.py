@@ -146,10 +146,11 @@ def update_Agents(key_directory_folder='metadata', key_type='admin'):
     if dir_location == "":
         print("\nThere is not path assigned for {0} \
                add the path on keyfiles_path.json\n".format(sys.platform))
-        return -1
+        return 0
     elif not os.path.exists(dir_location):
         print("\nThe directory {} doesn't exists\n".format(dir_location))
-        return -1
+        return 0
     for element in keys_directory['Agents'][key_type]:
         pathfile = os.path.join(dir_location, element["keyfile"])
         getAgent(pathfile, element["project_id"])
+    return 1

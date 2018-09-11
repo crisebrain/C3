@@ -57,7 +57,8 @@ if __name__ == "__main__":
             noport = 5050
             _ = writenumport(noport)
     # Rellena el arbol con la info del CB
-    update_Agents()
+    if update_Agents() == 0:
+        print("WARNING: Error updating agents\n")
     idChatBot = publishIntentTree("chatbots", idChatBot)  # "testing-b6df8")
     im = InfoManager(rootdirectory=os.getcwd(), idChatBot=idChatBot)
     port = int(os.getenv("PORT", noport))
