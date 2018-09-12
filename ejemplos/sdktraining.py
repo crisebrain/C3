@@ -34,4 +34,7 @@ if __name__ == "__main__":
     os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = keypath
     tphrases = ["comete mis calzones", "chupame el pie"]
     message_texts = ["Mejor tu comete los tuyos"]
-    create_intent("preguntasrespuestas-humansite", "prueba", tphrases, message_texts)
+    project_id = "preguntasrespuestas-humansite"
+    display_name = "prueba"
+    create_intent(project_id, display_name,
+                  tphrases, message_texts)
