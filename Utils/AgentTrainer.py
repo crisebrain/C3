@@ -65,10 +65,14 @@ class AgentTrainer:
             messages=[message])
         try:
             response = self.intents_client.create_intent(self.parent, intent)
-        except:
-            print("updating intent ...")
-            self.delete_intent(display_name)
-            response = self.intents_client.create_intent(self.parent, intent)
+        except Exception as error:
+            if type(error).__name__ == "FailedPrecondition":
+                print("updating intent ...")
+                self.delete_intent(display_name)
+                response = self.intents_client.create_intent(self.parent,
+                                                             intent)
+            else:
+                response = None
         # print('Intent created: {}'.format(response))
         return response
 
