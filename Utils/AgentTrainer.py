@@ -72,12 +72,15 @@ class AgentTrainer:
                 response = self.intents_client.create_intent(self.parent,
                                                              intent)
             else:
+                print(type(error).__name__, error)
                 response = None
-        # print('Intent created: {}'.format(response))
+        print('Intent created: {}'.format(response))
         return response
 
 if __name__ == "__main__":
-    atr = AgentTrainer("preguntasrespuestas-humansite")
+    atr = AgentTrainer("hs-preguntasrespuestas-fac0e")
+    # atr = AgentTrainer("facturasvoz-estable")
+    # atr = AgentTrainer("preguntasrespuestas-humansite")
     tphrases = ["Jarvis", "Oye Jarvis", "Te hablo a tí",
                 "Jarvis me escuchas", "Jarvis dime algo"]
     message_texts = ["Vete a molestar a otro lado, pinche escuincle!!!"]
