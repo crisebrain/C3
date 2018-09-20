@@ -1,10 +1,10 @@
 import json
 from Utils.logtofile import CreateLogger
-from ChatbotWrapper.DF import preguntasRespuestas
 
 
 def makeWebhookResult(req, origin = 1):
     if origin == 1:
+        from ChatbotWrapper.DF import preguntasRespuestas
         from ChatbotWrapper.CB_DF_Facturas import factura
         originstr = "WhDF"
     else:
