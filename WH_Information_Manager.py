@@ -17,6 +17,7 @@ def retornodummy():
 
 @app.route("/infomanager", methods=["POST", "GET"])
 def webhook2():
+    """Listener method for POST request to connect the InfoManager"""
     req = request.get_json(silent=True, force=True)
     action = req.get("action")
     if action == "obtieneDatos":
@@ -32,11 +33,13 @@ def webhook2():
     return r
 
 def readnumport():
+    """Reads the port number stored in _NoPORT_IM.temp"""
     with open("metadata/_NoPORT_IM.temp", "r") as fnoport:
         numport = int(fnoport.read().strip())
     return numport
 
 def writenumport(numport):
+    """Writes the port number into _NoPORT_IM.temp"""
     with open("metadata/_NoPORT_IM.temp", "w") as fnoport:
         fnoport.write(str(numport))
     return 0
@@ -48,8 +51,11 @@ if __name__ == "__main__":
                         help='The port number for webservice listener')
     parser.add_argument('--agent', dest='agentid', metavar='string', type=str,
                         help='The agent id to default set')
+    # asignacion de puerto del webhook e id de agente para construccion por
+    # defecto de arbol en conference (puede cambiar)
     args = parser.parse_args()
     agentid = args.agentid
+    # -------------------------------------------------------------------
     noport = args.noport
     if args.agentid is None:
         agentid = "hs-preguntasrespuestas"
@@ -59,11 +65,14 @@ if __name__ == "__main__":
         except FileNotFoundError:
             noport = 5050
     _ = writenumport(noport)
-    # Rellena el arbol con la info del CB
+    # Descarga los agentes cuyas llaves esten listadas en keyfiles_path.json
     if update_Agents() == 0:
         print("WARNING: Error updating agents\n")
-    agentid = publishIntentTree("chatbots", agentid)  # "testing-b6df8")
+    # Crea los esqueletos de los arboles en el conference.pck
+    agentid = publishIntentTree("chatbots", agentid)
+    # Crea la instancia del infomanager
     im = InfoManager(rootdirectory=os.getcwd(), idChatBot=agentid)
+    # Levanta listener para el webhook del infomanager
     port = int(os.getenv("PORT", noport))
     print("Starting app on port %d" %port)
     app.run(debug=False, port=port, host="0.0.0.0")
