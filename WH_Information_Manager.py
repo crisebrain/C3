@@ -17,7 +17,7 @@ def retornodummy():
 
 @app.route("/infomanager", methods=["POST", "GET"])
 def webhook2():
-    """Listener method for POST request to connect the InfoManager"""
+    """Listener method for POST request to connect the InfoManager."""
     req = request.get_json(silent=True, force=True)
     action = req.get("action")
     if action == "obtieneDatos":
@@ -33,13 +33,13 @@ def webhook2():
     return r
 
 def readnumport():
-    """Reads the port number stored in _NoPORT_IM.temp"""
+    """Reads the port number stored in _NoPORT_IM.temp."""
     with open("metadata/_NoPORT_IM.temp", "r") as fnoport:
         numport = int(fnoport.read().strip())
     return numport
 
 def writenumport(numport):
-    """Writes the port number into _NoPORT_IM.temp"""
+    """Writes the port number into _NoPORT_IM.temp."""
     with open("metadata/_NoPORT_IM.temp", "w") as fnoport:
         fnoport.write(str(numport))
     return 0
