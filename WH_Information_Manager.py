@@ -3,6 +3,7 @@
 import os
 import sys
 import json
+import argparse
 from InfoManager import InfoManager, publishIntentTree, update_Agents
 from flask import Flask, request, make_response
 #from SearchEngine import cognitive_req
@@ -42,25 +43,27 @@ def writenumport(numport):
 
 
 if __name__ == "__main__":
-    idChatBot = "hs-preguntasrespuestas"
-    if len(sys.argv) == 2:
-        noport = sys.argv[1]
-        _ = writenumport(noport)
-    elif len(sys.argv) > 2:
-        noport = sys.argv[1]
-        _ = writenumport(noport)
-        idChatBot = sys.argv[2]
-    else:
+    parser = argparse.ArgumentParser(description='InfoManager service.')
+    parser.add_argument('--port', dest='noport', metavar='NNNN', type=int,
+                        help='The port number for webservice listener')
+    parser.add_argument('--agent', dest='agentid', metavar='string', type=str,
+                        help='The agent id to default set')
+    args = parser.parse_args()
+    agentid = args.agentid
+    noport = args.noport
+    if args.agentid is None:
+        agentid = "hs-preguntasrespuestas"
+    if args.noport is None:
         try:
             noport = readnumport()
         except FileNotFoundError:
             noport = 5050
-            _ = writenumport(noport)
+    _ = writenumport(noport)
     # Rellena el arbol con la info del CB
     if update_Agents() == 0:
         print("WARNING: Error updating agents\n")
-    idChatBot = publishIntentTree("chatbots", idChatBot)  # "testing-b6df8")
-    im = InfoManager(rootdirectory=os.getcwd(), idChatBot=idChatBot)
+    agentid = publishIntentTree("chatbots", agentid)  # "testing-b6df8")
+    im = InfoManager(rootdirectory=os.getcwd(), idChatBot=agentid)
     port = int(os.getenv("PORT", noport))
     print("Starting app on port %d" %port)
-    app.run(debug=True, port=port, host="0.0.0.0")
+    app.run(debug=False, port=port, host="0.0.0.0")
