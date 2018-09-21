@@ -1,0 +1,48 @@
+{
+  "Agents":
+  {
+    "admin":
+    [
+      {
+        "project_id": "facturasvoz-estable",
+        "keyfile": "facturasvoz-estable-19c1a9fdc200_admin.json"
+      },
+      {
+        "project_id": "transfautomatica",
+        "keyfile": "transfautomatica-d2708515d5ad.json"
+      },
+      {
+        "project_id": "facturas-fasedos-mio",
+        "keyfile": "facturas-fasedos-mio-b9db6285b172.json"
+      },
+      {
+        "project_id": "hs-preguntasrespuestas-fac0e",
+        "keyfile": "hs-preguntasrespuestas-fac0e-8f92fd138c11_admin.json"
+      },
+      {
+        "project_id": "preguntasrespuestas-humansite",
+        "keyfile": "preguntasrespuestas-humansite-e221cd6b345a_admin.json"
+      }
+    ],
+    "client":
+    [
+      {
+        "project_id": "facturasvoz-estable",
+        "keyfile": "facturasvoz-estable-ae59624e7be6_cliente.json"
+      },
+      {
+        "project_id": "hs-preguntasrespuestas-fac0e",
+        "keyfile": "hs-preguntasrespuestas-fac0e-8912fe141eca_paginaWeb_client.json"
+      },
+      {
+        "project_id": "TransferenciaAutomatica2",
+        "keyfile": "TransferenciaAutomatica2-4a3206ea5b05_Roman_client.json"
+      }
+    ]
+  },
+  "DirLocation":
+  {
+    "linux": "/home/quetzal/Ebraintec/Keys_DF",
+    "windows": "c:/Users/gerardosu/Keys_DF"
+  }
+}
