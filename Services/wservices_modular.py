@@ -33,6 +33,8 @@ def makeWebhookResult(req, origin = 1):
 
     try:
         if origin ==1:
+            # TODO debería de haber una action general solo para guardar
+            # valores
             if action == "factura":
                 return factura(req)
             elif action == "preguntasRespuestas":
