@@ -51,7 +51,8 @@ class InfoManager:
         projectid = jdata.get("session").split("/")[1]
         sessionid = jdata.get("session").split("/")[-1]
         self.info.update(dict(projectid=projectid, sessionid=sessionid))
-        self.sc.reassignTree(sessionid)
+        print(projectid)
+        self.sc.reassignTree(sessionid, projectid)
         it = self.sc.extractTree()
         intentid = jdata.get("queryResult").get("intent").get("name")
         # sessionid =
@@ -176,9 +177,17 @@ class InfoManager:
         return response
 
     def fetchValues(self, jdata):
+        """Fetch the n objects that are required on the request.
+        jdata: dir object with the following fields
+              agent - agent id, string assigned by dialogflow.
+              session - session id, string assigned by dialogflow
+              data-numberHistory - number of elements to fetch
+              data-reqObject - object type (context, intent)
+        """
         projectid = jdata.get("data").get("agent")
         sessionid = jdata.get("data").get("session")
-        self.sc.reassignTree(sessionid)
+        print(projectid)
+        self.sc.reassignTree(sessionid, projectid)
         data = jdata.get("data")
         it = self.sc.extractTree()
         nhistory = jdata.get("data").get("numberHistory")

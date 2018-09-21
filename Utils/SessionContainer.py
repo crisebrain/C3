@@ -22,9 +22,11 @@ class SessionContainer:
         self.current_intentTree = tree.idChatBot
         setattr(self, self.current_intentTree, tree)
 
-    def reassignTree(self, sessionnumber):
+    def reassignTree(self, sessionnumber, idChatBot):
         it = self.extractTree()
         if getattr(it, "sessionid", None) != sessionnumber:
+            if idChatBot != self.idChatBot:
+                self.idChatBot = idChatBot
             it = self.consultIntentTree(sessionnumber)
             if getattr(it, "sessionid", None) == None:
                 it.setSession(sessionnumber)
@@ -35,6 +37,8 @@ class SessionContainer:
 
     def consultIntentTree(self, sessionnumber):
         intentTree_dict = pickle.load(open(self.pathpicklefile, "rb"))
+        # TODO almacenar el objeto pickle en memoria
+        # probar cuanto ocupa estando en memoria
         intentTree_list = intentTree_dict[self.idChatBot]
         indices = [True if getattr(tree, "sessionid", None) == sessionnumber
                    else False for tree in intentTree_list]
