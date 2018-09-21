@@ -23,7 +23,15 @@ class SessionContainer:
         setattr(self, self.current_intentTree, tree)
 
     def reassignTree(self, sessionnumber, idChatBot):
+        """Compares the current agentid and sessionid with the request values.
+        If are not the same, updates the intent tree to work with the one that
+        asks for InfoManager service.
+        Params:
+        sessionnumber: str sessionid
+        idChatbot: str agentid
+        """
         it = self.extractTree()
+        # si session es diferente a la del intenttreevigente
         if getattr(it, "sessionid", None) != sessionnumber:
             if idChatBot != self.idChatBot:
                 self.idChatBot = idChatBot
@@ -31,12 +39,20 @@ class SessionContainer:
             if getattr(it, "sessionid", None) == None:
                 it.setSession(sessionnumber)
             # buscar en el pickle file por el que tenga esa sesion
-            # cuando tuviese que recuperarse una sesion
-            # if buscar en piclefile
+            self.current_intentTree = it.idChatBot
+            setattr(self, self.current_intentTree, it)
+        # Si agente en peticion es diferente al vigente intenttree
+        elif idChatBot != self.idChatBot:
+            self.idChatBot = idChatBot
+            it = self.consultIntentTree(sessionnumber)
+            if getattr(it, "sessionid", None) == None:
+                it.setSession(sessionnumber)
             self.current_intentTree = it.idChatBot
             setattr(self, self.current_intentTree, it)
 
     def consultIntentTree(self, sessionnumber):
+        """Search the intenttree that are related with a respective sessionid.
+        """
         intentTree_dict = pickle.load(open(self.pathpicklefile, "rb"))
         # TODO almacenar el objeto pickle en memoria
         # probar cuanto ocupa estando en memoria

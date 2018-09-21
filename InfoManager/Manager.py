@@ -50,13 +50,11 @@ class InfoManager:
         """
         projectid = jdata.get("session").split("/")[1]
         sessionid = jdata.get("session").split("/")[-1]
+        intentid = jdata.get("queryResult").get("intent").get("name")
+        intentid = intentid.split("/")[-1]
         self.info.update(dict(projectid=projectid, sessionid=sessionid))
-        print(projectid)
         self.sc.reassignTree(sessionid, projectid)
         it = self.sc.extractTree()
-        intentid = jdata.get("queryResult").get("intent").get("name")
-        # sessionid =
-        intentid = intentid.split("/")[-1]
         node = it.find_node(intentid, to_dict=False, by_field="id")
         if "fallback" not in node.name.lower():
             response = self.intentFlow(jdata, node)
