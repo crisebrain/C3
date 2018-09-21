@@ -89,7 +89,7 @@ class IntentTree(RenderTree):
         node - Root node.
         currentcontextls - context list for the tree
         loadedDate - str Date-Time
-        idChatBot - Id for the current ChatBot
+        idChatBot - Id for the current ChatBot. ProjectId for DialogFlow
         sessionid - Id for the session, created when the firs request from
                     dialog flow is send.
         """

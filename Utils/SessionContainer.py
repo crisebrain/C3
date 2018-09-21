@@ -33,6 +33,7 @@ class SessionContainer:
             # buscar en el pickle file por el que tenga esa sesion
             # cuando tuviese que recuperarse una sesion
             # if buscar en piclefile
+            self.current_intentTree = it.idChatBot
             setattr(self, self.current_intentTree, it)
 
     def consultIntentTree(self, sessionnumber):
