@@ -3,9 +3,8 @@
 import json
 import os
 import sys
-
+import argparse
 from flask import Flask, request, make_response
-
 from Services import makeWebhookResult
 
 app = Flask(__name__)
@@ -28,10 +27,18 @@ def webhook():
 
 
 if __name__ == "__main__":
-    if len(sys.argv) > 1:
-        portnumber = int(sys.argv[1])
-    else:
-        portnumber = 5000
-    port = int(os.getenv("PORT", portnumber))
+    parser = argparse.ArgumentParser(description='InfoManager service.')
+    parser.add_argument('--port', dest='noport', metavar='NNNN', type=int,
+                        help='The port number for webservice listener')
+    parser.add_argument('--debug', dest='debug', metavar='N', type=int,
+                        help='debug mode, 1 for turn on')
+    args = parser.parse_args()
+    # asignacion de puerto del webhook y modo debug
+    noport = args.noport
+    debug = bool(args.debug)
+    # --------------------------------------------------------------------
+    if args.noport is None:
+        noport = 5000
+    port = int(os.getenv("PORT", noport))
     print("Starting app on port %d" %port)
-    app.run(debug=True, port=port, host="0.0.0.0")
+    app.run(debug=debug, port=port, host="0.0.0.0")

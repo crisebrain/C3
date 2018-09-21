@@ -51,12 +51,15 @@ if __name__ == "__main__":
                         help='The port number for webservice listener')
     parser.add_argument('--agent', dest='agentid', metavar='string', type=str,
                         help='The agent id to default set')
+    parser.add_argument('--debug', dest='debug', metavar='N', type=int,
+                        help='debug mode, 1 for turn on')
     # asignacion de puerto del webhook e id de agente para construccion por
     # defecto de arbol en conference (puede cambiar)
     args = parser.parse_args()
     agentid = args.agentid
-    # -------------------------------------------------------------------
     noport = args.noport
+    debug = bool(args.debug)
+    # -------------------------------------------------------------------
     if args.agentid is None:
         agentid = "hs-preguntasrespuestas"
     if args.noport is None:
@@ -75,4 +78,4 @@ if __name__ == "__main__":
     # Levanta listener para el webhook del infomanager
     port = int(os.getenv("PORT", noport))
     print("Starting app on port %d" %port)
-    app.run(debug=False, port=port, host="0.0.0.0")
+    app.run(debug=debug, port=port, host="0.0.0.0")
