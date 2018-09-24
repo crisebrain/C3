@@ -86,7 +86,7 @@ class InfoManager:
             for parameter in parameters:
                 name = parameter["name"]
                 value = userdictinfo[name]
-                print(value)
+                # print(value)
                 if "$" in parameter["value"]:  # local
                     if jdata.get("IM_fields") is not None:
                         node.writeParameter(jdata.get("IM_fields"), name)
@@ -129,7 +129,7 @@ class InfoManager:
         # Tiene que ver con los contextos
         queryResult = jdata.get("queryResult")
         if forward:
-            response = self.makeWebhookResult(jdata,2)
+            response = self.makeWebhookResult(jdata, 2)
             if response["payload"]["returnCode"] == "0":
                 msgString = node.msgAns
                 pattern = r"\$\w+"
@@ -184,7 +184,6 @@ class InfoManager:
         """
         projectid = jdata.get("data").get("agent")
         sessionid = jdata.get("data").get("session")
-        print(projectid)
         self.sc.reassignTree(sessionid, projectid)
         data = jdata.get("data")
         it = self.sc.extractTree()

@@ -39,8 +39,6 @@ def makeresponseAction(req, action):
                 "returnCode": returnCode
             },
         "fulfillmentText": textresp,
-        "outputContexts": {"name": session + "/contexts/0-2vdn-followup",
-                           "lifespanCount": 0}
     }
             # "followupEventInput": {"name": "salida",
             #                "parameters": {"prueba": "1"},
@@ -48,10 +46,8 @@ def makeresponseAction(req, action):
 
     respContext = evaluaContextos(returnCode, action,
                                   nombre, req.get("session"))
-
     if respContext:
         resp.update(respContext)
-
     return resp
 
 def evaluaContextos(code, action, valor, session):

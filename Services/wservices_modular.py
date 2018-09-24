@@ -6,6 +6,7 @@ def makeWebhookResult(req, origin = 1):
     if origin == 1:
         from ChatbotWrapper.DF import preguntasRespuestas
         from ChatbotWrapper.CB_DF_Facturas import factura
+        from ChatbotWrapper.Utils import methods_DF_to_IM as IM
         originstr = "WhDF"
     else:
         from .saldos_vdns import makeresponseAction, informacion
@@ -33,15 +34,17 @@ def makeWebhookResult(req, origin = 1):
 
     try:
         if origin ==1:
-            # TODO debería de haber una action general solo para guardar
-            # valores
+            # Cada servicio es responsable de construir su propio retorno
+            # de error, parecido a esto;
+            # return {"payload": {"result": "Null", "returnCode": "0"},
+            #         "fulfillmentText": "Null"}
             if action == "factura":
                 return factura(req)
             elif action == "preguntasRespuestas":
                 return preguntasRespuestas.analizeReq(req)
             else:
-                return {"payload": {"result": "Null", "returnCode": "0"},
-                        "fulfillmentText": "Null"}
+                response = IM.post_data(req)
+                return response
         else:
             if action == "VDN" or action == "saldo":
                 return makeresponseAction(req, action)
