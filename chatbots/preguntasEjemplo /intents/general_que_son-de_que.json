@@ -1,0 +1,47 @@
+{
+  "id": "d075c415-b51a-4749-b562-991c26badc25",
+  "parentId": "7f9775ae-dd89-4627-b65d-a1e672f3b188",
+  "rootParentId": "7f9775ae-dd89-4627-b65d-a1e672f3b188",
+  "name": "general_que_son-de_que",
+  "auto": true,
+  "contexts": [
+    "general_que_son-followup"
+  ],
+  "responses": [
+    {
+      "resetContexts": false,
+      "action": "preguntasRespuestas",
+      "affectedContexts": [],
+      "parameters": [
+        {
+          "id": "d3952abc-aac9-4ade-a95a-6be0f5e105ee",
+          "required": false,
+          "dataType": "@que_son",
+          "name": "que_son",
+          "value": "$que_son",
+          "isList": false
+        }
+      ],
+      "messages": [
+        {
+          "type": 0,
+          "lang": "es-419",
+          "speech": "Falló el servicio."
+        },
+        {
+          "type": 0,
+          "lang": "es",
+          "speech": "Falló el servicio."
+        }
+      ],
+      "defaultResponsePlatforms": {},
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": true,
+  "webhookForSlotFilling": false,
+  "lastUpdate": 1534980000,
+  "fallbackIntent": false,
+  "events": []
+}

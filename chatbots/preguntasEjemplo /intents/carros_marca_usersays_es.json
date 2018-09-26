@@ -1,0 +1,65 @@
+[
+  {
+    "id": "92ceba86-78fb-4b59-ba3a-0a5e04744063",
+    "data": [
+      {
+        "text": "dime los tipos de ",
+        "userDefined": false
+      },
+      {
+        "text": "marcas",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " de ",
+        "userDefined": false
+      },
+      {
+        "text": "autos",
+        "alias": "carro",
+        "meta": "@carro",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1534866733
+  },
+  {
+    "id": "62023fb4-67d9-4cb9-b746-fb63739e5cdc",
+    "data": [
+      {
+        "text": "que ",
+        "userDefined": false
+      },
+      {
+        "text": "marcas",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " de ",
+        "userDefined": false
+      },
+      {
+        "text": "carros",
+        "alias": "carro",
+        "meta": "@carro",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "hay",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1534866733
+  }
+]

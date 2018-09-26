@@ -1,0 +1,42 @@
+{
+  "id": "4402d697-5e3f-4e8d-8052-24b0514988a2",
+  "name": "general-modulo",
+  "auto": true,
+  "contexts": [],
+  "responses": [
+    {
+      "resetContexts": false,
+      "action": "preguntasRespuestas",
+      "affectedContexts": [],
+      "parameters": [
+        {
+          "id": "7dc949ba-5720-4c67-8527-2308834f6d32",
+          "dataType": "@general_modulo",
+          "name": "general_modulo",
+          "value": "$general_modulo",
+          "isList": false
+        }
+      ],
+      "messages": [
+        {
+          "type": 0,
+          "lang": "es-419",
+          "speech": "Falló el servicio."
+        },
+        {
+          "type": 0,
+          "lang": "es",
+          "speech": "Falló el servicio."
+        }
+      ],
+      "defaultResponsePlatforms": {},
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": true,
+  "webhookForSlotFilling": false,
+  "lastUpdate": 1534989542,
+  "fallbackIntent": false,
+  "events": []
+}

@@ -1,0 +1,53 @@
+{
+  "id": "7f9775ae-dd89-4627-b65d-a1e672f3b188",
+  "name": "general_que_son",
+  "auto": true,
+  "contexts": [],
+  "responses": [
+    {
+      "resetContexts": false,
+      "action": "preguntasRespuestas",
+      "affectedContexts": [
+        {
+          "name": "general_que_son-followup",
+          "parameters": {},
+          "lifespan": 2
+        }
+      ],
+      "parameters": [
+        {
+          "id": "8ce63c1e-94e8-457c-bb48-07f0f4648cf4",
+          "required": false,
+          "dataType": "@que_son",
+          "name": "que_son",
+          "value": "$que_son",
+          "isList": false
+        }
+      ],
+      "messages": [
+        {
+          "type": 0,
+          "lang": "es-419",
+          "speech": "El servicio falló."
+        },
+        {
+          "type": 0,
+          "lang": "es",
+          "speech": "El servicio falló."
+        }
+      ],
+      "defaultResponsePlatforms": {},
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": true,
+  "webhookForSlotFilling": false,
+  "lastUpdate": 1534810511,
+  "fallbackIntent": false,
+  "events": [
+    {
+      "name": "e_general_que_son"
+    }
+  ]
+}

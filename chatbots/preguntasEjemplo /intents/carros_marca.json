@@ -1,0 +1,49 @@
+{
+  "id": "362d98af-fa91-4513-a348-f4655120fb6f",
+  "name": "carros_marca",
+  "auto": true,
+  "contexts": [],
+  "responses": [
+    {
+      "resetContexts": false,
+      "action": "preguntasRespuestas",
+      "affectedContexts": [
+        {
+          "name": "cx_carro",
+          "parameters": {},
+          "lifespan": 5
+        }
+      ],
+      "parameters": [
+        {
+          "id": "c4c948ce-aa4e-4c08-abab-1f16f91876b2",
+          "required": false,
+          "dataType": "@carro",
+          "name": "carro",
+          "value": "$carro",
+          "isList": false
+        }
+      ],
+      "messages": [
+        {
+          "type": 0,
+          "lang": "es-419",
+          "speech": "El servicio falló."
+        },
+        {
+          "type": 0,
+          "lang": "es",
+          "speech": "El servicio falló."
+        }
+      ],
+      "defaultResponsePlatforms": {},
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": true,
+  "webhookForSlotFilling": false,
+  "lastUpdate": 1534967418,
+  "fallbackIntent": false,
+  "events": []
+}

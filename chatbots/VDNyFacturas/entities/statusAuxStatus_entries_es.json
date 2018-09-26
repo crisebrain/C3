@@ -1,0 +1,55 @@
+[
+  {
+    "value": "Recibido",
+    "synonyms": [
+      "recibido",
+      "recibida",
+      "recibidos",
+      "recibidas"
+    ]
+  },
+  {
+    "value": "Error",
+    "synonyms": [
+      "error"
+    ]
+  },
+  {
+    "value": "Rechazado",
+    "synonyms": [
+      "rechazado",
+      "rechazada",
+      "rechazados",
+      "rechazadas",
+      "rechazo"
+    ]
+  },
+  {
+    "value": "Firmado",
+    "synonyms": [
+      "firmado",
+      "firmada",
+      "firmados",
+      "firmadas"
+    ]
+  },
+  {
+    "value": "Aceptado",
+    "synonyms": [
+      "aceptado",
+      "aceptada",
+      "aceptados",
+      "aceptadas"
+    ]
+  },
+  {
+    "value": "Enviado Adquiriente",
+    "synonyms": [
+      "enviado",
+      "enviada",
+      "enviados",
+      "enviadas",
+      "envio"
+    ]
+  }
+]

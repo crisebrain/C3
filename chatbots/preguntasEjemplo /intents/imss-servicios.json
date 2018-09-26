@@ -1,0 +1,40 @@
+{
+  "id": "a5292536-f2a7-46c2-8ff9-7c730ec90b54",
+  "name": "imss-servicios",
+  "auto": true,
+  "contexts": [],
+  "responses": [
+    {
+      "resetContexts": false,
+      "action": "preguntasRespuestas",
+      "affectedContexts": [
+        {
+          "name": "cx_imss",
+          "parameters": {},
+          "lifespan": 5
+        }
+      ],
+      "parameters": [],
+      "messages": [
+        {
+          "type": 0,
+          "lang": "es-419",
+          "speech": "Falló el servicio."
+        },
+        {
+          "type": 0,
+          "lang": "es",
+          "speech": "Falló el servicio."
+        }
+      ],
+      "defaultResponsePlatforms": {},
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": true,
+  "webhookForSlotFilling": false,
+  "lastUpdate": 1534989059,
+  "fallbackIntent": false,
+  "events": []
+}

@@ -1,0 +1,38 @@
+{
+  "id": "b7f5acae-3da0-4a41-bb63-282a372f39a3",
+  "name": "Default Welcome Intent",
+  "auto": true,
+  "contexts": [],
+  "responses": [
+    {
+      "resetContexts": false,
+      "action": "input.welcome",
+      "affectedContexts": [],
+      "parameters": [],
+      "messages": [
+        {
+          "type": 0,
+          "lang": "es-419",
+          "speech": "Te puedo de hablar de objetos e interfaces. ¿De qué quieres que te hable?"
+        },
+        {
+          "type": 0,
+          "lang": "es",
+          "speech": "Te puedo de hablar de objetos e interfaces. ¿De qué quieres que te hable?"
+        }
+      ],
+      "defaultResponsePlatforms": {},
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": false,
+  "webhookForSlotFilling": false,
+  "lastUpdate": 1534865612,
+  "fallbackIntent": false,
+  "events": [
+    {
+      "name": "WELCOME"
+    }
+  ]
+}

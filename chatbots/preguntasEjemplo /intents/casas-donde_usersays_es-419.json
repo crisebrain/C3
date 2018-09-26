@@ -1,0 +1,47 @@
+[
+  {
+    "id": "5598a5a3-e09e-496d-8777-3fe0a99007aa",
+    "data": [
+      {
+        "text": "donde venden casa",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1534984455
+  },
+  {
+    "id": "44436a05-dffe-4459-81bf-899cec37ec32",
+    "data": [
+      {
+        "text": "donde encuentro casas",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1534984455
+  },
+  {
+    "id": "a790bf90-6216-4d95-822c-91fae913b461",
+    "data": [
+      {
+        "text": "donde ",
+        "userDefined": false
+      },
+      {
+        "text": "hay",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " casas",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1534984455
+  }
+]

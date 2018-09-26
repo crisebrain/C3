@@ -1,0 +1,122 @@
+[
+  {
+    "id": "619da6c4-9e8e-4e68-b771-794e96ceab88",
+    "data": [
+      {
+        "text": "Que funciones tienes?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527003159
+  },
+  {
+    "id": "3c169ff6-d670-4a24-95a0-0b3691b71071",
+    "data": [
+      {
+        "text": "Que puedes hacer?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527003159
+  },
+  {
+    "id": "eadd67d6-8e6f-4613-b79f-19ef337de69d",
+    "data": [
+      {
+        "text": "Necesito que me orientes",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527003159
+  },
+  {
+    "id": "102e02c8-f309-43c6-af9e-d74d6cfbb702",
+    "data": [
+      {
+        "text": "Necesito ayuda",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527003159
+  },
+  {
+    "id": "f8524225-e54a-4fb7-9c6c-7e3af89a15ab",
+    "data": [
+      {
+        "text": "Dime que hacer.",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527003159
+  },
+  {
+    "id": "544ff101-3e33-4e0a-960f-6aeba0cf9b03",
+    "data": [
+      {
+        "text": "Ayuda",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527003159
+  },
+  {
+    "id": "d9e1c7bf-ac9c-4d87-a0d2-fffd05525802",
+    "data": [
+      {
+        "text": "Ayúdame",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527003159
+  },
+  {
+    "id": "b60cd07f-e576-4c07-a8a1-61e406c2e835",
+    "data": [
+      {
+        "text": "Listame tus funciones",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527003159
+  },
+  {
+    "id": "ed905308-df69-4ab8-909a-d60c4c0a7b7f",
+    "data": [
+      {
+        "text": "y que puedo hacer?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527024857
+  },
+  {
+    "id": "0bdfbfbb-521a-493f-8e52-713e83c3d328",
+    "data": [
+      {
+        "text": "Dame opciones",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527003159
+  }
+]

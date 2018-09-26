@@ -1,0 +1,14 @@
+[
+  {
+    "value": "@objeto:objeto",
+    "synonyms": [
+      "@objeto:objeto"
+    ]
+  },
+  {
+    "value": "@interfaz:interfaz",
+    "synonyms": [
+      "@interfaz:interfaz"
+    ]
+  }
+]

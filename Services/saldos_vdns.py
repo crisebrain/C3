@@ -2,6 +2,11 @@ from .bd_busqueda import dbquery
 from .generales import construyeNombre
 import json
 
+#===============================================================================================================
+#===============================================================================================================
+#===============================================================================================================
+#===============================================================================================================
+
 def makeresponseAction(req, action):
     """Creates the response json object to send as answer to the webhook.
     Is used for both actions 'Saldos' and 'VDN'
@@ -18,6 +23,7 @@ def makeresponseAction(req, action):
     """
     # Carga de base de datos
     result = req.get("queryResult").get("parameters")
+    
     nombre = construyeNombre(result)
     if nombre != "":
         coincidencias = dbquery(nombre)
@@ -27,7 +33,9 @@ def makeresponseAction(req, action):
         returnCode = calcCode([], True)
         coincidencias = []
 
+#MENSAJSON----------------------------- ----         -----------           --- --------------------------------
     textresp = mensajson(coincidencias, returnCode, action, nombre)
+#MENSAJSON----------------------------- ----         -----------           --- --------------------------------
     resultarray = []
     for coin in coincidencias:
         resultarray.append(dict(zip(["nombre", action],
@@ -40,15 +48,19 @@ def makeresponseAction(req, action):
             },
         "fulfillmentText": textresp,
     }
-            # "followupEventInput": {"name": "salida",
-            #                "parameters": {"prueba": "1"},
-            #                "languageCode": "es"}}
+#EVALUACONTEXTOS------------- ----    ---    -----------    ---     --- --------------------------------
+    respContext = evaluaContextos(returnCode, action, nombre, req.get("session"))
+#EVALUACONTEXTOS------------- ----    ---    -----------    ---     --- --------------------------------
 
-    respContext = evaluaContextos(returnCode, action,
-                                  nombre, req.get("session"))
     if respContext:
         resp.update(respContext)
     return resp
+
+#===============================================================================================================
+#===============================================================================================================
+#===============================================================================================================
+#===============================================================================================================
+
 
 def evaluaContextos(code, action, valor, session):
     """Check and reset contexts for the vdn and saldos."""
@@ -63,6 +75,11 @@ def evaluaContextos(code, action, valor, session):
                           {"name": session + "/contexts/0-1saldo-followup-2",
                            "lifespanCount": 0}]
         return {"outputContexts": outputContexts}
+
+#===============================================================================================================
+#===============================================================================================================
+#===============================================================================================================
+#===============================================================================================================
 
 def calcCode(array, empty=False):
     if not empty:
@@ -79,6 +96,11 @@ def calcCode(array, empty=False):
     else:
         return 1
 
+#===============================================================================================================
+#===============================================================================================================
+#===============================================================================================================
+#===============================================================================================================
+
 def mensajson(array, code, action, valor):
     if action == "VDN":
         if valor == "":
@@ -91,8 +113,8 @@ def mensajson(array, code, action, valor):
         elif code == 1:
             elem = array[0]
             Text = "Será transferido con {0} {1} y tel: {2}.".format(elem["Nombre"],
-                                                        elem["Apellido"],
-                                                        elem["VDN"])
+                                                                     elem["Apellido"],
+                                                                     elem["VDN"])
             Text += "\nHasta luego."
 
         elif code == 2:
@@ -115,8 +137,8 @@ def mensajson(array, code, action, valor):
         elif code == 1:
             elem = array[0]
             Text = "El saldo de {0} {1} es {2} pesos".format(elem["Nombre"],
-                                                            elem["Apellido"],
-                                                            elem["saldo"])
+                                                             elem["Apellido"],
+                                                             elem["saldo"])
             Text += "\n¿Deseas algo más?"
 
         elif code == 2:
@@ -127,6 +149,12 @@ def mensajson(array, code, action, valor):
         else:
             Text = "Existen demasiadas coincidencias, necesitas ser mas específico"
     return Text
+
+#===============================================================================================================
+#===============================================================================================================
+#===============================================================================================================
+#===============================================================================================================
+
 
 def informacion(servicio):
     servicios = {

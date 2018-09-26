@@ -1,0 +1,46 @@
+[
+  {
+    "value": "periodo",
+    "synonyms": [
+      "periodo"
+    ]
+  },
+  {
+    "value": "estado",
+    "synonyms": [
+      "estado",
+      "status",
+      "estatus"
+    ]
+  },
+  {
+    "value": "numero",
+    "synonyms": [
+      "numero",
+      "numero de cuenta",
+      "cuenta"
+    ]
+  },
+  {
+    "value": "prefijo",
+    "synonyms": [
+      "prefijo",
+      "serie"
+    ]
+  },
+  {
+    "value": "acuse",
+    "synonyms": [
+      "acuse"
+    ]
+  },
+  {
+    "value": "documento",
+    "synonyms": [
+      "tipo",
+      "tipo de documento",
+      "tipo documento",
+      "documento"
+    ]
+  }
+]

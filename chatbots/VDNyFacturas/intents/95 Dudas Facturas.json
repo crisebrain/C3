@@ -1,0 +1,40 @@
+{
+  "id": "f2a12d37-9e19-441d-8fc9-bbd44fc475ba",
+  "name": "95 Dudas Facturas",
+  "auto": true,
+  "contexts": [],
+  "responses": [
+    {
+      "resetContexts": false,
+      "affectedContexts": [],
+      "parameters": [
+        {
+          "id": "7fd88ca4-4f5b-414e-8eca-8def3554118d",
+          "required": false,
+          "dataType": "@tipoDocumento",
+          "name": "tipoDocumento",
+          "value": "$tipoDocumento",
+          "isList": true
+        }
+      ],
+      "messages": [
+        {
+          "type": 0,
+          "lang": "es",
+          "speech": [
+            "El servicio de consulta de facturas tiene acceso a los registros productivos y obtiene los registros mediante criterios de búsqueda como Tipo Documento, Estatus o Prefijo. Esta información se encuentra actualizada al momento y cuenta con un poderoso mecanismo de evaluación de sentencias en lenguaje humano. Intente efectuar alguna consulta.\n\nPor ejemplo, diga: \"Quiero las facturas del día de hoy\" o \"quiero las facturas con estatus cerrado\".\n\nLos parámetros disponibles son:\n- Tipo de documento.\n- Estatus\n- Serie\n- Periodo\n- Acuse\n- Número de cuenta",
+            "El servicio de facturas en linea, permite la obtención de sus documentos con base en criterios de búsqueda definidos por avalores como Acuse, Número de factura, Serie o Periodo. Lo invito a que realice una factura.\n\nPor ejemplo, diga: \"Quiero las facturas del día de hoy\" o \"quiero las facturas con estatus cerrado\".\n\nLos parámetros disponibles son:\n- Tipo de documento.\n- Estatus\n- Serie\n- Periodo\n- Acuse\n- Número de cuenta"
+          ]
+        }
+      ],
+      "defaultResponsePlatforms": {},
+      "speech": []
+    }
+  ],
+  "priority": 750000,
+  "webhookUsed": false,
+  "webhookForSlotFilling": false,
+  "lastUpdate": 1529083682,
+  "fallbackIntent": false,
+  "events": []
+}

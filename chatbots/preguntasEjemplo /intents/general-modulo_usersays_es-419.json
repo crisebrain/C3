@@ -1,0 +1,92 @@
+[
+  {
+    "id": "a6128f31-4d85-45b8-9281-92804cff0f09",
+    "data": [
+      {
+        "text": "cual es el modulo ",
+        "userDefined": false
+      },
+      {
+        "text": "imss",
+        "alias": "general_modulo",
+        "meta": "@general_modulo",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1534989542
+  },
+  {
+    "id": "69df774e-06b5-4887-b983-035fac1a052f",
+    "data": [
+      {
+        "text": "que significa el modulo ",
+        "userDefined": false
+      },
+      {
+        "text": "imss",
+        "alias": "general_modulo",
+        "meta": "@general_modulo",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1534989542
+  },
+  {
+    "id": "b75cf341-8be9-4290-b326-a8bbb585b65c",
+    "data": [
+      {
+        "text": "a que se refiere la opción de ",
+        "userDefined": false
+      },
+      {
+        "text": "imss",
+        "alias": "general_modulo",
+        "meta": "@general_modulo",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1534989542
+  },
+  {
+    "id": "eb651455-649f-4d7f-9816-c621245207b8",
+    "data": [
+      {
+        "text": "a que se refiere el modulo de ",
+        "userDefined": false
+      },
+      {
+        "text": "imss",
+        "alias": "general_modulo",
+        "meta": "@general_modulo",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1534989542
+  },
+  {
+    "id": "f0e8dbda-61ee-4ec3-b98d-8ebc1c9346b4",
+    "data": [
+      {
+        "text": "que es modulo ",
+        "userDefined": false
+      },
+      {
+        "text": "imss",
+        "alias": "general_modulo",
+        "meta": "@general_modulo",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1534989542
+  }
+]

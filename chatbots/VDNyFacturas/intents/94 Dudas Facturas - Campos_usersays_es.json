@@ -1,0 +1,264 @@
+[
+  {
+    "id": "c42075b7-46a1-43a6-8385-de8d648675b8",
+    "data": [
+      {
+        "text": "para que sirve ",
+        "userDefined": false
+      },
+      {
+        "text": "el campo",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "prefijo",
+        "alias": "campo",
+        "meta": "@facturaCamposDudas",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527617347
+  },
+  {
+    "id": "7e20c959-03ba-41ad-8c60-5759200af5a7",
+    "data": [
+      {
+        "text": "de donde ",
+        "userDefined": false
+      },
+      {
+        "text": "saco",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " el ",
+        "userDefined": false
+      },
+      {
+        "text": "valor",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " de ",
+        "userDefined": false
+      },
+      {
+        "text": "documento",
+        "alias": "campo",
+        "meta": "@facturaCamposDudas",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527614502
+  },
+  {
+    "id": "cd29d0d7-eefe-4662-a99d-e2335c337d03",
+    "data": [
+      {
+        "text": "que es ",
+        "userDefined": false
+      },
+      {
+        "text": "serie",
+        "alias": "campo",
+        "meta": "@facturaCamposDudas",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527614502
+  },
+  {
+    "id": "43f86b01-8148-4aab-a16c-d65860e4ad21",
+    "data": [
+      {
+        "text": "cual es el criterio de busqueda de ",
+        "userDefined": false
+      },
+      {
+        "text": "prefijo",
+        "alias": "campo",
+        "meta": "@facturaCamposDudas",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527642282
+  },
+  {
+    "id": "964bff48-3999-44c8-8eed-11455e07244f",
+    "data": [
+      {
+        "text": "cual es el formato de ",
+        "userDefined": false
+      },
+      {
+        "text": "documento",
+        "alias": "campo",
+        "meta": "@facturaCamposDudas",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527614502
+  },
+  {
+    "id": "112d697d-f0f7-483f-978e-e65479c4060a",
+    "data": [
+      {
+        "text": "que significa ",
+        "userDefined": false
+      },
+      {
+        "text": "el campo",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "estado",
+        "alias": "campo",
+        "meta": "@facturaCamposDudas",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527614502
+  },
+  {
+    "id": "51f9ce2d-b935-4aff-9aa7-740f6130b35d",
+    "data": [
+      {
+        "text": "dime los criterios de busqueda de ",
+        "userDefined": false
+      },
+      {
+        "text": "acuse",
+        "alias": "campo",
+        "meta": "@facturaCamposDudas",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527642282
+  },
+  {
+    "id": "e382448e-38d0-4d42-b728-d1e50744107c",
+    "data": [
+      {
+        "text": "A",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " que se refiere ",
+        "userDefined": false
+      },
+      {
+        "text": "el campo",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "acuse",
+        "alias": "campo",
+        "meta": "@facturaCamposDudas",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527614502
+  },
+  {
+    "id": "f9f643f1-99b8-45a5-bbaa-408f62627f20",
+    "data": [
+      {
+        "text": "no estoy seguro cual es el ",
+        "userDefined": false
+      },
+      {
+        "text": "acuse",
+        "alias": "campo",
+        "meta": "@facturaCamposDudas",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527614502
+  },
+  {
+    "id": "403cf4ad-5d11-421c-a04b-431b6b4d32b6",
+    "data": [
+      {
+        "text": "cuales son los valores validos para ",
+        "userDefined": false
+      },
+      {
+        "text": "periodo",
+        "alias": "campo",
+        "meta": "@facturaCamposDudas",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527615905
+  }
+]

@@ -1,0 +1,44 @@
+{
+  "id": "da42e8fc-c6e2-4743-9b18-738a849c6b55",
+  "name": "objeto_tipo",
+  "auto": true,
+  "contexts": [],
+  "responses": [
+    {
+      "resetContexts": false,
+      "action": "preguntasRespuestas",
+      "affectedContexts": [
+        {
+          "name": "cx_objeto",
+          "parameters": {},
+          "lifespan": 5
+        }
+      ],
+      "parameters": [],
+      "messages": [
+        {
+          "type": 0,
+          "lang": "es-419",
+          "speech": "El servicio falló."
+        },
+        {
+          "type": 0,
+          "lang": "es",
+          "speech": "El servicio falló."
+        }
+      ],
+      "defaultResponsePlatforms": {},
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": true,
+  "webhookForSlotFilling": false,
+  "lastUpdate": 1534810199,
+  "fallbackIntent": false,
+  "events": [
+    {
+      "name": "e_objeto_tipo"
+    }
+  ]
+}

@@ -1,0 +1,119 @@
+[
+  {
+    "id": "235b30be-9422-48a3-b138-c047e9a4d831",
+    "data": [
+      {
+        "text": "que es",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1534810511
+  },
+  {
+    "id": "23e544e3-f518-4782-aa16-c3172516889b",
+    "data": [
+      {
+        "text": "y que es eso",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1534810511
+  },
+  {
+    "id": "cc0c51ca-0a9b-45a2-a938-95a086b776f2",
+    "data": [
+      {
+        "text": "que son",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1534810511
+  },
+  {
+    "id": "a792be01-df25-4b3f-bc53-3cd5609080f2",
+    "data": [
+      {
+        "text": "dame información de ",
+        "userDefined": false
+      },
+      {
+        "text": "interfaces",
+        "alias": "que_son",
+        "meta": "@que_son",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1534805925
+  },
+  {
+    "id": "caeb2e5e-1683-4743-896e-6079fdf6538c",
+    "data": [
+      {
+        "text": "dime que es ",
+        "userDefined": false
+      },
+      {
+        "text": "un",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "objeto",
+        "alias": "que_son",
+        "meta": "@que_son",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1534805925
+  },
+  {
+    "id": "e4f3d41a-733f-4f3f-843f-6a1bf736c58d",
+    "data": [
+      {
+        "text": "que es ",
+        "userDefined": false
+      },
+      {
+        "text": "objeto",
+        "alias": "que_son",
+        "meta": "@que_son",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1534805925
+  },
+  {
+    "id": "b631bd76-6bb3-4a4d-bffa-729bf2c8003a",
+    "data": [
+      {
+        "text": "que son los ",
+        "userDefined": false
+      },
+      {
+        "text": "objetos",
+        "alias": "que_son",
+        "meta": "@que_son",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1534805925
+  }
+]

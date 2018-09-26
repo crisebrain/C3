@@ -1,0 +1,44 @@
+{
+  "id": "c69511d7-05e8-47f3-8cf5-a4d71550b425",
+  "name": "interfaz_costo",
+  "auto": true,
+  "contexts": [],
+  "responses": [
+    {
+      "resetContexts": false,
+      "action": "preguntasRespuestas",
+      "affectedContexts": [
+        {
+          "name": "cx_interfaz",
+          "parameters": {},
+          "lifespan": 5
+        }
+      ],
+      "parameters": [],
+      "messages": [
+        {
+          "type": 0,
+          "lang": "es-419",
+          "speech": "El servicio falló."
+        },
+        {
+          "type": 0,
+          "lang": "es",
+          "speech": "El servicio falló."
+        }
+      ],
+      "defaultResponsePlatforms": {},
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": true,
+  "webhookForSlotFilling": false,
+  "lastUpdate": 1534811873,
+  "fallbackIntent": false,
+  "events": [
+    {
+      "name": "e_interfaz_costo"
+    }
+  ]
+}

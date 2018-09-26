@@ -1,0 +1,260 @@
+[
+  {
+    "value": "@prefijo:prefijo",
+    "synonyms": [
+      "@prefijo:prefijo"
+    ]
+  },
+  {
+    "value": "@acuse:acuse",
+    "synonyms": [
+      "@acuse:acuse"
+    ]
+  },
+  {
+    "value": "@periodo:periodo ",
+    "synonyms": [
+      "@periodo:periodo "
+    ]
+  },
+  {
+    "value": "@status:status",
+    "synonyms": [
+      "@status:status"
+    ]
+  },
+  {
+    "value": "@numeroFactura:numeroFactura ",
+    "synonyms": [
+      "@numeroFactura:numeroFactura "
+    ]
+  },
+  {
+    "value": "@tipoDocumento:tipoDocumento ",
+    "synonyms": [
+      "@tipoDocumento:tipoDocumento "
+    ]
+  },
+  {
+    "value": "de enero del 2100",
+    "synonyms": [
+      "de enero del 2100"
+    ]
+  },
+  {
+    "value": "nit 1232",
+    "synonyms": [
+      "nit 1232"
+    ]
+  },
+  {
+    "value": "24 de enero de 1879",
+    "synonyms": [
+      "24 de enero de 1879"
+    ]
+  },
+  {
+    "value": "31 de enero del 2000",
+    "synonyms": [
+      "31 de enero del 2000"
+    ]
+  },
+  {
+    "value": "de enero de 1990",
+    "synonyms": [
+      "de enero de 1990"
+    ]
+  },
+  {
+    "value": "folio inicial 1234",
+    "synonyms": [
+      "folio inicial 1234"
+    ]
+  },
+  {
+    "value": "nit 123455",
+    "synonyms": [
+      "nit 123455"
+    ]
+  },
+  {
+    "value": "del primero de enero",
+    "synonyms": [
+      "del primero de enero"
+    ]
+  },
+  {
+    "value": "24 de septiembre del 2017",
+    "synonyms": [
+      "24 de septiembre del 2017"
+    ]
+  },
+  {
+    "value": "primero de febrero del 2018",
+    "synonyms": [
+      "primero de febrero del 2018"
+    ]
+  },
+  {
+    "value": "con folio inicial 123",
+    "synonyms": [
+      "con folio inicial 123"
+    ]
+  },
+  {
+    "value": "folio final 987",
+    "synonyms": [
+      "folio final 987"
+    ]
+  },
+  {
+    "value": "estatus aceptado",
+    "synonyms": [
+      "estatus aceptado"
+    ]
+  },
+  {
+    "value": "1 de Marzo del 2017",
+    "synonyms": [
+      "1 de Marzo del 2017"
+    ]
+  },
+  {
+    "value": "5 de Noviembre del presente año",
+    "synonyms": [
+      "5 de Noviembre del presente año"
+    ]
+  },
+  {
+    "value": "15 de noviembre del 2017",
+    "synonyms": [
+      "15 de noviembre del 2017"
+    ]
+  },
+  {
+    "value": "24 de Febrero del 2018",
+    "synonyms": [
+      "24 de Febrero del 2018"
+    ]
+  },
+  {
+    "value": "inicien con el folio 123",
+    "synonyms": [
+      "inicien con el folio 123"
+    ]
+  },
+  {
+    "value": "finalicen con 987",
+    "synonyms": [
+      "finalicen con 987"
+    ]
+  },
+  {
+    "value": "del año pasado",
+    "synonyms": [
+      "del año pasado"
+    ]
+  },
+  {
+    "value": "nit 2433",
+    "synonyms": [
+      "nit 2433"
+    ]
+  },
+  {
+    "value": "mañana",
+    "synonyms": [
+      "mañana"
+    ]
+  },
+  {
+    "value": "folio de inicio 123",
+    "synonyms": [
+      "folio de inicio 123"
+    ]
+  },
+  {
+    "value": "de enero",
+    "synonyms": [
+      "de enero"
+    ]
+  },
+  {
+    "value": "2343 es el folio de finalizado",
+    "synonyms": [
+      "2343 es el folio de finalizado"
+    ]
+  },
+  {
+    "value": "folio inicial 123",
+    "synonyms": [
+      "folio inicial 123"
+    ]
+  },
+  {
+    "value": "folio finalice en 2343",
+    "synonyms": [
+      "folio finalice en 2343"
+    ]
+  },
+  {
+    "value": "de 3 de septiembre de 1987",
+    "synonyms": [
+      "de 3 de septiembre de 1987"
+    ]
+  },
+  {
+    "value": "folio final 234",
+    "synonyms": [
+      "folio final 234"
+    ]
+  },
+  {
+    "value": "noviembre del 2015",
+    "synonyms": [
+      "noviembre del 2015"
+    ]
+  },
+  {
+    "value": "1 enero del 2010",
+    "synonyms": [
+      "1 enero del 2010"
+    ]
+  },
+  {
+    "value": "5 de febrero del 2012",
+    "synonyms": [
+      "5 de febrero del 2012"
+    ]
+  },
+  {
+    "value": "estatus recibido",
+    "synonyms": [
+      "estatus recibido"
+    ]
+  },
+  {
+    "value": "marzo del 2017",
+    "synonyms": [
+      "marzo del 2017"
+    ]
+  },
+  {
+    "value": "adquiriente 1234",
+    "synonyms": [
+      "adquiriente 1234"
+    ]
+  },
+  {
+    "value": "Enero",
+    "synonyms": [
+      "Enero"
+    ]
+  },
+  {
+    "value": "Marzo primero del 2017",
+    "synonyms": [
+      "Marzo primero del 2017"
+    ]
+  }
+]

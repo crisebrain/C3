@@ -1,0 +1,42 @@
+{
+    "dicContextToEntityPhrase" : {
+      "cx_parametrosbusqueda" : "los parámetros de búsqueda de facturas",
+      "cx_facturaelectronica" : "factura electrónica",
+      "cx_facturaprocesada" : "factura procesada",
+      "cx_facturarechazada" : "factura rechazada",
+      "cx_reglasdevalidacion" : "reglas de validación para facturas"
+    },
+
+    "dicEntityToContext" : {
+      "parametrosbusqueda": "cx_parametrosbusqueda",
+      "facturaelectronica": "cx_facturaelectronica",
+      "facturaprocesada" : "cx_facturaprocesada",
+      "facturarechazada" : "cx_facturarechazada",
+      "reglasdevalidacion" : "cx_reglasdevalidacion",
+      "que_son" : "general_que_son-followup"
+    },
+
+    "dicResponseIntents" : {
+      "general_que_son": {
+          "parametrosbusqueda": "Al realizar una búsqueda cognitiva, puedes preguntar por facturas que [...]",
+          "facturaelectronica": "Una factura electrónica es un documento generado por medios digitales [...]",
+          "facturaprocesada" : "significa que la factura pudo ser procesada y aprobada por la autoridad",
+          "facturarechazada" : "significa que el archivo recibido contenia errores y por lo tanto no pudo ser procesado correctamente",
+          "reglasdevalidacion" : "Las reglas de validación son: [...]"
+      },
+      "hola" : "Hola. Te estás comunicando a nuestro centro de soporte. Si tienes tu clave númerica de atención telefónica digítala o mencionala ahora, o solicita comunicarte con un ejecutivo.",
+      "como_imprimir": "En el portal, una vez seleccionada la factura, cuentas con una opción que te permite imprimirla",
+      "como_buscar": "para buscar una factura puedes entrar al portal [...]",
+      "como_reenviar": "En el portal, una vez seleccionada una factura en específico, cuentas con una opción que te permite reenviarla por correo.",
+      "como_descargar": "En el portal, una vez seleccionada una factura, cuentas con una opción para descargarla. ",
+      "como_validar": "todas las facturas tienen un dato o identificador único con el cual puedes verificar en el portal del SAT si está registrada y es válida.",
+      "dudas_con_el_servicio " : "pregúntame lo que gustes a cerca de nuestro servicio"
+    },
+
+    "dicResponseActions" : {
+      "soporteTecnico" : "",
+      "levantaTicket" : "",
+      "consultaTicket" : "",
+      "facturas" : ""
+    }
+}

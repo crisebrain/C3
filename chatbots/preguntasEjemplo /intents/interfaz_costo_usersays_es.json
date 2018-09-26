@@ -1,0 +1,87 @@
+[
+  {
+    "id": "d4341ee0-93a7-481b-b70a-b6c5bb94e3c6",
+    "data": [
+      {
+        "text": "cual es el costo de la ",
+        "userDefined": false
+      },
+      {
+        "text": "interfaz",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1534807975
+  },
+  {
+    "id": "4c3fbbc2-3b8e-40e1-b038-89bd3550d633",
+    "data": [
+      {
+        "text": "Dame información del precio de las ",
+        "userDefined": false
+      },
+      {
+        "text": "interfaces",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1534806256
+  },
+  {
+    "id": "09baca43-4611-4500-a555-fd31d7406c18",
+    "data": [
+      {
+        "text": "son caras las ",
+        "userDefined": false
+      },
+      {
+        "text": "interfaz",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1534806256
+  },
+  {
+    "id": "a5562b21-e3d4-47a9-a7ee-164b552c7ff5",
+    "data": [
+      {
+        "text": "el precio de las ",
+        "userDefined": false
+      },
+      {
+        "text": "interfaces",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1534806256
+  },
+  {
+    "id": "aec9471a-bff8-44b6-9158-0b1b0b9b8d02",
+    "data": [
+      {
+        "text": "cuanto cuestan las ",
+        "userDefined": false
+      },
+      {
+        "text": "interfaces",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1534806256
+  }
+]

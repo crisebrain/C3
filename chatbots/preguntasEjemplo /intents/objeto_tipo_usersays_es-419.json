@@ -1,0 +1,79 @@
+[
+  {
+    "id": "b78b95f6-fa5e-462c-96b7-f814685e0abf",
+    "data": [
+      {
+        "text": "que es el tipo de ",
+        "userDefined": false
+      },
+      {
+        "text": "objeto",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1534810199
+  },
+  {
+    "id": "96d11561-4b5b-438c-b7ea-c344e51d7d95",
+    "data": [
+      {
+        "text": "explícame las diferencias de los ",
+        "userDefined": false
+      },
+      {
+        "text": "objetos",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1534804751
+  },
+  {
+    "id": "50339572-9f82-498e-845b-674a575905cb",
+    "data": [
+      {
+        "text": "que tipos de ",
+        "userDefined": false
+      },
+      {
+        "text": "objetos",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "hay",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1534804751
+  },
+  {
+    "id": "cbf86f13-39c5-4a52-81d4-b2b8641eceb3",
+    "data": [
+      {
+        "text": "cuales son los tipos de ",
+        "userDefined": false
+      },
+      {
+        "text": "objetos",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1534804751
+  }
+]

@@ -1,0 +1,54 @@
+{
+  "id": "430061e6-ebf3-49e7-b17a-442a4d148a43",
+  "name": "99 Despedida",
+  "auto": true,
+  "contexts": [],
+  "responses": [
+    {
+      "resetContexts": false,
+      "action": "",
+      "affectedContexts": [
+        {
+          "name": "0-1Saldo-followup-2",
+          "parameters": {},
+          "lifespan": 0
+        },
+        {
+          "name": "0-1Saldo-followup",
+          "parameters": {},
+          "lifespan": 0
+        },
+        {
+          "name": "0-2VDN-followup",
+          "parameters": {},
+          "lifespan": 0
+        },
+        {
+          "name": "0-2VDN-followup-2",
+          "parameters": {},
+          "lifespan": 0
+        }
+      ],
+      "parameters": [],
+      "messages": [
+        {
+          "type": 0,
+          "lang": "es",
+          "speech": "Fue un placer atenderlo. Hasta luego."
+        }
+      ],
+      "defaultResponsePlatforms": {},
+      "speech": []
+    }
+  ],
+  "priority": 1000000,
+  "webhookUsed": false,
+  "webhookForSlotFilling": false,
+  "lastUpdate": 1528220174,
+  "fallbackIntent": false,
+  "events": [
+    {
+      "name": "e_despedida"
+    }
+  ]
+}

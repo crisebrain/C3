@@ -1,0 +1,25 @@
+{
+    "dicContextToEntityPhrase" : {
+    },
+
+
+    "dicEntityToContext" : {
+
+
+    },
+
+
+    "dicResponseIntents" : {
+      "general_que_son": {
+          "interfaz": "Son las interfaces de usuario.",
+      },
+      "general-como": {
+          "permiso": "Para consultar y asignar los permisos es necesario ir a Configuración-Grupo Empresarial y dar click en el elemento de la columna 'Perfiles'. Esta acción genera el listado de los perfiles existentes y permite la activación de los permisos al seleccionar algunos de los módulos presentados y efectuar la administración en la secciónd de Seguridad."
+      }
+    },
+
+
+    "dicResponseActions" : {
+
+    }
+}

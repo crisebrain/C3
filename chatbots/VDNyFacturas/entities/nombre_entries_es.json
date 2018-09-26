@@ -1,0 +1,20 @@
+[
+  {
+    "value": "@nombresExtras:nombresExtras ",
+    "synonyms": [
+      "@nombresExtras:nombresExtras "
+    ]
+  },
+  {
+    "value": "@sys.given-name:nombre",
+    "synonyms": [
+      "@sys.given-name:nombre"
+    ]
+  },
+  {
+    "value": "@sys.last-name:apellido",
+    "synonyms": [
+      "@sys.last-name:apellido"
+    ]
+  }
+]

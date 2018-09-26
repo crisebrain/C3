@@ -1,0 +1,70 @@
+[
+  {
+    "id": "42f51ca9-f25c-49cc-8c22-d2a54880c0c7",
+    "data": [
+      {
+        "text": "me refería  a ",
+        "userDefined": false
+      },
+      {
+        "text": "objetos",
+        "alias": "que_son",
+        "meta": "@que_son",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1534978707
+  },
+  {
+    "id": "eb989d58-e64e-43f8-9329-3b690a9f9472",
+    "data": [
+      {
+        "text": "me refiero a ",
+        "userDefined": false
+      },
+      {
+        "text": "objetos",
+        "alias": "que_son",
+        "meta": "@que_son",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1534978707
+  },
+  {
+    "id": "4f268301-d5a3-4d52-9ebc-2cc7a43db9b9",
+    "data": [
+      {
+        "text": "objeto",
+        "alias": "que_son",
+        "meta": "@que_son",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1534978707
+  },
+  {
+    "id": "1e35f3e2-1cfe-4532-a132-224f10cfd897",
+    "data": [
+      {
+        "text": "a ",
+        "userDefined": false
+      },
+      {
+        "text": "interfaces",
+        "alias": "que_son",
+        "meta": "@que_son",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1534978707
+  }
+]

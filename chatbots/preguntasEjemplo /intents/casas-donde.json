@@ -1,0 +1,40 @@
+{
+  "id": "5cf719ff-5bea-4038-a3f3-d55195011798",
+  "name": "casas-donde",
+  "auto": true,
+  "contexts": [],
+  "responses": [
+    {
+      "resetContexts": false,
+      "action": "preguntasRespuestas",
+      "affectedContexts": [
+        {
+          "name": "cx_casa",
+          "parameters": {},
+          "lifespan": 5
+        }
+      ],
+      "parameters": [],
+      "messages": [
+        {
+          "type": 0,
+          "lang": "es-419",
+          "speech": "Falló el servicio."
+        },
+        {
+          "type": 0,
+          "lang": "es",
+          "speech": "Falló el servicio."
+        }
+      ],
+      "defaultResponsePlatforms": {},
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": true,
+  "webhookForSlotFilling": false,
+  "lastUpdate": 1534984455,
+  "fallbackIntent": false,
+  "events": []
+}

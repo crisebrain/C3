@@ -1,0 +1,455 @@
+[
+  {
+    "value": "ventura",
+    "synonyms": [
+      "ventura"
+    ]
+  },
+  {
+    "value": "ams",
+    "synonyms": [
+      "ams"
+    ]
+  },
+  {
+    "value": "cuadros",
+    "synonyms": [
+      "cuadros"
+    ]
+  },
+  {
+    "value": "primito",
+    "synonyms": [
+      "primito"
+    ]
+  },
+  {
+    "value": "magaly",
+    "synonyms": [
+      "magaly"
+    ]
+  },
+  {
+    "value": "estefani",
+    "synonyms": [
+      "estefani"
+    ]
+  },
+  {
+    "value": "chavarría",
+    "synonyms": [
+      "chavarría"
+    ]
+  },
+  {
+    "value": "bodoque",
+    "synonyms": [
+      "bodoque"
+    ]
+  },
+  {
+    "value": "yoselin",
+    "synonyms": [
+      "yoselin"
+    ]
+  },
+  {
+    "value": "Cesar",
+    "synonyms": [
+      "Cesar",
+      "César"
+    ]
+  },
+  {
+    "value": "lucero",
+    "synonyms": [
+      "lucero"
+    ]
+  },
+  {
+    "value": "mirna",
+    "synonyms": [
+      "mirna"
+    ]
+  },
+  {
+    "value": "Olvera",
+    "synonyms": [
+      "Olvera"
+    ]
+  },
+  {
+    "value": "eloy",
+    "synonyms": [
+      "eloy"
+    ]
+  },
+  {
+    "value": "anguiano",
+    "synonyms": [
+      "anguiano"
+    ]
+  },
+  {
+    "value": "barajas",
+    "synonyms": [
+      "barajas"
+    ]
+  },
+  {
+    "value": "Yazmín",
+    "synonyms": [
+      "Yazmín"
+    ]
+  },
+  {
+    "value": "nava",
+    "synonyms": [
+      "nava"
+    ]
+  },
+  {
+    "value": "mireya",
+    "synonyms": [
+      "mireya"
+    ]
+  },
+  {
+    "value": "Osornio",
+    "synonyms": [
+      "Osornio"
+    ]
+  },
+  {
+    "value": "del",
+    "synonyms": [
+      "del"
+    ]
+  },
+  {
+    "value": "chavez",
+    "synonyms": [
+      "chavez",
+      "chávez"
+    ]
+  },
+  {
+    "value": "cuauhtemoc",
+    "synonyms": [
+      "cuauhtemoc",
+      "cuauhtémoc"
+    ]
+  },
+  {
+    "value": "xala",
+    "synonyms": [
+      "xala"
+    ]
+  },
+  {
+    "value": "escalante",
+    "synonyms": [
+      "escalante"
+    ]
+  },
+  {
+    "value": "Haase",
+    "synonyms": [
+      "Haase"
+    ]
+  },
+  {
+    "value": "aidé",
+    "synonyms": [
+      "aidé"
+    ]
+  },
+  {
+    "value": "mejia",
+    "synonyms": [
+      "mejia",
+      "mejía"
+    ]
+  },
+  {
+    "value": "víctor",
+    "synonyms": [
+      "víctor"
+    ]
+  },
+  {
+    "value": "jose",
+    "synonyms": [
+      "jose",
+      "josé"
+    ]
+  },
+  {
+    "value": "recepcion dos",
+    "synonyms": [
+      "recepcion 2",
+      "recepcion dos",
+      "recepción 2",
+      "recepción dos"
+    ]
+  },
+  {
+    "value": "zaid",
+    "synonyms": [
+      "zaid"
+    ]
+  },
+  {
+    "value": "veloz",
+    "synonyms": [
+      "veloz"
+    ]
+  },
+  {
+    "value": "recepcion uno",
+    "synonyms": [
+      "recepcion 1",
+      "recepcion uno",
+      "recepción 1",
+      "recepción uno"
+    ]
+  },
+  {
+    "value": "narciso",
+    "synonyms": [
+      "narciso"
+    ]
+  },
+  {
+    "value": "licona",
+    "synonyms": [
+      "licona"
+    ]
+  },
+  {
+    "value": "valdivia",
+    "synonyms": [
+      "valdivia"
+    ]
+  },
+  {
+    "value": "maqueda",
+    "synonyms": [
+      "maqueda"
+    ]
+  },
+  {
+    "value": "cintia",
+    "synonyms": [
+      "cintia"
+    ]
+  },
+  {
+    "value": "ugalde",
+    "synonyms": [
+      "ugalde"
+    ]
+  },
+  {
+    "value": "magali",
+    "synonyms": [
+      "magali"
+    ]
+  },
+  {
+    "value": "verónica",
+    "synonyms": [
+      "verónica"
+    ]
+  },
+  {
+    "value": "noemí",
+    "synonyms": [
+      "noemí"
+    ]
+  },
+  {
+    "value": "villalpando",
+    "synonyms": [
+      "villalpando"
+    ]
+  },
+  {
+    "value": "amante",
+    "synonyms": [
+      "amante"
+    ]
+  },
+  {
+    "value": "baltazar",
+    "synonyms": [
+      "baltazar"
+    ]
+  },
+  {
+    "value": "garcia",
+    "synonyms": [
+      "garcia"
+    ]
+  },
+  {
+    "value": "mayin",
+    "synonyms": [
+      "mayin"
+    ]
+  },
+  {
+    "value": "juanito",
+    "synonyms": [
+      "juanito"
+    ]
+  },
+  {
+    "value": "maria",
+    "synonyms": [
+      "maria",
+      "maría"
+    ]
+  },
+  {
+    "value": "eder",
+    "synonyms": [
+      "eder"
+    ]
+  },
+  {
+    "value": "de la",
+    "synonyms": [
+      "de la"
+    ]
+  },
+  {
+    "value": "valdez",
+    "synonyms": [
+      "valdez"
+    ]
+  },
+  {
+    "value": "mandujano",
+    "synonyms": [
+      "mandujano"
+    ]
+  },
+  {
+    "value": "cortes",
+    "synonyms": [
+      "cortes"
+    ]
+  },
+  {
+    "value": "cinthia",
+    "synonyms": [
+      "cinthia"
+    ]
+  },
+  {
+    "value": "jesús",
+    "synonyms": [
+      "jesús"
+    ]
+  },
+  {
+    "value": "kitzia",
+    "synonyms": [
+      "kitzia"
+    ]
+  },
+  {
+    "value": "zacatelco",
+    "synonyms": [
+      "zacatelco"
+    ]
+  },
+  {
+    "value": "cinthya",
+    "synonyms": [
+      "cinthya"
+    ]
+  },
+  {
+    "value": "aguayo",
+    "synonyms": [
+      "aguayo"
+    ]
+  },
+  {
+    "value": "hernandez",
+    "synonyms": [
+      "hernandez"
+    ]
+  },
+  {
+    "value": "trejo",
+    "synonyms": [
+      "trejo"
+    ]
+  },
+  {
+    "value": "escalera",
+    "synonyms": [
+      "escalera"
+    ]
+  },
+  {
+    "value": "mosco",
+    "synonyms": [
+      "mosco"
+    ]
+  },
+  {
+    "value": "landy",
+    "synonyms": [
+      "landy"
+    ]
+  },
+  {
+    "value": "carcamo",
+    "synonyms": [
+      "carcamo"
+    ]
+  },
+  {
+    "value": "novelo",
+    "synonyms": [
+      "novelo"
+    ]
+  },
+  {
+    "value": "aline",
+    "synonyms": [
+      "aline"
+    ]
+  },
+  {
+    "value": "nayenci",
+    "synonyms": [
+      "nayenci"
+    ]
+  },
+  {
+    "value": "mendez",
+    "synonyms": [
+      "mendez",
+      "méndez"
+    ]
+  },
+  {
+    "value": "director general",
+    "synonyms": [
+      "director general",
+      "administrador general"
+    ]
+  },
+  {
+    "value": "director de desarrollo",
+    "synonyms": [
+      "director de desarrollo",
+      "administrador general"
+    ]
+  }
+]

@@ -1,0 +1,50 @@
+[
+  {
+    "value": "carro",
+    "synonyms": [
+      "carro"
+    ]
+  },
+  {
+    "value": "carros",
+    "synonyms": [
+      "carros"
+    ]
+  },
+  {
+    "value": "auto",
+    "synonyms": [
+      "auto"
+    ]
+  },
+  {
+    "value": "autos",
+    "synonyms": [
+      "autos"
+    ]
+  },
+  {
+    "value": "automóvil",
+    "synonyms": [
+      "automóvil"
+    ]
+  },
+  {
+    "value": "automóviles",
+    "synonyms": [
+      "automóviles"
+    ]
+  },
+  {
+    "value": "coche",
+    "synonyms": [
+      "coche"
+    ]
+  },
+  {
+    "value": "coches",
+    "synonyms": [
+      "coches"
+    ]
+  }
+]

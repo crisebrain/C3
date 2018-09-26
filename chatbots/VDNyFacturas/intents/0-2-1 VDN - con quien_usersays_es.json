@@ -1,0 +1,219 @@
+[
+  {
+    "id": "66133812-7791-4f28-bec1-9f71bf7e0c22",
+    "data": [
+      {
+        "text": "con ",
+        "userDefined": false
+      },
+      {
+        "text": "Jazmin",
+        "alias": "nombre",
+        "meta": "@nombre",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527798733
+  },
+  {
+    "id": "98f4edfa-b15b-4469-8043-8e993358ca97",
+    "data": [
+      {
+        "text": "Gabriel",
+        "alias": "nombre",
+        "meta": "@nombre",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527798733
+  },
+  {
+    "id": "a1e07a8a-92b9-4b20-8796-14c5dfb9e8a5",
+    "data": [
+      {
+        "text": "Comunicame con ",
+        "userDefined": false
+      },
+      {
+        "text": "Hector",
+        "alias": "nombre",
+        "meta": "@nombre",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527798733
+  },
+  {
+    "id": "6774dc7e-ee2d-47a5-8a45-cf8b3ca2dcc5",
+    "data": [
+      {
+        "text": "quiero comunicarme ",
+        "userDefined": false
+      },
+      {
+        "text": "juan",
+        "alias": "nombre",
+        "meta": "@nombre",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527798733
+  },
+  {
+    "id": "fdc75dfb-3ed6-4a01-8646-9c07a4ccbdb0",
+    "data": [
+      {
+        "text": "mejor con ",
+        "userDefined": false
+      },
+      {
+        "text": "hector",
+        "alias": "nombre",
+        "meta": "@nombre",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527798733
+  },
+  {
+    "id": "0cb0c362-1279-4c5a-9171-d937464b3a22",
+    "data": [
+      {
+        "text": "a",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "Gabriel Garcia",
+        "alias": "nombre",
+        "meta": "@nombre",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527798733
+  },
+  {
+    "id": "81241551-3b14-4824-b0f1-d4caef559105",
+    "data": [
+      {
+        "text": "olvidalo quiero comunicarme con ",
+        "userDefined": false
+      },
+      {
+        "text": "juan",
+        "alias": "nombre",
+        "meta": "@nombre",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527798733
+  },
+  {
+    "id": "34e2038d-0e2d-4019-868b-f37505cb7ff9",
+    "data": [
+      {
+        "text": "Gabriel Osorio",
+        "alias": "nombre",
+        "meta": "@nombre",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527798733
+  },
+  {
+    "id": "db8e9d8d-cf1f-42ce-8f0d-b1f07dd02574",
+    "data": [
+      {
+        "text": "Deseo hablar con ",
+        "userDefined": false
+      },
+      {
+        "text": "Manuel",
+        "alias": "nombre",
+        "meta": "@nombre",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527798733
+  },
+  {
+    "id": "d1bb699e-60c7-4c40-afd1-d639264f9071",
+    "data": [
+      {
+        "text": "con ",
+        "userDefined": false
+      },
+      {
+        "text": "Javier",
+        "alias": "nombre",
+        "meta": "@nombre",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527798733
+  },
+  {
+    "id": "ab14685a-59f9-4beb-bb1c-e3fa8ee69e4a",
+    "data": [
+      {
+        "text": "olvidalo quiero hablar con ",
+        "userDefined": false
+      },
+      {
+        "text": "juan",
+        "alias": "nombre",
+        "meta": "@nombre",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527798733
+  },
+  {
+    "id": "f8667db9-4b87-46fe-a358-91cb2fcdb916",
+    "data": [
+      {
+        "text": "y con ",
+        "userDefined": false
+      },
+      {
+        "text": "gabriel",
+        "alias": "nombre",
+        "meta": "@nombre",
+        "userDefined": true
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1527798733
+  }
+]

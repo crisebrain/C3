@@ -1,0 +1,103 @@
+[
+  {
+    "id": "4ba1e633-6c4c-4d7a-8bb1-c33c09da57c2",
+    "data": [
+      {
+        "text": "No se",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1526941578
+  },
+  {
+    "id": "8598640d-6e41-4083-beec-185e845d482b",
+    "data": [
+      {
+        "text": "No recuerdo el nombre",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1526941578
+  },
+  {
+    "id": "885b6462-8f74-4637-a179-2bc8c075445d",
+    "data": [
+      {
+        "text": "Con el jefe",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1526941578
+  },
+  {
+    "id": "ab3bdd5b-cc41-437b-b520-657f0843f972",
+    "data": [
+      {
+        "text": "Con el que sea",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1526941578
+  },
+  {
+    "id": "91b0a86c-6d16-47e5-aa10-45e341b1c8be",
+    "data": [
+      {
+        "text": "No lo se",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1526941578
+  },
+  {
+    "id": "4aa96941-0da8-4e79-a5d8-56ea2846fd98",
+    "data": [
+      {
+        "text": "Con quien sea",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1526941578
+  },
+  {
+    "id": "7256bdbf-c6d2-4669-933b-76ad01cd84c4",
+    "data": [
+      {
+        "text": "No me ",
+        "userDefined": false
+      },
+      {
+        "text": "acuerdo",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1526941578
+  },
+  {
+    "id": "79d09706-7ffb-4c71-8807-1cd6c6c46e77",
+    "data": [
+      {
+        "text": "Con mi director",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1526941578
+  }
+]
