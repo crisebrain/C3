@@ -178,8 +178,8 @@ if __name__ == "__main__":
 
     # Frases de entrenamiento
     tphrases = [[
-                    {"text": "Quiero unos "},
-                    {"text": "tacos ", "entity_type": display_name},
+                    {"text": "Quiero unos "},  # frase sin entity
+                    {"text": "tacos ", "entity_type": display_name},  # entity
                     {"text": "de "},
                     {"text": "cochinita", "entity_type": display_name}
                ],
