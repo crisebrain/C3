@@ -104,15 +104,25 @@ class Agent_Handler:
 
     def create_intent(self, display_name, training_phrases_parts,
                       message_texts, action=None, webhook_state=False,
-                      input_context_names=[], output_contexts=[]):
+                      input_context_names=[], output_contexts=[],
+                      displayNameType=None):
         """Create an intent of the given intent type."""
         training_phrases = []
         for training_phrases_part in training_phrases_parts:
-            part = dialogflow.types.Intent.TrainingPhrase.Part(
-                text=training_phrases_part)
+            parts = []
+            for element in training_phrases_part:
+                if element.get("entity_type") is not None:
+                    part = dialogflow.types.Intent.TrainingPhrase.Part(
+                        text=element.get("text"),
+                        entity_type="@{0}".format(element.get("entity_type")),
+                        alias=element.get("entity_type"))
+                else:
+                    part = dialogflow.types.Intent.TrainingPhrase.Part(
+                        text=element.get("text"))
+                parts.append(part)
             # Here we create a new training phrase for each provided part.
             training_phrase = dialogflow.types.Intent.TrainingPhrase(
-                parts=[part])
+                parts=parts)
             training_phrases.append(training_phrase)
 
         text = dialogflow.types.Intent.Message.Text(text=message_texts)
@@ -148,27 +158,7 @@ if __name__ == "__main__":
     # handler = Agent_Handler("facturasvoz-estable")
     # handler = Agent_Handler("preguntasrespuestas-humansite")
     handler = Agent_Handler(project_id)
-    # Frases de entrenamiento
-    tphrases = ["Quiero unos tacos de cochinita",
-                "se me antoja una torta",
-                "Voy a preparar mole de olla",
-                "voy a preparar aguachile",
-                "Me das unas enfrijoladas",
-                "Tengo antojo de una birria",
-                "Tengo antojo de comerme un pozole",
-                "Tengo mucha hambre y quiero barbacoa"]
-    # Mensaje de respuesta
-    message_texts = ["Tienes hambre muchacho y quieres comer $comida.original"]
-    # Nombre de intent
-    display_name_intent = "auto-comer"
-    # action
-    action = "hambre"
-    # comunicacion con webhook
-    webhook_state = False
-    # Primero crear intent con especificaciones, si el intent ya existe
-    # lo borra y crea uno nuevo con las nuevas especificaciones
-    handler.create_intent(display_name_intent, tphrases, message_texts,
-                          action=action, webhook_state=webhook_state)
+
     # Nombre de tipo de entity
     display_name = "comida"
     # Tipo de entity (hay listas 2, maps 1 o enumerables 3)
@@ -185,7 +175,58 @@ if __name__ == "__main__":
     entity_value3 = "golosina"
     synonyms3 = ["cocada", "palanqueta", "gomitas", "cacahuates", "pepitas",
                  "pistaches"]
+
+    # Frases de entrenamiento
+    tphrases = [[
+                    {"text": "Quiero unos "},
+                    {"text": "tacos ", "entity_type": display_name},
+                    {"text": "de "},
+                    {"text": "cochinita", "entity_type": display_name}
+               ],
+               [
+                    {"text": "se me antoja una "},
+                    {"text": "torta", "entity_type": display_name}
+               ],
+               [
+                    {"text": "Voy a preparar "},
+                    {"text": "mole", "entity_type": display_name}
+               ],
+               [
+                    {"text": "voy a preparar "},
+                    {"text": "aguachile", "entity_type": display_name}
+               ],
+               [
+                    {"text": "Me das unas "},
+                    {"text": "enfrijoladas", "entity_type": display_name}
+               ],
+               [
+                    {"text": "Tengo antojo de una "},
+                    {"text": "birria", "entity_type": display_name}
+               ],
+               [
+                    {"text": "Tengo antojo de comerme un "},
+                    {"text": "pozole", "entity_type": display_name}
+               ],
+               [
+                    {"text": "Tengo mucha hambre y quiero "},
+                    {"text": "barbacoa", "entity_type": display_name}
+               ]]
+    # Mensaje de respuesta
+    message_texts = ["Sale ${0}.original para el joven!!!".format(display_name)]
+    # Nombre de intent
+    display_name_intent = "auto-comer"
+    # action
+    action = "hambre"
+    # comunicacion con webhook
+    webhook_state = False
+    # crear el tipo de entity
     handler.create_entity_type(display_name, kind)
+    # crear los posibles valores junto con sinonimos
     handler.create_entity(display_name, entity_value1, synonyms1)
     handler.create_entity(display_name, entity_value2, synonyms2)
     handler.create_entity(display_name, entity_value3, synonyms3)
+
+    # Crear intent con especificaciones, si el intent ya existe
+    # lo borra y crea uno nuevo con las nuevas especificaciones
+    handler.create_intent(display_name_intent, tphrases, message_texts,
+                          webhook_state=webhook_state, action=action)
